@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F27F84A5-7434-4493-AE1F-61D2129A2EE9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Skybrud.Social.GitHub</RootNamespace>
+    <AssemblyName>Skybrud.Social.GitHub</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Skybrud.Social">
+      <HintPath>..\..\..\Skybrud.Social\src\Skybrud.Social\bin\Release\Skybrud.Social.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Endpoints\GitHubOrganizationsEndpoint.cs" />
+    <Compile Include="Endpoints\GitHubRepositoriesEndpoint.cs" />
+    <Compile Include="Endpoints\GitHubUserEndpoint.cs" />
+    <Compile Include="Endpoints\GitHubUsersEndpoint.cs" />
+    <Compile Include="Endpoints\Raw\GitHubOrganizationsRawEndpoint.cs" />
+    <Compile Include="Endpoints\Raw\GitHubRepositoriesRawEndpoint.cs" />
+    <Compile Include="Endpoints\Raw\GitHubUserRawEndpoint.cs" />
+    <Compile Include="Endpoints\Raw\GitHubUsersRawEndpoint.cs" />
+    <Compile Include="Exceptions\GitHubException.cs" />
+    <Compile Include="Exceptions\GitHubHttpException.cs" />
+    <Compile Include="GitHubScope.cs" />
+    <Compile Include="GitHubScopeCollection.cs" />
+    <Compile Include="GitHubService.cs" />
+    <Compile Include="OAuth\GitHubOAuthAccessTokenResponse.cs" />
+    <Compile Include="OAuth\GitHubOAuthClient.cs" />
+    <Compile Include="Objects\Commits\GitHubCommitAuthor.cs" />
+    <Compile Include="Objects\Commits\GitHubCommitDetails.cs" />
+    <Compile Include="Objects\Commits\GitHubCommitFile.cs" />
+    <Compile Include="Objects\Commits\GitHubCommitFileStatus.cs" />
+    <Compile Include="Objects\Commits\GitHubCommitParent.cs" />
+    <Compile Include="Objects\Commits\GitHubCommitStats.cs" />
+    <Compile Include="Objects\Commits\GitHubCommitTree.cs" />
+    <Compile Include="Objects\GitHubCommit.cs" />
+    <Compile Include="Objects\GitHubCommitSummary.cs" />
+    <Compile Include="Objects\GitHubEmail.cs" />
+    <Compile Include="Objects\GitHubOrganization.cs" />
+    <Compile Include="Objects\GitHubOrganizationSummary.cs" />
+    <Compile Include="Objects\GitHubRepository.cs" />
+    <Compile Include="Objects\GitHubRepositorySummary.cs" />
+    <Compile Include="Objects\GitHubUser.cs" />
+    <Compile Include="Objects\GitHubUserSummary.cs" />
+    <Compile Include="Objects\GitHubUserType.cs" />
+    <Compile Include="Options\GitHubGetCommitOptions.cs" />
+    <Compile Include="Properties\AssemblyInfoGenerated.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Responses\GitHubCommitResponse.cs" />
+    <Compile Include="Responses\GitHubCommitsResponse.cs" />
+    <Compile Include="Responses\GitHubEmailsResponse.cs" />
+    <Compile Include="Responses\GitHubFollowingResponse.cs" />
+    <Compile Include="Responses\GitHubOrganizationResponse.cs" />
+    <Compile Include="Responses\GitHubOrganizationsResponse.cs" />
+    <Compile Include="Responses\GitHubRepositoriesResponse.cs" />
+    <Compile Include="Responses\GitHubRepositoryResponse.cs" />
+    <Compile Include="Responses\GitHubResponse.cs" />
+    <Compile Include="Responses\GitHubUserResponse.cs" />
+    <Compile Include="Responses\GitHubUsersResponse.cs" />
+    <Compile Include="Scopes\GitHubScopes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>"$(SolutionDir)Skybrud.Social.PreBuildTool.exe" 2015-12-27 "$(ProjectPath)"</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
