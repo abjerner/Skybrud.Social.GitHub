@@ -2,14 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Skybrud.Social.GitHub {
+namespace Skybrud.Social.GitHub.Scopes {
 
     /// <summary>
     /// Class representing a collection of scopes of the GitHub API.
     /// </summary>
     public class GitHubScopeCollection {
-
-        // TODO: Move to the "Skybrud.Social.GitHub.Scopes" namespace for v1.0
 
         #region Private fields
 

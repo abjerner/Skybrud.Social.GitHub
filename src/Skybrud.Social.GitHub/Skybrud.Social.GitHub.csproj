@@ -56,8 +56,8 @@
     <Compile Include="Endpoints\Raw\GitHubUsersRawEndpoint.cs" />
     <Compile Include="Exceptions\GitHubException.cs" />
     <Compile Include="Exceptions\GitHubHttpException.cs" />
-    <Compile Include="GitHubScope.cs" />
-    <Compile Include="GitHubScopeCollection.cs" />
+    <Compile Include="Scopes\GitHubScope.cs" />
+    <Compile Include="Scopes\GitHubScopeCollection.cs" />
     <Compile Include="GitHubService.cs" />
     <Compile Include="OAuth\GitHubOAuthAccessTokenResponse.cs" />
     <Compile Include="OAuth\GitHubOAuthClient.cs" />

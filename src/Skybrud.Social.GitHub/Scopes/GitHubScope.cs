@@ -1,14 +1,11 @@
 using System;
-using Skybrud.Social.GitHub.Scopes;
 
-namespace Skybrud.Social.GitHub {
+namespace Skybrud.Social.GitHub.Scopes {
 
     /// <summary>
     /// Class representing a scope of the GitHub API.
     /// </summary>
     public class GitHubScope {
-
-        // TODO: Move to the "Skybrud.Social.GitHub.Scopes" namespace for v1.0
 
         #region Constants
         

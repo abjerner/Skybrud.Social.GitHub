@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using Skybrud.Social.GitHub.Scopes;
 
 namespace Skybrud.Social.GitHub.OAuth {
 
