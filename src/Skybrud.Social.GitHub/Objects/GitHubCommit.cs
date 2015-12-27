@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Social.GitHub.Objects.Commits;
+using Skybrud.Social.GitHub.Objects.Users;
 using Skybrud.Social.Json.Extensions.JObject;
 
 namespace Skybrud.Social.GitHub.Objects {

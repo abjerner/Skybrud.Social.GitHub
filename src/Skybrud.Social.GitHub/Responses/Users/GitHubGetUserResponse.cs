@@ -1,5 +1,5 @@
 ﻿using System;
-using Skybrud.Social.GitHub.Objects;
+using Skybrud.Social.GitHub.Objects.Users;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Responses.Users {
@@ -11,7 +11,9 @@ namespace Skybrud.Social.GitHub.Responses.Users {
 
         #region Constructor
 
-        private GitHubGetUserResponse(SocialHttpResponse response) : base(response) { }
+        private GitHubGetUserResponse(SocialHttpResponse response) : base(response) {
+            Body = ParseJsonObject(response.Body, GitHubUser.Parse);
+        }
 
         #endregion
 
@@ -29,9 +31,7 @@ namespace Skybrud.Social.GitHub.Responses.Users {
             ValidateResponse(response);
 
             // Initialize the response object
-            return new GitHubGetUserResponse(response) {
-                Body = ParseJsonObject(response.Body, GitHubUser.Parse)
-            };
+            return new GitHubGetUserResponse(response);
 
         }
 

@@ -46,15 +46,15 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <summary>
         /// Gets a list of users following the authenticated user.
         /// </summary>
-        public GitHubUsersResponse GetFollowers() {
-            return GitHubUsersResponse.ParseResponse(Raw.GetFollowers());
+        public GitHubGetUsersResponse GetFollowers() {
+            return GitHubGetUsersResponse.ParseResponse(Raw.GetFollowers());
         }
 
         /// <summary>
         /// Gets a list of users the authenticated user is following.
         /// </summary>
-        public GitHubUsersResponse GetFollowing() {
-            return GitHubUsersResponse.ParseResponse(Raw.GetFollowing());
+        public GitHubGetUsersResponse GetFollowing() {
+            return GitHubGetUsersResponse.ParseResponse(Raw.GetFollowing());
         }
 
         /// <summary>
