@@ -71,6 +71,7 @@
     <Compile Include="Objects\GitHubCommit.cs" />
     <Compile Include="Objects\GitHubCommitSummary.cs" />
     <Compile Include="Objects\GitHubEmail.cs" />
+    <Compile Include="Objects\GitHubObject.cs" />
     <Compile Include="Objects\GitHubOrganization.cs" />
     <Compile Include="Objects\GitHubOrganizationSummary.cs" />
     <Compile Include="Objects\GitHubRepository.cs" />
