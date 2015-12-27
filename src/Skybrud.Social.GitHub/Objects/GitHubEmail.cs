@@ -1,8 +1,9 @@
-﻿using Skybrud.Social.Json;
+﻿using Newtonsoft.Json.Linq;
+using Skybrud.Social.Json.Extensions.JObject;
 
 namespace Skybrud.Social.GitHub.Objects {
-    
-    public class GitHubEmail : SocialJsonObject {
+
+    public class GitHubEmail : GitHubObject {
 
         #region Properties
 
@@ -16,13 +17,13 @@ namespace Skybrud.Social.GitHub.Objects {
 
         #region Constructor
 
-        private GitHubEmail(JsonObject obj) : base(obj) { }
+        private GitHubEmail(JObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
-        public static GitHubEmail Parse(JsonObject obj) {
+        public static GitHubEmail Parse(JObject obj) {
             if (obj == null) return null;
             return new GitHubEmail(obj) {
                 Email = obj.GetString("email"),

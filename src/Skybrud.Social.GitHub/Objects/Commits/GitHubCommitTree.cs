@@ -1,9 +1,10 @@
 ﻿using Newtonsoft.Json;
-using Skybrud.Social.Json;
+using Newtonsoft.Json.Linq;
+using Skybrud.Social.Json.Extensions.JObject;
 
 namespace Skybrud.Social.GitHub.Objects.Commits {
     
-    public class GitHubCommitTree : SocialJsonObject {
+    public class GitHubCommitTree : GitHubObject {
 
         #region Properties
 
@@ -17,13 +18,13 @@ namespace Skybrud.Social.GitHub.Objects.Commits {
 
         #region Constructor
 
-        private GitHubCommitTree(JsonObject obj) : base(obj) { }
+        private GitHubCommitTree(JObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
-        public static GitHubCommitTree Parse(JsonObject obj) {
+        public static GitHubCommitTree Parse(JObject obj) {
             if (obj == null) return null;
             return new GitHubCommitTree(obj) {
                 Sha = obj.GetString("sha"),

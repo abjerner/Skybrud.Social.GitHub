@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Net;
+using Newtonsoft.Json.Linq;
 using Skybrud.Social.GitHub.Exceptions;
 using Skybrud.Social.Http;
 using Skybrud.Social.Json;
+using Skybrud.Social.Json.Extensions.JObject;
 
 namespace Skybrud.Social.GitHub.Responses {
 
@@ -53,7 +55,7 @@ namespace Skybrud.Social.GitHub.Responses {
             if (response.StatusCode == HttpStatusCode.OK) return;
 
             // Get the "meta" object
-            JsonObject obj = response.GetBodyAsJsonObject();
+            JObject obj = SocialUtils.ParseJsonObject(response.Body);
 
             // Now throw some exceptions
             string message = obj.GetString("message");

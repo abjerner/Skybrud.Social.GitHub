@@ -1,9 +1,10 @@
 ﻿using Newtonsoft.Json;
-using Skybrud.Social.Json;
+using Newtonsoft.Json.Linq;
+using Skybrud.Social.Json.Extensions.JObject;
 
 namespace Skybrud.Social.GitHub.Objects.Commits {
     
-    public class GitHubCommitDetails : SocialJsonObject {
+    public class GitHubCommitDetails : GitHubObject {
 
         #region Properties
 
@@ -29,13 +30,13 @@ namespace Skybrud.Social.GitHub.Objects.Commits {
 
         #region Constructor
 
-        private GitHubCommitDetails(JsonObject obj) : base(obj) { }
+        private GitHubCommitDetails(JObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
-        public static GitHubCommitDetails Parse(JsonObject obj) {
+        public static GitHubCommitDetails Parse(JObject obj) {
             if (obj == null) return null;
             return new GitHubCommitDetails(obj) {
                 Author = obj.GetObject("author", GitHubCommitAuthor.Parse),

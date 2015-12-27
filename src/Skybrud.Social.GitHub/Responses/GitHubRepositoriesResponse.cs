@@ -1,7 +1,6 @@
 ﻿using System;
 using Skybrud.Social.GitHub.Objects;
 using Skybrud.Social.Http;
-using Skybrud.Social.Json;
 
 namespace Skybrud.Social.GitHub.Responses {
 
@@ -23,7 +22,7 @@ namespace Skybrud.Social.GitHub.Responses {
 
             // Initialize the response object
             return new GitHubRepositoriesResponse(response) {
-                Body = JsonArray.ParseJson(response.Body).ParseMultiple(GitHubRepositorySummary.Parse)
+                Body = SocialUtils.ParseJsonArray(response.Body, GitHubRepositorySummary.Parse)
             };
 
         }

@@ -1,7 +1,9 @@
 ﻿using System.Net;
+using Newtonsoft.Json.Linq;
 using Skybrud.Social.GitHub.Exceptions;
 using Skybrud.Social.Http;
 using Skybrud.Social.Json;
+using Skybrud.Social.Json.Extensions.JObject;
 
 namespace Skybrud.Social.GitHub.Responses {
 
@@ -36,7 +38,7 @@ namespace Skybrud.Social.GitHub.Responses {
                 default:
 
                     // Parse the raw JSON response
-                    JsonObject obj = response.GetBodyAsJsonObject();
+                    JObject obj = SocialUtils.ParseJsonObject(response.Body);
 
                     string message = obj.GetString("message");
                     string url = obj.GetString("documentation_url");

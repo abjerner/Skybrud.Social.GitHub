@@ -1,9 +1,10 @@
 ﻿using System;
-using Skybrud.Social.Json;
+using Newtonsoft.Json.Linq;
+using Skybrud.Social.Json.Extensions.JObject;
 
 namespace Skybrud.Social.GitHub.Objects {
 
-    public class GitHubUserSummary : SocialJsonObject {
+    public class GitHubUserSummary : GitHubObject {
 
         #region Properties
 
@@ -43,13 +44,13 @@ namespace Skybrud.Social.GitHub.Objects {
 
         #region Constructor
 
-        private GitHubUserSummary(JsonObject obj) : base(obj) { }
+        private GitHubUserSummary(JObject obj) : base(obj) { }
 
         #endregion
 
         #region Static methods
 
-        public static GitHubUserSummary Parse(JsonObject obj) {
+        public static GitHubUserSummary Parse(JObject obj) {
 
             if (obj == null) return null;
 
