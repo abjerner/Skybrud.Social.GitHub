@@ -3,7 +3,6 @@ using System.Net;
 using Newtonsoft.Json.Linq;
 using Skybrud.Social.GitHub.Exceptions;
 using Skybrud.Social.Http;
-using Skybrud.Social.Json;
 using Skybrud.Social.Json.Extensions.JObject;
 
 namespace Skybrud.Social.GitHub.Responses {
@@ -35,6 +34,10 @@ namespace Skybrud.Social.GitHub.Responses {
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance from the specified <code>response</code>.
+        /// </summary>
+        /// <param name="response">The raw response the instance should be based on.</param>
         protected GitHubResponse(SocialHttpResponse response) : base(response) {
             RateLimit = Int32.Parse(response.Headers["X-RateLimit-Limit"]);
             RateLimitRemaining = Int32.Parse(response.Headers["X-RateLimit-Remaining"]);
@@ -55,13 +58,52 @@ namespace Skybrud.Social.GitHub.Responses {
             if (response.StatusCode == HttpStatusCode.OK) return;
 
             // Get the "meta" object
-            JObject obj = SocialUtils.ParseJsonObject(response.Body);
+            JObject obj = ParseJsonObject(response.Body);
 
             // Now throw some exceptions
             string message = obj.GetString("message");
             string url = obj.GetString("documentation_url");
             throw new GitHubHttpException(response, message, url);
 
+        }
+
+        /// <summary>
+        /// Parses the specified <code>json</code> string into an instance <code>JObject</code>.
+        /// </summary>
+        /// <param name="json">The JSON string to be parsed.</param>
+        /// <returns>Returns an instance of <code>JObject</code> parsed from the specified <code>json</code> string.</returns>
+        protected static JObject ParseJsonObject(string json) {
+            return SocialUtils.ParseJsonObject(json);
+        }
+
+        /// <summary>
+        /// Parses the specified <code>json</code> string into an instance of <code>T</code>.
+        /// </summary>
+        /// <typeparam name="T">The type to be returned.</typeparam>
+        /// <param name="json">The JSON string to be parsed.</param>
+        /// <param name="func">A callback function/method used for converting an instance of <code>JObject</code> into an instance of <code>T</code>.</param>
+        /// <returns>Returns an instance of <code>T</code> parsed from the specified <code>json</code> string.</returns>
+        protected static T ParseJsonObject<T>(string json, Func<JObject, T> func) {
+            return SocialUtils.ParseJsonObject(json, func);
+        }
+
+        /// <summary>
+        /// Parses the specified <code>json</code> string into an instance of <code>JArray</code>.
+        /// </summary>
+        /// <param name="json">The JSON string to be parsed.</param>
+        /// <returns>Returns an instance of <code>JArray</code> parsed from the specified <code>json</code> string.</returns>
+        public static JArray ParseJsonArray(string json) {
+            return SocialUtils.ParseJsonArray(json);
+        }
+
+        /// <summary>
+        /// Parses the specified <code>json</code> string into an array of <code>T</code>.
+        /// </summary>
+        /// <param name="json">The JSON string to be parsed.</param>
+        /// <param name="func">A callback function/method used for converting an instance of <code>JObject</code> into an instance of <code>T</code>.</param>
+        /// <returns>Returns an array of <code>T</code> parsed from the specified <code>json</code> string.</returns>
+        public static T[] ParseJsonArray<T>(string json, Func<JObject, T> func) {
+            return SocialUtils.ParseJsonArray(json, func);
         }
 
         #endregion
@@ -84,6 +126,10 @@ namespace Skybrud.Social.GitHub.Responses {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance from the specified <code>response</code>.
+        /// </summary>
+        /// <param name="response">The raw response the instance should be based on.</param>
         protected GitHubResponse(SocialHttpResponse response) : base(response) { }
 
         #endregion
