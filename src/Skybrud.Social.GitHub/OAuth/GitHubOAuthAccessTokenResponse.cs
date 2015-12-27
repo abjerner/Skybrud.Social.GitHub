@@ -18,15 +18,15 @@ namespace Skybrud.Social.GitHub.OAuth {
 
             foreach (string scope in (nvc["scope"] ?? "").Split(new [] {','}, StringSplitOptions.RemoveEmptyEntries)) {
                 switch (scope) {
-                    case "user": scopes.Add(GitHubScope.User); break;
-                    case "user:email": scopes.Add(GitHubScope.UserEmail); break;
-                    case "user:follow": scopes.Add(GitHubScope.UserFollow); break;
-                    case "public_repo": scopes.Add(GitHubScope.PublicRepo); break;
-                    case "repo": scopes.Add(GitHubScope.Repo); break;
-                    case "repo:status": scopes.Add(GitHubScope.RepoStatus); break;
-                    case "delete_repo": scopes.Add(GitHubScope.DeleteRepo); break;
-                    case "notifications": scopes.Add(GitHubScope.Notifications); break;
-                    case "gist": scopes.Add(GitHubScope.Gist); break;
+                    case "user": scopes.Add(GitHubScopes.User); break;
+                    case "user:email": scopes.Add(GitHubScopes.UserEmail); break;
+                    case "user:follow": scopes.Add(GitHubScopes.UserFollow); break;
+                    case "public_repo": scopes.Add(GitHubScopes.PublicRepo); break;
+                    case "repo": scopes.Add(GitHubScopes.Repo); break;
+                    case "repo:status": scopes.Add(GitHubScopes.RepoStatus); break;
+                    case "delete_repo": scopes.Add(GitHubScopes.DeleteRepo); break;
+                    case "notifications": scopes.Add(GitHubScopes.Notifications); break;
+                    case "gist": scopes.Add(GitHubScopes.Gist); break;
                     default: scopes.Add(new GitHubScope(scope)); break;
                 }
             } 
