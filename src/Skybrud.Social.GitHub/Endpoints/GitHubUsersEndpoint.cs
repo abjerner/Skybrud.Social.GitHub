@@ -1,5 +1,6 @@
 using Skybrud.Social.GitHub.Endpoints.Raw;
 using Skybrud.Social.GitHub.Responses;
+using Skybrud.Social.GitHub.Responses.Users;
 
 namespace Skybrud.Social.GitHub.Endpoints {
     
@@ -35,8 +36,8 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// Gets information about a user with the specified <code>username</code>.
         /// </summary>
         /// <param name="username">The username of the user.</param>
-        public GitHubUserResponse GetUser(string username) {
-            return GitHubUserResponse.ParseResponse(Raw.GetUser(username));
+        public GitHubGetUserResponse GetUser(string username) {
+            return GitHubGetUserResponse.ParseResponse(Raw.GetUser(username));
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
 using Skybrud.Social.GitHub.Endpoints.Raw;
 using Skybrud.Social.GitHub.Responses;
+using Skybrud.Social.GitHub.Responses.Users;
 
 namespace Skybrud.Social.GitHub.Endpoints {
     
@@ -34,8 +35,8 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <summary>
         /// Gets information about thr authenticated user.
         /// </summary>
-        public GitHubUserResponse GetUser() {
-            return GitHubUserResponse.ParseResponse(Raw.GetUser());
+        public GitHubGetUserResponse GetUser() {
+            return GitHubGetUserResponse.ParseResponse(Raw.GetUser());
         }
 
         public GitHubEmailsResponse GetEmails() {

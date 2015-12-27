@@ -92,7 +92,7 @@
     <Compile Include="Responses\GitHubRepositoriesResponse.cs" />
     <Compile Include="Responses\GitHubRepositoryResponse.cs" />
     <Compile Include="Responses\GitHubResponse.cs" />
-    <Compile Include="Responses\GitHubUserResponse.cs" />
+    <Compile Include="Responses\Users\GitHubGetUserResponse.cs" />
     <Compile Include="Responses\GitHubUsersResponse.cs" />
     <Compile Include="Scopes\GitHubScopes.cs" />
   </ItemGroup>
