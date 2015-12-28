@@ -2,6 +2,7 @@ using System;
 using System.Collections.Specialized;
 using System.Net;
 using Skybrud.Social.GitHub.Endpoints.Raw;
+using Skybrud.Social.GitHub.Objects.Authentication;
 using Skybrud.Social.GitHub.Scopes;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces;
@@ -161,7 +162,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// Exchanges the specified authorization code for a user access token.
         /// </summary>
         /// <param name="authCode">The authorization code received from the GitHub OAuth dialog.</param>
-        public GitHubOAuthAccessTokenResponse GetAccessTokenFromAuthCode(string authCode) {
+        public GitHubAccessToken GetAccessTokenFromAuthCode(string authCode) {
 
             NameValueCollection parameters = new NameValueCollection {
                 {"client_id", ClientId},
@@ -179,7 +180,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             NameValueCollection response = SocialUtils.ParseQueryString(contents);
 
             // Return the response
-            return GitHubOAuthAccessTokenResponse.Parse(response);
+            return GitHubAccessToken.Parse(response);
 
         }
 

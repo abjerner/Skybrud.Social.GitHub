@@ -1,5 +1,4 @@
 ﻿using System;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Social.GitHub.Enums;
 using Skybrud.Social.Json.Extensions.JObject;

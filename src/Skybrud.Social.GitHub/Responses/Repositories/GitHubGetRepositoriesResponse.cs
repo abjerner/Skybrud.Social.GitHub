@@ -1,5 +1,4 @@
 ﻿using System;
-using Skybrud.Social.GitHub.Objects;
 using Skybrud.Social.GitHub.Objects.Repositories;
 using Skybrud.Social.Http;
 
@@ -12,7 +11,9 @@ namespace Skybrud.Social.GitHub.Responses.Repositories {
 
         #region Constructor
 
-        private GitHubGetRepositoriesResponse(SocialHttpResponse response) : base(response) { }
+        private GitHubGetRepositoriesResponse(SocialHttpResponse response) : base(response) {
+            Body = ParseJsonArray(response.Body, GitHubRepositorySummary.Parse);
+        }
 
         #endregion
 
@@ -30,9 +31,7 @@ namespace Skybrud.Social.GitHub.Responses.Repositories {
             ValidateResponse(response);
 
             // Initialize the response object
-            return new GitHubGetRepositoriesResponse(response) {
-                Body = ParseJsonArray(response.Body, GitHubRepositorySummary.Parse)
-            };
+            return new GitHubGetRepositoriesResponse(response);
 
         }
 

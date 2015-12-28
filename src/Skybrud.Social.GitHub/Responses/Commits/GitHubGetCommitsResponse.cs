@@ -1,5 +1,4 @@
 ﻿using System;
-using Skybrud.Social.GitHub.Objects;
 using Skybrud.Social.GitHub.Objects.Commits;
 using Skybrud.Social.Http;
 
@@ -12,7 +11,9 @@ namespace Skybrud.Social.GitHub.Responses.Commits {
 
         #region Constructor
 
-        private GitHubGetCommitsResponse(SocialHttpResponse response) : base(response) { }
+        private GitHubGetCommitsResponse(SocialHttpResponse response) : base(response) {
+            Body = ParseJsonArray(response.Body, GitHubCommitSummary.Parse);
+        }
 
         #endregion
 
@@ -32,9 +33,7 @@ namespace Skybrud.Social.GitHub.Responses.Commits {
             ValidateResponse(response);
 
             // Initialize the response object
-            return new GitHubGetCommitsResponse(response) {
-                Body = ParseJsonArray(response.Body, GitHubCommitSummary.Parse)
-            };
+            return new GitHubGetCommitsResponse(response);
 
         }
 

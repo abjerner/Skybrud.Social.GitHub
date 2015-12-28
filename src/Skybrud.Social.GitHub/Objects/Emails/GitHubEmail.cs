@@ -45,13 +45,8 @@ namespace Skybrud.Social.GitHub.Objects.Emails {
         /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
         /// <returns>Returns an instance of <code>GitHubEmail</code>.</returns>
         public static GitHubEmail Parse(JObject obj) {
-            if (obj == null) return null;
-            return new GitHubEmail(obj) {
-                Email = obj.GetString("email"),
-                IsVerified = obj.GetBoolean("verified"),
-                IsPrimary = obj.GetBoolean("primary")
-            };
-        
+            return obj == null ? null : new GitHubEmail(obj);
+
         }
 
         #endregion

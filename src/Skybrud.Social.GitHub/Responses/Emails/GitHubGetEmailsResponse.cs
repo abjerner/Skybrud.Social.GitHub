@@ -1,5 +1,4 @@
 ﻿using System;
-using Skybrud.Social.GitHub.Objects;
 using Skybrud.Social.GitHub.Objects.Emails;
 using Skybrud.Social.Http;
 
@@ -12,7 +11,9 @@ namespace Skybrud.Social.GitHub.Responses.Emails {
 
         #region Constructor
 
-        private GitHubGetEmailsResponse(SocialHttpResponse response) : base(response) { }
+        private GitHubGetEmailsResponse(SocialHttpResponse response) : base(response) {
+            Body = ParseJsonArray(response.Body, GitHubEmail.Parse);
+        }
 
         #endregion
 
@@ -30,9 +31,7 @@ namespace Skybrud.Social.GitHub.Responses.Emails {
             ValidateResponse(response);
 
             // Initialize the response object
-            return new GitHubGetEmailsResponse(response) {
-                Body = ParseJsonArray(response.Body, GitHubEmail.Parse)
-            };
+            return new GitHubGetEmailsResponse(response);
 
         }
 

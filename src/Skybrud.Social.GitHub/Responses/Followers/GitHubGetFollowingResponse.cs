@@ -22,28 +22,17 @@ namespace Skybrud.Social.GitHub.Responses.Followers {
 
         #region Constructor
 
-        private GitHubGetFollowingResponse(SocialHttpResponse response) : base(response) { }
-
-        #endregion
-
-        /// <summary>
-        /// Parses the specified <code>response</code> into an instance of <code>GitHubGetFollowingResponse</code>.
-        /// </summary>
-        /// <param name="response">The instance of <code>SocialHttpResponse</code> representing the raw response.</param>
-        /// <returns>Returns an instance of <code>GitHubGetFollowingResponse</code> representing the response.</returns>
-        public static GitHubGetFollowingResponse ParseResponse(SocialHttpResponse response) {
+        private GitHubGetFollowingResponse(SocialHttpResponse response) : base(response) {
 
             switch (response.StatusCode) {
 
                 case HttpStatusCode.NoContent:
-                    return new GitHubGetFollowingResponse(response) {
-                        IsFollowing = true
-                    };
+                    IsFollowing = true;
+                    break;
 
                 case HttpStatusCode.NotFound:
-                    return new GitHubGetFollowingResponse(response) {
-                        IsFollowing = false
-                    };
+                    IsFollowing = false;
+                    break;
 
                 default:
 
@@ -53,9 +42,20 @@ namespace Skybrud.Social.GitHub.Responses.Followers {
                     string message = obj.GetString("message");
                     string url = obj.GetString("documentation_url");
                     throw new GitHubHttpException(response, message, url);
-                    
+
             }
 
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Parses the specified <code>response</code> into an instance of <code>GitHubGetFollowingResponse</code>.
+        /// </summary>
+        /// <param name="response">The instance of <code>SocialHttpResponse</code> representing the raw response.</param>
+        /// <returns>Returns an instance of <code>GitHubGetFollowingResponse</code> representing the response.</returns>
+        public static GitHubGetFollowingResponse ParseResponse(SocialHttpResponse response) {
+            return response == null ? null : new GitHubGetFollowingResponse(response);
         }
 
     }
