@@ -1,20 +1,24 @@
 using Skybrud.Social.GitHub.Endpoints.Raw;
-using Skybrud.Social.GitHub.Options;
-using Skybrud.Social.GitHub.Responses;
+using Skybrud.Social.GitHub.Options.Commits;
+using Skybrud.Social.GitHub.Responses.Commits;
+using Skybrud.Social.GitHub.Responses.Repositories;
 
 namespace Skybrud.Social.GitHub.Endpoints {
-    
+
+    /// <summary>
+    /// Class representing the repositories endpoint.
+    /// </summary>
     public class GitHubRepositoriesEndpoint {
 
         #region Properties
 
         /// <summary>
-        /// A reference to the GitHub service.
+        /// Gets a reference to the GitHub service.
         /// </summary>
         public GitHubService Service { get; private set; }
 
         /// <summary>
-        /// A reference to the raw endpoint.
+        /// Gets a reference to the raw endpoint.
         /// </summary>
         public GitHubRepositoriesRawEndpoint Raw {
             get { return Service.Client.Repositories; }
@@ -32,20 +36,42 @@ namespace Skybrud.Social.GitHub.Endpoints {
 
         #region Methods
 
-        public GitHubCommitResponse GetCommit(string owner, string repository, string sha) {
-            return GitHubCommitResponse.ParseResponse(Raw.GetCommit(owner, repository, sha));
+        /// <summary>
+        /// Gets information about the commit matching the specified <code>owner</code>, <code>repository</code> and <code>sha</code> hash.
+        /// </summary>
+        /// <param name="owner">The alias (login) of the owner.</param>
+        /// <param name="repository">The slug of the repository.</param>
+        /// <param name="sha">The SHA hash of the commit.</param>
+        /// <returns>Returns an instance of <code>GitHubGetCommitResponse</code> representing the response.</returns>
+        public GitHubGetCommitResponse GetCommit(string owner, string repository, string sha) {
+            return GitHubGetCommitResponse.ParseResponse(Raw.GetCommit(owner, repository, sha));
         }
 
-        public GitHubCommitsResponse GetCommits(string owner, string repository) {
-            return GitHubCommitsResponse.ParseResponse(Raw.GetCommits(owner, repository));
+        /// <summary>
+        /// Gets a list of commits of the repository matching the specified <code>owner</code> and <code>repository</code>.
+        /// </summary>
+        /// <param name="owner">The alias (login) of the owner.</param>
+        /// <param name="repository">The slug of the repository.</param>
+        /// <returns>Returns an instance of <code>GitHubGetCommitsResponse</code> representing the response.</returns>
+        public GitHubGetCommitsResponse GetCommits(string owner, string repository) {
+            return GitHubGetCommitsResponse.ParseResponse(Raw.GetCommits(owner, repository));
         }
 
-        public GitHubCommitsResponse GetCommits(string owner, string repository, GitHubGetCommitOptions options) {
-            return GitHubCommitsResponse.ParseResponse(Raw.GetCommits(owner, repository, options));
+        /// <summary>
+        /// Gets a list of commits of the repository matching the specified <code>options</code>.
+        /// </summary>
+        /// <param name="options">The options for the call to the API.</param>
+        /// <returns>Returns an instance of <code>GitHubGetCommitsResponse</code> representing the response.</returns>
+        public GitHubGetCommitsResponse GetCommits(GitHubGetCommitOptions options) {
+            return GitHubGetCommitsResponse.ParseResponse(Raw.GetCommits(options));
         }
 
-        public GitHubRepositoryResponse GetRepository(string owner, string repository) {
-            return GitHubRepositoryResponse.ParseResponse(Raw.GetRepository(owner, repository));
+        /// <summary>
+        /// Gets information about the repository matching the specified <code>owner</code> and <code>repository</code>.
+        /// </summary>
+        /// <returns>Returns an instance of <code>GitHubGetRepositoryResponse</code> representing the response.</returns>
+        public GitHubGetRepositoryResponse GetRepository(string owner, string repository) {
+            return GitHubGetRepositoryResponse.ParseResponse(Raw.GetRepository(owner, repository));
         }
 
         #endregion

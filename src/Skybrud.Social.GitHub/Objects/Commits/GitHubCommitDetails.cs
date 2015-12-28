@@ -1,51 +1,69 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Skybrud.Social.Json.Extensions.JObject;
 
 namespace Skybrud.Social.GitHub.Objects.Commits {
     
+    /// <summary>
+    /// Class representing the details of a commit.
+    /// </summary>
     public class GitHubCommitDetails : GitHubObject {
 
         #region Properties
 
-        [JsonProperty("author")]
+        /// <summary>
+        /// Gets information about the author of the commit.
+        /// </summary>
         public GitHubCommitAuthor Author { get; private set; }
         
-        [JsonProperty("comitter")]
+        /// <summary>
+        /// Gets information about the user who committed the commit.
+        /// </summary>
         public GitHubCommitAuthor Committer { get; private set; }
         
-        [JsonProperty("message")]
+        /// <summary>
+        /// Gets the message of the commit.
+        /// </summary>
         public string Message { get; private set; }
         
-        [JsonProperty("tree")]
+        /// <summary>
+        /// Gets information about the tree begind the commit.
+        /// </summary>
         public GitHubCommitTree Tree { get; private set; }
         
-        [JsonProperty("url")]
+        /// <summary>
+        /// Gets the API URL of the commit.
+        /// </summary>
         public string Url { get; private set; }
         
-        [JsonProperty("comment_count")]
+        /// <summary>
+        /// Gets the amount of comments the commit has received.
+        /// </summary>
         public int CommentCount { get; private set; }
         
         #endregion
 
         #region Constructor
 
-        private GitHubCommitDetails(JObject obj) : base(obj) { }
+        private GitHubCommitDetails(JObject obj) : base(obj) {
+            Author = obj.GetObject("author", GitHubCommitAuthor.Parse);
+            Committer = obj.GetObject("committer", GitHubCommitAuthor.Parse);
+            Message = obj.GetString("message");
+            Tree = obj.GetObject("tree", GitHubCommitTree.Parse);
+            Url = obj.GetString("url");
+            CommentCount = obj.GetInt32("comment_count");
+        }
 
         #endregion
 
         #region Static methods
 
+        /// <summary>
+        /// Parses the specified <code>obj</code> into an instance of <code>GitHubCommitDetails</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
+        /// <returns>Returns an instance of <code>GitHubCommitDetails</code>.</returns>
         public static GitHubCommitDetails Parse(JObject obj) {
-            if (obj == null) return null;
-            return new GitHubCommitDetails(obj) {
-                Author = obj.GetObject("author", GitHubCommitAuthor.Parse),
-                Committer = obj.GetObject("committer", GitHubCommitAuthor.Parse),
-                Message = obj.GetString("message"),
-                Tree = obj.GetObject("tree", GitHubCommitTree.Parse),
-                Url = obj.GetString("url"),
-                CommentCount = obj.GetInt32("comment_count")
-            };
+            return obj == null ? null : new GitHubCommitDetails(obj);
         }
 
         #endregion

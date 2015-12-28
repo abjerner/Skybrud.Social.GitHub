@@ -1,20 +1,26 @@
 using Skybrud.Social.GitHub.Endpoints.Raw;
-using Skybrud.Social.GitHub.Responses;
+using Skybrud.Social.GitHub.Responses.Emails;
+using Skybrud.Social.GitHub.Responses.Followers;
+using Skybrud.Social.GitHub.Responses.Organizations;
+using Skybrud.Social.GitHub.Responses.Repositories;
 using Skybrud.Social.GitHub.Responses.Users;
 
 namespace Skybrud.Social.GitHub.Endpoints {
-    
+
+    /// <summary>
+    /// Class representing the user endpoint.
+    /// </summary>
     public class GitHubUserEndpoint {
 
         #region Properties
 
         /// <summary>
-        /// A reference to the GitHub service.
+        /// Gets a reference to the GitHub service.
         /// </summary>
         public GitHubService Service { get; private set; }
 
         /// <summary>
-        /// A reference to the raw endpoint.
+        /// Gets a reference to the raw endpoint.
         /// </summary>
         public GitHubUserRawEndpoint Raw {
             get { return Service.Client.User; }
@@ -33,19 +39,25 @@ namespace Skybrud.Social.GitHub.Endpoints {
         #region Methods
 
         /// <summary>
-        /// Gets information about thr authenticated user.
+        /// Gets information about the authenticated user.
         /// </summary>
+        /// <returns>Returns an instance of <code>GitHubGetUserResponse</code> representing the response.</returns>
         public GitHubGetUserResponse GetUser() {
             return GitHubGetUserResponse.ParseResponse(Raw.GetUser());
         }
 
-        public GitHubEmailsResponse GetEmails() {
-            return GitHubEmailsResponse.ParseResponse(Raw.GetEmails());
+        /// <summary>
+        /// Gets a list of email addresses of the authenticated user.
+        /// </summary>
+        /// <returns>Returns an instance of <code>GitHubGetEmailsResponse</code> representing the response.</returns>
+        public GitHubGetEmailsResponse GetEmails() {
+            return GitHubGetEmailsResponse.ParseResponse(Raw.GetEmails());
         }
 
         /// <summary>
         /// Gets a list of users following the authenticated user.
         /// </summary>
+        /// <returns>Returns an instance of <code>GitHubGetUsersResponse</code> representing the response.</returns>
         public GitHubGetUsersResponse GetFollowers() {
             return GitHubGetUsersResponse.ParseResponse(Raw.GetFollowers());
         }
@@ -53,31 +65,34 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <summary>
         /// Gets a list of users the authenticated user is following.
         /// </summary>
+        /// <returns>Returns an instance of <code>GitHubGetUsersResponse</code> representing the response.</returns>
         public GitHubGetUsersResponse GetFollowing() {
             return GitHubGetUsersResponse.ParseResponse(Raw.GetFollowing());
         }
 
         /// <summary>
-        /// Gets whether the authenticated user follows the specified username.
+        /// Gets whether the authenticated user is following the user with the specified <code>username</code>.
         /// </summary>
-        /// <param name="username">The username to check.</param>
-        public GitHubFollowingResponse IsFollowing(string username) {
-            return GitHubFollowingResponse.ParseResponse(Raw.IsFollowing(username));
+        /// <param name="username">The username (login) of the user.</param>
+        /// <returns>Returns an instance of <code>GitHubGetFollowingResponse</code> representing the response.</returns>
+        public GitHubGetFollowingResponse IsFollowing(string username) {
+            return GitHubGetFollowingResponse.ParseResponse(Raw.IsFollowing(username));
         }
-        
+
         /// <summary>
         /// Gets a list of repositories of the authenticated user.
         /// </summary>
-        public GitHubRepositoriesResponse GetRepositories() {
-            return GitHubRepositoriesResponse.ParseResponse(Raw.GetRepositories());
+        /// <returns>Returns an instance of <code>GitHubGetRepositoriesResponse</code> representing the response.</returns>
+        public GitHubGetRepositoriesResponse GetRepositories() {
+            return GitHubGetRepositoriesResponse.ParseResponse(Raw.GetRepositories());
         }
-        
+
         /// <summary>
-        /// Gets a list of organizations the authenticated user is a part of.
+        /// Gets a list of organizations the authenticated user is a member of.
         /// </summary>
-        /// <returns></returns>
-        public GitHubOrganizationsResponse GetOrganizations() {
-            return GitHubOrganizationsResponse.ParseResponse(Raw.GetOrganizations());
+        /// <returns>Returns an instance of <code>GitHubGetOrganizationsResponse</code> representing the response.</returns>
+        public GitHubGetOrganizationsResponse GetOrganizations() {
+            return GitHubGetOrganizationsResponse.ParseResponse(Raw.GetOrganizations());
         }
 
         #endregion

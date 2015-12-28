@@ -1,20 +1,24 @@
 using Skybrud.Social.GitHub.Endpoints.Raw;
-using Skybrud.Social.GitHub.Responses;
+using Skybrud.Social.GitHub.Responses.Organizations;
+using Skybrud.Social.GitHub.Responses.Repositories;
 using Skybrud.Social.GitHub.Responses.Users;
 
 namespace Skybrud.Social.GitHub.Endpoints {
-    
+
+    /// <summary>
+    /// Class representing the users endpoint.
+    /// </summary>
     public class GitHubUsersEndpoint {
 
         #region Properties
 
         /// <summary>
-        /// A reference to the GitHub service.
+        /// Gets a reference to the GitHub service.
         /// </summary>
         public GitHubService Service { get; private set; }
 
         /// <summary>
-        /// A reference to the raw endpoint.
+        /// Gets a reference to the raw endpoint.
         /// </summary>
         public GitHubUsersRawEndpoint Raw {
             get { return Service.Client.Users; }
@@ -33,27 +37,30 @@ namespace Skybrud.Social.GitHub.Endpoints {
         #region Methods
 
         /// <summary>
-        /// Gets information about a user with the specified <code>username</code>.
+        /// Gets information about the user with the specified <code>username</code>.
         /// </summary>
-        /// <param name="username">The username of the user.</param>
+        /// <param name="username">The username (login) of the user.</param>
+        /// <returns>Returns an instance of <code>GitHubGetUserResponse</code> representing the response.</returns>
         public GitHubGetUserResponse GetUser(string username) {
             return GitHubGetUserResponse.ParseResponse(Raw.GetUser(username));
         }
 
         /// <summary>
-        /// Gets a list of repositories of a user with the specified <code>username</code>.
+        /// Gets a list of repositories of the user with the specified <code>username</code>.
         /// </summary>
-        /// <param name="username">The username of the user.</param>
-        public GitHubRepositoriesResponse GetRepositories(string username) {
-            return GitHubRepositoriesResponse.ParseResponse(Raw.GetRepositories(username));
+        /// <param name="username">The username (login) of the user.</param>
+        /// <returns>Returns an instance of <code>GitHubGetRepositoriesResponse</code> representing the response.</returns>
+        public GitHubGetRepositoriesResponse GetRepositories(string username) {
+            return GitHubGetRepositoriesResponse.ParseResponse(Raw.GetRepositories(username));
         }
 
         /// <summary>
-        /// Gets a list of organizations the specified user is a part of.
+        /// Gets a list of organizations the user with the specified <code>username</code> is a member of.
         /// </summary>
-        /// <returns></returns>
-        public GitHubOrganizationsResponse GetOrganizations(string username) {
-            return GitHubOrganizationsResponse.ParseResponse(Raw.GetOrganizations(username));
+        /// <param name="username">The username (login) of the user.</param>
+        /// <returns>Returns an instance of <code>GitHubGetOrganizationsResponse</code> representing the response.</returns>
+        public GitHubGetOrganizationsResponse GetOrganizations(string username) {
+            return GitHubGetOrganizationsResponse.ParseResponse(Raw.GetOrganizations(username));
         }
 
         #endregion

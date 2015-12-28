@@ -2,11 +2,17 @@ using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Endpoints.Raw {
-    
+
+    /// <summary>
+    /// Class representing the raw users endpoint.
+    /// </summary>
     public class GitHubUsersRawEndpoint {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the parent OAuth client.
+        /// </summary>
         public GitHubOAuthClient Client { get; private set; }
 
         #endregion
@@ -21,14 +27,29 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
 
         #region Methods
 
+        /// <summary>
+        /// Gets information about the user with the specified <code>username</code>.
+        /// </summary>
+        /// <param name="username">The username (login) of the user.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
         public SocialHttpResponse GetUser(string username) {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/users/" + username);
         }
 
+        /// <summary>
+        /// Gets a list of repositories of the user with the specified <code>username</code>.
+        /// </summary>
+        /// <param name="username">The username (login) of the user.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
         public SocialHttpResponse GetRepositories(string username) {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/users/" + username + "/repos");
         }
 
+        /// <summary>
+        /// Gets a list of organizations the user with the specified <code>username</code> is a member of.
+        /// </summary>
+        /// <param name="username">The username (login) of the user.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
         public SocialHttpResponse GetOrganizations(string username) {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/users/" + username + "/orgs");
         }

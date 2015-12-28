@@ -35,6 +35,10 @@ namespace Skybrud.Social.GitHub.Scopes {
 
         #region Member methods
 
+        /// <summary>
+        /// Returns a string representation (the name) of the scope.
+        /// </summary>
+        /// <returns>Returns a string representation of the scope.</returns>
         public override string ToString() {
             return Name;
         }

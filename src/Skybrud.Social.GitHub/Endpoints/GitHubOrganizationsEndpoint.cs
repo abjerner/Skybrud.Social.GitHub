@@ -1,19 +1,22 @@
 using Skybrud.Social.GitHub.Endpoints.Raw;
-using Skybrud.Social.GitHub.Responses;
+using Skybrud.Social.GitHub.Responses.Organizations;
 
 namespace Skybrud.Social.GitHub.Endpoints {
     
+    /// <summary>
+    /// Class representing the organizations endpoint.
+    /// </summary>
     public class GitHubOrganizationsEndpoint {
 
         #region Properties
 
         /// <summary>
-        /// A reference to the GitHub service.
+        /// Gets a reference to the GitHub service.
         /// </summary>
         public GitHubService Service { get; private set; }
 
         /// <summary>
-        /// A reference to the raw endpoint.
+        /// Gets a reference to the raw endpoint.
         /// </summary>
         public GitHubOrganizationsRawEndpoint Raw {
             get { return Service.Client.Organizations; }
@@ -31,8 +34,13 @@ namespace Skybrud.Social.GitHub.Endpoints {
 
         #region Methods
 
-        public GitHubOrganizationResponse GetOrganization(string org) {
-            return GitHubOrganizationResponse.ParseResponse(Raw.GetOrganization(org));
+        /// <summary>
+        /// Gets information about the organisation with the specified <code>alias</code>.
+        /// </summary>
+        /// <param name="alias">The alias (login) of the organization.</param>
+        /// <returns>Returns an instance of <code>GitHubGetOrganizationResponse</code> representing the response.</returns>
+        public GitHubGetOrganizationResponse GetOrganization(string alias) {
+            return GitHubGetOrganizationResponse.ParseResponse(Raw.GetOrganization(alias));
         }
 
         #endregion

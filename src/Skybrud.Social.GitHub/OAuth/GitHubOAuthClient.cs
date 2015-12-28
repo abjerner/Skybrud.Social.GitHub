@@ -1,41 +1,44 @@
 using System;
 using System.Collections.Specialized;
 using System.Net;
-using System.Web;
 using Skybrud.Social.GitHub.Endpoints.Raw;
 using Skybrud.Social.GitHub.Scopes;
 using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces;
 
 namespace Skybrud.Social.GitHub.OAuth {
 
+    /// <summary>
+    /// Class for handling the raw communication with the GitHub API as well as any OAuth 2.0
+    /// communication/authentication.
+    /// </summary>
     public class GitHubOAuthClient {
 
         #region Properties
 
         /// <summary>
-        /// The ID of the client.
+        /// Gets or sets the ID of the client.
         /// </summary>
         public string ClientId { get; set; }
 
         /// <summary>
-        /// The secret of the client.
+        /// Gets or sets the secret of the client.
         /// </summary>
         public string ClientSecret { get; set; }
 
         /// <summary>
-        /// The redirect URI of your application.
+        /// Gets or sets the redirect URI of your application.
         /// </summary>
         public string RedirectUri { get; set; }
 
         /// <summary>
-        /// The access token.
+        /// Gets or sets the access token.
         /// </summary>
         public string AccessToken { get; set; }
 
         /// <summary>
-        /// The GitHub API support basic authentication, so even though this is
-        /// not a part of OAuth, the <var>GitHubOAuthClient</var> will handle
-        /// basic authentication as well.
+        /// The GitHub API support basic authentication, so even though this is not a part of OAuth, the
+        /// <code>GitHubOAuthClient</code> will handle basic authentication as well.
         /// </summary>
         public NetworkCredential Credentials { get; set; }
 
@@ -43,8 +46,20 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// Gets a reference to the raw organizations endpoint.
         /// </summary>
         public GitHubOrganizationsRawEndpoint Organizations { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to the raw repositories endpoint.
+        /// </summary>
         public GitHubRepositoriesRawEndpoint Repositories { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to the raw user endpoint.
+        /// </summary>
         public GitHubUserRawEndpoint User { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to the raw users endpoint.
+        /// </summary>
         public GitHubUsersRawEndpoint Users { get; private set; }
 
         #endregion
@@ -96,20 +111,46 @@ namespace Skybrud.Social.GitHub.OAuth {
 
         #region Methods
 
-        public string GetAuthorizationUrl(string state, GitHubScopeCollection scopes) {
+        /// <summary>
+        /// Gets an authorization URL using the specified <code>state</code>. This URL will only make your application
+        /// request a basic scope.
+        /// </summary>
+        /// <param name="state">A unique state for the request.</param>
+        public string GetAuthorizationUrl(string state) {
+            return GetAuthorizationUrl(state, default(GitHubScopeCollection));
+        }
+
+        /// <summary>
+        /// Gets an authorization URL using the specified <code>state</code> and request the specified <code>scope</code>.
+        /// </summary>
+        /// <param name="state">A unique state for the request.</param>
+        /// <param name="scope">The scope of your application.</param>
+        public string GetAuthorizationUrl(string state, GitHubScopeCollection scope) {
+            return GetAuthorizationUrl(state, scope == null ? "" : scope.ToString());
+        }
+
+        /// <summary>
+        /// Gets an authorization URL using the specified <code>state</code> and request the specified <code>scope</code>.
+        /// </summary>
+        /// <param name="state">A unique state for the request.</param>
+        /// <param name="scope">The scope of your application.</param>
+        public string GetAuthorizationUrl(string state, params string[] scope) {
+
+            // Do we have a valid "state" ?
+            if (String.IsNullOrWhiteSpace(state)) {
+                throw new ArgumentNullException("state", "A valid state should be specified as it is part of the security of OAuth 2.0.");
+            }
 
             // Initialize the query string
-            NameValueCollection nvc = new NameValueCollection { { "client_id", ClientId } };
+            NameValueCollection nvc = new NameValueCollection {
+                { "client_id", ClientId },
+                {"redirect_uri", RedirectUri},
+                {"state", state}
+            };
 
-            // Add the redirect URI if specified
-            if (!String.IsNullOrWhiteSpace(RedirectUri)) nvc.Add("redirect_uri", RedirectUri);
-
-            // Add the state if specified
-            if (!String.IsNullOrWhiteSpace(state)) nvc.Add("state", state);
-
-            // Get the scope list
-            string scope = (scopes == null ? "" : scopes.ToString());
-            if (!String.IsNullOrWhiteSpace(scope)) nvc.Add("scope", scope);
+            // Append the scope if specified
+            string scopes = (scope == null ? "" : String.Join(",", scope));
+            if (!String.IsNullOrWhiteSpace(scopes)) nvc.Add("scope", scopes);
 
             // Generate the URL
             return "https://github.com/login/oauth/authorize?" + SocialUtils.NameValueCollectionToQueryString(nvc);
@@ -174,6 +215,10 @@ namespace Skybrud.Social.GitHub.OAuth {
 
         public SocialHttpResponse DoAuthenticatedGetRequest(string url, NameValueCollection query) {
             return DoAuthenticatedGetRequest(url, new SocialQueryString(query));
+        }
+
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url, IGetOptions options) {
+            return DoAuthenticatedGetRequest(url, options == null ? null : options.GetQueryString());
         }
 
         public SocialHttpResponse DoAuthenticatedGetRequest(string url, SocialQueryString query) {

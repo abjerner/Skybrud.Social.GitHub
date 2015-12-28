@@ -1,15 +1,20 @@
 using System;
-using System.Collections.Specialized;
 using Skybrud.Social.GitHub.OAuth;
-using Skybrud.Social.GitHub.Options;
+using Skybrud.Social.GitHub.Options.Commits;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Endpoints.Raw {
-    
+
+    /// <summary>
+    /// Class representing the raw repositories endpoint.
+    /// </summary>
     public class GitHubRepositoriesRawEndpoint {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the parent OAuth client.
+        /// </summary>
         public GitHubOAuthClient Client { get; private set; }
 
         #endregion
@@ -24,32 +29,47 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
 
         #region Methods
 
-        public string GetContents(string owner, string repository, string path) {
+        /*public string GetContents(string owner, string repository, string path) {
             return SocialUtils.DoHttpGetRequestAndGetBodyAsString(
                 Client.GenerateAbsoluteUrl(String.Format("/repos/{0}/{1}/contents/{2}", owner, repository, path))
             );
-        }
+        }*/
 
+        /// <summary>
+        /// Gets information about the commit matching the specified <code>owner</code>, <code>repository</code> and <code>sha</code> hash.
+        /// </summary>
+        /// <param name="owner">The alias (login) of the owner.</param>
+        /// <param name="repository">The slug of the repository.</param>
+        /// <param name="sha">The SHA hash of the commit.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
         public SocialHttpResponse GetCommit(string owner, string repository, string sha) {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + owner + "/" + repository + "/commits/" + sha);
         }
 
+        /// <summary>
+        /// Gets a list of commits of the repository matching the specified <code>owner</code> and <code>repository</code>.
+        /// </summary>
+        /// <param name="owner">The alias (login) of the owner.</param>
+        /// <param name="repository">The slug of the repository.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
         public SocialHttpResponse GetCommits(string owner, string repository) {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + owner + "/" + repository + "/commits");
         }
 
-        public SocialHttpResponse GetCommits(string owner, string repository, GitHubGetCommitOptions options) {
-            NameValueCollection query = new NameValueCollection();
-            if (options != null) {
-                if (!String.IsNullOrWhiteSpace(options.Sha)) query.Add("sha", options.Sha);
-                if (!String.IsNullOrWhiteSpace(options.Path)) query.Add("path", options.Path);
-                if (!String.IsNullOrWhiteSpace(options.Author)) query.Add("author", options.Author);
-                if (options.Since != null) query.Add("since", options.Since.Value.ToString(SocialUtils.IsoDateFormat));
-                if (options.Until != null) query.Add("until", options.Until.Value.ToString(SocialUtils.IsoDateFormat));
-            }
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + owner + "/" + repository + "/commits", query);
+        /// <summary>
+        /// Gets a list of commits of the repository matching the specified <code>options</code>.
+        /// </summary>
+        /// <param name="options">The options for the call to the API.</param>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        public SocialHttpResponse GetCommits(GitHubGetCommitOptions options) {
+            if (options == null) throw new ArgumentNullException("options");
+            return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + options.Owner + "/" + options.Repository + "/commits", options);
         }
 
+        /// <summary>
+        /// Gets information about the repository matching the specified <code>owner</code> and <code>repository</code>.
+        /// </summary>
+        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
         public SocialHttpResponse GetRepository(string owner, string repository) {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + owner + "/" + repository);
         }
