@@ -174,13 +174,13 @@ namespace Skybrud.Social.GitHub.OAuth {
             if (!String.IsNullOrWhiteSpace(RedirectUri)) parameters.Add("redirect_uri", RedirectUri);
 
             // Get the response from the server
-            string contents = SocialUtils.DoHttpPostRequestAndGetBodyAsString("https://github.com/login/oauth/access_token", null, parameters);
+            SocialHttpResponse response = SocialUtils.DoHttpPostRequest("https://github.com/login/oauth/access_token", null, parameters);
 
             // Parse the contents
-            NameValueCollection response = SocialUtils.ParseQueryString(contents);
+            NameValueCollection nvc = SocialUtils.ParseQueryString(response.Body);
 
             // Return the response
-            return GitHubAccessToken.Parse(response);
+            return GitHubAccessToken.Parse(nvc);
 
         }
 
