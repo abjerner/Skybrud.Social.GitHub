@@ -32,7 +32,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetUser() {
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/user");
+            return Client.DoHttpGetRequest("https://api.github.com/user");
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetEmails() {
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/user/emails");
+            return Client.DoHttpGetRequest("https://api.github.com/user/emails");
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetFollowers() {
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/user/followers");
+            return Client.DoHttpGetRequest("https://api.github.com/user/followers");
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetFollowing() {
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/user/followers");
+            return Client.DoHttpGetRequest("https://api.github.com/user/followers");
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="username">The username (login) of the user.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse IsFollowing(string username) {
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/user/following/" + username);
+            return Client.DoHttpGetRequest("https://api.github.com/user/following/" + username);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetRepositories() {
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/user/repos");
+            return Client.DoHttpGetRequest("https://api.github.com/user/repos");
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetOrganizations() {
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/user/orgs");
+            return Client.DoHttpGetRequest("https://api.github.com/user/orgs");
         }
 
         #endregion

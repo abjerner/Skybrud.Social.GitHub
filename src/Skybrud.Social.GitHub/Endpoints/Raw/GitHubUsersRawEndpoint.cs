@@ -33,7 +33,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="username">The username (login) of the user.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetUser(string username) {
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/users/" + username);
+            return Client.DoHttpGetRequest("https://api.github.com/users/" + username);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="username">The username (login) of the user.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetRepositories(string username) {
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/users/" + username + "/repos");
+            return Client.DoHttpGetRequest("https://api.github.com/users/" + username + "/repos");
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="username">The username (login) of the user.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetOrganizations(string username) {
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/users/" + username + "/orgs");
+            return Client.DoHttpGetRequest("https://api.github.com/users/" + username + "/orgs");
         }
 
         #endregion

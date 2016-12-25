@@ -44,7 +44,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="sha">The SHA hash of the commit.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetCommit(string owner, string repository, string sha) {
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + owner + "/" + repository + "/commits/" + sha);
+            return Client.DoHttpGetRequest("https://api.github.com/repos/" + owner + "/" + repository + "/commits/" + sha);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="repository">The slug of the repository.</param>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetCommits(string owner, string repository) {
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + owner + "/" + repository + "/commits");
+            return Client.DoHttpGetRequest("https://api.github.com/repos/" + owner + "/" + repository + "/commits");
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetCommits(GitHubGetCommitOptions options) {
             if (options == null) throw new ArgumentNullException("options");
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + options.Owner + "/" + options.Repository + "/commits", options);
+            return Client.DoHttpGetRequest("https://api.github.com/repos/" + options.Owner + "/" + options.Repository + "/commits", options);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetRepository(string owner, string repository) {
-            return Client.DoAuthenticatedGetRequest("https://api.github.com/repos/" + owner + "/" + repository);
+            return Client.DoHttpGetRequest("https://api.github.com/repos/" + owner + "/" + repository);
         }
 
         #endregion

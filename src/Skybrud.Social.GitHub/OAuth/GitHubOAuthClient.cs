@@ -5,7 +5,6 @@ using Skybrud.Social.GitHub.Endpoints.Raw;
 using Skybrud.Social.GitHub.Objects.Authentication;
 using Skybrud.Social.GitHub.Scopes;
 using Skybrud.Social.Http;
-using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.GitHub.OAuth {
 
@@ -13,7 +12,7 @@ namespace Skybrud.Social.GitHub.OAuth {
     /// Class for handling the raw communication with the GitHub API as well as any OAuth 2.0
     /// communication/authentication.
     /// </summary>
-    public class GitHubOAuthClient {
+    public class GitHubOAuthClient : SocialHttpClient {
 
         #region Properties
 
@@ -216,42 +215,19 @@ namespace Skybrud.Social.GitHub.OAuth {
             return url;
 
         }
-
-        public SocialHttpResponse DoAuthenticatedGetRequest(string url) {
-            return DoAuthenticatedGetRequest(url, (SocialHttpQueryString) null);
-        }
-
-        public SocialHttpResponse DoAuthenticatedGetRequest(string url, NameValueCollection query) {
-            return DoAuthenticatedGetRequest(url, new SocialHttpQueryString(query));
-        }
-
-        public SocialHttpResponse DoAuthenticatedGetRequest(string url, IHttpGetOptions options) {
-            return DoAuthenticatedGetRequest(url, options == null ? null : options.GetQueryString());
-        }
-
-        public SocialHttpResponse DoAuthenticatedGetRequest(string url, IHttpQueryString query) {
-
-            // Throw an exception if the URL is empty
-            if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
-
-            // Append the query string to the URL
-            if (query != null && !query.IsEmpty) url += (url.Contains("?") ? "&" : "?") + query;
-
-            // Initialize a new HTTP request
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
+        
+        /// <summary>
+        /// Virtual method that can be used for configuring a request.
+        /// </summary>
+        /// <param name="request">The instance of <see cref="SocialHttpRequest"/> representing the request.</param>
+        protected override void PrepareHttpRequest(SocialHttpRequest request) {
 
             // GitHub requires a user agent - see https://developer.github.com/v3/#user-agent-required
             request.UserAgent = "Skybrud.Social";
 
-            // Add an authorization header with the access token
-            request.Headers.Add("Authorization: token " + AccessToken);
-
-            // Get the HTTP response
-            try {
-                return SocialHttpResponse.GetFromWebResponse(request.GetResponse() as HttpWebResponse);
-            } catch (WebException ex) {
-                if (ex.Status != WebExceptionStatus.ProtocolError) throw;
-                return SocialHttpResponse.GetFromWebResponse(ex.Response as HttpWebResponse);
+            // Append the access token to the HTTP headers (if present)
+            if (!String.IsNullOrWhiteSpace(AccessToken)) {
+                request.Headers.Authorization = "token " + AccessToken;
             }
 
         }
