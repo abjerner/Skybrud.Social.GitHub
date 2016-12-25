@@ -1,14 +1,14 @@
 using System;
+using Skybrud.Essentials.Time;
 using Skybrud.Social.Http;
-using Skybrud.Social.Interfaces;
-using Skybrud.Social.Time;
+using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.GitHub.Options.Commits {
     
     /// <summary>
     /// Class representing the options for getting a list of commits of a given repository.
     /// </summary>
-    public class GitHubGetCommitOptions: IGetOptions {
+    public class GitHubGetCommitOptions: IHttpGetOptions {
 
         #region Properties
 
@@ -41,29 +41,29 @@ namespace Skybrud.Social.GitHub.Options.Commits {
         /// Optional: Gets or sets the timestamp the returned commits should match. Only commits after this date will
         /// be returned.
         /// </summary>
-        public SocialDateTime Since { get; set; }
+        public EssentialsDateTime Since { get; set; }
 
         /// <summary>
         /// Optional: Gets or sets the timestamp the returned commits should match. Only commits before this date will
         /// be returned.
         /// </summary>
-        public SocialDateTime Until { get; set; }
+        public EssentialsDateTime Until { get; set; }
 
         #endregion
 
         #region Member methods
 
         /// <summary>
-        /// Generates an instance of <code>SocialQueryString</code> representing the options.
+        /// Generates an instance of <see cref="IHttpQueryString"/> representing the options.
         /// </summary>
-        /// <returns>Returns an instance of <code>SocialQueryString</code>.</returns>
-        public SocialQueryString GetQueryString() {
-            SocialQueryString query = new SocialQueryString();
+        /// <returns>Returns an instance of <see cref="IHttpQueryString"/>.</returns>
+        public IHttpQueryString GetQueryString() {
+            SocialHttpQueryString query = new SocialHttpQueryString();
             if (!String.IsNullOrWhiteSpace(Sha)) query.Add("sha", Sha);
             if (!String.IsNullOrWhiteSpace(Path)) query.Add("path", Path);
             if (!String.IsNullOrWhiteSpace(Author)) query.Add("author", Author);
-            if (Since != null) query.Add("since", Since.ToString(SocialUtils.IsoDateFormat));
-            if (Until != null) query.Add("until", Until.ToString(SocialUtils.IsoDateFormat));
+            if (Since != null) query.Add("since", Since.ToString(TimeHelper.Iso8601DateFormat));
+            if (Until != null) query.Add("until", Until.ToString(TimeHelper.Iso8601DateFormat));
             return query;
         }
 

@@ -15,7 +15,7 @@ namespace Skybrud.Social.GitHub.Responses.Authentication {
         private GitHubAccessTokenResponse(SocialHttpResponse response) : base(response) {
 
             // Parse the response body into an instance of NameValueCollection
-            NameValueCollection body = SocialUtils.ParseQueryString(response.Body);
+            NameValueCollection body = SocialUtils.Misc.ParseQueryString(response.Body);
             
             Body = GitHubAccessToken.Parse(body);
         

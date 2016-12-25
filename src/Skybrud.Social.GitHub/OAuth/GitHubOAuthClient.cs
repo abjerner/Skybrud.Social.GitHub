@@ -5,7 +5,7 @@ using Skybrud.Social.GitHub.Endpoints.Raw;
 using Skybrud.Social.GitHub.Objects.Authentication;
 using Skybrud.Social.GitHub.Scopes;
 using Skybrud.Social.Http;
-using Skybrud.Social.Interfaces;
+using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.GitHub.OAuth {
 
@@ -154,7 +154,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             if (!String.IsNullOrWhiteSpace(scopes)) nvc.Add("scope", scopes);
 
             // Generate the URL
-            return "https://github.com/login/oauth/authorize?" + SocialUtils.NameValueCollectionToQueryString(nvc);
+            return "https://github.com/login/oauth/authorize?" + SocialUtils.Misc.NameValueCollectionToQueryString(nvc);
 
         }
 
@@ -174,10 +174,10 @@ namespace Skybrud.Social.GitHub.OAuth {
             if (!String.IsNullOrWhiteSpace(RedirectUri)) parameters.Add("redirect_uri", RedirectUri);
 
             // Get the response from the server
-            SocialHttpResponse response = SocialUtils.DoHttpPostRequest("https://github.com/login/oauth/access_token", null, parameters);
+            SocialHttpResponse response = SocialUtils.Http.DoHttpPostRequest("https://github.com/login/oauth/access_token", null, parameters);
 
             // Parse the contents
-            NameValueCollection nvc = SocialUtils.ParseQueryString(response.Body);
+            NameValueCollection nvc = SocialUtils.Misc.ParseQueryString(response.Body);
 
             // Return the response
             return GitHubAccessToken.Parse(nvc);
@@ -203,7 +203,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             url += relative;
 
             // Append the query string (if not empty)
-            if (query.Count > 0) url += "?" + SocialUtils.NameValueCollectionToQueryString(query);
+            if (query.Count > 0) url += "?" + SocialUtils.Misc.NameValueCollectionToQueryString(query);
 
             // Now return the URL
             return url;
@@ -211,18 +211,18 @@ namespace Skybrud.Social.GitHub.OAuth {
         }
 
         public SocialHttpResponse DoAuthenticatedGetRequest(string url) {
-            return DoAuthenticatedGetRequest(url, (SocialQueryString)null);
+            return DoAuthenticatedGetRequest(url, (SocialHttpQueryString) null);
         }
 
         public SocialHttpResponse DoAuthenticatedGetRequest(string url, NameValueCollection query) {
-            return DoAuthenticatedGetRequest(url, new SocialQueryString(query));
+            return DoAuthenticatedGetRequest(url, new SocialHttpQueryString(query));
         }
 
-        public SocialHttpResponse DoAuthenticatedGetRequest(string url, IGetOptions options) {
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url, IHttpGetOptions options) {
             return DoAuthenticatedGetRequest(url, options == null ? null : options.GetQueryString());
         }
 
-        public SocialHttpResponse DoAuthenticatedGetRequest(string url, SocialQueryString query) {
+        public SocialHttpResponse DoAuthenticatedGetRequest(string url, IHttpQueryString query) {
 
             // Throw an exception if the URL is empty
             if (String.IsNullOrWhiteSpace(url)) throw new ArgumentNullException("url");
