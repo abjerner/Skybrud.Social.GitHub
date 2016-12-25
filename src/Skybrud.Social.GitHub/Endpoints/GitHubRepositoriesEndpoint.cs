@@ -37,39 +37,42 @@ namespace Skybrud.Social.GitHub.Endpoints {
         #region Methods
 
         /// <summary>
-        /// Gets information about the commit matching the specified <code>owner</code>, <code>repository</code> and <code>sha</code> hash.
+        /// Gets information about the commit matching the specified <paramref name="owner"/>,
+        /// <paramref name="repository"/> and <paramref name="sha"/> hash.
         /// </summary>
         /// <param name="owner">The alias (login) of the owner.</param>
         /// <param name="repository">The slug of the repository.</param>
         /// <param name="sha">The SHA hash of the commit.</param>
-        /// <returns>Returns an instance of <code>GitHubGetCommitResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="GitHubGetCommitResponse"/> representing the response.</returns>
         public GitHubGetCommitResponse GetCommit(string owner, string repository, string sha) {
             return GitHubGetCommitResponse.ParseResponse(Raw.GetCommit(owner, repository, sha));
         }
 
         /// <summary>
-        /// Gets a list of commits of the repository matching the specified <code>owner</code> and <code>repository</code>.
+        /// Gets a list of commits of the repository matching the specified <paramref name="owner"/> and
+        /// <paramref name="repository"/>.
         /// </summary>
         /// <param name="owner">The alias (login) of the owner.</param>
         /// <param name="repository">The slug of the repository.</param>
-        /// <returns>Returns an instance of <code>GitHubGetCommitsResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="GitHubGetCommitsResponse"/> representing the response.</returns>
         public GitHubGetCommitsResponse GetCommits(string owner, string repository) {
             return GitHubGetCommitsResponse.ParseResponse(Raw.GetCommits(owner, repository));
         }
 
         /// <summary>
-        /// Gets a list of commits of the repository matching the specified <code>options</code>.
+        /// Gets a list of commits of the repository matching the specified <paramref name="options"/>.
         /// </summary>
         /// <param name="options">The options for the call to the API.</param>
-        /// <returns>Returns an instance of <code>GitHubGetCommitsResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="GitHubGetCommitsResponse"/> representing the response.</returns>
         public GitHubGetCommitsResponse GetCommits(GitHubGetCommitOptions options) {
             return GitHubGetCommitsResponse.ParseResponse(Raw.GetCommits(options));
         }
 
         /// <summary>
-        /// Gets information about the repository matching the specified <code>owner</code> and <code>repository</code>.
+        /// Gets information about the repository matching the specified <paramref name="owner"/> and
+        /// <paramref name="repository"/>.
         /// </summary>
-        /// <returns>Returns an instance of <code>GitHubGetRepositoryResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="GitHubGetRepositoryResponse"/> representing the response.</returns>
         public GitHubGetRepositoryResponse GetRepository(string owner, string repository) {
             return GitHubGetRepositoryResponse.ParseResponse(Raw.GetRepository(owner, repository));
         }

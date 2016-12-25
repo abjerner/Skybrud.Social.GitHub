@@ -58,10 +58,10 @@ namespace Skybrud.Social.GitHub.Objects.Repositories {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <code>obj</code> into an instance of <code>GitHubRepositoryUrlCollection</code>.
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubRepositoryUrlCollection"/>.
         /// </summary>
-        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
-        /// <returns>Returns an instance of <code>GitHubCommitUrlCollection</code>.</returns>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <returns>Returns an instance of <see cref="GitHubRepositoryUrlCollection"/>.</returns>
         public static GitHubRepositoryUrlCollection Parse(JObject obj) {
             return obj == null ? null : new GitHubRepositoryUrlCollection(obj);
         }

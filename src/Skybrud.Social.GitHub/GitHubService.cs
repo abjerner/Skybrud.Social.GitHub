@@ -5,6 +5,9 @@ using Skybrud.Social.GitHub.OAuth;
 
 namespace Skybrud.Social.GitHub {
 
+    /// <summary>
+    /// Class representing the object oriented implementation of the GitHub API.
+    /// </summary>
     public class GitHubService {
 
         #region Properties
@@ -14,12 +17,24 @@ namespace Skybrud.Social.GitHub {
         /// </summary>
         public GitHubOAuthClient Client { get; private set; }
 
+        /// <summary>
+        /// Gets a reference to the organizations endpoint.
+        /// </summary>
         public GitHubOrganizationsEndpoint Organizations { get; private set; }
 
+        /// <summary>
+        /// Gets a reference to the repositories endpoint.
+        /// </summary>
         public GitHubRepositoriesEndpoint Repositories { get; private set; }
 
+        /// <summary>
+        /// Gets a reference to the user endpoint.
+        /// </summary>
         public GitHubUserEndpoint User { get; private set; }
 
+        /// <summary>
+        /// Gets a reference to the users endpoint.
+        /// </summary>
         public GitHubUsersEndpoint Users { get; private set; }
 
         #endregion
@@ -53,8 +68,7 @@ namespace Skybrud.Social.GitHub {
         }
 
         /// <summary>
-        /// Initializes a new service instance from the specifie OAuth 2 access
-        /// token.
+        /// Initializes a new service instance from the specifie OAuth 2 <paramref name="accessToken"/>.
         /// </summary>
         /// <param name="accessToken">The access token.</param>
         public static GitHubService CreateFromAccessToken(string accessToken) {
@@ -64,10 +78,9 @@ namespace Skybrud.Social.GitHub {
         }
 
         /// <summary>
-        /// Initializes a new service instance from the specified username and
-        /// password using basic authentication in the HTTP protocol. Using
-        /// this approach is specific to the GitGub API and not a part of
-        /// OAuth 2.
+        /// Initializes a new service instance from the specified <paramref name="username"/> and
+        /// <paramref name="password"/> using basic authentication in the HTTP protocol. Using this approach is
+        /// specific to the GitGub API and not a part of OAuth 2.
         /// </summary>
         /// <param name="username">The username of the user on GitHub.com</param>
         /// <param name="password">The password of the user on GitHub.com</param>
@@ -78,9 +91,9 @@ namespace Skybrud.Social.GitHub {
         }
 
         /// <summary>
-        /// Initializes a new service instance from the specified credentials
-        /// using basic authentication in the HTTP protocol. Using this
-        /// approach is specific to the GitGub API and not a part of OAuth 2.
+        /// Initializes a new service instance from the specified <paramref name="credentials"/> using basic
+        /// authentication in the HTTP protocol. Using this approach is specific to the GitGub API and not a part of
+        /// OAuth 2.
         /// </summary>
         /// <param name="credentials">The credentials of the user on GitHub.com</param>
         public static GitHubService CreateFromCredentials(NetworkCredential credentials) {

@@ -22,7 +22,7 @@ namespace Skybrud.Social.GitHub.Responses.Commits {
         /// <summary>
         /// Parses the specified <code>response</code> into an instance of <code>GitHubGetCommitResponse</code>.
         /// </summary>
-        /// <param name="response">The instance of <code>SocialHttpResponse</code> representing the raw response.</param>
+        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
         /// <returns>Returns an instance of <code>GitHubGetCommitResponse</code> representing the response.</returns>
         public static GitHubGetCommitResponse ParseResponse(SocialHttpResponse response) {
 

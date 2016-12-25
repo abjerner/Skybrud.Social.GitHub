@@ -68,7 +68,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         #region Constructors
 
         /// <summary>
-        /// Initializes an OAuth client with empty information.
+        /// Initializes a new OAuth client with default options.
         /// </summary>
         public GitHubOAuthClient() {
             Organizations = new GitHubOrganizationsRawEndpoint(this);
@@ -78,7 +78,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         }
 
         /// <summary>
-        /// Initializes an OAuth client with the specified access token. Using this initializer,
+        /// Initializes a new OAuth client with the specified <paramref name="accessToken"/>. Using this initializer,
         /// the client will have no information about your app.
         /// </summary>
         /// <param name="accessToken">A valid access token.</param>
@@ -87,7 +87,8 @@ namespace Skybrud.Social.GitHub.OAuth {
         }
 
         /// <summary>
-        /// Initializes an OAuth client with the specified client ID and client secret.
+        /// Initializes a new OAuth client with the specified <paramref name="clientId"/> and
+        /// <paramref name="clientSecret"/>.
         /// </summary>
         /// <param name="clientId">The ID of the client.</param>
         /// <param name="clientSecret">The secret of the client.</param>
@@ -97,7 +98,8 @@ namespace Skybrud.Social.GitHub.OAuth {
         }
 
         /// <summary>
-        /// Initializes an OAuth client with the specified client ID, client secret and redirect URI.
+        /// Initializes an OAuth client with the specified <paramref name="clientId"/>, <paramref name="clientSecret"/>
+        /// and <paramref name="redirectUri"/>.
         /// </summary>
         /// <param name="clientId">The ID of the client.</param>
         /// <param name="clientSecret">The secret of the client.</param>
@@ -113,28 +115,33 @@ namespace Skybrud.Social.GitHub.OAuth {
         #region Methods
 
         /// <summary>
-        /// Gets an authorization URL using the specified <code>state</code>. This URL will only make your application
+        /// Gets an authorization URL using the specified <see cref="state"/>. This URL will only make your application
         /// request a basic scope.
         /// </summary>
         /// <param name="state">A unique state for the request.</param>
+        /// <returns>Returns a <see cref="String"/> with the authorization URL.</returns>
         public string GetAuthorizationUrl(string state) {
             return GetAuthorizationUrl(state, default(GitHubScopeCollection));
         }
 
         /// <summary>
-        /// Gets an authorization URL using the specified <code>state</code> and request the specified <code>scope</code>.
+        /// Gets an authorization URL using the specified <see cref="state"/> and request the specified
+        /// <see cref="scope"/>.
         /// </summary>
         /// <param name="state">A unique state for the request.</param>
         /// <param name="scope">The scope of your application.</param>
+        /// <returns>Returns a <see cref="String"/> with the authorization URL.</returns>
         public string GetAuthorizationUrl(string state, GitHubScopeCollection scope) {
             return GetAuthorizationUrl(state, scope == null ? "" : scope.ToString());
         }
 
         /// <summary>
-        /// Gets an authorization URL using the specified <code>state</code> and request the specified <code>scope</code>.
+        /// Gets an authorization URL using the specified <see cref="state"/>. and request the specified
+        /// <see cref="scope"/>.
         /// </summary>
         /// <param name="state">A unique state for the request.</param>
         /// <param name="scope">The scope of your application.</param>
+        /// <returns>Returns a <see cref="String"/> with the authorization URL.</returns>
         public string GetAuthorizationUrl(string state, params string[] scope) {
 
             // Do we have a valid "state" ?
@@ -159,7 +166,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         }
 
         /// <summary>
-        /// Exchanges the specified authorization code for a user access token.
+        /// Exchanges the specified <paramref name="authCode"/> for a user access token.
         /// </summary>
         /// <param name="authCode">The authorization code received from the GitHub OAuth dialog.</param>
         public GitHubAccessToken GetAccessTokenFromAuthCode(string authCode) {

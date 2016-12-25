@@ -58,10 +58,10 @@ namespace Skybrud.Social.GitHub.Objects.Commits {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <code>obj</code> into an instance of <code>GitHubCommitDetails</code>.
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubCommitDetails"/>.
         /// </summary>
-        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
-        /// <returns>Returns an instance of <code>GitHubCommitDetails</code>.</returns>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <returns>Returns an instance of <see cref="GitHubCommitDetails"/>.</returns>
         public static GitHubCommitDetails Parse(JObject obj) {
             return obj == null ? null : new GitHubCommitDetails(obj);
         }

@@ -28,28 +28,28 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         #region Methods
 
         /// <summary>
-        /// Gets information about the user with the specified <code>username</code>.
+        /// Gets information about the user with the specified <paramref name="username"/>.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetUser(string username) {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/users/" + username);
         }
 
         /// <summary>
-        /// Gets a list of repositories of the user with the specified <code>username</code>.
+        /// Gets a list of repositories of the user with the specified <paramref name="username"/>.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetRepositories(string username) {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/users/" + username + "/repos");
         }
 
         /// <summary>
-        /// Gets a list of organizations the user with the specified <code>username</code> is a member of.
+        /// Gets a list of organizations the user with the specified <paramref name="username"/> is a member of.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetOrganizations(string username) {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/users/" + username + "/orgs");
         }

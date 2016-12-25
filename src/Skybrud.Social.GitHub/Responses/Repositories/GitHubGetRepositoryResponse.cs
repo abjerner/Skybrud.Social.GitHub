@@ -20,7 +20,7 @@ namespace Skybrud.Social.GitHub.Responses.Repositories {
         /// <summary>
         /// Parses the specified <code>response</code> into an instance of <code>GitHubGetRepositoryResponse</code>.
         /// </summary>
-        /// <param name="response">The instance of <code>SocialHttpResponse</code> representing the raw response.</param>
+        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
         /// <returns>Returns an instance of <code>GitHubGetRepositoryResponse</code> representing the response.</returns>
         public static GitHubGetRepositoryResponse ParseResponse(SocialHttpResponse response) {
 

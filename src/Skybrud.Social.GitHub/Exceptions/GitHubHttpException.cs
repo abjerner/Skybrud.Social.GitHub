@@ -32,7 +32,7 @@ namespace Skybrud.Social.GitHub.Exceptions {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new exception based on the specified <code>response</code>.
+        /// Initializes a new exception based on the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The raw response of the exception.</param>
         public GitHubHttpException(SocialHttpResponse response) : base("Invalid response received from the GitHub API (Status: " + ((int) response.StatusCode) + ")") {
@@ -40,7 +40,7 @@ namespace Skybrud.Social.GitHub.Exceptions {
         }
 
         /// <summary>
-        /// Initializes a new exception based on the specified <code>response</code> and <code>message</code>.
+        /// Initializes a new exception based on the specified <paramref name="response"/> and <paramref name="message"/>.
         /// </summary>
         /// <param name="response">The raw response of the exception.</param>
         /// <param name="message">The message of the exception.</param>
@@ -49,7 +49,7 @@ namespace Skybrud.Social.GitHub.Exceptions {
         }
 
         /// <summary>
-        /// Initializes a new exception based on the specified <code>response</code> and <code>message</code>.
+        /// Initializes a new exception based on the specified <paramref name="response"/> and <paramref name="message"/>.
         /// </summary>
         /// <param name="response">The raw response of the exception.</param>
         /// <param name="message">The message of the exception.</param>

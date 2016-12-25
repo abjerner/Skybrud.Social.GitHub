@@ -52,7 +52,7 @@ namespace Skybrud.Social.GitHub.Responses.Followers {
         /// <summary>
         /// Parses the specified <code>response</code> into an instance of <code>GitHubGetFollowingResponse</code>.
         /// </summary>
-        /// <param name="response">The instance of <code>SocialHttpResponse</code> representing the raw response.</param>
+        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
         /// <returns>Returns an instance of <code>GitHubGetFollowingResponse</code> representing the response.</returns>
         public static GitHubGetFollowingResponse ParseResponse(SocialHttpResponse response) {
             return response == null ? null : new GitHubGetFollowingResponse(response);

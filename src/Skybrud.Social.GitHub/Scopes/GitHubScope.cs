@@ -22,7 +22,7 @@ namespace Skybrud.Social.GitHub.Scopes {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new scope with the specified <code>name</code> and <code>description</code>.
+        /// Initializes a new scope with the specified <paramref name="name"/> and <see cref="description"/>.
         /// </summary>
         /// <param name="name">The name of the scope.</param>
         /// <param name="description">The description of the scope.</param>
@@ -48,7 +48,7 @@ namespace Skybrud.Social.GitHub.Scopes {
         #region Operators
 
         /// <summary>
-        /// Adding two instance of <code>GitHubScope</code> will result in a <code>GitHubScopeCollection</code> containing both scopes.
+        /// Adding two instance of <see cref="GitHubScope"/> will result in a <see cref="GitHubScopeCollection"/> containing both scopes.
         /// </summary>
         /// <param name="left">The left scope.</param>
         /// <param name="right">The right scope.</param>

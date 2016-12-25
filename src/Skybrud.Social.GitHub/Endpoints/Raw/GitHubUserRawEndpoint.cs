@@ -30,7 +30,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <summary>
         /// Gets information about the authenticated user.
         /// </summary>
-        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetUser() {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/user");
         }
@@ -38,7 +38,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <summary>
         /// Gets a list of email addresses of the authenticated user.
         /// </summary>
-        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetEmails() {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/user/emails");
         }
@@ -46,7 +46,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <summary>
         /// Gets a list of users following the authenticated user.
         /// </summary>
-        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetFollowers() {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/user/followers");
         }
@@ -54,16 +54,16 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <summary>
         /// Gets a list of users the authenticated user is following.
         /// </summary>
-        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetFollowing() {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/user/followers");
         }
 
         /// <summary>
-        /// Gets whether the authenticated user is following the user with the specified <code>username</code>.
+        /// Gets whether the authenticated user is following the user with the specified <paramref name="username"/>.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse IsFollowing(string username) {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/user/following/" + username);
         }
@@ -71,7 +71,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <summary>
         /// Gets a list of repositories of the authenticated user.
         /// </summary>
-        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetRepositories() {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/user/repos");
         }
@@ -79,7 +79,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <summary>
         /// Gets a list of organizations the authenticated user is a member of.
         /// </summary>
-        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetOrganizations() {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/user/orgs");
         }

@@ -37,7 +37,7 @@ namespace Skybrud.Social.GitHub.Responses {
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance from the specified <code>response</code>.
+        /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The raw response the instance should be based on.</param>
         protected GitHubResponse(SocialHttpResponse response) : base(response) {
@@ -51,7 +51,7 @@ namespace Skybrud.Social.GitHub.Responses {
         #region Static methods
 
         /// <summary>
-        /// Validates the specified <code>response</code>.
+        /// Validates the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The response to be validated.</param>
         public static void ValidateResponse(SocialHttpResponse response) {
@@ -90,7 +90,7 @@ namespace Skybrud.Social.GitHub.Responses {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance from the specified <code>response</code>.
+        /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The raw response the instance should be based on.</param>
         protected GitHubResponse(SocialHttpResponse response) : base(response) { }

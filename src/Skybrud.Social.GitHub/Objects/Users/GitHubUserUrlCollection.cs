@@ -88,10 +88,10 @@ namespace Skybrud.Social.GitHub.Objects.Users {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <code>obj</code> into an instance of <code>GitHubUserUrlCollection</code>.
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubUserUrlCollection"/>.
         /// </summary>
-        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
-        /// <returns>Returns an instance of <code>GitHubUserUrlCollection</code>.</returns>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <returns>Returns an instance of <see cref="GitHubUserUrlCollection"/>.</returns>
         public static GitHubUserUrlCollection Parse(JObject obj) {
             return obj == null ? null : new GitHubUserUrlCollection(obj);
         }

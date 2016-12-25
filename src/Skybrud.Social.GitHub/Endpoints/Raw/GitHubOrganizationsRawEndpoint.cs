@@ -28,10 +28,10 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         #region Methods
 
         /// <summary>
-        /// Gets information about the organisation with the specified <code>alias</code>.
+        /// Gets information about the organisation with the specified <see cref="alias"/>.
         /// </summary>
         /// <param name="alias">The alias (login) of the organization.</param>
-        /// <returns>Returns an instance of <code>SocialHttpResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetOrganization(string alias) {
             return Client.DoAuthenticatedGetRequest("https://api.github.com/orgs/" + alias);
         }

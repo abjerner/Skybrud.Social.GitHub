@@ -37,28 +37,28 @@ namespace Skybrud.Social.GitHub.Endpoints {
         #region Methods
 
         /// <summary>
-        /// Gets information about the user with the specified <code>username</code>.
+        /// Gets information about the user with the specified <paramref name="username"/>.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>Returns an instance of <code>GitHubGetUserResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="GitHubGetUserResponse"/> representing the response.</returns>
         public GitHubGetUserResponse GetUser(string username) {
             return GitHubGetUserResponse.ParseResponse(Raw.GetUser(username));
         }
 
         /// <summary>
-        /// Gets a list of repositories of the user with the specified <code>username</code>.
+        /// Gets a list of repositories of the user with the specified <paramref name="username"/>.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>Returns an instance of <code>GitHubGetRepositoriesResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="GitHubGetRepositoriesResponse"/> representing the response.</returns>
         public GitHubGetRepositoriesResponse GetRepositories(string username) {
             return GitHubGetRepositoriesResponse.ParseResponse(Raw.GetRepositories(username));
         }
 
         /// <summary>
-        /// Gets a list of organizations the user with the specified <code>username</code> is a member of.
+        /// Gets a list of organizations the user with the specified <paramref name="username"/> is a member of.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>Returns an instance of <code>GitHubGetOrganizationsResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="GitHubGetOrganizationsResponse"/> representing the response.</returns>
         public GitHubGetOrganizationsResponse GetOrganizations(string username) {
             return GitHubGetOrganizationsResponse.ParseResponse(Raw.GetOrganizations(username));
         }

@@ -41,7 +41,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <summary>
         /// Gets information about the authenticated user.
         /// </summary>
-        /// <returns>Returns an instance of <code>GitHubGetUserResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="GitHubGetUserResponse"/> representing the response.</returns>
         public GitHubGetUserResponse GetUser() {
             return GitHubGetUserResponse.ParseResponse(Raw.GetUser());
         }
@@ -49,7 +49,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <summary>
         /// Gets a list of email addresses of the authenticated user.
         /// </summary>
-        /// <returns>Returns an instance of <code>GitHubGetEmailsResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="GitHubGetEmailsResponse"/> representing the response.</returns>
         public GitHubGetEmailsResponse GetEmails() {
             return GitHubGetEmailsResponse.ParseResponse(Raw.GetEmails());
         }
@@ -57,7 +57,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <summary>
         /// Gets a list of users following the authenticated user.
         /// </summary>
-        /// <returns>Returns an instance of <code>GitHubGetUsersResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="GitHubGetUsersResponse"/> representing the response.</returns>
         public GitHubGetUsersResponse GetFollowers() {
             return GitHubGetUsersResponse.ParseResponse(Raw.GetFollowers());
         }
@@ -65,16 +65,16 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <summary>
         /// Gets a list of users the authenticated user is following.
         /// </summary>
-        /// <returns>Returns an instance of <code>GitHubGetUsersResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="GitHubGetUsersResponse"/> representing the response.</returns>
         public GitHubGetUsersResponse GetFollowing() {
             return GitHubGetUsersResponse.ParseResponse(Raw.GetFollowing());
         }
 
         /// <summary>
-        /// Gets whether the authenticated user is following the user with the specified <code>username</code>.
+        /// Gets whether the authenticated user is following the user with the specified <paramref name="username"/>.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>Returns an instance of <code>GitHubGetFollowingResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="GitHubGetFollowingResponse"/> representing the response.</returns>
         public GitHubGetFollowingResponse IsFollowing(string username) {
             return GitHubGetFollowingResponse.ParseResponse(Raw.IsFollowing(username));
         }
@@ -82,7 +82,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <summary>
         /// Gets a list of repositories of the authenticated user.
         /// </summary>
-        /// <returns>Returns an instance of <code>GitHubGetRepositoriesResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="GitHubGetRepositoriesResponse"/> representing the response.</returns>
         public GitHubGetRepositoriesResponse GetRepositories() {
             return GitHubGetRepositoriesResponse.ParseResponse(Raw.GetRepositories());
         }
@@ -90,7 +90,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <summary>
         /// Gets a list of organizations the authenticated user is a member of.
         /// </summary>
-        /// <returns>Returns an instance of <code>GitHubGetOrganizationsResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="GitHubGetOrganizationsResponse"/> representing the response.</returns>
         public GitHubGetOrganizationsResponse GetOrganizations() {
             return GitHubGetOrganizationsResponse.ParseResponse(Raw.GetOrganizations());
         }

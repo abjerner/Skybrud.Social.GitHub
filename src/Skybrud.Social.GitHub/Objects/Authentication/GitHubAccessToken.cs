@@ -60,10 +60,10 @@ namespace Skybrud.Social.GitHub.Objects.Authentication {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <code>nvc</code> into an instance of <code>GitHubAccessToken</code>.
+        /// Parses the specified <paramref name="nvc"/> into an instance of <see cref="GitHubAccessToken"/>.
         /// </summary>
-        /// <param name="nvc">The instance of <code>NameValueCollection</code> to be parsed.</param>
-        /// <returns>Returns an instance of <code>GitHubAccessToken</code>.</returns>
+        /// <param name="nvc">The instance of <see cref="NameValueCollection"/> to be parsed.</param>
+        /// <returns>Returns an instance of <see cref="GitHubAccessToken"/>.</returns>
         public static GitHubAccessToken Parse(NameValueCollection nvc) {
             return nvc == null ? null : new GitHubAccessToken(nvc);
         }

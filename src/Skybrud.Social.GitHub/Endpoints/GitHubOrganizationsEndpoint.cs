@@ -35,10 +35,10 @@ namespace Skybrud.Social.GitHub.Endpoints {
         #region Methods
 
         /// <summary>
-        /// Gets information about the organisation with the specified <code>alias</code>.
+        /// Gets information about the organisation with the specified <see cref="alias"/>.
         /// </summary>
         /// <param name="alias">The alias (login) of the organization.</param>
-        /// <returns>Returns an instance of <code>GitHubGetOrganizationResponse</code> representing the response.</returns>
+        /// <returns>Returns an instance of <see cref="GitHubGetOrganizationResponse"/> representing the response.</returns>
         public GitHubGetOrganizationResponse GetOrganization(string alias) {
             return GitHubGetOrganizationResponse.ParseResponse(Raw.GetOrganization(alias));
         }

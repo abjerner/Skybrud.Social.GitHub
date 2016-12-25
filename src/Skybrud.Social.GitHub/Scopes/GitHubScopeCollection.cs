@@ -29,7 +29,7 @@ namespace Skybrud.Social.GitHub.Scopes {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new collection with the specified array of <code>scopes</code>.
+        /// Initializes a new collection with the specified array of <paramref name="scopes"/>.
         /// </summary>
         /// <param name="scopes">The array of scopes the collection should be based on.</param>
         public GitHubScopeCollection(params GitHubScope[] scopes) {
@@ -41,7 +41,7 @@ namespace Skybrud.Social.GitHub.Scopes {
         #region Member methods
 
         /// <summary>
-        /// Adds the specified <code>scope</code> to the collection.
+        /// Adds the specified <paramref name="scope"/> to the collection.
         /// </summary>
         /// <param name="scope">The scope to be added.</param>
         public void Add(GitHubScope scope) {
@@ -49,9 +49,9 @@ namespace Skybrud.Social.GitHub.Scopes {
         }
 
         /// <summary>
-        /// Converts the collection of scopes into an array of <code>GitHubScope</code>.
+        /// Converts the collection of scopes into an array of <see cref="GitHubScope"/>.
         /// </summary>
-        /// <returns>Returns an array of <code>GitHubScope</code>.</returns>
+        /// <returns>Returns an array of <see cref="GitHubScope"/>.</returns>
         public GitHubScope[] ToArray() {
             return _list.ToArray();
         }
@@ -59,7 +59,7 @@ namespace Skybrud.Social.GitHub.Scopes {
         /// <summary>
         /// Returns a string array representing the collection.
         /// </summary>
-        /// <returns>Returns a <code>string</code> array.</returns>
+        /// <returns>Returns an array of <see cref="String"/>.</returns>
         public string[] ToStringArray() {
             return (from scope in _list where scope.Name.Length > 0 select scope.Name).ToArray();
         }
@@ -78,25 +78,25 @@ namespace Skybrud.Social.GitHub.Scopes {
         #region Operator overloading
 
         /// <summary>
-        /// Initializes a new collection based on a single <code>scope</code>.
+        /// Initializes a new collection based on a single <paramref name="scope"/>.
         /// </summary>
         /// <param name="scope">The scope the collection should be based on.</param>
-        /// <returns>Returns a new collection based on a single <code>scope</code>.</returns>
+        /// <returns>Returns a new collection based on a single <paramref name="scope"/>.</returns>
         public static implicit operator GitHubScopeCollection(GitHubScope scope) {
             return new GitHubScopeCollection(scope);
         }
 
         /// <summary>
-        /// Initializes a new collection based on the specified <code>array</code> of scopes.
+        /// Initializes a new collection based on the specified <paramref name="array"/> of scopes.
         /// </summary>
         /// <param name="array">The array the collection should be based on.</param>
-        /// <returns>Returns a new instance of <code>GitHubScopeCollection</code>.</returns>
+        /// <returns>Returns a new instance of <see cref="GitHubScopeCollection"/>.</returns>
         public static implicit operator GitHubScopeCollection(GitHubScope[] array) {
             return new GitHubScopeCollection(array ?? new GitHubScope[0]);
         }
 
         /// <summary>
-        /// Adds the specified <code>scope</code> to <code>collection</code>.
+        /// Adds the specified <paramref name="scope"/> to <paramref name="collection"/>.
         /// </summary>
         /// <param name="collection">The collection.</param>
         /// <param name="scope">The scope to be added.</param>

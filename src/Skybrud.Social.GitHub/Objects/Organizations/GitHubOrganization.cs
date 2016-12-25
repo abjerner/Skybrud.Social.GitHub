@@ -120,10 +120,10 @@ namespace Skybrud.Social.GitHub.Objects.Organizations {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <code>obj</code> into an instance of <code>GitHubOrganization</code>.
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubOrganization"/>.
         /// </summary>
-        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
-        /// <returns>Returns an instance of <code>GitHubOrganization</code>.</returns>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <returns>Returns an instance of <see cref="GitHubOrganization"/>.</returns>
         public static GitHubOrganization Parse(JObject obj) {
             return obj == null ? null : new GitHubOrganization(obj);
         }
