@@ -62,8 +62,8 @@ namespace Skybrud.Social.GitHub.Options.Commits {
             if (!String.IsNullOrWhiteSpace(Sha)) query.Add("sha", Sha);
             if (!String.IsNullOrWhiteSpace(Path)) query.Add("path", Path);
             if (!String.IsNullOrWhiteSpace(Author)) query.Add("author", Author);
-            if (Since != null) query.Add("since", Since.ToString(TimeHelper.Iso8601DateFormat));
-            if (Until != null) query.Add("until", Until.ToString(TimeHelper.Iso8601DateFormat));
+            if (Since != null) query.Add("since", Since.ToString(TimeUtils.Iso8601DateFormat));
+            if (Until != null) query.Add("until", Until.ToString(TimeUtils.Iso8601DateFormat));
             return query;
         }
 
