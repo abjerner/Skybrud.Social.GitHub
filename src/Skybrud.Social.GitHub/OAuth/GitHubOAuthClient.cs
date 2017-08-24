@@ -2,7 +2,7 @@ using System;
 using System.Collections.Specialized;
 using System.Net;
 using Skybrud.Social.GitHub.Endpoints.Raw;
-using Skybrud.Social.GitHub.Objects.Authentication;
+using Skybrud.Social.GitHub.Models.Authentication;
 using Skybrud.Social.GitHub.Scopes;
 using Skybrud.Social.Http;
 
@@ -43,6 +43,11 @@ namespace Skybrud.Social.GitHub.OAuth {
         public NetworkCredential Credentials { get; set; }
 
         /// <summary>
+        /// Gets a reference to the raw issues endpoint.
+        /// </summary>
+        public GitHubIssuesRawEndpoint Issues { get; private set; }
+
+        /// <summary>
         /// Gets a reference to the raw organizations endpoint.
         /// </summary>
         public GitHubOrganizationsRawEndpoint Organizations { get; private set; }
@@ -70,6 +75,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// Initializes a new OAuth client with default options.
         /// </summary>
         public GitHubOAuthClient() {
+            Issues = new GitHubIssuesRawEndpoint(this);
             Organizations = new GitHubOrganizationsRawEndpoint(this);
             Repositories = new GitHubRepositoriesRawEndpoint(this);
             User = new GitHubUserRawEndpoint(this);

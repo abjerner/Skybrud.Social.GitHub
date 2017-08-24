@@ -1,5 +1,5 @@
 ﻿using System;
-using Skybrud.Social.GitHub.Objects.Users;
+using Skybrud.Social.GitHub.Models.Users;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Responses.Users {

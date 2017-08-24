@@ -18,6 +18,11 @@ namespace Skybrud.Social.GitHub {
         public GitHubOAuthClient Client { get; private set; }
 
         /// <summary>
+        /// Gets a reference to the issues endpoint.
+        /// </summary>
+        public GitHubIssuesEndpoint Issues { get; private set; }
+
+        /// <summary>
         /// Gets a reference to the organizations endpoint.
         /// </summary>
         public GitHubOrganizationsEndpoint Organizations { get; private set; }
@@ -43,6 +48,7 @@ namespace Skybrud.Social.GitHub {
 
         private GitHubService(GitHubOAuthClient client) {
             Client = client;
+            Issues = new GitHubIssuesEndpoint(this);
             Organizations = new GitHubOrganizationsEndpoint(this);
             Repositories = new GitHubRepositoriesEndpoint(this);
             User = new GitHubUserEndpoint(this);

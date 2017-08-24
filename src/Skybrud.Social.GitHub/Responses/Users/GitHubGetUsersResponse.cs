@@ -1,5 +1,5 @@
 ﻿using System;
-using Skybrud.Social.GitHub.Objects.Users;
+using Skybrud.Social.GitHub.Models.Users;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Responses.Users {
@@ -7,12 +7,12 @@ namespace Skybrud.Social.GitHub.Responses.Users {
     /// <summary>
     /// Class representing the response for getting a list of GitHub users.
     /// </summary>
-    public class GitHubGetUsersResponse : GitHubResponse<GitHubUserSummary[]> {
+    public class GitHubGetUsersResponse : GitHubResponse<GitHubUserItem[]> {
 
         #region Constructor
 
         private GitHubGetUsersResponse(SocialHttpResponse response) : base(response) {
-            Body = ParseJsonArray(response.Body, GitHubUserSummary.Parse);
+            Body = ParseJsonArray(response.Body, GitHubUserItem.Parse);
         }
 
         #endregion

@@ -1,5 +1,5 @@
 ﻿using System;
-using Skybrud.Social.GitHub.Objects.Repositories;
+using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Responses.Repositories {
@@ -7,12 +7,12 @@ namespace Skybrud.Social.GitHub.Responses.Repositories {
     /// <summary>
     /// Class representing the response for getting a list of GitHub repositories.
     /// </summary>
-    public class GitHubGetRepositoriesResponse : GitHubResponse<GitHubRepositorySummary[]> {
+    public class GitHubGetRepositoriesResponse : GitHubResponse<GitHubRepositoryItem[]> {
 
         #region Constructor
 
         private GitHubGetRepositoriesResponse(SocialHttpResponse response) : base(response) {
-            Body = ParseJsonArray(response.Body, GitHubRepositorySummary.Parse);
+            Body = ParseJsonArray(response.Body, GitHubRepositoryItem.Parse);
         }
 
         #endregion

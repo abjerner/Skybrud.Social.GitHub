@@ -3,7 +3,7 @@ using System;
 namespace Skybrud.Social.GitHub.Exceptions {
     
     /// <summary>
-    /// Class representing a basic exception returned by the GitHub API.
+    /// Class representing a basic GitHub exception.
     /// </summary>
     public class GitHubException : Exception {
 

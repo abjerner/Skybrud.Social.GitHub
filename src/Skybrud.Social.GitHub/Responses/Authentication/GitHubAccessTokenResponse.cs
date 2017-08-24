@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
-using Skybrud.Social.GitHub.Objects.Authentication;
+using Skybrud.Social.GitHub.Models.Authentication;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Responses.Authentication {
