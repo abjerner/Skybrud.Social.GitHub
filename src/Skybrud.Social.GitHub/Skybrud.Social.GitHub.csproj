@@ -1,149 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F27F84A5-7434-4493-AE1F-61D2129A2EE9}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworks>netstandard1.3;net45;net46</TargetFrameworks>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <RunBuildTargets>true</RunBuildTargets>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <RootNamespace>Skybrud.Social.GitHub</RootNamespace>
-    <AssemblyName>Skybrud.Social.GitHub</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <Version>1.0.0-beta001</Version>
+    <Company>Skybrud.dk a/s</Company>
+    <Product>Skybrud.Social</Product>
+    <Authors>Anders Bjerner</Authors>
+    <Copyright>Copyright © 2017</Copyright>
+    <Description>Authentication and service implementation for the GitHub API.</Description>
+    <RepositoryUrl>https://github.com/abjerner/Skybrud.Social.GitHub</RepositoryUrl>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Skybrud.Social.GitHub.xml</DocumentationFile>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Skybrud.Essentials, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Skybrud.Essentials.1.0.9\lib\net45\Skybrud.Essentials.dll</HintPath>
-    </Reference>
-    <Reference Include="Skybrud.Social.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Skybrud.Social.Core.1.0.0-beta9\lib\net45\Skybrud.Social.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Constants\GitHubConstants.cs" />
-    <Compile Include="Endpoints\GitHubIssuesEndpoint.cs" />
-    <Compile Include="Endpoints\GitHubOrganizationsEndpoint.cs" />
-    <Compile Include="Endpoints\GitHubRepositoriesEndpoint.cs" />
-    <Compile Include="Endpoints\GitHubUserEndpoint.cs" />
-    <Compile Include="Endpoints\GitHubUsersEndpoint.cs" />
-    <Compile Include="Endpoints\Raw\GitHubOrganizationsRawEndpoint.cs" />
-    <Compile Include="Endpoints\Raw\GitHubRepositoriesRawEndpoint.cs" />
-    <Compile Include="Endpoints\Raw\GitHubUserRawEndpoint.cs" />
-    <Compile Include="Endpoints\Raw\GitHubIssuesRawEndpoint.cs" />
-    <Compile Include="Endpoints\Raw\GitHubUsersRawEndpoint.cs" />
-    <Compile Include="Exceptions\GitHubException.cs" />
-    <Compile Include="Exceptions\GitHubHttpException.cs" />
-    <Compile Include="Exceptions\GitHubParseException.cs" />
-    <Compile Include="Models\Issues\GitHubIssueItem.cs" />
-    <Compile Include="Models\Issues\GitHubIssueState.cs" />
-    <Compile Include="Models\Issues\GitHubIssue.cs" />
-    <Compile Include="Models\Issues\GitHubIssueUrlCollection.cs" />
-    <Compile Include="Models\Labels\GitHubLabel.cs" />
-    <Compile Include="Models\Milestones\GitHubMilestone.cs" />
-    <Compile Include="Models\Users\GitHubUserItem.cs" />
-    <Compile Include="Models\Commits\GitHubCommitUrlCollection.cs" />
-    <Compile Include="Models\Organizations\GitHubOrganizationUrlCollection.cs" />
-    <Compile Include="Models\Repositories\GitHubRepositoryUrlCollection.cs" />
-    <Compile Include="Models\Users\GitHubUserUrlCollection.cs" />
-    <Compile Include="Options\GitHubSortDirection.cs" />
-    <Compile Include="Options\Issues\GitHubGetIssuesOptions.cs" />
-    <Compile Include="Options\Issues\GitHubIssueSortField.cs" />
-    <Compile Include="Options\Issues\GitHubIssueFilter.cs" />
-    <Compile Include="Options\Issues\GitHubIssueState.cs" />
-    <Compile Include="Responses\Authentication\GitHubAccessTokenResponse.cs" />
-    <Compile Include="Responses\Issues\GitHubGetIssuesResponse.cs" />
-    <Compile Include="Scopes\GitHubScope.cs" />
-    <Compile Include="Scopes\GitHubScopeCollection.cs" />
-    <Compile Include="GitHubService.cs" />
-    <Compile Include="Models\Authentication\GitHubAccessToken.cs" />
-    <Compile Include="OAuth\GitHubOAuthClient.cs" />
-    <Compile Include="Models\Commits\GitHubCommitAuthor.cs" />
-    <Compile Include="Models\Commits\GitHubCommitDetails.cs" />
-    <Compile Include="Models\Commits\GitHubCommitFile.cs" />
-    <Compile Include="Enums\GitHubCommitFileStatus.cs" />
-    <Compile Include="Models\Commits\GitHubCommitParent.cs" />
-    <Compile Include="Models\Commits\GitHubCommitStats.cs" />
-    <Compile Include="Models\Commits\GitHubCommitTree.cs" />
-    <Compile Include="Models\Commits\GitHubCommit.cs" />
-    <Compile Include="Models\Commits\GitHubCommitSummary.cs" />
-    <Compile Include="Models\Emails\GitHubEmail.cs" />
-    <Compile Include="Models\GitHubObject.cs" />
-    <Compile Include="Models\Organizations\GitHubOrganization.cs" />
-    <Compile Include="Models\Organizations\GitHubOrganizationSummary.cs" />
-    <Compile Include="Models\Repositories\GitHubRepository.cs" />
-    <Compile Include="Models\Repositories\GitHubRepositoryItem.cs" />
-    <Compile Include="Models\Users\GitHubUser.cs" />
-    <Compile Include="Models\Users\GitHubUserType.cs" />
-    <Compile Include="Options\Commits\GitHubGetCommitOptions.cs" />
-    <Compile Include="Properties\AssemblyInfoGenerated.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Responses\Commits\GitHubGetCommitResponse.cs" />
-    <Compile Include="Responses\Commits\GitHubGetCommitsResponse.cs" />
-    <Compile Include="Responses\Emails\GitHubGetEmailsResponse.cs" />
-    <Compile Include="Responses\Followers\GitHubGetFollowingResponse.cs" />
-    <Compile Include="Responses\Organizations\GitHubGetOrganizationResponse.cs" />
-    <Compile Include="Responses\Organizations\GitHubGetOrganizationsResponse.cs" />
-    <Compile Include="Responses\Repositories\GitHubGetRepositoriesResponse.cs" />
-    <Compile Include="Responses\Repositories\GitHubGetRepositoryResponse.cs" />
-    <Compile Include="Responses\GitHubResponse.cs" />
-    <Compile Include="Responses\Users\GitHubGetUserResponse.cs" />
-    <Compile Include="Responses\Users\GitHubGetUsersResponse.cs" />
-    <Compile Include="Scopes\GitHubScopes.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="Properties\AssemblyInfo.json" />
-    <None Include="Skybrud.Social.GitHub.nuspec" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="LICENSE.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Objects\" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  
   <PropertyGroup>
-    <PreBuildEvent>"$(SolutionDir)build\Skybrud.Social.PreBuildTool.exe" 2015-12-27 "$(ProjectPath)"</PreBuildEvent>
+    <PackageTags>GitHub, Graph, API, Skybrud, Social, OAuth, JSON</PackageTags>
+    <PackageLicenseUrl>https://github.com/abjerner/Skybrud.Social.GitHub/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/abjerner/Skybrud.Social.GitHub</PackageProjectUrl>
+    <PackageIconUrl>http://www.skybrud.dk/img/5431sk/icon/favicon.ico</PackageIconUrl>
   </PropertyGroup>
-  <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)build\UpdateAssemblyInfoJson.exe" "$(ProjectPath)" "$(TargetPath)"</PostBuildEvent>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.3'">
+    <DefineConstants>NET_STANDARD</DefineConstants>
   </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net45' OR '$(TargetFramework)'=='net46'">
+    <DefineConstants>NET_FRAMEWORK</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Skybrud.Social.Core" Version="1.0.2" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard1.3|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard1.3\Skybrud.Social.GitHub.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net45|AnyCPU'">
+    <DocumentationFile>bin\Release\net45\Skybrud.Social.GitHub.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net46|AnyCPU'">
+    <DocumentationFile>bin\Release\net46\Skybrud.Social.GitHub.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(TargetFramework)|$(RunBuildTargets)'=='netstandard1.3|true'">
+    <Exec Command="&quot;$(SolutionDir)build/Skybrud.Social.PreBuildTool.exe&quot; /date=2015-12-27 /projectPath=&quot;$(ProjectPath)&quot;" />
   </Target>
-  <Target Name="AfterBuild">
+
+  <Target Name="PostBuild" BeforeTargets="PostBuildEvent" Condition="'$(TargetFramework)|$(RunBuildTargets)'=='net46|true'">
+    <Exec Command="&quot;$(SolutionDir)build\UpdateAssemblyInfoJson.exe&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot;" />
   </Target>
-  -->
+
 </Project>

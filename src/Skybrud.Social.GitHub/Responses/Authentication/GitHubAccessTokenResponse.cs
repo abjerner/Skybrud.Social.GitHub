@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Specialized;
 using Skybrud.Social.GitHub.Models.Authentication;
 using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.GitHub.Responses.Authentication {
 
@@ -15,7 +15,7 @@ namespace Skybrud.Social.GitHub.Responses.Authentication {
         private GitHubAccessTokenResponse(SocialHttpResponse response) : base(response) {
 
             // Parse the response body into an instance of NameValueCollection
-            NameValueCollection body = SocialUtils.Misc.ParseQueryString(response.Body);
+            IHttpQueryString body = SocialHttpQueryString.ParseQueryString(response.Body);
             
             Body = GitHubAccessToken.Parse(body);
         

@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Specialized;
 using Skybrud.Social.GitHub.Scopes;
+using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.GitHub.Models.Authentication {
 
@@ -30,11 +30,11 @@ namespace Skybrud.Social.GitHub.Models.Authentication {
 
         #region Constructors
 
-        private GitHubAccessToken(NameValueCollection nvc) {
+        private GitHubAccessToken(IHttpQueryString query) {
 
             GitHubScopeCollection scopes = new GitHubScopeCollection();
 
-            foreach (string scope in (nvc["scope"] ?? "").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)) {
+            foreach (string scope in (query["scope"] ?? "").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)) {
                 switch (scope) {
                     case "user": scopes.Add(GitHubScopes.User); break;
                     case "user:email": scopes.Add(GitHubScopes.UserEmail); break;
@@ -49,9 +49,9 @@ namespace Skybrud.Social.GitHub.Models.Authentication {
                 }
             }
 
-            AccessToken = nvc["access_token"];
+            AccessToken = query["access_token"];
             Scope = scopes;
-            TokenType = nvc["token_type"];
+            TokenType = query["token_type"];
 
         }
 
@@ -60,12 +60,12 @@ namespace Skybrud.Social.GitHub.Models.Authentication {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="nvc"/> into an instance of <see cref="GitHubAccessToken"/>.
+        /// Parses the specified <paramref name="query"/> into an instance of <see cref="GitHubAccessToken"/>.
         /// </summary>
-        /// <param name="nvc">The instance of <see cref="NameValueCollection"/> to be parsed.</param>
+        /// <param name="query">The instance of <see cref="IHttpQueryString"/> to be parsed.</param>
         /// <returns>Returns an instance of <see cref="GitHubAccessToken"/>.</returns>
-        public static GitHubAccessToken Parse(NameValueCollection nvc) {
-            return nvc == null ? null : new GitHubAccessToken(nvc);
+        public static GitHubAccessToken Parse(IHttpQueryString query) {
+            return query == null ? null : new GitHubAccessToken(query);
         }
 
         #endregion

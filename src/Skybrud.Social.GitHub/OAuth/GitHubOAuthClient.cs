@@ -1,10 +1,10 @@
 using System;
-using System.Collections.Specialized;
 using System.Net;
 using Skybrud.Social.GitHub.Endpoints.Raw;
 using Skybrud.Social.GitHub.Models.Authentication;
 using Skybrud.Social.GitHub.Scopes;
 using Skybrud.Social.Http;
+using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.GitHub.OAuth {
 
@@ -155,7 +155,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             }
 
             // Initialize the query string
-            NameValueCollection nvc = new NameValueCollection {
+            IHttpQueryString query = new SocialHttpQueryString {
                 { "client_id", ClientId },
                 {"redirect_uri", RedirectUri},
                 {"state", state}
@@ -163,10 +163,10 @@ namespace Skybrud.Social.GitHub.OAuth {
 
             // Append the scope if specified
             string scopes = (scope == null ? "" : String.Join(",", scope));
-            if (!String.IsNullOrWhiteSpace(scopes)) nvc.Add("scope", scopes);
+            if (!String.IsNullOrWhiteSpace(scopes)) query.Add("scope", scopes);
 
             // Generate the URL
-            return "https://github.com/login/oauth/authorize?" + SocialUtils.Misc.NameValueCollectionToQueryString(nvc);
+            return "https://github.com/login/oauth/authorize?" + query;
 
         }
 
@@ -176,7 +176,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// <param name="authCode">The authorization code received from the GitHub OAuth dialog.</param>
         public GitHubAccessToken GetAccessTokenFromAuthCode(string authCode) {
 
-            NameValueCollection parameters = new NameValueCollection {
+            IHttpPostData parameters = new SocialHttpPostData {
                 {"client_id", ClientId},
                 {"client_secret", ClientSecret},
                 {"code", authCode }
@@ -189,10 +189,10 @@ namespace Skybrud.Social.GitHub.OAuth {
             SocialHttpResponse response = SocialUtils.Http.DoHttpPostRequest("https://github.com/login/oauth/access_token", null, parameters);
 
             // Parse the contents
-            NameValueCollection nvc = SocialUtils.Misc.ParseQueryString(response.Body);
+            IHttpQueryString body = SocialHttpQueryString.ParseQueryString(response.Body);
 
             // Return the response
-            return GitHubAccessToken.Parse(nvc);
+            return GitHubAccessToken.Parse(body);
 
         }
 
@@ -200,9 +200,9 @@ namespace Skybrud.Social.GitHub.OAuth {
             return GenerateAbsoluteUrl(relative, null);
         }
 
-        internal string GenerateAbsoluteUrl(string relative, NameValueCollection query) {
+        internal string GenerateAbsoluteUrl(string relative, IHttpQueryString query) {
 
-            if (query == null) query = new NameValueCollection();
+            if (query == null) query = new SocialHttpQueryString();
 
             string url = "https://api.github.com";
             if (Credentials != null) {
@@ -215,7 +215,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             url += relative;
 
             // Append the query string (if not empty)
-            if (query.Count > 0) url += "?" + SocialUtils.Misc.NameValueCollectionToQueryString(query);
+            if (query.Count > 0) url += "?" + query;
 
             // Now return the URL
             return url;
