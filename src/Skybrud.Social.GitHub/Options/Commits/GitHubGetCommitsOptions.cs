@@ -4,11 +4,14 @@ using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.GitHub.Options.Commits {
-    
+
     /// <summary>
     /// Class representing the options for getting a list of commits of a given repository.
     /// </summary>
-    public class GitHubGetCommitOptions: IHttpGetOptions {
+    /// <see>
+    ///     <cref>https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository</cref>
+    /// </see>
+    public class GitHubGetCommitsOptions: IHttpGetOptions {
 
         #region Properties
 
@@ -56,7 +59,7 @@ namespace Skybrud.Social.GitHub.Options.Commits {
         /// <summary>
         /// Generates an instance of <see cref="IHttpQueryString"/> representing the options.
         /// </summary>
-        /// <returns>Returns an instance of <see cref="IHttpQueryString"/>.</returns>
+        /// <returns>An instance of <see cref="IHttpQueryString"/>.</returns>
         public IHttpQueryString GetQueryString() {
             SocialHttpQueryString query = new SocialHttpQueryString();
             if (!String.IsNullOrWhiteSpace(Sha)) query.Add("sha", Sha);

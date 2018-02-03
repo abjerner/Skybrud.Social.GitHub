@@ -15,136 +15,136 @@ namespace Skybrud.Social.GitHub.Models.Repositories {
         /// <summary>
         /// Gets the ID of the repository.
         /// </summary>
-        public int Id { get; private set; }
+        public int Id { get; }
 
         /// <summary>
         /// Gets the name of the repository - eg. <code>Skybrud.Social</code>.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the full name of the repository - eg. <code>abjerner/Skybrud.Social</code>.
         /// </summary>
-        public string FullName { get; private set; }
+        public string FullName { get; }
 
         /// <summary>
         /// Gets information about the owner of the repository.
         /// </summary>
-        public GitHubUserItem Owner { get; private set; }
+        public GitHubUserItem Owner { get; }
 
         /// <summary>
         /// Gets whether the repository is private.
         /// </summary>
-        public bool IsPrivate { get; private set; }
+        public bool IsPrivate { get; }
 
         /// <summary>
         /// Gets a reference to a collection of URLs related to the repository.
         /// </summary>
-        public GitHubRepositoryUrlCollection Urls { get; private set; }
+        public GitHubRepositoryUrlCollection Urls { get; }
 
         /// <summary>
         /// Gets the description of the repository.
         /// </summary>
-        public string Description { get; private set; }
+        public string Description { get; }
 
         /// <summary>
         /// Gets whether the repository is a fork.
         /// </summary>
-        public bool IsFork { get; private set; }
+        public bool IsFork { get; }
 
         /// <summary>
         /// Gets a timestamp for when the repository was created.
         /// </summary>
-        public DateTime CreatedAt { get; private set; }
+        public DateTime CreatedAt { get; }
 
         /// <summary>
         /// Gets a timestamp for when the repository was last updated.
         /// </summary>
-        public DateTime UpdatedAt { get; private set; }
+        public DateTime UpdatedAt { get; }
 
         /// <summary>
         /// Gets the timestamp for when a user last pushed to the repository.
         /// </summary>
-        public DateTime PushedAt { get; private set; }
+        public DateTime PushedAt { get; }
 
         /// <summary>
         /// Gets the URL for the website behind project.
         /// </summary>
-        public string Homepage { get; private set; }
+        public string Homepage { get; }
 
         /// <summary>
         /// Gets the size of the repository.
         /// </summary>
-        public long Size { get; private set; }
+        public long Size { get; }
 
         /// <summary>
         /// Gets the amount of users who have starred the repository.
         /// </summary>
-        public int StargazersCount { get; private set; }
+        public int StargazersCount { get; }
 
         /// <summary>
         /// Gets the amount of users watching the repository.
         /// </summary>
-        public int WatchersCount { get; private set; }
+        public int WatchersCount { get; }
 
         /// <summary>
         /// Gets the language of repository.
         /// </summary>
-        public string Language { get; private set; }
+        public string Language { get; }
 
         /// <summary>
         /// Gets whether the repository has any issues.
         /// </summary>
-        public bool HasIssues { get; private set; }
+        public bool HasIssues { get; }
 
         /// <summary>
         /// Gets whether the repository has any available downloads.
         /// </summary>
-        public bool HasDownloads { get; private set; }
+        public bool HasDownloads { get; }
 
         /// <summary>
         /// Gets whether the repository has a wiki.
         /// </summary>
-        public bool HasWiki { get; private set; }
+        public bool HasWiki { get; }
 
         /// <summary>
         /// Gets whether the repository has any pages.
         /// </summary>
-        public bool HasPages { get; private set; }
+        public bool HasPages { get; }
 
         /// <summary>
         /// Gets the amount of forks of the repository.
         /// </summary>
-        public int ForksCount { get; private set; }
+        public int ForksCount { get; }
 
         /// <summary>
         /// Gets the amount of open issues.
         /// </summary>
-        public int OpenIssuesCount { get; private set; }
+        public int OpenIssuesCount { get; }
 
         /// <summary>
         /// Gets the amount of forks of the repository.
         /// </summary>
-        public int Forks { get; private set; }
+        public int Forks { get; }
 
         /// <summary>
         /// Gets the amount of open issues.
         /// </summary>
-        public int OpenIssues { get; private set; }
+        public int OpenIssues { get; }
 
         /// <summary>
         /// Gets the amount of users who have subscribed (watchers) to the repository.
         /// </summary>
-        public int Watchers { get; private set; }
+        public int Watchers { get; }
 
         /// <summary>
         /// Gets the name of the default branch.
         /// </summary>
-        public string DefaultBranch { get; private set; }
+        public string DefaultBranch { get; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="obj"/>.

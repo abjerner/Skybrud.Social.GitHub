@@ -49,14 +49,18 @@ namespace Skybrud.Social.GitHub.Responses.Followers {
 
         #endregion
 
+        #region Static methods
+
         /// <summary>
-        /// Parses the specified <code>response</code> into an instance of <code>GitHubGetFollowingResponse</code>.
+        /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubGetFollowingResponse"/>.
         /// </summary>
         /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
-        /// <returns>Returns an instance of <code>GitHubGetFollowingResponse</code> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubGetFollowingResponse"/> representing the response.</returns>
         public static GitHubGetFollowingResponse ParseResponse(SocialHttpResponse response) {
             return response == null ? null : new GitHubGetFollowingResponse(response);
         }
+
+        #endregion
 
     }
 

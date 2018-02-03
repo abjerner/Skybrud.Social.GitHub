@@ -13,26 +13,26 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         /// <summary>
         /// Gets the login (username) of the organization.
         /// </summary>
-        public string Login { get; private set; }
+        public string Login { get; }
 
         /// <summary>
         /// Gets the ID of the organization.
         /// </summary>
-        public int Id { get; private set; }
+        public int Id { get; }
 
         /// <summary>
         /// Gets a collection of URLs related to the organization.
         /// </summary>
-        public GitHubOrganizationUrlCollection Urls { get; private set; }
+        public GitHubOrganizationUrlCollection Urls { get; }
 
         /// <summary>
         /// Gets the avatar URL of the organization.
         /// </summary>
-        public string AvatarUrl { get; private set; }
+        public string AvatarUrl { get; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private GitHubOrganizationSummary(JObject obj) : base(obj) {
             Login = obj.GetString("login");
@@ -49,7 +49,7 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubOrganizationSummary"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="GitHubOrganizationSummary"/>.</returns>
+        /// <returns>An instance of <see cref="GitHubOrganizationSummary"/>.</returns>
         public static GitHubOrganizationSummary Parse(JObject obj) {
             return obj == null ? null : new GitHubOrganizationSummary(obj);
         }

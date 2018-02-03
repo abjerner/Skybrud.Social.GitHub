@@ -19,107 +19,103 @@ namespace Skybrud.Social.GitHub.Models.Issues {
         /// <summary>
         /// Gets the ID of the issue.
         /// </summary>
-        public long Id { get; private set; }
+        public long Id { get; }
 
         /// <summary>
         /// Gets the issue number.
         /// </summary>
-        public int Number { get; private set; }
+        public int Number { get; }
 
         /// <summary>
         /// Gets the title of the issue.
         /// </summary>
-        public string Title { get; private set; }
+        public string Title { get; }
 
         /// <summary>
         /// Gets a reference to the user who created the issue.
         /// </summary>
-        public GitHubUserItem User { get; private set; }
+        public GitHubUserItem User { get; }
 
         /// <summary>
         /// Gets an array of the labels of the issue.
         /// </summary>
-        public GitHubLabel[] Labels { get; private set; }
+        public GitHubLabel[] Labels { get; }
 
         /// <summary>
         /// Gets the state of the issue, indicating whether the issue is open or closed.
         /// </summary>
-        public GitHubIssueState State { get; private set; }
+        public GitHubIssueState State { get; }
 
         /// <summary>
         /// Gets whether the issue has been locked.
         /// </summary>
-        public bool IsLocked { get; private set; }
+        public bool IsLocked { get; }
 
         /// <summary>
         /// Gets a reference to the (first) user the issue is assigned to, or <code>null</code> if the issue is not
         /// assigned to any users.
         /// </summary>
-        public GitHubUserItem Assignee { get; private set; }
+        public GitHubUserItem Assignee { get; }
 
         /// <summary>
         /// Gets an array of the users the issue is assigned to.
         /// </summary>
-        public GitHubUserItem[] Assignees { get; private set; }
+        public GitHubUserItem[] Assignees { get; }
 
         /// <summary>
         /// Gets a reference to the milestone of the issue, or <code>null</code> if the issue is not part of a milestone.
         /// </summary>
-        public GitHubMilestone Milestone { get; private set; }
+        public GitHubMilestone Milestone { get; }
 
         /// <summary>
         /// Gets whether the issue is part of a milestone.
         /// </summary>
-        public bool HasMilestone {
-            get { return Milestone != null; }
-        }
+        public bool HasMilestone => Milestone != null;
 
         /// <summary>
         /// Gets the number of comment.
         /// </summary>
-        public int Comments { get; private set; }
+        public int Comments { get; }
 
         /// <summary>
         /// Gets a timestamp for when the issue was created.
         /// </summary>
-        public EssentialsDateTime CreatedAt { get; private set; }
+        public EssentialsDateTime CreatedAt { get; }
 
         /// <summary>
         /// Gets a timestamp for when the issue was last updated.
         /// </summary>
-        public EssentialsDateTime UpdatedAt { get; private set; }
+        public EssentialsDateTime UpdatedAt { get; }
 
         /// <summary>
         /// Gets a timestamp for when the issue was closed. If <see cref="State"/> is
         /// <see cref="GitHubIssueState.Open"/>, this property will return <code>null</code>.
         /// </summary>
-        public EssentialsDateTime ClosedAt { get; private set; }
+        public EssentialsDateTime ClosedAt { get; }
 
         /// <summary>
         /// Gets a reference to the repository of the issue.
         /// </summary>
-        public GitHubRepositoryItem Repository { get; private set; }
+        public GitHubRepositoryItem Repository { get; }
 
         /// <summary>
         /// Gets the body of the issue.
         /// </summary>
-        public string Body { get; private set; }
+        public string Body { get; }
 
         /// <summary>
         /// Gets whether a body has been specified for the commit.
         /// </summary>
-        public bool HasBody {
-            get { return !String.IsNullOrWhiteSpace(Body); }
-        }
+        public bool HasBody => !String.IsNullOrWhiteSpace(Body);
 
         /// <summary>
         /// Gets a collection/map of URLs related to the issue.
         /// </summary>
-        public GitHubIssueUrlCollection Urls { get; private set; }
+        public GitHubIssueUrlCollection Urls { get; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="obj"/>.

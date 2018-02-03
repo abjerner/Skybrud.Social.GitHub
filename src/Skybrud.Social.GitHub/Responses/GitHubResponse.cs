@@ -34,7 +34,7 @@ namespace Skybrud.Social.GitHub.Responses {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="response"/>.

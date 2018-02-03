@@ -1,4 +1,4 @@
-﻿namespace Skybrud.Social.GitHub.Enums {
+﻿namespace Skybrud.Social.GitHub.Models.Commits {
     
     /// <summary>
     /// Enum class indicating status of a file in a commit.

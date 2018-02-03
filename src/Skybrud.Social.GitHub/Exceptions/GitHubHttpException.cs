@@ -18,9 +18,7 @@ namespace Skybrud.Social.GitHub.Exceptions {
         /// <summary>
         /// Gets the status code of the response.
         /// </summary>
-        public HttpStatusCode StatusCode {
-            get { return Response.StatusCode; }
-        }
+        public HttpStatusCode StatusCode => Response.StatusCode;
 
         /// <summary>
         /// Gets an URL to the GitHub documentation with more information about the exception.

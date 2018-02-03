@@ -14,21 +14,21 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// <summary>
         /// Gets the name of the author.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
         
         /// <summary>
         /// Gets the email address of the author.
         /// </summary>
-        public string Email { get; private set; }
+        public string Email { get; }
         
         /// <summary>
         /// Gets the date of the commit.
         /// </summary>
-        public DateTime Date { get; private set; }
+        public DateTime Date { get; }
         
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private GitHubCommitAuthor(JObject obj) : base(obj) {
             Name = obj.GetString("name");
@@ -44,7 +44,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubCommitAuthor"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="GitHubCommitAuthor"/>.</returns>
+        /// <returns>An instance of <see cref="GitHubCommitAuthor"/>.</returns>
         public static GitHubCommitAuthor Parse(JObject obj) {
             return obj == null ? null : new GitHubCommitAuthor(obj);
         }

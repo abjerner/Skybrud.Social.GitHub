@@ -13,16 +13,16 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// <summary>
         /// Gets the SHA hash of the tree.
         /// </summary>
-        public string Sha { get; private set; }
+        public string Sha { get; }
         
         /// <summary>
         /// Gets the API URL of the tree.
         /// </summary>
-        public string Url { get; private set; }
+        public string Url { get; }
         
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private GitHubCommitTree(JObject obj) : base(obj) {
             Sha = obj.GetString("sha");
@@ -37,7 +37,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubCommitTree"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="GitHubCommitTree"/>.</returns>
+        /// <returns>An instance of <see cref="GitHubCommitTree"/>.</returns>
         public static GitHubCommitTree Parse(JObject obj) {
             return obj == null ? null : new GitHubCommitTree(obj);
         }

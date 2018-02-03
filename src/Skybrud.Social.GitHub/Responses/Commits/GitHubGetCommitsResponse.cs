@@ -9,10 +9,16 @@ namespace Skybrud.Social.GitHub.Responses.Commits {
     /// </summary>
     public class GitHubGetCommitsResponse : GitHubResponse<GitHubCommitSummary[]> {
 
-        #region Constructor
+        #region Constructors
 
         private GitHubGetCommitsResponse(SocialHttpResponse response) : base(response) {
+
+            // Validate the response
+            ValidateResponse(response);
+
+            // Parse the response body
             Body = ParseJsonArray(response.Body, GitHubCommitSummary.Parse);
+
         }
 
         #endregion
@@ -20,21 +26,13 @@ namespace Skybrud.Social.GitHub.Responses.Commits {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <code>response</code> into an instance of <code>GitHubGetCommitsResponse</code>.
+        /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubGetCommitsResponse"/>.
         /// </summary>
         /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
-        /// <returns>Returns an instance of <code>GitHubGetCommitsResponse</code> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubGetCommitsResponse"/> representing the response.</returns>
         public static GitHubGetCommitsResponse ParseResponse(SocialHttpResponse response) {
-
-            // Some input validation
-            if (response == null) throw new ArgumentNullException("response");
-
-            // Validate the response
-            ValidateResponse(response);
-
-            // Initialize the response object
+            if (response == null) throw new ArgumentNullException(nameof(response));
             return new GitHubGetCommitsResponse(response);
-
         }
 
         #endregion

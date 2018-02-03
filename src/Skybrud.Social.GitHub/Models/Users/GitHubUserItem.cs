@@ -14,38 +14,38 @@ namespace Skybrud.Social.GitHub.Models.Users {
         /// <summary>
         /// Gets the login (username) of the user.
         /// </summary>
-        public string Login { get; private set; }
+        public string Login { get; }
 
         /// <summary>
         /// Gets the ID of the user.
         /// </summary>
-        public int Id { get; private set; }
+        public int Id { get; }
 
         /// <summary>
         /// Gets the avatar URL of the user.
         /// </summary>
-        public string AvatarUrl { get; private set; }
+        public string AvatarUrl { get; }
 
         // TODO: Add support for the "gravatar_id" property
 
         /// <summary>
         /// Gets the collection of URLs related to the user.
         /// </summary>
-        public GitHubUserUrlCollection Urls { get; private set; }
+        public GitHubUserUrlCollection Urls { get; }
 
         /// <summary>
         /// Gets the type of the user.
         /// </summary>
-        public GitHubUserType Type { get; private set; }
+        public GitHubUserType Type { get; }
 
         /// <summary>
         /// Gets whether the user is a site admin.
         /// </summary>
-        public bool IsSiteAdmin { get; private set; }
+        public bool IsSiteAdmin { get; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="obj"/>.

@@ -5,7 +5,7 @@ using Skybrud.Social.GitHub.Responses.Issues;
 namespace Skybrud.Social.GitHub.Endpoints {
 
     /// <summary>
-    /// Class representing the issues endpoint.
+    /// Class representing the <strong>Issues</strong> endpoint.
     /// </summary>
     public class GitHubIssuesEndpoint {
 
@@ -14,14 +14,12 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <summary>
         /// Gets a reference to the GitHub service.
         /// </summary>
-        public GitHubService Service { get; private set; }
+        public GitHubService Service { get; }
 
         /// <summary>
         /// Gets a reference to the raw endpoint.
         /// </summary>
-        public GitHubIssuesRawEndpoint Raw {
-            get { return Service.Client.Issues; }
-        }
+        public GitHubIssuesRawEndpoint Raw => Service.Client.Issues;
 
         #endregion
 

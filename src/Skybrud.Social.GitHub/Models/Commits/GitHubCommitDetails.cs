@@ -13,36 +13,36 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// <summary>
         /// Gets information about the author of the commit.
         /// </summary>
-        public GitHubCommitAuthor Author { get; private set; }
+        public GitHubCommitAuthor Author { get; }
         
         /// <summary>
         /// Gets information about the user who committed the commit.
         /// </summary>
-        public GitHubCommitAuthor Committer { get; private set; }
+        public GitHubCommitAuthor Committer { get; }
         
         /// <summary>
         /// Gets the message of the commit.
         /// </summary>
-        public string Message { get; private set; }
+        public string Message { get; }
         
         /// <summary>
         /// Gets information about the tree begind the commit.
         /// </summary>
-        public GitHubCommitTree Tree { get; private set; }
+        public GitHubCommitTree Tree { get; }
         
         /// <summary>
         /// Gets the API URL of the commit.
         /// </summary>
-        public string Url { get; private set; }
+        public string Url { get; }
         
         /// <summary>
         /// Gets the amount of comments the commit has received.
         /// </summary>
-        public int CommentCount { get; private set; }
+        public int CommentCount { get; }
         
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private GitHubCommitDetails(JObject obj) : base(obj) {
             Author = obj.GetObject("author", GitHubCommitAuthor.Parse);
@@ -61,7 +61,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubCommitDetails"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="GitHubCommitDetails"/>.</returns>
+        /// <returns>An instance of <see cref="GitHubCommitDetails"/>.</returns>
         public static GitHubCommitDetails Parse(JObject obj) {
             return obj == null ? null : new GitHubCommitDetails(obj);
         }

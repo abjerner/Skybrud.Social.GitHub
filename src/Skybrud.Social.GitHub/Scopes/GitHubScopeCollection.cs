@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +8,7 @@ namespace Skybrud.Social.GitHub.Scopes {
     /// <summary>
     /// Class representing a collection of scopes of the GitHub API.
     /// </summary>
-    public class GitHubScopeCollection {
+    public class GitHubScopeCollection : IEnumerable<GitHubScope> {
 
         #region Private fields
 
@@ -20,9 +21,7 @@ namespace Skybrud.Social.GitHub.Scopes {
         /// <summary>
         /// Gets an array of all scopes added to the collection.
         /// </summary>
-        public GitHubScope[] Items {
-            get { return _list.ToArray(); }
-        }
+        public GitHubScope[] Items => _list.ToArray();
 
         #endregion
 
@@ -65,12 +64,28 @@ namespace Skybrud.Social.GitHub.Scopes {
         }
 
         /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        public IEnumerator<GitHubScope> GetEnumerator() {
+            return _list.GetEnumerator();
+        }
+
+        /// <summary>
         /// Returns a string representation of the collection. The string will consist of the names of scopes added to
         /// the collection, each separated by a comma.
         /// </summary>
         /// <returns>Returns a string representation of the collection.</returns>
         public override string ToString() {
             return String.Join(",", ToStringArray());
+        }
+
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
         }
 
         #endregion

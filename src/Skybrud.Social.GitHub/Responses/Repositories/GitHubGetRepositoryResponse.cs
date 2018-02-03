@@ -9,31 +9,33 @@ namespace Skybrud.Social.GitHub.Responses.Repositories {
     /// </summary>
     public class GitHubGetRepositoryResponse : GitHubResponse<GitHubRepository> {
 
-        #region Constructor
+        #region Constructors
 
         private GitHubGetRepositoryResponse(SocialHttpResponse response) : base(response) {
-            Body = ParseJsonObject(response.Body, GitHubRepository.Parse);
-        }
-
-        #endregion
-
-        /// <summary>
-        /// Parses the specified <code>response</code> into an instance of <code>GitHubGetRepositoryResponse</code>.
-        /// </summary>
-        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
-        /// <returns>Returns an instance of <code>GitHubGetRepositoryResponse</code> representing the response.</returns>
-        public static GitHubGetRepositoryResponse ParseResponse(SocialHttpResponse response) {
-
-            // Some input validation
-            if (response == null) throw new ArgumentNullException("response");
 
             // Validate the response
             ValidateResponse(response);
 
-            // Initialize the response object
-            return new GitHubGetRepositoryResponse(response);
+            // Parse the response body
+            Body = ParseJsonObject(response.Body, GitHubRepository.Parse);
 
         }
+
+        #endregion
+
+        #region Static methods
+
+        /// <summary>
+        /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubGetRepositoryResponse"/>.
+        /// </summary>
+        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
+        /// <returns>An instance of <see cref="GitHubGetRepositoryResponse"/> representing the response.</returns>
+        public static GitHubGetRepositoryResponse ParseResponse(SocialHttpResponse response) {
+            if (response == null) throw new ArgumentNullException(nameof(response));
+            return new GitHubGetRepositoryResponse(response);
+        }
+
+        #endregion
 
     }
 

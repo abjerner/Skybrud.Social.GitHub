@@ -10,23 +10,31 @@ namespace Skybrud.Social.GitHub.Scopes {
         /// <summary>
         /// Gets the name of the scope.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the description of the scope.
         /// </summary>
-        public string Description { get; private set; }
+        public string Description { get; }
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new scope with the specified <paramref name="name"/> and <see cref="description"/>.
+        /// Initializes a new scope with the specified <paramref name="name"/>.
+        /// </summary>
+        /// <param name="name">The name of the scope.</param>
+        internal GitHubScope(string name) {
+            Name = name;
+        }
+
+        /// <summary>
+        /// Initializes a new scope with the specified <paramref name="name"/> and <paramref name="description"/>.
         /// </summary>
         /// <param name="name">The name of the scope.</param>
         /// <param name="description">The description of the scope.</param>
-        internal GitHubScope(string name, string description = null) {
+        internal GitHubScope(string name, string description) {
             Name = name;
             Description = description;
         }
@@ -38,7 +46,7 @@ namespace Skybrud.Social.GitHub.Scopes {
         /// <summary>
         /// Returns a string representation (the name) of the scope.
         /// </summary>
-        /// <returns>Returns a string representation of the scope.</returns>
+        /// <returns>A string representation of the scope.</returns>
         public override string ToString() {
             return Name;
         }
@@ -48,7 +56,7 @@ namespace Skybrud.Social.GitHub.Scopes {
         #region Operators
 
         /// <summary>
-        /// Adding two instance of <see cref="GitHubScope"/> will result in a <see cref="GitHubScopeCollection"/> containing both scopes.
+        /// Adding two instances of <see cref="GitHubScope"/> will result in a <see cref="GitHubScopeCollection"/> containing both scopes.
         /// </summary>
         /// <param name="left">The left scope.</param>
         /// <param name="right">The right scope.</param>

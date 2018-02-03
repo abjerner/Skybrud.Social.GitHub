@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 
 namespace Skybrud.Social.GitHub.Models.Issues {
 
@@ -14,7 +13,7 @@ namespace Skybrud.Social.GitHub.Models.Issues {
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private GitHubIssue(JObject obj) : base(obj) {
             // TODO: Add support for the "closed_by" property

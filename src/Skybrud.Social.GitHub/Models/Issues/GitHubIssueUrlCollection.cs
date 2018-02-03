@@ -13,36 +13,36 @@ namespace Skybrud.Social.GitHub.Models.Issues {
         /// <summary>
         /// Gets the API URL of the user.
         /// </summary>
-        public string Url { get; private set; }
+        public string Url { get; }
 
         /// <summary>
         /// Gets the website URL of the issue.
         /// </summary>
-        public string HtmlUrl { get; private set; }
+        public string HtmlUrl { get; }
 
         /// <summary>
         /// Gets the API URL for getting the repository of the issue.
         /// </summary>
-        public string RepositoryUrl { get; private set; }
+        public string RepositoryUrl { get; }
 
         /// <summary>
         /// Gets the API URL for getting a list of labels of the issue.
         /// </summary>
-        public string LabelsUrl { get; private set; }
+        public string LabelsUrl { get; }
 
         /// <summary>
         /// Gets the API URL for getting a list of comments of the issue.
         /// </summary>
-        public string CommentsUrl { get; private set; }
+        public string CommentsUrl { get; }
 
         /// <summary>
         /// Gets the API URL for getting a list of events of the issue.
         /// </summary>
-        public string EventsUrl { get; private set; }
+        public string EventsUrl { get; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private GitHubIssueUrlCollection(JObject obj) {
             Url = obj.GetString("url");

@@ -14,66 +14,66 @@ namespace Skybrud.Social.GitHub.Models.Users {
         /// <summary>
         /// Gets the name of the user.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the company name of the user.
         /// </summary>
-        public string Company { get; private set; }
+        public string Company { get; }
 
         /// <summary>
         /// Gets the location of the user.
         /// </summary>
-        public string Location { get; private set; }
+        public string Location { get; }
 
         /// <summary>
         /// Gets the primary email address of the user.
         /// </summary>
-        public string Email { get; private set; }
+        public string Email { get; }
 
         /// <summary>
         /// Gets whether the user is available for hire.
         /// </summary>
-        public string IsHireable { get; private set; }
+        public string IsHireable { get; }
 
         /// <summary>
         /// Gets the bio of the user.
         /// </summary>
-        public string Bio { get; private set; }
+        public string Bio { get; }
 
         /// <summary>
         /// Gets the amount of public repositories of the user.
         /// </summary>
-        public int PublicRepos { get; private set; }
+        public int PublicRepos { get; }
 
         /// <summary>
         /// Gets the amount of public gists of the user.
         /// </summary>
-        public int PublicGists { get; private set; }
+        public int PublicGists { get; }
 
         /// <summary>
         /// Gets the amount of followers of the user.
         /// </summary>
-        public int Followers { get; private set; }
+        public int Followers { get; }
 
         /// <summary>
         /// Gets the amount of other users the user is following.
         /// </summary>
-        public int Following { get; private set; }
+        public int Following { get; }
 
         /// <summary>
         /// Gets a timestamp for when the user was created.
         /// </summary>
-        public DateTime CreatedAt { get; private set; }
+        public DateTime CreatedAt { get; }
 
         /// <summary>
         /// Gets a timestamp for when the user was last updated.
         /// </summary>
-        public DateTime UpdatedAt { get; private set; }
+        public DateTime UpdatedAt { get; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private GitHubUser(JObject obj) : base(obj) {
             Name = obj.GetString("name");
@@ -98,7 +98,7 @@ namespace Skybrud.Social.GitHub.Models.Users {
         /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubUser"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="GitHubUser"/>.</returns>
+        /// <returns>An instance of <see cref="GitHubUser"/>.</returns>
         public new static GitHubUser Parse(JObject obj) {
             return obj == null ? null : new GitHubUser(obj);
         }

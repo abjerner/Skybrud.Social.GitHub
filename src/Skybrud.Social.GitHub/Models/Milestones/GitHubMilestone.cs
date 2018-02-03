@@ -23,81 +23,77 @@ namespace Skybrud.Social.GitHub.Models.Milestones {
         /// <summary>
         /// Gets the ID of the milestone.
         /// </summary>
-        public long Id { get; private set; }
+        public long Id { get; }
 
         /// <summary>
         /// Gets the number of the milestone.
         /// </summary>
-        public int Number { get; private set; }
+        public int Number { get; }
 
         /// <summary>
         /// Gets the title of the milestone.
         /// </summary>
-        public string Title { get; private set; }
+        public string Title { get; }
 
         /// <summary>
         /// Gets the description of the milestone.
         /// </summary>
-        public string Description { get; private set; }
+        public string Description { get; }
 
         /// <summary>
         /// Gets whether a description has been specified for the milestone.
         /// </summary>
-        public bool HasDescription {
-            get { return String.IsNullOrWhiteSpace(Description); }
-        }
+        public bool HasDescription => String.IsNullOrWhiteSpace(Description);
 
         /// <summary>
         /// Gets a reference to the user who created the milestone.
         /// </summary>
-        public GitHubUser Creator { get; private set; }
+        public GitHubUser Creator { get; }
 
         /// <summary>
         /// Gets the amount of open issues in the milestone.
         /// </summary>
-        public int OpenIssues { get; private set; }
+        public int OpenIssues { get; }
 
         /// <summary>
         /// Gets the amount of closed issues in the milestone.
         /// </summary>
-        public int ClosedIssues { get; private set; }
+        public int ClosedIssues { get; }
 
         /// <summary>
         /// Gets the state of the milestone, indicating whether the milestone is open or closed.
         /// </summary>
-        public GitHubIssueState State { get; private set; }
+        public GitHubIssueState State { get; }
 
         /// <summary>
         /// Gets a timestamp for when the issue was created.
         /// </summary>
-        public EssentialsDateTime CreatedAt { get; private set; }
+        public EssentialsDateTime CreatedAt { get; }
 
         /// <summary>
         /// Gets a timestamp for when the issue was last updated.
         /// </summary>
-        public EssentialsDateTime UpdatedAt { get; private set; }
+        public EssentialsDateTime UpdatedAt { get; }
 
         /// <summary>
         /// Gets a timestamp for when the milestone is due, or <code>null</code> if the milestone doesn't have a due date.
         /// </summary>
-        public EssentialsDateTime DueOn { get; private set; }
+        public EssentialsDateTime DueOn { get; }
 
         /// <summary>
         /// Gets whether a due date has been specified for the milestone.
         /// </summary>
-        public bool HasDueOn {
-            get { return DueOn != null; }
-        }
+        public bool HasDueOn => DueOn != null;
 
         /// <summary>
         /// Gets a timestamp for when the milestone was closed. If <see cref="State"/> is
         /// <see cref="GitHubIssueState.Open"/>, this property will return <code>null</code>.
         /// </summary>
-        public EssentialsDateTime ClosedAt { get; private set; }
+        public EssentialsDateTime ClosedAt { get; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private GitHubMilestone(JObject obj) : base(obj) {
             Id = obj.GetInt64("id");

@@ -9,31 +9,33 @@ namespace Skybrud.Social.GitHub.Responses.Users {
     /// </summary>
     public class GitHubGetUsersResponse : GitHubResponse<GitHubUserItem[]> {
 
-        #region Constructor
+        #region Constructors
 
         private GitHubGetUsersResponse(SocialHttpResponse response) : base(response) {
-            Body = ParseJsonArray(response.Body, GitHubUserItem.Parse);
-        }
-
-        #endregion
-
-        /// <summary>
-        /// Parses the specified <code>response</code> into an instance of <code>GitHubGetUsersResponse</code>.
-        /// </summary>
-        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
-        /// <returns>Returns an instance of <code>GitHubGetUsersResponse</code> representing the response.</returns>
-        public static GitHubGetUsersResponse ParseResponse(SocialHttpResponse response) {
-
-            // Some input validation
-            if (response == null) throw new ArgumentNullException("response");
 
             // Validate the response
             ValidateResponse(response);
 
-            // Initialize the response object
-            return new GitHubGetUsersResponse(response);
+            // Parse the response body
+            Body = ParseJsonArray(response.Body, GitHubUserItem.Parse);
 
         }
+
+        #endregion
+
+        #region Static methods
+
+        /// <summary>
+        /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubGetUsersResponse"/>.
+        /// </summary>
+        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
+        /// <returns>An instance of <see cref="GitHubGetUsersResponse"/> representing the response.</returns>
+        public static GitHubGetUsersResponse ParseResponse(SocialHttpResponse response) {
+            if (response == null) throw new ArgumentNullException(nameof(response));
+            return new GitHubGetUsersResponse(response);
+        }
+
+        #endregion
 
     }
 

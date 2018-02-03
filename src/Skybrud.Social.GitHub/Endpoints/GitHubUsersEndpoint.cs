@@ -6,7 +6,7 @@ using Skybrud.Social.GitHub.Responses.Users;
 namespace Skybrud.Social.GitHub.Endpoints {
 
     /// <summary>
-    /// Class representing the users endpoint.
+    /// Class representing the <strong>Users</strong> endpoint.
     /// </summary>
     public class GitHubUsersEndpoint {
 
@@ -15,14 +15,12 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <summary>
         /// Gets a reference to the GitHub service.
         /// </summary>
-        public GitHubService Service { get; private set; }
+        public GitHubService Service { get; }
 
         /// <summary>
         /// Gets a reference to the raw endpoint.
         /// </summary>
-        public GitHubUsersRawEndpoint Raw {
-            get { return Service.Client.Users; }
-        }
+        public GitHubUsersRawEndpoint Raw => Service.Client.Users;
 
         #endregion
 
@@ -40,7 +38,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// Gets information about the user with the specified <paramref name="username"/>.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>Returns an instance of <see cref="GitHubGetUserResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubGetUserResponse"/> representing the response.</returns>
         public GitHubGetUserResponse GetUser(string username) {
             return GitHubGetUserResponse.ParseResponse(Raw.GetUser(username));
         }
@@ -49,7 +47,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// Gets a list of repositories of the user with the specified <paramref name="username"/>.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>Returns an instance of <see cref="GitHubGetRepositoriesResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubGetRepositoriesResponse"/> representing the response.</returns>
         public GitHubGetRepositoriesResponse GetRepositories(string username) {
             return GitHubGetRepositoriesResponse.ParseResponse(Raw.GetRepositories(username));
         }
@@ -58,7 +56,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// Gets a list of organizations the user with the specified <paramref name="username"/> is a member of.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>Returns an instance of <see cref="GitHubGetOrganizationsResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubGetOrganizationsResponse"/> representing the response.</returns>
         public GitHubGetOrganizationsResponse GetOrganizations(string username) {
             return GitHubGetOrganizationsResponse.ParseResponse(Raw.GetOrganizations(username));
         }

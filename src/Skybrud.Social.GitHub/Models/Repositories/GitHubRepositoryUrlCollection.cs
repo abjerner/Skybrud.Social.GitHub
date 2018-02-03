@@ -13,36 +13,36 @@ namespace Skybrud.Social.GitHub.Models.Repositories {
         /// <summary>
         /// Gets the website (HTML) URL of the repository.
         /// </summary>
-        public string HtmlUrl { get; private set; }
+        public string HtmlUrl { get; }
 
         /// <summary>
         /// Gets the API URL of the repository.
         /// </summary>
-        public string Url { get; private set; }
+        public string Url { get; }
 
         /// <summary>
         /// Gets the Git URL of the repository.
         /// </summary>
-        public string GitUrl { get; private set; }
+        public string GitUrl { get; }
 
         /// <summary>
         /// Gets the SSH URL of the repository.
         /// </summary>
-        public string SshUrl { get; private set; }
+        public string SshUrl { get; }
 
         /// <summary>
         /// Gets the clone URL of the repository.
         /// </summary>
-        public string CloneUrl { get; private set; }
+        public string CloneUrl { get; }
 
         /// <summary>
         /// Gets the Subversion URL of the repository.
         /// </summary>
-        public string SvnUrl { get; private set; }
+        public string SvnUrl { get; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private GitHubRepositoryUrlCollection(JObject obj) {
             HtmlUrl = obj.GetString("html_url");
@@ -61,7 +61,7 @@ namespace Skybrud.Social.GitHub.Models.Repositories {
         /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubRepositoryUrlCollection"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="GitHubRepositoryUrlCollection"/>.</returns>
+        /// <returns>An instance of <see cref="GitHubRepositoryUrlCollection"/>.</returns>
         public static GitHubRepositoryUrlCollection Parse(JObject obj) {
             return obj == null ? null : new GitHubRepositoryUrlCollection(obj);
         }

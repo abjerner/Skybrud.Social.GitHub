@@ -45,27 +45,27 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// <summary>
         /// Gets a reference to the raw issues endpoint.
         /// </summary>
-        public GitHubIssuesRawEndpoint Issues { get; private set; }
+        public GitHubIssuesRawEndpoint Issues { get; }
 
         /// <summary>
         /// Gets a reference to the raw organizations endpoint.
         /// </summary>
-        public GitHubOrganizationsRawEndpoint Organizations { get; private set; }
+        public GitHubOrganizationsRawEndpoint Organizations { get; }
 
         /// <summary>
         /// Gets a reference to the raw repositories endpoint.
         /// </summary>
-        public GitHubRepositoriesRawEndpoint Repositories { get; private set; }
+        public GitHubRepositoriesRawEndpoint Repositories { get; }
 
         /// <summary>
         /// Gets a reference to the raw user endpoint.
         /// </summary>
-        public GitHubUserRawEndpoint User { get; private set; }
+        public GitHubUserRawEndpoint User { get; }
 
         /// <summary>
         /// Gets a reference to the raw users endpoint.
         /// </summary>
-        public GitHubUsersRawEndpoint Users { get; private set; }
+        public GitHubUsersRawEndpoint Users { get; }
 
         #endregion
 
@@ -115,43 +115,51 @@ namespace Skybrud.Social.GitHub.OAuth {
             RedirectUri = redirectUri;
         }
 
+        /// <summary>
+        /// Initializes a new OAuth client based on the specified <paramref name="credentials"/>.
+        /// </summary>
+        /// <param name="credentials">An instance of <paramref name="credentials"/> representing the username and password of the user.</param>
+        public GitHubOAuthClient(NetworkCredential credentials) : this() {
+            Credentials = credentials ?? throw new ArgumentNullException(nameof(credentials));
+        }
+
         #endregion
 
-        #region Methods
+        #region Member methods
 
         /// <summary>
-        /// Gets an authorization URL using the specified <see cref="state"/>. This URL will only make your application
-        /// request a basic scope.
+        /// Gets an authorization URL using the specified <paramref name="state"/>. This URL will only make your
+        /// application request a basic scope.
         /// </summary>
         /// <param name="state">A unique state for the request.</param>
-        /// <returns>Returns a <see cref="String"/> with the authorization URL.</returns>
+        /// <returns>A <see cref="String"/> with the authorization URL.</returns>
         public string GetAuthorizationUrl(string state) {
             return GetAuthorizationUrl(state, default(GitHubScopeCollection));
         }
 
         /// <summary>
-        /// Gets an authorization URL using the specified <see cref="state"/> and request the specified
-        /// <see cref="scope"/>.
+        /// Gets an authorization URL using the specified <paramref name="state"/> and request the specified
+        /// <paramref name="scope"/>.
         /// </summary>
         /// <param name="state">A unique state for the request.</param>
         /// <param name="scope">The scope of your application.</param>
-        /// <returns>Returns a <see cref="String"/> with the authorization URL.</returns>
+        /// <returns>A <see cref="String"/> with the authorization URL.</returns>
         public string GetAuthorizationUrl(string state, GitHubScopeCollection scope) {
             return GetAuthorizationUrl(state, scope == null ? "" : scope.ToString());
         }
 
         /// <summary>
-        /// Gets an authorization URL using the specified <see cref="state"/>. and request the specified
-        /// <see cref="scope"/>.
+        /// Gets an authorization URL using the specified <paramref name="state"/>. and request the specified
+        /// <paramref name="scope"/>.
         /// </summary>
         /// <param name="state">A unique state for the request.</param>
         /// <param name="scope">The scope of your application.</param>
-        /// <returns>Returns a <see cref="String"/> with the authorization URL.</returns>
+        /// <returns>A <see cref="String"/> with the authorization URL.</returns>
         public string GetAuthorizationUrl(string state, params string[] scope) {
 
             // Do we have a valid "state" ?
             if (String.IsNullOrWhiteSpace(state)) {
-                throw new ArgumentNullException("state", "A valid state should be specified as it is part of the security of OAuth 2.0.");
+                throw new ArgumentNullException(nameof(state), "A valid state should be specified as it is part of the security of OAuth 2.0.");
             }
 
             // Initialize the query string
@@ -162,7 +170,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             };
 
             // Append the scope if specified
-            string scopes = (scope == null ? "" : String.Join(",", scope));
+            string scopes = scope == null ? "" : String.Join(",", scope);
             if (!String.IsNullOrWhiteSpace(scopes)) query.Add("scope", scopes);
 
             // Generate the URL
@@ -228,9 +236,12 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// <param name="request">The instance of <see cref="SocialHttpRequest"/> representing the request.</param>
         protected override void PrepareHttpRequest(SocialHttpRequest request) {
 
+            // Append scheme and host if not already present
+            if (request.Url.StartsWith("/")) request.Url = "https://api.github.com" + request.Url;
+
             // GitHub requires a user agent - see https://developer.github.com/v3/#user-agent-required
             request.UserAgent = "Skybrud.Social";
-
+            
             // Append the access token to the HTTP headers (if present)
             if (!String.IsNullOrWhiteSpace(AccessToken)) {
                 request.Headers.Authorization = "token " + AccessToken;

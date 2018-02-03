@@ -13,21 +13,21 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// <summary>
         /// Gets the SHA hash of the commit.
         /// </summary>
-        public string Sha { get; private set; }
+        public string Sha { get; }
         
         /// <summary>
         /// Gets the API URL of the commit.
         /// </summary>
-        public string Url { get; private set; }
+        public string Url { get; }
         
         /// <summary>
         /// Gets the HTML (website) URL of the commit.
         /// </summary>
-        public string HtmlUrl { get; private set; }
+        public string HtmlUrl { get; }
         
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private GitHubCommitParent(JObject obj) : base(obj) {
             Sha = obj.GetString("sha");
@@ -43,7 +43,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubCommitParent"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="GitHubCommitParent"/>.</returns>
+        /// <returns>An instance of <see cref="GitHubCommitParent"/>.</returns>
         public static GitHubCommitParent Parse(JObject obj) {
             return obj == null ? null : new GitHubCommitParent(obj);
         }

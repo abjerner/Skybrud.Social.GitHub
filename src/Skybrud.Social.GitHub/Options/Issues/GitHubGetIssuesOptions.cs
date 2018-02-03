@@ -10,6 +10,9 @@ namespace Skybrud.Social.GitHub.Options.Issues {
     /// <summary>
     /// Class representing the options for getting a list of issues.
     /// </summary>
+    /// <see>
+    ///     <cref>https://developer.github.com/v3/issues/#list-issues</cref>
+    /// </see>
     public class GitHubGetIssuesOptions : IHttpGetOptions {
 
         #region Properties
@@ -44,8 +47,14 @@ namespace Skybrud.Social.GitHub.Options.Issues {
         /// </summary>
         public EssentialsDateTime Since { get; set; }
 
+        /// <summary>
+        /// Gets or sets the page to be returned.
+        /// </summary>
         public int Page { get; set; }
 
+        /// <summary>
+        /// Gets or sets the maximum amount of issues to be returned by each page.
+        /// </summary>
         public int PerPage { get; set; }
 
         #endregion
@@ -55,32 +64,23 @@ namespace Skybrud.Social.GitHub.Options.Issues {
         /// <summary>
         /// Generates an instance of <see cref="IHttpQueryString"/> representing the options.
         /// </summary>
-        /// <returns>Returns an instance of <see cref="IHttpQueryString"/>.</returns>
+        /// <returns>An instance of <see cref="IHttpQueryString"/>.</returns>
         public IHttpQueryString GetQueryString() {
 
-            SocialHttpQueryString query = new SocialHttpQueryString();
+            IHttpQueryString query = new SocialHttpQueryString {
+                {"filter", StringUtils.ToLower(Filter)},
+                {"state", StringUtils.ToLower(State)}
+            };
 
-            query.Add("filter", StringUtils.ToLower(Filter));
-            query.Add("state", StringUtils.ToLower(State));
-
-            if (Labels != null && Labels.Length > 0) {
-                query.Add("labels", String.Join(",", Labels));
-            }
+            if (Labels != null && Labels.Length > 0) query.Add("labels", String.Join(",", Labels));
 
             query.Add("sort", StringUtils.ToLower(Sort));
             query.Add("direction", StringUtils.ToLower(Direction));
             
-            if (Since != null) {
-                query.Add("since", Since.ToString(GitHubConstants.DateTimeFormat));
-            }
+            if (Since != null) query.Add("since", Since.ToString(GitHubConstants.DateTimeFormat));
 
-            if (Page > 0) {
-                query.Add("page", Page);
-            }
-
-            if (PerPage > 0) {
-                query.Add("per_page", PerPage);
-            }
+            if (Page > 0) query.Add("page", Page);
+            if (PerPage > 0) query.Add("per_page", PerPage);
 
             return query;
 

@@ -13,31 +13,31 @@ namespace Skybrud.Social.GitHub.Models.Labels {
         /// <summary>
         /// Gets the ID of the label.
         /// </summary>
-        public long Id { get; private set; }
+        public long Id { get; }
 
         /// <summary>
         /// Gets the API URL of the label.
         /// </summary>
-        public string Url { get; private set; }
+        public string Url { get; }
 
         /// <summary>
         /// Gets the name of the label.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the color of the label.
         /// </summary>
-        public string Color { get; private set; }
+        public string Color { get; }
 
         /// <summary>
         /// Gets this is a default label.
         /// </summary>
-        public bool IsDefault { get; private set; }
+        public bool IsDefault { get; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private GitHubLabel(JObject obj) : base(obj) {
             Id = obj.GetInt64("id");

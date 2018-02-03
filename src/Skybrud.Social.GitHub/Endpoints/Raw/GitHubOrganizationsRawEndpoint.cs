@@ -1,10 +1,11 @@
+using System;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Endpoints.Raw {
-    
+
     /// <summary>
-    /// Class representing the raw organizations endpoint.
+    /// Class representing the raw <strong>Organizations</strong> endpoint.
     /// </summary>
     public class GitHubOrganizationsRawEndpoint {
 
@@ -13,7 +14,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <summary>
         /// Gets a reference to the parent OAuth client.
         /// </summary>
-        public GitHubOAuthClient Client { get; private set; }
+        public GitHubOAuthClient Client { get; }
 
         #endregion
 
@@ -28,12 +29,13 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         #region Methods
 
         /// <summary>
-        /// Gets information about the organisation with the specified <see cref="alias"/>.
+        /// Gets information about the organisation with the specified <paramref name="alias"/>.
         /// </summary>
         /// <param name="alias">The alias (login) of the organization.</param>
-        /// <returns>Returns an instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetOrganization(string alias) {
-            return Client.DoHttpGetRequest("https://api.github.com/orgs/" + alias);
+            if (String.IsNullOrWhiteSpace(alias)) throw new ArgumentNullException(nameof(alias));
+            return Client.DoHttpGetRequest("/orgs/" + alias);
         }
 
         #endregion

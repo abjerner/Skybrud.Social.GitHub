@@ -13,36 +13,36 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         /// <summary>
         /// Gets the API URL of the organization.
         /// </summary>
-        public string Url { get; private set; }
+        public string Url { get; }
         
         /// <summary>
         /// Gets the API URL for getting a list of repositories of the organization.
         /// </summary>
-        public string ReposUrl { get; private set; }
+        public string ReposUrl { get; }
         
         /// <summary>
         /// Gets the API URL for getting a list of events made by members of the organization.
         /// </summary>
-        public string EventsUrl { get; private set; }
+        public string EventsUrl { get; }
 
         /// <summary>
         /// Gets the API URL for getting a list of members of the organization.
         /// </summary>
-        public string MembersUrl { get; private set; }
+        public string MembersUrl { get; }
         
         /// <summary>
         /// Gets the API URL for getting a list of public members of the organization.
         /// </summary>
-        public string PublicMembersUrl { get; private set; }
+        public string PublicMembersUrl { get; }
 
         /// <summary>
         /// Gets the website (HTML) URL of the organization.
         /// </summary>
-        public string HtmlUrl { get; private set; }
+        public string HtmlUrl { get; }
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private GitHubOrganizationUrlCollection(JObject obj) {
             Url = obj.GetString("url");
@@ -61,7 +61,7 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubOrganizationUrlCollection"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="GitHubOrganizationUrlCollection"/>.</returns>
+        /// <returns>An instance of <see cref="GitHubOrganizationUrlCollection"/>.</returns>
         public static GitHubOrganizationUrlCollection Parse(JObject obj) {
             return obj == null ? null : new GitHubOrganizationUrlCollection(obj);
         }

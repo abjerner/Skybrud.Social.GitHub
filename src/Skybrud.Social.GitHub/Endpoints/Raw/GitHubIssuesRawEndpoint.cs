@@ -1,3 +1,4 @@
+using System;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Issues;
 using Skybrud.Social.Http;
@@ -5,7 +6,7 @@ using Skybrud.Social.Http;
 namespace Skybrud.Social.GitHub.Endpoints.Raw {
 
     /// <summary>
-    /// Class representing the raw issues endpoint.
+    /// Class representing the raw <strong>Issues</strong> endpoint.
     /// </summary>
     public class GitHubIssuesRawEndpoint {
 
@@ -14,7 +15,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <summary>
         /// Gets a reference to the parent OAuth client.
         /// </summary>
-        public GitHubOAuthClient Client { get; private set; }
+        public GitHubOAuthClient Client { get; }
 
         #endregion
 
@@ -33,7 +34,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetIssues() {
-            return Client.DoHttpGetRequest("https://api.github.com/issues");
+            return Client.DoHttpGetRequest("/issues");
         }
 
         /// <summary>
@@ -42,7 +43,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="options">The options for the call to the API.</param>
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetIssues(GitHubGetIssuesOptions options) {
-            return Client.DoHttpGetRequest("https://api.github.com/issues", options);
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            return Client.DoHttpGetRequest("/issues", options);
         }
 
         #endregion

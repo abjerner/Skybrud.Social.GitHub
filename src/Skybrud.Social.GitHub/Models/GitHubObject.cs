@@ -8,7 +8,7 @@ namespace Skybrud.Social.GitHub.Models {
     /// </summary>
     public class GitHubObject : JsonObjectBase {
 
-        #region Constructor
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="obj"/>.

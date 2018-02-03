@@ -25,20 +25,16 @@ namespace Skybrud.Social.GitHub.Responses.Issues {
         /// <summary>
         /// Gets whether the response represents the first page.
         /// </summary>
-        public bool IsFirstPage {
-            get { return CurrentPage == 0; }
-        }
+        public bool IsFirstPage => CurrentPage == 0;
 
         /// <summary>
         /// Gets whether the response represents the last page.
         /// </summary>
-        public bool IsLastPage {
-            get { return CurrentPage >= TotalPages; }
-        }
+        public bool IsLastPage => CurrentPage >= TotalPages;
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         private GitHubGetIssuesResponse(SocialHttpResponse response) : base(response) {
 
@@ -93,15 +89,19 @@ namespace Skybrud.Social.GitHub.Responses.Issues {
 
         #endregion
 
+        #region Static methods
+
         /// <summary>
         /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubGetIssuesResponse"/>.
         /// </summary>
         /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
         /// <returns>An instance of <see cref="GitHubGetIssuesResponse"/> representing the response.</returns>
         public static GitHubGetIssuesResponse ParseResponse(SocialHttpResponse response) {
-            if (response == null) throw new ArgumentNullException("response");
+            if (response == null) throw new ArgumentNullException(nameof(response));
             return new GitHubGetIssuesResponse(response);
         }
+
+        #endregion
 
     }
 

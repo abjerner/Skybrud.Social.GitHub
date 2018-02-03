@@ -6,7 +6,7 @@ using Skybrud.Social.GitHub.Responses.Repositories;
 namespace Skybrud.Social.GitHub.Endpoints {
 
     /// <summary>
-    /// Class representing the repositories endpoint.
+    /// Class representing the <strong>Repositories</strong> endpoint.
     /// </summary>
     public class GitHubRepositoriesEndpoint {
 
@@ -15,14 +15,12 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <summary>
         /// Gets a reference to the GitHub service.
         /// </summary>
-        public GitHubService Service { get; private set; }
+        public GitHubService Service { get; }
 
         /// <summary>
         /// Gets a reference to the raw endpoint.
         /// </summary>
-        public GitHubRepositoriesRawEndpoint Raw {
-            get { return Service.Client.Repositories; }
-        }
+        public GitHubRepositoriesRawEndpoint Raw => Service.Client.Repositories;
 
         #endregion
 
@@ -43,7 +41,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <param name="owner">The alias (login) of the owner.</param>
         /// <param name="repository">The slug of the repository.</param>
         /// <param name="sha">The SHA hash of the commit.</param>
-        /// <returns>Returns an instance of <see cref="GitHubGetCommitResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubGetCommitResponse"/> representing the response.</returns>
         public GitHubGetCommitResponse GetCommit(string owner, string repository, string sha) {
             return GitHubGetCommitResponse.ParseResponse(Raw.GetCommit(owner, repository, sha));
         }
@@ -54,7 +52,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// </summary>
         /// <param name="owner">The alias (login) of the owner.</param>
         /// <param name="repository">The slug of the repository.</param>
-        /// <returns>Returns an instance of <see cref="GitHubGetCommitsResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubGetCommitsResponse"/> representing the response.</returns>
         public GitHubGetCommitsResponse GetCommits(string owner, string repository) {
             return GitHubGetCommitsResponse.ParseResponse(Raw.GetCommits(owner, repository));
         }
@@ -63,8 +61,8 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// Gets a list of commits of the repository matching the specified <paramref name="options"/>.
         /// </summary>
         /// <param name="options">The options for the call to the API.</param>
-        /// <returns>Returns an instance of <see cref="GitHubGetCommitsResponse"/> representing the response.</returns>
-        public GitHubGetCommitsResponse GetCommits(GitHubGetCommitOptions options) {
+        /// <returns>An instance of <see cref="GitHubGetCommitsResponse"/> representing the response.</returns>
+        public GitHubGetCommitsResponse GetCommits(GitHubGetCommitsOptions options) {
             return GitHubGetCommitsResponse.ParseResponse(Raw.GetCommits(options));
         }
 
@@ -72,7 +70,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// Gets information about the repository matching the specified <paramref name="owner"/> and
         /// <paramref name="repository"/>.
         /// </summary>
-        /// <returns>Returns an instance of <see cref="GitHubGetRepositoryResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubGetRepositoryResponse"/> representing the response.</returns>
         public GitHubGetRepositoryResponse GetRepository(string owner, string repository) {
             return GitHubGetRepositoryResponse.ParseResponse(Raw.GetRepository(owner, repository));
         }
