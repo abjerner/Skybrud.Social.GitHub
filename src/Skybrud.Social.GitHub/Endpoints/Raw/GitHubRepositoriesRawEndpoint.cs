@@ -1,6 +1,7 @@
 using System;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Commits;
+using Skybrud.Social.GitHub.Options.Repositories;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Endpoints.Raw {
@@ -82,6 +83,30 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
             if (String.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (String.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
             return Client.DoHttpGetRequest("/repos/" + owner + "/" + repository);
+        }
+
+        /// <summary>
+        /// Gets a list of pull requests matching the repository 
+        /// </summary>
+        /// <param name="owner">The alias of the repository owner.</param>
+        /// <param name="repository">The alias of the repository.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public SocialHttpResponse GetPullRequests(string owner, string repository) {
+            if (String.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
+            if (String.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
+            return Client.DoHttpGetRequest($"/repos/{owner}/{repository}/pulls");
+        }
+
+        /// <summary>
+        /// Gets a list of pull requests matching the repository matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public SocialHttpResponse GetPullRequests(GitHubGetPullRequetsOptions options) {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            if (String.IsNullOrWhiteSpace(options.Owner)) throw new ArgumentNullException(nameof(options.Owner));
+            if (String.IsNullOrWhiteSpace(options.Repository)) throw new ArgumentNullException(nameof(options.Repository));
+            return Client.DoHttpGetRequest($"/repos/{options.Owner}/{options.Repository}/pulls", options);
         }
 
         #endregion
