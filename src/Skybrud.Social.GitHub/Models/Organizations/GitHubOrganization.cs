@@ -7,29 +7,9 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
     /// <summary>
     /// Class representing a GitHub organization.
     /// </summary>
-    public class GitHubOrganization : GitHubObject {
+    public class GitHubOrganization : GitHubOrganizationItem {
 
         #region Properties
-        
-        /// <summary>
-        /// Gets the login (username) of the organization.
-        /// </summary>
-        public string Login { get; }
-
-        /// <summary>
-        /// Gets the ID of the organization.
-        /// </summary>
-        public int Id { get; }
-
-        /// <summary>
-        /// Gets a collection of URLs related to the organization.
-        /// </summary>
-        public GitHubOrganizationUrlCollection Urls { get; }
-
-        /// <summary>
-        /// Gets the avatar URL of the organization.
-        /// </summary>
-        public string AvatarUrl { get; }
 
         /// <summary>
         /// Gets the name of the organization.
@@ -97,22 +77,33 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
 
         #region Constructors
 
-        private GitHubOrganization(JObject obj) : base(obj) {
-            Login = obj.GetString("login");
-            Id = obj.GetInt32("id");
-            Urls = GitHubOrganizationUrlCollection.Parse(obj);
-            AvatarUrl = obj.GetString("avatar_url");
+        /// <summary>
+        /// Initializes a new instance from the specified <paramref name="obj"/>.
+        /// </summary>
+        /// <param name="obj">The instance of <see cref="JObject"/> representing the organization.</param>
+        protected GitHubOrganization(JObject obj) : base(obj) {
             Name = obj.GetString("name");
             Company = obj.GetString("company");
             Blog = obj.GetString("blog");
             Location = obj.GetString("location");
             Email = obj.GetString("email");
+            // Add support for the "has_organization_projects" property
+            // Add support for the "has_repository_projects" property
             PublicRepos = obj.GetInt32("public_repos");
             PublicGists = obj.GetInt32("public_gists");
             Followers = obj.GetInt32("followers");
             Following = obj.GetInt32("following");
             CreatedAt = obj.GetDateTime("created_at");
             UpdatedAt = obj.GetDateTime("updated_at");
+            // Add support for the "total_private_repos" property
+            // Add support for the "owned_private_repos" property
+            // Add support for the "private_gists" property
+            // Add support for the "disk_usage" property
+            // Add support for the "collaborators" property
+            // Add support for the "billing_email" property
+            // Add support for the "plan" property
+            // Add support for the "default_repository_permission" property
+            // Add support for the "members_can_create_repositories" property
         }
 
         #endregion
@@ -124,7 +115,7 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubOrganization"/>.</returns>
-        public static GitHubOrganization Parse(JObject obj) {
+        public new static GitHubOrganization Parse(JObject obj) {
             return obj == null ? null : new GitHubOrganization(obj);
         }
 

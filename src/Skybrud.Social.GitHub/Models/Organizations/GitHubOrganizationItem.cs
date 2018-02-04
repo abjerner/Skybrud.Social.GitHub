@@ -1,12 +1,13 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
+using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Organizations {
 
     /// <summary>
-    /// Class representing a summary of a GitHub organization.
+    /// Class representing a GitHub organization.
     /// </summary>
-    public class GitHubOrganizationSummary : GitHubObject {
+    public class GitHubOrganizationItem : GitHubObject {
 
         #region Properties
 
@@ -30,15 +31,30 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         /// </summary>
         public string AvatarUrl { get; }
 
+        /// <summary>
+        /// Gets the description of the organization.
+        /// </summary>
+        public string Description { get; }
+
+        /// <summary>
+        /// Gets whether the organization has a description.
+        /// </summary>
+        public bool HasDescription => !String.IsNullOrWhiteSpace(Description);
+
         #endregion
 
         #region Constructors
 
-        private GitHubOrganizationSummary(JObject obj) : base(obj) {
+        /// <summary>
+        /// Initializes a new instance from the specified <paramref name="obj"/>.
+        /// </summary>
+        /// <param name="obj">The instance of <see cref="JObject"/> representing the organizationt.</param>
+        protected GitHubOrganizationItem(JObject obj) : base(obj) {
             Login = obj.GetString("login");
             Id = obj.GetInt32("id");
             Urls = GitHubOrganizationUrlCollection.Parse(obj);
             AvatarUrl = obj.GetString("avatar_url");
+            Description = obj.GetString("description");
         }
 
         #endregion
@@ -46,12 +62,12 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubOrganizationSummary"/>.
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubOrganizationItem"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="GitHubOrganizationSummary"/>.</returns>
-        public static GitHubOrganizationSummary Parse(JObject obj) {
-            return obj == null ? null : new GitHubOrganizationSummary(obj);
+        /// <returns>An instance of <see cref="GitHubOrganizationItem"/>.</returns>
+        public static GitHubOrganizationItem Parse(JObject obj) {
+            return obj == null ? null : new GitHubOrganizationItem(obj);
         }
 
         #endregion
