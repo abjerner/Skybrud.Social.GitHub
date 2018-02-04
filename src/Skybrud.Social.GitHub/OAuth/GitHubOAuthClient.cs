@@ -179,6 +179,10 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// <returns>A <see cref="String"/> with the authorization URL.</returns>
         public string GetAuthorizationUrl(string state, params string[] scope) {
 
+            // Some input validation
+            if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException("ClientId");
+            if (String.IsNullOrWhiteSpace(RedirectUri)) throw new PropertyNotSetException("RedirectUri");
+
             // Do we have a valid "state" ?
             if (String.IsNullOrWhiteSpace(state)) {
                 throw new ArgumentNullException(nameof(state), "A valid state should be specified as it is part of the security of OAuth 2.0.");
