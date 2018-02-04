@@ -37,8 +37,8 @@ namespace Skybrud.Social.GitHub.OAuth {
         public string AccessToken { get; set; }
 
         /// <summary>
-        /// The GitHub API support basic authentication, so even though this is not a part of OAuth, the
-        /// <code>GitHubOAuthClient</code> will handle basic authentication as well.
+        /// The GitHub API supports basic authentication, so even though this is not a part of OAuth, the
+        /// <see cref="GitHubOAuthClient"/> class will handle basic authentication as well.
         /// </summary>
         public NetworkCredential Credentials { get; set; }
 
