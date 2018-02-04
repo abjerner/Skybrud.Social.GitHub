@@ -46,6 +46,12 @@ namespace Skybrud.Social.GitHub.Responses {
         /// <param name="response">The response to be validated.</param>
         public static void ValidateResponse(SocialHttpResponse response) {
 
+            // If an error occurs during authorization, the error code will still be "OK"
+            if (response.ContentType.StartsWith("application/x-www-form-urlencoded") && response.Body.StartsWith("error=")) {
+                SocialHttpQueryString body = SocialHttpQueryString.ParseQueryString(response.Body, true);
+                throw new GitHubException(body.GetString("error_description"));
+            }
+
             // Skip error checking if the server responds with an OK status code
             if (response.StatusCode == HttpStatusCode.OK) return;
 
