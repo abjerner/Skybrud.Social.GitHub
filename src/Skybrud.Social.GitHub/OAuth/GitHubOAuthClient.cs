@@ -2,7 +2,6 @@ using System;
 using System.Net;
 using Skybrud.Essentials.Common;
 using Skybrud.Social.GitHub.Endpoints.Raw;
-using Skybrud.Social.GitHub.Models.Authentication;
 using Skybrud.Social.GitHub.Responses.Authentication;
 using Skybrud.Social.GitHub.Scopes;
 using Skybrud.Social.Http;
@@ -231,32 +230,6 @@ namespace Skybrud.Social.GitHub.OAuth {
             
             // Return the response
             return GitHubTokenResponse.ParseResponse(response);
-
-        }
-
-        internal string GenerateAbsoluteUrl(string relative) {
-            return GenerateAbsoluteUrl(relative, null);
-        }
-
-        internal string GenerateAbsoluteUrl(string relative, IHttpQueryString query) {
-
-            if (query == null) query = new SocialHttpQueryString();
-
-            string url = "https://api.github.com";
-            if (Credentials != null) {
-                url = "https://" + Credentials.UserName + ":" + Credentials.Password + "@api.github.com";
-            } else if (AccessToken != null) {
-                query.Add("access_token", AccessToken);
-            }
-
-            // Add the relative URL
-            url += relative;
-
-            // Append the query string (if not empty)
-            if (query.Count > 0) url += "?" + query;
-
-            // Now return the URL
-            return url;
 
         }
         
