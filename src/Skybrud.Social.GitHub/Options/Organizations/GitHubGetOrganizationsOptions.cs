@@ -13,10 +13,15 @@ namespace Skybrud.Social.GitHub.Options.Organizations {
 
         #region Properties
 
+        ///// <summary>
+        ///// Gets or sets the integer ID of the last Organization that you've seen.
+        ///// </summary>
+        //public int Since { get; set; }
+
         /// <summary>
-        /// Gets or sets the integer ID of the last Organization that you've seen.
+        /// Gets or sets the page to be returned. Default is <code>1</code>, indicating the first page.
         /// </summary>
-        public int Since { get; set; }
+        public int Page { get; set; }
 
         /// <summary>
         /// Gets or sets the maximum amount of organizations to be returned by each page.
@@ -26,18 +31,30 @@ namespace Skybrud.Social.GitHub.Options.Organizations {
         #endregion
 
         #region Constructors
-        
+
         /// <summary>
         /// Initializes a new instance with default options.
         /// </summary>
-        public GitHubGetOrganizationsOptions() { }
+        public GitHubGetOrganizationsOptions() {
+            Page = 1;
+        }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="since"/>.
+        /// Initializes a new instance based on the specified <paramref name="page"/>.
         /// </summary>
-        /// <param name="since">The integer ID of the last organization that you've seen.</param>
-        public GitHubGetOrganizationsOptions(int since) {
-            Since = since;
+        /// <param name="page">The page to be returned. Default is <code>1</code>, indicating the first page.</param>
+        public GitHubGetOrganizationsOptions(int page) {
+            Page = page;
+        }
+        
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="page"/> and <paramref name="perPage"/>.
+        /// </summary>
+        /// <param name="page">The page to be returned. Default is <code>1</code>, indicating the first page.</param>
+        /// <param name="perPage">The maximum amount of pull requests to be returned by each page.</param>
+        public GitHubGetOrganizationsOptions(int page, int perPage) {
+            Page = page;
+            PerPage = perPage;
         }
 
         #endregion
@@ -52,7 +69,8 @@ namespace Skybrud.Social.GitHub.Options.Organizations {
 
             IHttpQueryString query = new SocialHttpQueryString();
 
-            if (Since > 0) query.Add("since", Since);
+            //if (Since > 0) query.Add("since", Since);
+            if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
 
             return query;

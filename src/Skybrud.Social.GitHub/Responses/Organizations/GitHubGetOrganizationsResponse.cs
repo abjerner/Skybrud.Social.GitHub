@@ -7,7 +7,7 @@ namespace Skybrud.Social.GitHub.Responses.Organizations {
     /// <summary>
     /// Class representing the response for getting a list of GitHub organizations.
     /// </summary>
-    public class GitHubGetOrganizationsResponse : GitHubResponse<GitHubOrganizationSummary[]> {
+    public class GitHubGetOrganizationsResponse : GitHubResponse<GitHubOrganizationItem[]> {
 
         #region Constructors
 
@@ -17,7 +17,7 @@ namespace Skybrud.Social.GitHub.Responses.Organizations {
             ValidateResponse(response);
 
             // Parse the response body
-            Body = ParseJsonArray(response.Body, GitHubOrganizationSummary.Parse);
+            Body = ParseJsonArray(response.Body, GitHubOrganizationItem.Parse);
 
         }
 
