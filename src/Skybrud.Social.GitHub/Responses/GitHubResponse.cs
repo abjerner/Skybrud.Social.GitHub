@@ -1,11 +1,9 @@
-﻿using System;
-using System.Globalization;
-using System.Net;
+﻿using System.Net;
 using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Exceptions;
 using Skybrud.Social.Http;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Social.GitHub.Models.Common;
 
 namespace Skybrud.Social.GitHub.Responses {
 
@@ -17,20 +15,14 @@ namespace Skybrud.Social.GitHub.Responses {
         #region Properties
 
         /// <summary>
-        /// Gets the total amount of calls that can be made to the API in the current timeframe.
+        /// Gets information about rate limiting.
         /// </summary>
-        public int RateLimit { get; private set; }
+        public GitHubRateLimiting RateLimiting { get; }
 
         /// <summary>
-        /// Gets the remaining amount of calls that can be made to the API in the current
-        /// timeframe.
+        /// Gets whether rate limiting informatyion is available for this response. 
         /// </summary>
-        public int RateLimitRemaining { get; private set; }
-
-        /// <summary>
-        /// Gets the timestamp of the next rate limit timeframe.
-        /// </summary>
-        public EssentialsDateTime RateLimitReset { get; private set; }
+        public bool HasRateLimit => RateLimiting != null;
 
         #endregion
 
@@ -41,9 +33,7 @@ namespace Skybrud.Social.GitHub.Responses {
         /// </summary>
         /// <param name="response">The raw response the instance should be based on.</param>
         protected GitHubResponse(SocialHttpResponse response) : base(response) {
-            RateLimit = Int32.Parse(response.Headers["X-RateLimit-Limit"]);
-            RateLimitRemaining = Int32.Parse(response.Headers["X-RateLimit-Remaining"]);
-            RateLimitReset = EssentialsDateTime.FromUnixTimestamp(Double.Parse(response.Headers["X-RateLimit-Reset"], CultureInfo.InvariantCulture));
+            if (response.Headers["X-RateLimit-Limit"] != null) RateLimiting = GitHubRateLimiting.GetFromResponse(response);
         }
 
         #endregion
