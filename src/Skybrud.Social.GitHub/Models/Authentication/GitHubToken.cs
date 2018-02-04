@@ -7,7 +7,7 @@ namespace Skybrud.Social.GitHub.Models.Authentication {
     /// <summary>
     /// Class representing the response body of a call to exchange an authorization code for an access token.
     /// </summary>
-    public class GitHubAccessToken {
+    public class GitHubToken {
 
         #region Properties
 
@@ -30,7 +30,7 @@ namespace Skybrud.Social.GitHub.Models.Authentication {
 
         #region Constructors
 
-        private GitHubAccessToken(IHttpQueryString query) {
+        private GitHubToken(IHttpQueryString query) {
 
             GitHubScopeCollection scopes = new GitHubScopeCollection();
 
@@ -60,12 +60,12 @@ namespace Skybrud.Social.GitHub.Models.Authentication {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="query"/> into an instance of <see cref="GitHubAccessToken"/>.
+        /// Parses the specified <paramref name="query"/> into an instance of <see cref="GitHubToken"/>.
         /// </summary>
         /// <param name="query">The instance of <see cref="IHttpQueryString"/> to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="GitHubAccessToken"/>.</returns>
-        public static GitHubAccessToken Parse(IHttpQueryString query) {
-            return query == null ? null : new GitHubAccessToken(query);
+        /// <returns>Returns an instance of <see cref="GitHubToken"/>.</returns>
+        public static GitHubToken Parse(IHttpQueryString query) {
+            return query == null ? null : new GitHubToken(query);
         }
 
         #endregion

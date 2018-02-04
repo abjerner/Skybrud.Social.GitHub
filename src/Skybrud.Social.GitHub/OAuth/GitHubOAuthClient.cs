@@ -1,7 +1,9 @@
 using System;
 using System.Net;
+using Skybrud.Essentials.Common;
 using Skybrud.Social.GitHub.Endpoints.Raw;
 using Skybrud.Social.GitHub.Models.Authentication;
+using Skybrud.Social.GitHub.Responses.Authentication;
 using Skybrud.Social.GitHub.Scopes;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces.Http;
@@ -205,15 +207,20 @@ namespace Skybrud.Social.GitHub.OAuth {
         }
 
         /// <summary>
-        /// Exchanges the specified <paramref name="authCode"/> for a user access token.
+        /// Exchanges the specified <paramref name="authorizationCode"/> for a user access token.
         /// </summary>
-        /// <param name="authCode">The authorization code received from the GitHub OAuth dialog.</param>
-        public GitHubAccessToken GetAccessTokenFromAuthCode(string authCode) {
+        /// <param name="authorizationCode">The authorization code received from the GitHub OAuth dialog.</param>
+        public GitHubTokenResponse GetAccessTokenFromAuthorizationCode(string authorizationCode) {
+
+            // Some validation
+            if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException(nameof(ClientId));
+            if (String.IsNullOrWhiteSpace(ClientSecret)) throw new PropertyNotSetException(nameof(ClientId));
+            if (String.IsNullOrWhiteSpace(authorizationCode)) throw new ArgumentNullException(nameof(authorizationCode));
 
             IHttpPostData parameters = new SocialHttpPostData {
                 {"client_id", ClientId},
                 {"client_secret", ClientSecret},
-                {"code", authCode }
+                {"code", authorizationCode }
             };
 
             // Add the redirect URI (if specified)
@@ -221,12 +228,9 @@ namespace Skybrud.Social.GitHub.OAuth {
 
             // Get the response from the server
             SocialHttpResponse response = SocialUtils.Http.DoHttpPostRequest("https://github.com/login/oauth/access_token", null, parameters);
-
-            // Parse the contents
-            IHttpQueryString body = SocialHttpQueryString.ParseQueryString(response.Body);
-
+            
             // Return the response
-            return GitHubAccessToken.Parse(body);
+            return GitHubTokenResponse.ParseResponse(response);
 
         }
 
