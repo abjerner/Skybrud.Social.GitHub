@@ -250,6 +250,11 @@ namespace Skybrud.Social.GitHub.OAuth {
                 request.Headers.Authorization = "token " + AccessToken;
             }
 
+            // Set the credentials for basic authentication (if present)
+            if (Credentials != null) {
+                request.Credentials = Credentials;
+            }
+
         }
 
         #endregion
