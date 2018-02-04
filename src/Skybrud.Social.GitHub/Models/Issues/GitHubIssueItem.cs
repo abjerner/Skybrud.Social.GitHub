@@ -104,7 +104,7 @@ namespace Skybrud.Social.GitHub.Models.Issues {
         public string Body { get; }
 
         /// <summary>
-        /// Gets whether a body has been specified for the commit.
+        /// Gets whether a body has been specified for the issue.
         /// </summary>
         public bool HasBody => !String.IsNullOrWhiteSpace(Body);
 
