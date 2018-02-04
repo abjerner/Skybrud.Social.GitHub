@@ -38,7 +38,7 @@ namespace Skybrud.Social.GitHub.Options.Issues {
         public GitHubIssueSortField Sort { get; set; }
 
         /// <summary>
-        /// The direction of the sort.. Default is <see cref="GitHubSortDirection.Descending"/>.
+        /// The direction of the sort. Default is <see cref="GitHubSortDirection.Descending"/>.
         /// </summary>
         public GitHubSortDirection Direction { get; set; }
 
