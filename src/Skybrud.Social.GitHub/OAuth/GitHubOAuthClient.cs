@@ -144,6 +144,28 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// <param name="state">A unique state for the request.</param>
         /// <param name="scope">The scope of your application.</param>
         /// <returns>A <see cref="String"/> with the authorization URL.</returns>
+        public string GetAuthorizationUrl(string state, GitHubScope scope) {
+            return GetAuthorizationUrl(state, scope == null ? null : new GitHubScopeCollection(scope));
+        }
+
+        /// <summary>
+        /// Gets an authorization URL using the specified <paramref name="state"/> and request the specified
+        /// <paramref name="scope"/>.
+        /// </summary>
+        /// <param name="state">A unique state for the request.</param>
+        /// <param name="scope">The scope of your application.</param>
+        /// <returns>A <see cref="String"/> with the authorization URL.</returns>
+        public string GetAuthorizationUrl(string state, params GitHubScope[] scope) {
+            return GetAuthorizationUrl(state, scope == null ? null : new GitHubScopeCollection(scope));
+        }
+
+        /// <summary>
+        /// Gets an authorization URL using the specified <paramref name="state"/> and request the specified
+        /// <paramref name="scope"/>.
+        /// </summary>
+        /// <param name="state">A unique state for the request.</param>
+        /// <param name="scope">The scope of your application.</param>
+        /// <returns>A <see cref="String"/> with the authorization URL.</returns>
         public string GetAuthorizationUrl(string state, GitHubScopeCollection scope) {
             return GetAuthorizationUrl(state, scope == null ? "" : scope.ToString());
         }
@@ -164,7 +186,7 @@ namespace Skybrud.Social.GitHub.OAuth {
 
             // Initialize the query string
             IHttpQueryString query = new SocialHttpQueryString {
-                { "client_id", ClientId },
+                {"client_id", ClientId },
                 {"redirect_uri", RedirectUri},
                 {"state", state}
             };
