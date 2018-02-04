@@ -1,9 +1,10 @@
 ﻿using Skybrud.Essentials.Strings.Extensions;
 using Skybrud.Social.GitHub.Options.Issues;
+using Skybrud.Social.GitHub.Options.Repositories;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces.Http;
 
-namespace Skybrud.Social.GitHub.Options.Repositories {
+namespace Skybrud.Social.GitHub.Options.PullRequests {
 
     /// <summary>
     /// Class representing the options for getting a list of pull requests of a given repository.

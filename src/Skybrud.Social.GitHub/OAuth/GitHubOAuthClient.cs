@@ -54,6 +54,11 @@ namespace Skybrud.Social.GitHub.OAuth {
         public GitHubOrganizationsRawEndpoint Organizations { get; }
 
         /// <summary>
+        /// Gets a reference to the raw pull requests endpoint.
+        /// </summary>
+        public GitHubPullRequestsRawEndpoint PullRequests { get; }
+
+        /// <summary>
         /// Gets a reference to the raw repositories endpoint.
         /// </summary>
         public GitHubRepositoriesRawEndpoint Repositories { get; }
@@ -78,6 +83,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         public GitHubOAuthClient() {
             Issues = new GitHubIssuesRawEndpoint(this);
             Organizations = new GitHubOrganizationsRawEndpoint(this);
+            PullRequests = new GitHubPullRequestsRawEndpoint(this);
             Repositories = new GitHubRepositoriesRawEndpoint(this);
             User = new GitHubUserRawEndpoint(this);
             Users = new GitHubUsersRawEndpoint(this);

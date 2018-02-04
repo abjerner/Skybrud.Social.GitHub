@@ -28,6 +28,11 @@ namespace Skybrud.Social.GitHub {
         public GitHubOrganizationsEndpoint Organizations { get; }
 
         /// <summary>
+        /// Gets a reference to the pull requests endpoint.
+        /// </summary>
+        public GitHubPullRequestsEndpoint PullRequests { get; }
+
+        /// <summary>
         /// Gets a reference to the repositories endpoint.
         /// </summary>
         public GitHubRepositoriesEndpoint Repositories { get; }
@@ -50,6 +55,7 @@ namespace Skybrud.Social.GitHub {
             Client = client;
             Issues = new GitHubIssuesEndpoint(this);
             Organizations = new GitHubOrganizationsEndpoint(this);
+            PullRequests = new GitHubPullRequestsEndpoint(this);
             Repositories = new GitHubRepositoriesEndpoint(this);
             User = new GitHubUserEndpoint(this);
             Users = new GitHubUsersEndpoint(this);

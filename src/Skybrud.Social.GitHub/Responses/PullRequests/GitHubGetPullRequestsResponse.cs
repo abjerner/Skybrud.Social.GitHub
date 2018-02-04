@@ -2,7 +2,7 @@
 using Skybrud.Social.GitHub.Models.PullRequests;
 using Skybrud.Social.Http;
 
-namespace Skybrud.Social.GitHub.Responses.Repositories {
+namespace Skybrud.Social.GitHub.Responses.PullRequests {
 
     /// <summary>
     /// Class representing the response for getting a list of pull requests of a GitHub repositories.
