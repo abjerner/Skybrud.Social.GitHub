@@ -47,9 +47,19 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         public GitHubCommitStats Stats { get; }
 
         /// <summary>
+        /// Gets whether the <see cref="Stats"/> property has a value.
+        /// </summary>
+        public bool HasStats => Files.Length > 0;
+
+        /// <summary>
         /// Gets an array of files added, modified, renamed or removed in the commit.
         /// </summary>
         public GitHubCommitFile[] Files { get; }
+
+        /// <summary>
+        /// Gets whether the <see cref="Files"/> property has a value.
+        /// </summary>
+        public bool HasFiles => Files.Length > 0;
 
         #endregion
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Skybrud.Social.GitHub.Models;
 using Skybrud.Social.GitHub.Models.Commits;
 using Skybrud.Social.Http;
 
@@ -9,12 +10,24 @@ namespace Skybrud.Social.GitHub.Responses.Commits {
     /// </summary>
     public class GitHubGetCommitsResponse : GitHubResponse<GitHubCommitSummary[]> {
 
+        #region Properties
+
+        /// <summary>
+        /// Gets a reference to the <c>Link</c> header of the response.
+        /// </summary>
+        public GitHubLinkHeader Link { get; }
+
+        #endregion
+
         #region Constructors
 
         private GitHubGetCommitsResponse(SocialHttpResponse response) : base(response) {
 
             // Validate the response
             ValidateResponse(response);
+
+            // Parse the link header
+            Link = GitHubLinkHeader.Parse(response);
 
             // Parse the response body
             Body = ParseJsonArray(response.Body, GitHubCommitSummary.Parse);

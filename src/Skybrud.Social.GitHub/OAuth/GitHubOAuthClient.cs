@@ -44,6 +44,11 @@ namespace Skybrud.Social.GitHub.OAuth {
         public NetworkCredential Credentials { get; set; }
 
         /// <summary>
+        /// Gets a reference to the raw commits endpoint.
+        /// </summary>
+        public GitHubCommitsRawEndpoint Commits { get; }
+
+        /// <summary>
         /// Gets a reference to the raw issues endpoint.
         /// </summary>
         public GitHubIssuesRawEndpoint Issues { get; }
@@ -81,6 +86,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// Initializes a new OAuth client with default options.
         /// </summary>
         public GitHubOAuthClient() {
+            Commits = new GitHubCommitsRawEndpoint(this);
             Issues = new GitHubIssuesRawEndpoint(this);
             Organizations = new GitHubOrganizationsRawEndpoint(this);
             PullRequests = new GitHubPullRequestsRawEndpoint(this);

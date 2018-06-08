@@ -2,6 +2,7 @@ using System;
 using Skybrud.Essentials.Time;
 using Skybrud.Social.Http;
 using Skybrud.Social.Interfaces.Http;
+using static Skybrud.Social.GitHub.GitHubUtils;
 
 namespace Skybrud.Social.GitHub.Options.Commits {
 
@@ -52,6 +53,16 @@ namespace Skybrud.Social.GitHub.Options.Commits {
         /// </summary>
         public EssentialsDateTime Until { get; set; }
 
+        /// <summary>
+        /// Gets or sets the page to be returned.
+        /// </summary>
+        public int Page { get; set; }
+
+        /// <summary>
+        /// Gets or sets the maximum amount of commits to be returned by each page. Maximum allowed value is <c>100</c>.
+        /// </summary>
+        public int PerPage { get; set; }
+
         #endregion
 
         #region Member methods
@@ -65,8 +76,10 @@ namespace Skybrud.Social.GitHub.Options.Commits {
             if (!String.IsNullOrWhiteSpace(Sha)) query.Add("sha", Sha);
             if (!String.IsNullOrWhiteSpace(Path)) query.Add("path", Path);
             if (!String.IsNullOrWhiteSpace(Author)) query.Add("author", Author);
-            if (Since != null) query.Add("since", Since.ToString(TimeUtils.Iso8601DateFormat));
-            if (Until != null) query.Add("until", Until.ToString(TimeUtils.Iso8601DateFormat));
+            if (Since != null) query.Add("since", FormatDate(Since));
+            if (Until != null) query.Add("until", FormatDate(Until));
+            if (Page > 0) query.Add("page", Page);
+            if (PerPage > 0) query.Add("per_page", PerPage);
             return query;
         }
 
