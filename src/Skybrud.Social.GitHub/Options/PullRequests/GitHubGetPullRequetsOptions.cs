@@ -66,7 +66,7 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
             };
 
             query.Add("sort", Sort.ToKebabCase());
-            query.Add("direction", Direction.ToKebabCase());
+            query.Add("direction", Direction == GitHubSortDirection.Descending ? "desc" : "asc");
 
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);

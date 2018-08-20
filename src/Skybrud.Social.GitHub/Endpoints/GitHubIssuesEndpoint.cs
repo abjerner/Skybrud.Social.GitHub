@@ -42,11 +42,30 @@ namespace Skybrud.Social.GitHub.Endpoints {
         }
 
         /// <summary>
-        /// Gets a list of issues matching the specified <paramref name="options"/>.
+        /// Gets a list of issues assigned to the authenticated user.
         /// </summary>
         /// <param name="options">The options for the call to the API.</param>
         /// <returns>An instance of <see cref="GitHubGetIssuesResponse"/> representing the response.</returns>
         public GitHubGetIssuesResponse GetIssues(GitHubGetIssuesOptions options) {
+            return GitHubGetIssuesResponse.ParseResponse(Raw.GetIssues(options));
+        }
+
+        /// <summary>
+        /// Gets a list of issues for the repository matching the specified <paramref name="owner"/> and <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="owner">The alias of the parent user or organization.</param>
+        /// <param name="repository">The alias of the repository.</param>
+        /// <returns>An instance of <see cref="GitHubGetIssuesResponse"/> representing the response.</returns>
+        public GitHubGetIssuesResponse GetIssues(string owner, string repository) {
+            return GitHubGetIssuesResponse.ParseResponse(Raw.GetIssues(owner, repository));
+        }
+
+        /// <summary>
+        /// Gets a list of issues for the repository matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="GitHubGetIssuesResponse"/> representing the response.</returns>
+        public GitHubGetIssuesResponse GetIssues(GitHubGetRepositoryIssuesOptions options) {
             return GitHubGetIssuesResponse.ParseResponse(Raw.GetIssues(options));
         }
 

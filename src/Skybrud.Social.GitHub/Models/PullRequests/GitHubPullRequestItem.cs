@@ -3,6 +3,8 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Models.Issues;
+using Skybrud.Social.GitHub.Models.Labels;
+using Skybrud.Social.GitHub.Models.Milestones;
 using Skybrud.Social.GitHub.Models.Users;
 
 namespace Skybrud.Social.GitHub.Models.PullRequests {
@@ -19,6 +21,8 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         /// </summary>
         public long Id { get; }
 
+        public string node_id { get; }
+
         /// <summary>
         /// Gets the pull request number.
         /// </summary>
@@ -33,6 +37,8 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         /// Gets whether the pull request has been locked.
         /// </summary>
         public bool IsLocked { get; }
+
+        // TODO: Add support for the "active_lock_reason"
 
         /// <summary>
         /// Gets the title of the pull request.
@@ -65,14 +71,71 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         public EssentialsDateTime UpdatedAt { get; }
 
         /// <summary>
-        /// Gets a timestamp for when the pull request was closed, or <code>null</code> if the pull request hasn't yet been closed.
+        /// Gets a timestamp for when the pull request was closed, or <c>null</c> if the pull request hasn't yet been closed.
         /// </summary>
         public EssentialsDateTime ClosedAt { get; }
 
         /// <summary>
-        /// Gets a timestamp for when the pull request was merged, or <code>null</code> if the pull request hasn't yet been merged.
+        /// Gets whether the pull requsts has been closed.
+        /// </summary>
+        public bool IsClosed => ClosedAt != null;
+
+        /// <summary>
+        /// Gets a timestamp for when the pull request was merged, or <c>null</c> if the pull request hasn't yet been merged.
         /// </summary>
         public EssentialsDateTime MergedAt { get; }
+
+        /// <summary>
+        /// Gets whether the pull requsts has been merged.
+        /// </summary>
+        public bool IsMerged => MergedAt != null;
+
+        /// <summary>
+        /// Gets the SHA hash of the last commit of the pull request.
+        /// </summary>
+        public string MergeCommitSha { get; }
+
+        /// <summary>
+        /// Gets the user assigned to the pull requests, or <c>null</c> if no user is assigned to the pull request.
+        /// 
+        /// Notice that more than one user can be assigned to a pull request, so it's recommended to use the
+        /// <see cref="Assignees"/> property instead, as it returns an array of the assigned users.
+        /// </summary>
+        public GitHubUserItem Assignee { get; }
+
+        /// <summary>
+        /// Gets an array of users assigned to the pull request.
+        /// </summary>
+        public GitHubUserItem[] Assignees { get; }
+
+        /// <summary>
+        /// Gets whether any users are assigned to the pull request.
+        /// </summary>
+        public bool HasAssignees => Assignees.Length > 0;
+
+        // TODO: Add support for the "requested_reviewers" property
+
+        // TODO: Add support for the "requested_teams" property
+
+        /// <summary>
+        /// Gets an array of the labels associated with the pull request.
+        /// </summary>
+        public GitHubLabel[] Labels { get; }
+
+        /// <summary>
+        /// Gets the milestone of the pull request, or <c>null</c> if the pull request is not part of any milestones.
+        /// </summary>
+        public GitHubMilestone Milestone { get; }
+
+        // TODO: Add support for the "requested_teams" property
+
+        // TODO: Add support for the "head" property
+
+        // TODO: Add support for the "base" property
+
+        // TODO: Add support for the "_links" property
+
+        // TODO: Add support for the "author_association" property
 
         #endregion
 
@@ -94,6 +157,11 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
             UpdatedAt = obj.GetString("updated_at", EssentialsDateTime.Parse);
             ClosedAt = obj.GetString("closed_at", EssentialsDateTime.Parse);
             MergedAt = obj.GetString("merged_at", EssentialsDateTime.Parse);
+            MergeCommitSha = obj.GetString("merge_commit_sha");
+            Assignee = obj.GetObject("assignee", GitHubUserItem.Parse);
+            Assignees = obj.GetArrayItems("assignees", GitHubUserItem.Parse);
+            Labels = obj.GetArrayItems("labels", GitHubLabel.Parse);
+            Milestone = obj.GetObject("milestone", GitHubMilestone.Parse);
         }
 
         #endregion

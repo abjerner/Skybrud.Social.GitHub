@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
+using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Labels {
@@ -16,6 +17,11 @@ namespace Skybrud.Social.GitHub.Models.Labels {
         public long Id { get; }
 
         /// <summary>
+        /// Gets the node ID of the label.
+        /// </summary>
+        public string NodeId { get; }
+
+        /// <summary>
         /// Gets the API URL of the label.
         /// </summary>
         public string Url { get; }
@@ -24,6 +30,16 @@ namespace Skybrud.Social.GitHub.Models.Labels {
         /// Gets the name of the label.
         /// </summary>
         public string Name { get; }
+
+        /// <summary>
+        /// Gets the description of the label.
+        /// </summary>
+        public string Description { get; }
+
+        /// <summary>
+        /// Gets whether the label has a description.
+        /// </summary>
+        public bool HasDescription => !String.IsNullOrWhiteSpace(Description);
 
         /// <summary>
         /// Gets the color of the label.
@@ -41,8 +57,10 @@ namespace Skybrud.Social.GitHub.Models.Labels {
 
         private GitHubLabel(JObject obj) : base(obj) {
             Id = obj.GetInt64("id");
+            NodeId = obj.GetString("node_id");
             Url = obj.GetString("url");
             Name = obj.GetString("name");
+            Description = obj.GetString("description");
             Color = obj.GetString("color");
             IsDefault = obj.GetBoolean("default");
         }

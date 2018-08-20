@@ -76,7 +76,7 @@ namespace Skybrud.Social.GitHub.Models.Milestones {
         public EssentialsDateTime UpdatedAt { get; }
 
         /// <summary>
-        /// Gets a timestamp for when the milestone is due, or <code>null</code> if the milestone doesn't have a due date.
+        /// Gets a timestamp for when the milestone is due, or <c>null</c> if the milestone doesn't have a due date.
         /// </summary>
         public EssentialsDateTime DueOn { get; }
 
@@ -87,7 +87,7 @@ namespace Skybrud.Social.GitHub.Models.Milestones {
 
         /// <summary>
         /// Gets a timestamp for when the milestone was closed. If <see cref="State"/> is
-        /// <see cref="GitHubIssueState.Open"/>, this property will return <code>null</code>.
+        /// <see cref="GitHubIssueState.Open"/>, this property will return <c>null</c>.
         /// </summary>
         public EssentialsDateTime ClosedAt { get; }
 

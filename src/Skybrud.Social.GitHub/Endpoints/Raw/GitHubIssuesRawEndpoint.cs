@@ -38,13 +38,36 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         }
 
         /// <summary>
-        /// Gets a list of issues matching the specified <paramref name="options"/>.
+        /// Gets a list of issues assigned to the authenticated user.
         /// </summary>
         /// <param name="options">The options for the call to the API.</param>
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetIssues(GitHubGetIssuesOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
             return Client.DoHttpGetRequest("/issues", options);
+        }
+
+        /// <summary>
+        /// Gets a list of issues for the repository matching the specified <paramref name="owner"/> and <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="owner">The alias of the parent user or organization.</param>
+        /// <param name="repository">The alias of the repository.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public SocialHttpResponse GetIssues(string owner, string repository) {
+            if (String.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
+            if (String.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
+            return Client.DoHttpGetRequest($"/repos/{owner}/{repository}/issues");
+        }
+
+        /// <summary>
+        /// Gets a list of issues for the repository matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public SocialHttpResponse GetIssues(GitHubGetRepositoryIssuesOptions options) {
+            if (String.IsNullOrWhiteSpace(options.Owner)) throw new ArgumentNullException(nameof(options.Owner));
+            if (String.IsNullOrWhiteSpace(options.Repository)) throw new ArgumentNullException(nameof(options.Repository));
+            return Client.DoHttpGetRequest($"/repos/{options.Owner}/{options.Repository}/issues", options);
         }
 
         #endregion
