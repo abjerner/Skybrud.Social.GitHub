@@ -10,7 +10,7 @@
 
   <PropertyGroup>
     <RootNamespace>Skybrud.Social.GitHub</RootNamespace>
-    <Version>1.0.0-beta002</Version>
+    <Version>1.0.0-beta003</Version>
     <Company>Skybrud.dk a/s</Company>
     <Product>Skybrud.Social</Product>
     <Authors>Anders Bjerner</Authors>
@@ -22,7 +22,7 @@
   <PropertyGroup>
     <PackageTags>GitHub, Graph, API, Skybrud, Social, OAuth, JSON</PackageTags>
     <PackageLicenseUrl>https://github.com/abjerner/Skybrud.Social.GitHub/blob/master/LICENSE.md</PackageLicenseUrl>
-    <PackageProjectUrl>hhttps://social.skybrud.dk/github/</PackageProjectUrl>
+    <PackageProjectUrl>https://social.skybrud.dk/github/</PackageProjectUrl>
     <PackageIconUrl>http://www.skybrud.dk/img/5431sk/icon/favicon.ico</PackageIconUrl>
   </PropertyGroup>
 
