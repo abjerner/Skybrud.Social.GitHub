@@ -1,5 +1,6 @@
 using Skybrud.Social.GitHub.Endpoints.Raw;
 using Skybrud.Social.GitHub.Options.Issues;
+using Skybrud.Social.GitHub.Options.Issues.Comments;
 using Skybrud.Social.GitHub.Responses.Issues;
 
 namespace Skybrud.Social.GitHub.Endpoints {
@@ -67,6 +68,15 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <returns>An instance of <see cref="GitHubGetIssuesResponse"/> representing the response.</returns>
         public GitHubGetIssuesResponse GetIssues(GitHubGetRepositoryIssuesOptions options) {
             return GitHubGetIssuesResponse.ParseResponse(Raw.GetIssues(options));
+        }
+
+        /// <summary>
+        /// Adds a new comment to the issue matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request.</param>
+        /// <returns>An instance of <see cref="GitHubAddIssueCommentResponse"/> representing the response.</returns>
+        public GitHubAddIssueCommentResponse AddComment(GitHubAddIssueCommentOptions options) {
+            return GitHubAddIssueCommentResponse.ParseResponse(Raw.AddComment(options));
         }
 
         #endregion

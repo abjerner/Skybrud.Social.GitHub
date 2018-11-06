@@ -1,4 +1,5 @@
 using System.Net;
+using Skybrud.Social.GitHub.Models.Common;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Exceptions {
@@ -13,7 +14,7 @@ namespace Skybrud.Social.GitHub.Exceptions {
         /// <summary>
         /// Gets a reference to the raw response.
         /// </summary>
-        public SocialHttpResponse Response { get; private set; }
+        public SocialHttpResponse Response { get; }
 
         /// <summary>
         /// Gets the status code of the response.
@@ -21,9 +22,9 @@ namespace Skybrud.Social.GitHub.Exceptions {
         public HttpStatusCode StatusCode => Response.StatusCode;
 
         /// <summary>
-        /// Gets an URL to the GitHub documentation with more information about the exception.
+        /// Gets the error information from the response.
         /// </summary>
-        public string DocumentationUrl { get; private set; }
+        public GitHubError Error { get; }
 
         #endregion
 
@@ -33,7 +34,7 @@ namespace Skybrud.Social.GitHub.Exceptions {
         /// Initializes a new exception based on the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The raw response of the exception.</param>
-        public GitHubHttpException(SocialHttpResponse response) : base("Invalid response received from the GitHub API (Status: " + ((int) response.StatusCode) + ")") {
+        public GitHubHttpException(SocialHttpResponse response) : base("Invalid response received from the GitHub API (Status: " + (int) response.StatusCode + ")") {
             Response = response;
         }
 
@@ -47,14 +48,13 @@ namespace Skybrud.Social.GitHub.Exceptions {
         }
 
         /// <summary>
-        /// Initializes a new exception based on the specified <paramref name="response"/> and <paramref name="message"/>.
+        /// Initializes a new exception based on the specified <paramref name="response"/> and <paramref name="error"/>.
         /// </summary>
         /// <param name="response">The raw response of the exception.</param>
-        /// <param name="message">The message of the exception.</param>
-        /// <param name="documentationUrl">The URL to GitHub documentation about the exception.</param>
-        public GitHubHttpException(SocialHttpResponse response, string message, string documentationUrl) : base(message) {
+        /// <param name="error">The error information from the response.</param>
+        public GitHubHttpException(SocialHttpResponse response, GitHubError error) : base("Invalid response received from the GitHub API (Status: " + (int)response.StatusCode + ")") {
             Response = response;
-            DocumentationUrl = documentationUrl;
+            Error = error;
         }
 
         #endregion

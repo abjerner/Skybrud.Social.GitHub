@@ -1,6 +1,9 @@
 using System;
+using Newtonsoft.Json.Linq;
+using Skybrud.Essentials.Common;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Issues;
+using Skybrud.Social.GitHub.Options.Issues.Comments;
 using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Endpoints.Raw {
@@ -68,6 +71,29 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
             if (String.IsNullOrWhiteSpace(options.Owner)) throw new ArgumentNullException(nameof(options.Owner));
             if (String.IsNullOrWhiteSpace(options.Repository)) throw new ArgumentNullException(nameof(options.Repository));
             return Client.DoHttpGetRequest($"/repos/{options.Owner}/{options.Repository}/issues", options);
+        }
+
+        /// <summary>
+        /// Adds a new comment to the issue matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public SocialHttpResponse AddComment(GitHubAddIssueCommentOptions options) {
+
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            if (String.IsNullOrWhiteSpace(options.Owner)) throw new PropertyNotSetException(nameof(options.Owner));
+            if (String.IsNullOrWhiteSpace(options.Repository)) throw new PropertyNotSetException(nameof(options.Repository));
+            if (options.Number == 0) throw new PropertyNotSetException(nameof(options.Number));
+            if (String.IsNullOrWhiteSpace(options.Body)) throw new PropertyNotSetException(nameof(options.Body));
+
+            // Generate the payload for the request body
+            JObject body = new JObject {
+                {"body", options.Body}
+            };
+
+            // Make the request to the API
+            return Client.DoHttpPostRequest($"/repos/{options.Owner}/{options.Repository}/issues/{options.Number}/comments", body);
+
         }
 
         #endregion

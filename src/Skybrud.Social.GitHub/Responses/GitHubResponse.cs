@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using Newtonsoft.Json.Linq;
 using Skybrud.Social.GitHub.Exceptions;
 using Skybrud.Social.Http;
@@ -54,14 +55,13 @@ namespace Skybrud.Social.GitHub.Responses {
 
             // Skip error checking if the server responds with an OK status code
             if (response.StatusCode == HttpStatusCode.OK) return;
+            if (response.StatusCode == HttpStatusCode.Created) return;
 
-            // Get the "meta" object
-            JObject obj = ParseJsonObject(response.Body);
+            // Parse the error message from the response body
+            GitHubError error = ParseJsonObject(response.Body, GitHubError.Parse);
 
             // Now throw some exceptions
-            string message = obj.GetString("message");
-            string url = obj.GetString("documentation_url");
-            throw new GitHubHttpException(response, message, url);
+            throw new GitHubHttpException(response, error);
 
         }
 

@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Social.GitHub.Exceptions;
 using Skybrud.Social.Http;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Social.GitHub.Models.Common;
 
 namespace Skybrud.Social.GitHub.Responses.Followers {
 
@@ -37,11 +38,8 @@ namespace Skybrud.Social.GitHub.Responses.Followers {
                 default:
 
                     // Parse the raw JSON response
-                    JObject obj = ParseJsonObject(response.Body);
-
-                    string message = obj.GetString("message");
-                    string url = obj.GetString("documentation_url");
-                    throw new GitHubHttpException(response, message, url);
+                    GitHubError error = ParseJsonObject(response.Body, GitHubError.Parse);
+                    throw new GitHubHttpException(response, error);
 
             }
 
