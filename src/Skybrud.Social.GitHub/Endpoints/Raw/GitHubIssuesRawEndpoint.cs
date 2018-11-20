@@ -96,6 +96,20 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
 
         }
 
+        /// <summary>
+        /// Gets the events of the issue matching the specified <paramref name="owner"/>, <paramref name="repository"/> and <paramref name="number"/>.
+        /// </summary>
+        /// <param name="owner">The username (login) of the owner of the repository.</param>
+        /// <param name="repository">The slug of the repository.</param>
+        /// <param name="number">The number of the issue to which the comment should be added.</param>
+        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
+        public SocialHttpResponse GetEvents(string owner, string repository, int number)
+        {
+            
+
+
+        }
+
         #endregion
 
     }
