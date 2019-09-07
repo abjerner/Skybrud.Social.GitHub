@@ -16,6 +16,16 @@ namespace Skybrud.Social.GitHub.Models.Common {
         public string Message { get; }
 
         /// <summary>
+        /// Gets an array of errors.
+        /// </summary>
+        public string[] Errors { get; }
+
+        /// <summary>
+        /// Gets whether the <see cref="Errors"/> property has any items.
+        /// </summary>
+        public bool HasErrors => Errors.Length > 0;
+
+        /// <summary>
         /// Gets an URL with information about the error.
         /// </summary>
         public string DocumentationUrl { get; }
@@ -30,6 +40,7 @@ namespace Skybrud.Social.GitHub.Models.Common {
         /// <param name="obj">The an instance of <see cref="JObject"/> representing the error.</param>
         protected GitHubError(JObject obj) : base(obj) {
             Message = obj.GetString("message");
+            Errors = obj.GetStringArray("errors");
             DocumentationUrl = obj.GetString("documentation_url");
         }
 

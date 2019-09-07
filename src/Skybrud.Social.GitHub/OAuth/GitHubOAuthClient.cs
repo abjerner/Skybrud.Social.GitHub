@@ -5,6 +5,7 @@ using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Client;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Endpoints.Raw;
+using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Responses.Authentication;
 using Skybrud.Social.GitHub.Scopes;
 
@@ -243,6 +244,23 @@ namespace Skybrud.Social.GitHub.OAuth {
             
             // Return the response
             return GitHubTokenResponse.ParseResponse(response);
+
+        }
+
+        /// <summary>
+        /// Returns the response of the request identified by the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instanceo of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public virtual IHttpResponse GetResponse(IHttpRequestOptions options) {
+
+            if (options == null) throw new ArgumentNullException(nameof(options));
+
+            IHttpRequest request = options.GetRequest();
+
+            PrepareHttpRequest(request);
+
+            return request.GetResponse();
 
         }
         
