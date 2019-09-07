@@ -20,7 +20,7 @@ namespace Skybrud.Social.GitHub.Models.Common {
         /// Gets the remaining amount of calls that can be made to the API in the current
         /// timeframe.
         /// </summary>
-        public int Remaining { get; private set; }
+        public int Remaining { get; }
 
         /// <summary>
         /// Gets the timestamp of the next rate limit timeframe.
@@ -32,17 +32,13 @@ namespace Skybrud.Social.GitHub.Models.Common {
         #region Constructors
 
         private GitHubRateLimiting(IHttpResponse response) {
-            
-            int limit;
-            int remaining;
-            double reset;
 
-            Int32.TryParse(response.Headers["X-RateLimit-Limit"], out limit);
-            Int32.TryParse(response.Headers["X-RateLimit-Remaining"], out remaining);
+            int.TryParse(response.Headers["X-RateLimit-Limit"], out int limit);
+            int.TryParse(response.Headers["X-RateLimit-Remaining"], out int remaining);
 
             Limit = limit;
             Remaining = remaining;
-            Reset = Double.TryParse(response.Headers["X-RateLimit-Reset"], out reset) ? EssentialsDateTime.FromUnixTimestamp(reset) : null;
+            Reset = double.TryParse(response.Headers["X-RateLimit-Reset"], out double reset) ? EssentialsDateTime.FromUnixTimestamp(reset) : null;
 
         }
 

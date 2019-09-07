@@ -77,7 +77,7 @@ namespace Skybrud.Social.GitHub.Scopes {
         /// </summary>
         /// <returns>Returns a string representation of the collection.</returns>
         public override string ToString() {
-            return String.Join(",", ToStringArray());
+            return string.Join(",", ToStringArray());
         }
 
         /// <summary>

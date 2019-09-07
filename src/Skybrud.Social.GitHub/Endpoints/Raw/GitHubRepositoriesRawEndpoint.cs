@@ -40,8 +40,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetRepository(string owner, string repository) {
-            if (String.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
-            if (String.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
+            if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
+            if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
             return Client.DoHttpGetRequest("/repos/" + owner + "/" + repository);
         }
 

@@ -1,4 +1,5 @@
 using System;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.PullRequests;
@@ -40,8 +41,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="number">The number of the pull request.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetPullRequest(string owner, string repository, int number) {
-            if (String.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
-            if (String.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
+            if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
+            if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
             return Client.DoHttpGetRequest($"/repos/{owner}/{repository}/pulls/" + number);
         }
         
@@ -52,8 +53,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="repository">The alias of the repository.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetPullRequests(string owner, string repository) {
-            if (String.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
-            if (String.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
+            if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
+            if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
             return Client.DoHttpGetRequest($"/repos/{owner}/{repository}/pulls");
         }
 
@@ -64,8 +65,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetPullRequests(GitHubGetPullRequestsOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
-            if (String.IsNullOrWhiteSpace(options.Owner)) throw new ArgumentNullException(nameof(options.Owner));
-            if (String.IsNullOrWhiteSpace(options.Repository)) throw new ArgumentNullException(nameof(options.Repository));
+            if (string.IsNullOrWhiteSpace(options.Owner)) throw new PropertyNotSetException(nameof(options.Owner));
+            if (string.IsNullOrWhiteSpace(options.Repository)) throw new PropertyNotSetException(nameof(options.Repository));
             return Client.DoHttpGetRequest($"/repos/{options.Owner}/{options.Repository}/pulls", options);
         }
 

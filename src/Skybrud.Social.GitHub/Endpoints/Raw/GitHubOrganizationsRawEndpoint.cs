@@ -39,7 +39,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="alias">The alias (login) of the organization.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetOrganization(string alias) {
-            if (String.IsNullOrWhiteSpace(alias)) throw new ArgumentNullException(nameof(alias));
+            if (string.IsNullOrWhiteSpace(alias)) throw new ArgumentNullException(nameof(alias));
             return Client.DoHttpGetRequest("/orgs/" + alias);
         }
 
@@ -75,7 +75,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         ///     <cref>https://developer.github.com/v3/orgs/#list-user-organizations</cref>
         /// </see>
         public IHttpResponse GetOrganizations(string username) {
-            if (String.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
+            if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
             return GetOrganizations(new GitHubGetUserOrganizationsOptions(username));
         }
 
@@ -89,7 +89,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </see>
         public IHttpResponse GetOrganizations(GitHubGetUserOrganizationsOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
-            if (String.IsNullOrWhiteSpace(options.Username)) throw new PropertyNotSetException(nameof(options.Username));
+            if (string.IsNullOrWhiteSpace(options.Username)) throw new PropertyNotSetException(nameof(options.Username));
             return Client.DoHttpGetRequest($"/users/{options.Username}/orgs");
         }
 

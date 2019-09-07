@@ -106,7 +106,7 @@ namespace Skybrud.Social.GitHub.Models.Issues {
         /// <summary>
         /// Gets whether a body has been specified for the issue.
         /// </summary>
-        public bool HasBody => !String.IsNullOrWhiteSpace(Body);
+        public bool HasBody => !string.IsNullOrWhiteSpace(Body);
 
         /// <summary>
         /// Gets a collection/map of URLs related to the issue.

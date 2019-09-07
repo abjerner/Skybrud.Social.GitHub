@@ -43,7 +43,7 @@ namespace Skybrud.Social.GitHub.Models.Milestones {
         /// <summary>
         /// Gets whether a description has been specified for the milestone.
         /// </summary>
-        public bool HasDescription => String.IsNullOrWhiteSpace(Description);
+        public bool HasDescription => string.IsNullOrWhiteSpace(Description);
 
         /// <summary>
         /// Gets a reference to the user who created the milestone.

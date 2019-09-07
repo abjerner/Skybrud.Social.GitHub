@@ -85,7 +85,7 @@ namespace Skybrud.Social.GitHub {
         /// </summary>
         /// <param name="accessToken">The access token.</param>
         public static GitHubService CreateFromAccessToken(string accessToken) {
-            if (String.IsNullOrWhiteSpace(accessToken)) throw new ArgumentNullException(nameof(accessToken));
+            if (string.IsNullOrWhiteSpace(accessToken)) throw new ArgumentNullException(nameof(accessToken));
             return CreateFromOAuthClient(new GitHubOAuthClient(accessToken));
         }
 
@@ -97,8 +97,8 @@ namespace Skybrud.Social.GitHub {
         /// <param name="username">The username of the user on GitHub.com</param>
         /// <param name="password">The password of the user on GitHub.com</param>
         public static GitHubService CreateFromCredentials(string username, string password) {
-            if (String.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
-            if (String.IsNullOrWhiteSpace(password)) throw new ArgumentNullException(nameof(password));
+            if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
+            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException(nameof(password));
             return CreateFromOAuthClient(new GitHubOAuthClient {
                 Credentials = new NetworkCredential(username, password)
             });

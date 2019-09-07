@@ -73,9 +73,9 @@ namespace Skybrud.Social.GitHub.Options.Commits {
         /// <returns>An instance of <see cref="IHttpQueryString"/>.</returns>
         public IHttpQueryString GetQueryString() {
             IHttpQueryString query = new HttpQueryString();
-            if (!String.IsNullOrWhiteSpace(Sha)) query.Add("sha", Sha);
-            if (!String.IsNullOrWhiteSpace(Path)) query.Add("path", Path);
-            if (!String.IsNullOrWhiteSpace(Author)) query.Add("author", Author);
+            if (!string.IsNullOrWhiteSpace(Sha)) query.Add("sha", Sha);
+            if (!string.IsNullOrWhiteSpace(Path)) query.Add("path", Path);
+            if (!string.IsNullOrWhiteSpace(Author)) query.Add("author", Author);
             if (Since != null) query.Add("since", FormatDate(Since));
             if (Until != null) query.Add("until", FormatDate(Until));
             if (Page > 0) query.Add("page", Page);

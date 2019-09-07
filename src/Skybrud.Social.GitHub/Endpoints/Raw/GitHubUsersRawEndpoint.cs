@@ -14,7 +14,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <summary>
         /// Gets a reference to the parent OAuth client.
         /// </summary>
-        public GitHubOAuthClient Client { get; private set; }
+        public GitHubOAuthClient Client { get; }
 
         #endregion
 
@@ -34,7 +34,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="username">The username (login) of the user.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetUser(string username) {
-            if (String.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
+            if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
             return Client.DoHttpGetRequest("/users/" + username);
         }
 
@@ -44,7 +44,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="username">The username (login) of the user.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetRepositories(string username) {
-            if (String.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
+            if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
             return Client.DoHttpGetRequest("/users/" + username + "/repos");
         }
 
@@ -54,7 +54,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="username">The username (login) of the user.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetOrganizations(string username) {
-            if (String.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
+            if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
             return Client.DoHttpGetRequest("/users/" + username + "/orgs");
         }
 

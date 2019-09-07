@@ -39,7 +39,7 @@ namespace Skybrud.Social.GitHub.Models.Labels {
         /// <summary>
         /// Gets whether the label has a description.
         /// </summary>
-        public bool HasDescription => !String.IsNullOrWhiteSpace(Description);
+        public bool HasDescription => !string.IsNullOrWhiteSpace(Description);
 
         /// <summary>
         /// Gets the color of the label.

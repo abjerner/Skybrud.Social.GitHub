@@ -58,7 +58,7 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         /// <summary>
         /// Gets whether a body has been specified for the pull request.
         /// </summary>
-        public bool HasBody => !String.IsNullOrWhiteSpace(Body);
+        public bool HasBody => !string.IsNullOrWhiteSpace(Body);
 
         /// <summary>
         /// Gets a timestamp for when the pull request was created.

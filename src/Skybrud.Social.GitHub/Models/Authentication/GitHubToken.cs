@@ -14,17 +14,17 @@ namespace Skybrud.Social.GitHub.Models.Authentication {
         /// <summary>
         /// Gets the access token.
         /// </summary>
-        public string AccessToken { get; private set; }
+        public string AccessToken { get; }
 
         /// <summary>
         /// Gets a collection representing the granted scope.
         /// </summary>
-        public GitHubScopeCollection Scope { get; private set; }
+        public GitHubScopeCollection Scope { get; }
 
         /// <summary>
         /// Gets the type of the access token.
         /// </summary>
-        public string TokenType { get; private set; }
+        public string TokenType { get; }
 
         #endregion
 
@@ -34,7 +34,7 @@ namespace Skybrud.Social.GitHub.Models.Authentication {
 
             GitHubScopeCollection scopes = new GitHubScopeCollection();
 
-            foreach (string scope in (query["scope"] ?? "").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)) {
+            foreach (string scope in (query["scope"] ?? string.Empty).Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)) {
                 switch (scope) {
                     case "user": scopes.Add(GitHubScopes.User); break;
                     case "user:email": scopes.Add(GitHubScopes.UserEmail); break;

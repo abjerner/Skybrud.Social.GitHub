@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Organizations {
@@ -39,7 +38,7 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         /// <summary>
         /// Gets whether the organization has a description.
         /// </summary>
-        public bool HasDescription => !String.IsNullOrWhiteSpace(Description);
+        public bool HasDescription => !string.IsNullOrWhiteSpace(Description);
 
         #endregion
 

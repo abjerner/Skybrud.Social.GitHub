@@ -38,9 +38,9 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="sha">The SHA hash of the commit.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetCommit(string owner, string repository, string sha) {
-            if (String.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
-            if (String.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-            if (String.IsNullOrWhiteSpace(sha)) throw new ArgumentNullException(nameof(sha));
+            if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
+            if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
+            if (string.IsNullOrWhiteSpace(sha)) throw new ArgumentNullException(nameof(sha));
             return Client.DoHttpGetRequest("/repos/" + owner + "/" + repository + "/commits/" + sha);
         }
 
@@ -52,8 +52,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="repository">The slug of the repository.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetCommits(string owner, string repository) {
-            if (String.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
-            if (String.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
+            if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
+            if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
             return Client.DoHttpGetRequest("/repos/" + owner + "/" + repository + "/commits");
         }
 

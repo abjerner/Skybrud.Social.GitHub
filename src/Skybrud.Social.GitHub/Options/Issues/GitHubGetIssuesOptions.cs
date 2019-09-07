@@ -72,7 +72,7 @@ namespace Skybrud.Social.GitHub.Options.Issues {
                 {"state", StringUtils.ToLower(State)}
             };
 
-            if (Labels != null && Labels.Length > 0) query.Add("labels", String.Join(",", Labels));
+            if (Labels != null && Labels.Length > 0) query.Add("labels", string.Join(",", Labels));
 
             query.Add("sort", StringUtils.ToLower(Sort));
             query.Add("direction", StringUtils.ToLower(Direction));

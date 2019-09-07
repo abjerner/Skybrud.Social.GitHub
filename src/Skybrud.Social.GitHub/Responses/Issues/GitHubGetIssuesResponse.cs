@@ -15,12 +15,12 @@ namespace Skybrud.Social.GitHub.Responses.Issues {
         /// <summary>
         /// Gets the current page number.
         /// </summary>
-        public int CurrentPage { get; private set; }
+        public int CurrentPage { get; }
 
         /// <summary>
         /// Gets the total number of pages.
         /// </summary>
-        public int TotalPages { get; private set; }
+        public int TotalPages { get; }
 
         /// <summary>
         /// Gets whether the response represents the first page.
@@ -48,7 +48,7 @@ namespace Skybrud.Social.GitHub.Responses.Issues {
             string linkHeader = response.Headers["link"];
 
             // Return now if the header wasn't present
-            if (String.IsNullOrWhiteSpace(linkHeader)) return;
+            if (string.IsNullOrWhiteSpace(linkHeader)) return;
 
             // Set default values
             CurrentPage = 1;
@@ -67,7 +67,7 @@ namespace Skybrud.Social.GitHub.Responses.Issues {
                 if (!m2.Success) continue;
                 
                 // Parse the page number
-                int page = Int32.Parse(m2.Groups[1].Value);
+                int page = int.Parse(m2.Groups[1].Value);
 
                 switch (rel) {
 

@@ -194,11 +194,11 @@ namespace Skybrud.Social.GitHub.OAuth {
         public string GetAuthorizationUrl(string state, params string[] scope) {
 
             // Some input validation
-            if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException("ClientId");
-            if (String.IsNullOrWhiteSpace(RedirectUri)) throw new PropertyNotSetException("RedirectUri");
+            if (string.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException(nameof(ClientId));
+            if (string.IsNullOrWhiteSpace(RedirectUri)) throw new PropertyNotSetException(nameof(RedirectUri));
 
             // Do we have a valid "state" ?
-            if (String.IsNullOrWhiteSpace(state)) {
+            if (string.IsNullOrWhiteSpace(state)) {
                 throw new ArgumentNullException(nameof(state), "A valid state should be specified as it is part of the security of OAuth 2.0.");
             }
 
@@ -210,8 +210,8 @@ namespace Skybrud.Social.GitHub.OAuth {
             };
 
             // Append the scope if specified
-            string scopes = scope == null ? "" : String.Join(",", scope);
-            if (!String.IsNullOrWhiteSpace(scopes)) query.Add("scope", scopes);
+            string scopes = scope == null ? "" : string.Join(",", scope);
+            if (!string.IsNullOrWhiteSpace(scopes)) query.Add("scope", scopes);
 
             // Generate the URL
             return "https://github.com/login/oauth/authorize?" + query;
@@ -225,9 +225,9 @@ namespace Skybrud.Social.GitHub.OAuth {
         public GitHubTokenResponse GetAccessTokenFromAuthorizationCode(string authorizationCode) {
 
             // Some validation
-            if (String.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException(nameof(ClientId));
-            if (String.IsNullOrWhiteSpace(ClientSecret)) throw new PropertyNotSetException(nameof(ClientId));
-            if (String.IsNullOrWhiteSpace(authorizationCode)) throw new ArgumentNullException(nameof(authorizationCode));
+            if (string.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException(nameof(ClientId));
+            if (string.IsNullOrWhiteSpace(ClientSecret)) throw new PropertyNotSetException(nameof(ClientId));
+            if (string.IsNullOrWhiteSpace(authorizationCode)) throw new ArgumentNullException(nameof(authorizationCode));
 
             IHttpPostData parameters = new HttpPostData {
                 {"client_id", ClientId},
@@ -236,7 +236,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             };
 
             // Add the redirect URI (if specified)
-            if (!String.IsNullOrWhiteSpace(RedirectUri)) parameters.Add("redirect_uri", RedirectUri);
+            if (!string.IsNullOrWhiteSpace(RedirectUri)) parameters.Add("redirect_uri", RedirectUri);
 
             // Get the response from the server
             IHttpResponse response = HttpUtils.Requests.Post("https://github.com/login/oauth/access_token", null, parameters);
@@ -259,7 +259,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             request.UserAgent = "Skybrud.Social";
             
             // Append the access token to the HTTP headers (if present)
-            if (!String.IsNullOrWhiteSpace(AccessToken)) {
+            if (!string.IsNullOrWhiteSpace(AccessToken)) {
                 request.Headers.Authorization = "token " + AccessToken;
             }
 

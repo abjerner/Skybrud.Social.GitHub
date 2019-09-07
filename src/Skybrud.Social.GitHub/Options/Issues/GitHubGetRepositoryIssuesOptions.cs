@@ -95,11 +95,11 @@ namespace Skybrud.Social.GitHub.Options.Issues {
                 {"state", StringUtils.ToLower(State)}
             };
 
-            if (!String.IsNullOrWhiteSpace(Milestone)) query.Add("milestone", Milestone);
-            if (!String.IsNullOrWhiteSpace(Assignee)) query.Add("assignee", Assignee);
-            if (!String.IsNullOrWhiteSpace(Creator)) query.Add("creator", Creator);
-            if (!String.IsNullOrWhiteSpace(Mentioned)) query.Add("mentioned", Mentioned);
-            if (Labels != null && Labels.Length > 0) query.Add("labels", String.Join(",", Labels));
+            if (!string.IsNullOrWhiteSpace(Milestone)) query.Add("milestone", Milestone);
+            if (!string.IsNullOrWhiteSpace(Assignee)) query.Add("assignee", Assignee);
+            if (!string.IsNullOrWhiteSpace(Creator)) query.Add("creator", Creator);
+            if (!string.IsNullOrWhiteSpace(Mentioned)) query.Add("mentioned", Mentioned);
+            if (Labels != null && Labels.Length > 0) query.Add("labels", string.Join(",", Labels));
 
             query.Add("sort", StringUtils.ToLower(Sort));
             query.Add("direction", StringUtils.ToLower(Direction));

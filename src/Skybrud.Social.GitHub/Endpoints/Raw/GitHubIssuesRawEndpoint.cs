@@ -57,8 +57,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="repository">The alias of the repository.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetIssues(string owner, string repository) {
-            if (String.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
-            if (String.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
+            if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
+            if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
             return Client.DoHttpGetRequest($"/repos/{owner}/{repository}/issues");
         }
 
@@ -68,8 +68,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="options">The options for the request to the API.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetIssues(GitHubGetRepositoryIssuesOptions options) {
-            if (String.IsNullOrWhiteSpace(options.Owner)) throw new ArgumentNullException(nameof(options.Owner));
-            if (String.IsNullOrWhiteSpace(options.Repository)) throw new ArgumentNullException(nameof(options.Repository));
+            if (string.IsNullOrWhiteSpace(options.Owner)) throw new ArgumentNullException(nameof(options.Owner));
+            if (string.IsNullOrWhiteSpace(options.Repository)) throw new PropertyNotSetException(nameof(options.Repository));
             return Client.DoHttpGetRequest($"/repos/{options.Owner}/{options.Repository}/issues", options);
         }
 
@@ -81,10 +81,10 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         public IHttpResponse AddComment(GitHubAddIssueCommentOptions options) {
 
             if (options == null) throw new ArgumentNullException(nameof(options));
-            if (String.IsNullOrWhiteSpace(options.Owner)) throw new PropertyNotSetException(nameof(options.Owner));
-            if (String.IsNullOrWhiteSpace(options.Repository)) throw new PropertyNotSetException(nameof(options.Repository));
+            if (string.IsNullOrWhiteSpace(options.Owner)) throw new PropertyNotSetException(nameof(options.Owner));
+            if (string.IsNullOrWhiteSpace(options.Repository)) throw new PropertyNotSetException(nameof(options.Repository));
             if (options.Number == 0) throw new PropertyNotSetException(nameof(options.Number));
-            if (String.IsNullOrWhiteSpace(options.Body)) throw new PropertyNotSetException(nameof(options.Body));
+            if (string.IsNullOrWhiteSpace(options.Body)) throw new PropertyNotSetException(nameof(options.Body));
 
             // Generate the payload for the request body
             JObject body = new JObject {

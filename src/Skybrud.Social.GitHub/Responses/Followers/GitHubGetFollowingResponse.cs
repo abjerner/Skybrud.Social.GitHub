@@ -15,7 +15,7 @@ namespace Skybrud.Social.GitHub.Responses.Followers {
         /// <summary>
         /// Gets whether the authenticated user is following the specified user.
         /// </summary>
-        public bool IsFollowing { get; private set; }
+        public bool IsFollowing { get; }
 
         #endregion
 

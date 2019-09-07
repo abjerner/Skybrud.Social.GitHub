@@ -1,7 +1,6 @@
 using Skybrud.Social.GitHub.Endpoints.Raw;
 using Skybrud.Social.GitHub.Options.Commits;
 using Skybrud.Social.GitHub.Responses.Commits;
-using Skybrud.Social.GitHub.Responses.Repositories;
 
 namespace Skybrud.Social.GitHub.Endpoints {
 

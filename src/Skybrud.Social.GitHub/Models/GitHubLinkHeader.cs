@@ -70,7 +70,7 @@ namespace Skybrud.Social.GitHub.Models {
         public static GitHubLinkHeader Parse(string value) {
 
             // Return now if the header wasn't present
-            if (String.IsNullOrWhiteSpace(value)) return null;
+            if (string.IsNullOrWhiteSpace(value)) return null;
 
             // Initialize a new instance with default values
             GitHubLinkHeader link = new GitHubLinkHeader();
@@ -88,7 +88,7 @@ namespace Skybrud.Social.GitHub.Models {
                 if (!m2.Success) continue;
 
                 // Parse the page number
-                int page = Int32.Parse(m2.Groups[1].Value);
+                int page = int.Parse(m2.Groups[1].Value);
 
                 switch (rel) {
 
