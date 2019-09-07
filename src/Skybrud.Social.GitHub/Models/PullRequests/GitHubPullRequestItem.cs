@@ -63,17 +63,17 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         /// <summary>
         /// Gets a timestamp for when the pull request was created.
         /// </summary>
-        public EssentialsDateTime CreatedAt { get; }
+        public EssentialsTime CreatedAt { get; }
 
         /// <summary>
         /// Gets a timestamp for when the pull request was last updated.
         /// </summary>
-        public EssentialsDateTime UpdatedAt { get; }
+        public EssentialsTime UpdatedAt { get; }
 
         /// <summary>
         /// Gets a timestamp for when the pull request was closed, or <c>null</c> if the pull request hasn't yet been closed.
         /// </summary>
-        public EssentialsDateTime ClosedAt { get; }
+        public EssentialsTime ClosedAt { get; }
 
         /// <summary>
         /// Gets whether the pull requsts has been closed.
@@ -83,7 +83,7 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         /// <summary>
         /// Gets a timestamp for when the pull request was merged, or <c>null</c> if the pull request hasn't yet been merged.
         /// </summary>
-        public EssentialsDateTime MergedAt { get; }
+        public EssentialsTime MergedAt { get; }
 
         /// <summary>
         /// Gets whether the pull requsts has been merged.
@@ -153,10 +153,10 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
             Title = obj.GetString("title");
             User = obj.GetObject("user", GitHubUserItem.Parse);
             Body = obj.GetString("body");
-            CreatedAt = obj.GetString("created_at", EssentialsDateTime.Parse);
-            UpdatedAt = obj.GetString("updated_at", EssentialsDateTime.Parse);
-            ClosedAt = obj.GetString("closed_at", EssentialsDateTime.Parse);
-            MergedAt = obj.GetString("merged_at", EssentialsDateTime.Parse);
+            CreatedAt = obj.GetString("created_at", EssentialsTime.Parse);
+            UpdatedAt = obj.GetString("updated_at", EssentialsTime.Parse);
+            ClosedAt = obj.GetString("closed_at", EssentialsTime.Parse);
+            MergedAt = obj.GetString("merged_at", EssentialsTime.Parse);
             MergeCommitSha = obj.GetString("merge_commit_sha");
             Assignee = obj.GetObject("assignee", GitHubUserItem.Parse);
             Assignees = obj.GetArrayItems("assignees", GitHubUserItem.Parse);

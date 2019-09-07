@@ -68,17 +68,17 @@ namespace Skybrud.Social.GitHub.Models.Milestones {
         /// <summary>
         /// Gets a timestamp for when the issue was created.
         /// </summary>
-        public EssentialsDateTime CreatedAt { get; }
+        public EssentialsTime CreatedAt { get; }
 
         /// <summary>
         /// Gets a timestamp for when the issue was last updated.
         /// </summary>
-        public EssentialsDateTime UpdatedAt { get; }
+        public EssentialsTime UpdatedAt { get; }
 
         /// <summary>
         /// Gets a timestamp for when the milestone is due, or <c>null</c> if the milestone doesn't have a due date.
         /// </summary>
-        public EssentialsDateTime DueOn { get; }
+        public EssentialsTime DueOn { get; }
 
         /// <summary>
         /// Gets whether a due date has been specified for the milestone.
@@ -89,7 +89,7 @@ namespace Skybrud.Social.GitHub.Models.Milestones {
         /// Gets a timestamp for when the milestone was closed. If <see cref="State"/> is
         /// <see cref="GitHubIssueState.Open"/>, this property will return <c>null</c>.
         /// </summary>
-        public EssentialsDateTime ClosedAt { get; }
+        public EssentialsTime ClosedAt { get; }
 
         #endregion
 
@@ -104,10 +104,10 @@ namespace Skybrud.Social.GitHub.Models.Milestones {
             OpenIssues = obj.GetInt32("open_issues");
             ClosedIssues = obj.GetInt32("closed_issues");
             State = obj.GetEnum<GitHubIssueState>("state");
-            CreatedAt = obj.GetString("created_at", EssentialsDateTime.Parse);
-            UpdatedAt = obj.GetString("updated_at", EssentialsDateTime.Parse);
-            DueOn = obj.GetString("due_on", EssentialsDateTime.Parse);
-            ClosedAt = obj.GetString("closed_at", EssentialsDateTime.Parse);
+            CreatedAt = obj.GetString("created_at", EssentialsTime.Parse);
+            UpdatedAt = obj.GetString("updated_at", EssentialsTime.Parse);
+            DueOn = obj.GetString("due_on", EssentialsTime.Parse);
+            ClosedAt = obj.GetString("closed_at", EssentialsTime.Parse);
         }
 
         #endregion

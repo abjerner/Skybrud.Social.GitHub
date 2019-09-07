@@ -45,13 +45,13 @@ namespace Skybrud.Social.GitHub.Options.Commits {
         /// Optional: Gets or sets the timestamp the returned commits should match. Only commits after this date will
         /// be returned.
         /// </summary>
-        public EssentialsDateTime Since { get; set; }
+        public EssentialsTime Since { get; set; }
 
         /// <summary>
         /// Optional: Gets or sets the timestamp the returned commits should match. Only commits before this date will
         /// be returned.
         /// </summary>
-        public EssentialsDateTime Until { get; set; }
+        public EssentialsTime Until { get; set; }
 
         /// <summary>
         /// Gets or sets the page to be returned.
@@ -76,8 +76,8 @@ namespace Skybrud.Social.GitHub.Options.Commits {
             if (!string.IsNullOrWhiteSpace(Sha)) query.Add("sha", Sha);
             if (!string.IsNullOrWhiteSpace(Path)) query.Add("path", Path);
             if (!string.IsNullOrWhiteSpace(Author)) query.Add("author", Author);
-            if (Since != null) query.Add("since", FormatDate(Since));
-            if (Until != null) query.Add("until", FormatDate(Until));
+            if (Since != null) query.Add("since", Since.Iso8601);
+            if (Until != null) query.Add("until", Until.Iso8601);
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
             return query;

@@ -45,7 +45,7 @@ namespace Skybrud.Social.GitHub.Options.Issues {
         /// <summary>
         /// Only issues updated at or after this time are returned. Default is <code>null</code>.
         /// </summary>
-        public EssentialsDateTime Since { get; set; }
+        public EssentialsTime Since { get; set; }
 
         /// <summary>
         /// Gets or sets the page to be returned.
@@ -77,7 +77,7 @@ namespace Skybrud.Social.GitHub.Options.Issues {
             query.Add("sort", StringUtils.ToLower(Sort));
             query.Add("direction", StringUtils.ToLower(Direction));
             
-            if (Since != null) query.Add("since", Since.ToString(GitHubConstants.DateTimeFormat));
+            if (Since != null) query.Add("since", Since.Iso8601);
 
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);

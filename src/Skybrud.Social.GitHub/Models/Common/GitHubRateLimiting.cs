@@ -25,7 +25,7 @@ namespace Skybrud.Social.GitHub.Models.Common {
         /// <summary>
         /// Gets the timestamp of the next rate limit timeframe.
         /// </summary>
-        public EssentialsDateTime Reset { get; }
+        public EssentialsTime Reset { get; }
 
         #endregion
 
@@ -38,7 +38,7 @@ namespace Skybrud.Social.GitHub.Models.Common {
 
             Limit = limit;
             Remaining = remaining;
-            Reset = double.TryParse(response.Headers["X-RateLimit-Reset"], out double reset) ? EssentialsDateTime.FromUnixTimestamp(reset) : null;
+            Reset = double.TryParse(response.Headers["X-RateLimit-Reset"], out double reset) ? EssentialsTime.FromUnixTimestamp(reset) : null;
 
         }
 

@@ -80,18 +80,18 @@ namespace Skybrud.Social.GitHub.Models.Issues {
         /// <summary>
         /// Gets a timestamp for when the issue was created.
         /// </summary>
-        public EssentialsDateTime CreatedAt { get; }
+        public EssentialsTime CreatedAt { get; }
 
         /// <summary>
         /// Gets a timestamp for when the issue was last updated.
         /// </summary>
-        public EssentialsDateTime UpdatedAt { get; }
+        public EssentialsTime UpdatedAt { get; }
 
         /// <summary>
         /// Gets a timestamp for when the issue was closed. If <see cref="State"/> is
         /// <see cref="GitHubIssueState.Open"/>, this property will return <code>null</code>.
         /// </summary>
-        public EssentialsDateTime ClosedAt { get; }
+        public EssentialsTime ClosedAt { get; }
 
         /// <summary>
         /// Gets a reference to the repository of the issue.
@@ -133,9 +133,9 @@ namespace Skybrud.Social.GitHub.Models.Issues {
             Assignees = obj.GetArrayItems("assignees", GitHubUserItem.Parse);
             Milestone = obj.GetObject("milestone", GitHubMilestone.Parse);
             Comments = obj.GetInt32("comments");
-            CreatedAt = obj.GetString("created_at", EssentialsDateTime.Parse);
-            UpdatedAt = obj.GetString("updated_at", EssentialsDateTime.Parse);
-            ClosedAt = obj.GetString("closed_at", EssentialsDateTime.Parse);
+            CreatedAt = obj.GetString("created_at", EssentialsTime.Parse);
+            UpdatedAt = obj.GetString("updated_at", EssentialsTime.Parse);
+            ClosedAt = obj.GetString("closed_at", EssentialsTime.Parse);
             Repository = obj.GetObject("repository", GitHubRepositoryItem.Parse);
             Body = obj.GetString("body");
             Urls = GitHubIssueUrlCollection.Parse(obj);

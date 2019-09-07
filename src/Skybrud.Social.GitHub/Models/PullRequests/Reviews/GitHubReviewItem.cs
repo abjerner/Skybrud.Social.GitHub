@@ -33,7 +33,7 @@ namespace Skybrud.Social.GitHub.Models.PullRequests.Reviews {
         /// <summary>
         /// Gets a timestamp for when the review was submitted.
         /// </summary>
-        public EssentialsDateTime SubmittedAt { get; }
+        public EssentialsTime SubmittedAt { get; }
 
         // TODO: Add support for the "commit_id" property
 
@@ -55,7 +55,7 @@ namespace Skybrud.Social.GitHub.Models.PullRequests.Reviews {
             PullRequestUrl = obj.GetString("pull_request_url");
             // TODO: Add support for the "author_association" property
             // TODO: Add support for the "_links" property
-            SubmittedAt = obj.GetString("submitted_at", EssentialsDateTime.Parse);
+            SubmittedAt = obj.GetString("submitted_at", EssentialsTime.Parse);
             // TODO: Add support for the "commit_id" property
         }
 
