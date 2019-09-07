@@ -1,6 +1,6 @@
 ﻿using System;
+using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Issues;
-using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Responses.Issues {
 
@@ -8,7 +8,7 @@ namespace Skybrud.Social.GitHub.Responses.Issues {
 
         #region Constructors
 
-        private GitHubAddIssueCommentResponse(SocialHttpResponse response) : base(response) {
+        private GitHubAddIssueCommentResponse(IHttpResponse response) : base(response) {
 
             // Validate the response
             ValidateResponse(response);
@@ -25,9 +25,9 @@ namespace Skybrud.Social.GitHub.Responses.Issues {
         /// <summary>
         /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubAddIssueCommentResponse"/>.
         /// </summary>
-        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
+        /// <param name="response">The instance of <see cref="IHttpResponse"/> representing the raw response.</param>
         /// <returns>An instance of <see cref="GitHubAddIssueCommentResponse"/> representing the response.</returns>
-        public static GitHubAddIssueCommentResponse ParseResponse(SocialHttpResponse response) {
+        public static GitHubAddIssueCommentResponse ParseResponse(IHttpResponse response) {
             if (response == null) throw new ArgumentNullException(nameof(response));
             return new GitHubAddIssueCommentResponse(response);
         }

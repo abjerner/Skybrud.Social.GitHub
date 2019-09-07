@@ -1,8 +1,6 @@
 ﻿using System.Net;
-using Newtonsoft.Json.Linq;
+using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Exceptions;
-using Skybrud.Social.Http;
-using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Social.GitHub.Models.Common;
 
 namespace Skybrud.Social.GitHub.Responses.Followers {
@@ -23,7 +21,7 @@ namespace Skybrud.Social.GitHub.Responses.Followers {
 
         #region Constructor
 
-        private GitHubGetFollowingResponse(SocialHttpResponse response) : base(response) {
+        private GitHubGetFollowingResponse(IHttpResponse response) : base(response) {
 
             switch (response.StatusCode) {
 
@@ -52,9 +50,9 @@ namespace Skybrud.Social.GitHub.Responses.Followers {
         /// <summary>
         /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubGetFollowingResponse"/>.
         /// </summary>
-        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
+        /// <param name="response">The instance of <see cref="IHttpResponse"/> representing the raw response.</param>
         /// <returns>An instance of <see cref="GitHubGetFollowingResponse"/> representing the response.</returns>
-        public static GitHubGetFollowingResponse ParseResponse(SocialHttpResponse response) {
+        public static GitHubGetFollowingResponse ParseResponse(IHttpResponse response) {
             return response == null ? null : new GitHubGetFollowingResponse(response);
         }
 

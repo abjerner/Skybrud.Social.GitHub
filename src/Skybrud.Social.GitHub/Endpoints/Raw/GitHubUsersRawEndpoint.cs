@@ -1,6 +1,6 @@
 using System;
+using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
-using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Endpoints.Raw {
 
@@ -32,8 +32,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// Gets information about the user with the specified <paramref name="username"/>.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse GetUser(string username) {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetUser(string username) {
             if (String.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
             return Client.DoHttpGetRequest("/users/" + username);
         }
@@ -42,8 +42,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// Gets a list of repositories of the user with the specified <paramref name="username"/>.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse GetRepositories(string username) {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetRepositories(string username) {
             if (String.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
             return Client.DoHttpGetRequest("/users/" + username + "/repos");
         }
@@ -52,8 +52,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// Gets a list of organizations the user with the specified <paramref name="username"/> is a member of.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse GetOrganizations(string username) {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetOrganizations(string username) {
             if (String.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
             return Client.DoHttpGetRequest("/users/" + username + "/orgs");
         }

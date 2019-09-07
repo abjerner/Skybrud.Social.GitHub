@@ -1,11 +1,12 @@
 using System;
 using System.Net;
 using Skybrud.Essentials.Common;
+using Skybrud.Essentials.Http;
+using Skybrud.Essentials.Http.Client;
+using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Endpoints.Raw;
 using Skybrud.Social.GitHub.Responses.Authentication;
 using Skybrud.Social.GitHub.Scopes;
-using Skybrud.Social.Http;
-using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.GitHub.OAuth {
 
@@ -13,7 +14,7 @@ namespace Skybrud.Social.GitHub.OAuth {
     /// Class for handling the raw communication with the GitHub API as well as any OAuth 2.0
     /// communication/authentication.
     /// </summary>
-    public class GitHubOAuthClient : SocialHttpClient {
+    public class GitHubOAuthClient : HttpClient {
 
         #region Properties
 
@@ -202,7 +203,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             }
 
             // Initialize the query string
-            IHttpQueryString query = new SocialHttpQueryString {
+            IHttpQueryString query = new HttpQueryString {
                 {"client_id", ClientId },
                 {"redirect_uri", RedirectUri},
                 {"state", state}
@@ -228,7 +229,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             if (String.IsNullOrWhiteSpace(ClientSecret)) throw new PropertyNotSetException(nameof(ClientId));
             if (String.IsNullOrWhiteSpace(authorizationCode)) throw new ArgumentNullException(nameof(authorizationCode));
 
-            IHttpPostData parameters = new SocialHttpPostData {
+            IHttpPostData parameters = new HttpPostData {
                 {"client_id", ClientId},
                 {"client_secret", ClientSecret},
                 {"code", authorizationCode }
@@ -238,7 +239,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             if (!String.IsNullOrWhiteSpace(RedirectUri)) parameters.Add("redirect_uri", RedirectUri);
 
             // Get the response from the server
-            SocialHttpResponse response = SocialUtils.Http.DoHttpPostRequest("https://github.com/login/oauth/access_token", null, parameters);
+            IHttpResponse response = HttpUtils.Requests.Post("https://github.com/login/oauth/access_token", null, parameters);
             
             // Return the response
             return GitHubTokenResponse.ParseResponse(response);
@@ -248,8 +249,8 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// <summary>
         /// Virtual method that can be used for configuring a request.
         /// </summary>
-        /// <param name="request">The instance of <see cref="SocialHttpRequest"/> representing the request.</param>
-        protected override void PrepareHttpRequest(SocialHttpRequest request) {
+        /// <param name="request">The instance of <see cref="IHttpRequest"/> representing the request.</param>
+        protected override void PrepareHttpRequest(IHttpRequest request) {
 
             // Append scheme and host if not already present
             if (request.Url.StartsWith("/")) request.Url = "https://api.github.com" + request.Url;

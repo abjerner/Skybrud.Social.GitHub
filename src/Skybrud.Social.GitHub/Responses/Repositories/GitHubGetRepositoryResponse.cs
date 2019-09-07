@@ -1,6 +1,6 @@
 ﻿using System;
+using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
-using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Responses.Repositories {
 
@@ -11,7 +11,7 @@ namespace Skybrud.Social.GitHub.Responses.Repositories {
 
         #region Constructors
 
-        private GitHubGetRepositoryResponse(SocialHttpResponse response) : base(response) {
+        private GitHubGetRepositoryResponse(IHttpResponse response) : base(response) {
 
             // Validate the response
             ValidateResponse(response);
@@ -28,9 +28,9 @@ namespace Skybrud.Social.GitHub.Responses.Repositories {
         /// <summary>
         /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubGetRepositoryResponse"/>.
         /// </summary>
-        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
+        /// <param name="response">The instance of <see cref="IHttpResponse"/> representing the raw response.</param>
         /// <returns>An instance of <see cref="GitHubGetRepositoryResponse"/> representing the response.</returns>
-        public static GitHubGetRepositoryResponse ParseResponse(SocialHttpResponse response) {
+        public static GitHubGetRepositoryResponse ParseResponse(IHttpResponse response) {
             if (response == null) throw new ArgumentNullException(nameof(response));
             return new GitHubGetRepositoryResponse(response);
         }

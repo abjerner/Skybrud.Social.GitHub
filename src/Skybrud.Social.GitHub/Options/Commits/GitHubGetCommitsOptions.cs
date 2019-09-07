@@ -1,7 +1,7 @@
 using System;
+using Skybrud.Essentials.Http.Collections;
+using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Time;
-using Skybrud.Social.Http;
-using Skybrud.Social.Interfaces.Http;
 using static Skybrud.Social.GitHub.GitHubUtils;
 
 namespace Skybrud.Social.GitHub.Options.Commits {
@@ -72,7 +72,7 @@ namespace Skybrud.Social.GitHub.Options.Commits {
         /// </summary>
         /// <returns>An instance of <see cref="IHttpQueryString"/>.</returns>
         public IHttpQueryString GetQueryString() {
-            SocialHttpQueryString query = new SocialHttpQueryString();
+            IHttpQueryString query = new HttpQueryString();
             if (!String.IsNullOrWhiteSpace(Sha)) query.Add("sha", Sha);
             if (!String.IsNullOrWhiteSpace(Path)) query.Add("path", Path);
             if (!String.IsNullOrWhiteSpace(Author)) query.Add("author", Author);

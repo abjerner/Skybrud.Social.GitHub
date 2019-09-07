@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Issues;
-using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Responses.Issues {
 
@@ -36,7 +36,7 @@ namespace Skybrud.Social.GitHub.Responses.Issues {
 
         #region Constructors
 
-        private GitHubGetIssuesResponse(SocialHttpResponse response) : base(response) {
+        private GitHubGetIssuesResponse(IHttpResponse response) : base(response) {
 
             // Validate the response
             ValidateResponse(response);
@@ -94,9 +94,9 @@ namespace Skybrud.Social.GitHub.Responses.Issues {
         /// <summary>
         /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubGetIssuesResponse"/>.
         /// </summary>
-        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
+        /// <param name="response">The instance of <see cref="IHttpResponse"/> representing the raw response.</param>
         /// <returns>An instance of <see cref="GitHubGetIssuesResponse"/> representing the response.</returns>
-        public static GitHubGetIssuesResponse ParseResponse(SocialHttpResponse response) {
+        public static GitHubGetIssuesResponse ParseResponse(IHttpResponse response) {
             if (response == null) throw new ArgumentNullException(nameof(response));
             return new GitHubGetIssuesResponse(response);
         }

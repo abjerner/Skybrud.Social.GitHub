@@ -1,9 +1,9 @@
 using System;
+using Skybrud.Essentials.Http.Collections;
+using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Strings;
 using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Constants;
-using Skybrud.Social.Http;
-using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.GitHub.Options.Issues {
     
@@ -67,7 +67,7 @@ namespace Skybrud.Social.GitHub.Options.Issues {
         /// <returns>An instance of <see cref="IHttpQueryString"/>.</returns>
         public IHttpQueryString GetQueryString() {
 
-            IHttpQueryString query = new SocialHttpQueryString {
+            IHttpQueryString query = new HttpQueryString {
                 {"filter", StringUtils.ToLower(Filter)},
                 {"state", StringUtils.ToLower(State)}
             };

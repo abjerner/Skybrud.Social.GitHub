@@ -1,10 +1,10 @@
 using System;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
+using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Issues;
 using Skybrud.Social.GitHub.Options.Issues.Comments;
-using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Endpoints.Raw {
 
@@ -35,8 +35,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <summary>
         /// Gets a list of issues assigned to the authenticated user.
         /// </summary>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse GetIssues() {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetIssues() {
             return Client.DoHttpGetRequest("/issues");
         }
 
@@ -44,8 +44,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// Gets a list of issues assigned to the authenticated user.
         /// </summary>
         /// <param name="options">The options for the call to the API.</param>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse GetIssues(GitHubGetIssuesOptions options) {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetIssues(GitHubGetIssuesOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
             return Client.DoHttpGetRequest("/issues", options);
         }
@@ -55,8 +55,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <param name="owner">The alias of the parent user or organization.</param>
         /// <param name="repository">The alias of the repository.</param>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse GetIssues(string owner, string repository) {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetIssues(string owner, string repository) {
             if (String.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (String.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
             return Client.DoHttpGetRequest($"/repos/{owner}/{repository}/issues");
@@ -66,8 +66,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// Gets a list of issues for the repository matching the specified <paramref name="options"/>.
         /// </summary>
         /// <param name="options">The options for the request to the API.</param>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse GetIssues(GitHubGetRepositoryIssuesOptions options) {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetIssues(GitHubGetRepositoryIssuesOptions options) {
             if (String.IsNullOrWhiteSpace(options.Owner)) throw new ArgumentNullException(nameof(options.Owner));
             if (String.IsNullOrWhiteSpace(options.Repository)) throw new ArgumentNullException(nameof(options.Repository));
             return Client.DoHttpGetRequest($"/repos/{options.Owner}/{options.Repository}/issues", options);
@@ -77,8 +77,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// Adds a new comment to the issue matching the specified <paramref name="options"/>.
         /// </summary>
         /// <param name="options">The options for the request.</param>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse AddComment(GitHubAddIssueCommentOptions options) {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse AddComment(GitHubAddIssueCommentOptions options) {
 
             if (options == null) throw new ArgumentNullException(nameof(options));
             if (String.IsNullOrWhiteSpace(options.Owner)) throw new PropertyNotSetException(nameof(options.Owner));
@@ -102,9 +102,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="owner">The username (login) of the owner of the repository.</param>
         /// <param name="repository">The slug of the repository.</param>
         /// <param name="number">The number of the issue to which the comment should be added.</param>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse GetEvents(string owner, string repository, int number)
-        {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetEvents(string owner, string repository, int number) {
             return null;
         }
 

@@ -1,6 +1,6 @@
 using System.Net;
+using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Common;
-using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Exceptions {
 
@@ -14,7 +14,7 @@ namespace Skybrud.Social.GitHub.Exceptions {
         /// <summary>
         /// Gets a reference to the raw response.
         /// </summary>
-        public SocialHttpResponse Response { get; }
+        public IHttpResponse Response { get; }
 
         /// <summary>
         /// Gets the status code of the response.
@@ -34,7 +34,7 @@ namespace Skybrud.Social.GitHub.Exceptions {
         /// Initializes a new exception based on the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The raw response of the exception.</param>
-        public GitHubHttpException(SocialHttpResponse response) : base("Invalid response received from the GitHub API (Status: " + (int) response.StatusCode + ")") {
+        public GitHubHttpException(IHttpResponse response) : base("Invalid response received from the GitHub API (Status: " + (int) response.StatusCode + ")") {
             Response = response;
         }
 
@@ -43,7 +43,7 @@ namespace Skybrud.Social.GitHub.Exceptions {
         /// </summary>
         /// <param name="response">The raw response of the exception.</param>
         /// <param name="message">The message of the exception.</param>
-        public GitHubHttpException(SocialHttpResponse response, string message) : base(message) {
+        public GitHubHttpException(IHttpResponse response, string message) : base(message) {
             Response = response;
         }
 
@@ -52,7 +52,7 @@ namespace Skybrud.Social.GitHub.Exceptions {
         /// </summary>
         /// <param name="response">The raw response of the exception.</param>
         /// <param name="error">The error information from the response.</param>
-        public GitHubHttpException(SocialHttpResponse response, GitHubError error) : base("Invalid response received from the GitHub API (Status: " + (int)response.StatusCode + ")") {
+        public GitHubHttpException(IHttpResponse response, GitHubError error) : base("Invalid response received from the GitHub API (Status: " + (int)response.StatusCode + ")") {
             Response = response;
             Error = error;
         }

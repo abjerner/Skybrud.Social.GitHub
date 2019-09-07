@@ -1,9 +1,7 @@
-﻿using System;
-using System.Net;
-using Newtonsoft.Json.Linq;
+﻿using System.Net;
+using Skybrud.Essentials.Http;
+using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Exceptions;
-using Skybrud.Social.Http;
-using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Social.GitHub.Models.Common;
 
 namespace Skybrud.Social.GitHub.Responses {
@@ -11,7 +9,7 @@ namespace Skybrud.Social.GitHub.Responses {
     /// <summary>
     /// Class representing a response from the GitHub API.
     /// </summary>
-    public abstract class GitHubResponse : SocialResponse {
+    public abstract class GitHubResponse : HttpResponseBase {
 
         #region Properties
 
@@ -33,7 +31,7 @@ namespace Skybrud.Social.GitHub.Responses {
         /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The raw response the instance should be based on.</param>
-        protected GitHubResponse(SocialHttpResponse response) : base(response) {
+        protected GitHubResponse(IHttpResponse response) : base(response) {
             if (response.Headers["X-RateLimit-Limit"] != null) RateLimiting = GitHubRateLimiting.GetFromResponse(response);
         }
 
@@ -45,11 +43,11 @@ namespace Skybrud.Social.GitHub.Responses {
         /// Validates the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The response to be validated.</param>
-        public static void ValidateResponse(SocialHttpResponse response) {
+        public static void ValidateResponse(IHttpResponse response) {
 
             // If an error occurs during authorization, the error code will still be "OK"
             if (response.ContentType.StartsWith("application/x-www-form-urlencoded") && response.Body.StartsWith("error=")) {
-                SocialHttpQueryString body = SocialHttpQueryString.ParseQueryString(response.Body, true);
+                IHttpQueryString body = HttpQueryString.ParseQueryString(response.Body, true);
                 throw new GitHubException(body.GetString("error_description"));
             }
 
@@ -89,7 +87,7 @@ namespace Skybrud.Social.GitHub.Responses {
         /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The raw response the instance should be based on.</param>
-        protected GitHubResponse(SocialHttpResponse response) : base(response) { }
+        protected GitHubResponse(IHttpResponse response) : base(response) { }
 
         #endregion
 

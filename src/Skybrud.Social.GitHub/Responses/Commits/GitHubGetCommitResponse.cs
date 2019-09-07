@@ -1,6 +1,6 @@
 ﻿using System;
+using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Commits;
-using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Responses.Commits {
 
@@ -11,7 +11,7 @@ namespace Skybrud.Social.GitHub.Responses.Commits {
 
         #region Constructors
 
-        private GitHubGetCommitResponse(SocialHttpResponse response) : base(response) {
+        private GitHubGetCommitResponse(IHttpResponse response) : base(response) {
 
             // Validate the response
             ValidateResponse(response);
@@ -28,9 +28,9 @@ namespace Skybrud.Social.GitHub.Responses.Commits {
         /// <summary>
         /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubGetCommitResponse"/>.
         /// </summary>
-        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
+        /// <param name="response">The instance of <see cref="IHttpResponse"/> representing the raw response.</param>
         /// <returns>An instance of <see cref="GitHubGetCommitResponse"/> representing the response.</returns>
-        public static GitHubGetCommitResponse ParseResponse(SocialHttpResponse response) {
+        public static GitHubGetCommitResponse ParseResponse(IHttpResponse response) {
             if (response == null) throw new ArgumentNullException(nameof(response));
             return new GitHubGetCommitResponse(response);
         }

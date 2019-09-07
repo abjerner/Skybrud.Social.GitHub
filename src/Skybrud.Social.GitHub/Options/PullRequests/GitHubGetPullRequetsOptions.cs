@@ -1,8 +1,8 @@
-﻿using Skybrud.Essentials.Strings.Extensions;
+﻿using Skybrud.Essentials.Http.Collections;
+using Skybrud.Essentials.Http.Options;
+using Skybrud.Essentials.Strings.Extensions;
 using Skybrud.Social.GitHub.Options.Issues;
 using Skybrud.Social.GitHub.Options.Repositories;
-using Skybrud.Social.Http;
-using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.GitHub.Options.PullRequests {
 
@@ -61,7 +61,7 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
         /// <returns>An instance of <see cref="IHttpQueryString"/>.</returns>
         public IHttpQueryString GetQueryString() {
 
-            IHttpQueryString query = new SocialHttpQueryString {
+            IHttpQueryString query = new HttpQueryString {
                 {"state", State.ToKebabCase()}
             };
 

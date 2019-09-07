@@ -1,6 +1,6 @@
 ﻿using System;
+using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Emails;
-using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Responses.Emails {
 
@@ -11,7 +11,7 @@ namespace Skybrud.Social.GitHub.Responses.Emails {
 
         #region Constructor
 
-        private GitHubGetEmailsResponse(SocialHttpResponse response) : base(response) {
+        private GitHubGetEmailsResponse(IHttpResponse response) : base(response) {
 
             // Validate the response
             ValidateResponse(response);
@@ -28,9 +28,9 @@ namespace Skybrud.Social.GitHub.Responses.Emails {
         /// <summary>
         /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubGetEmailsResponse"/>.
         /// </summary>
-        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
+        /// <param name="response">The instance of <see cref="IHttpResponse"/> representing the raw response.</param>
         /// <returns>An instance of <see cref="GitHubGetEmailsResponse"/> representing the response.</returns>
-        public static GitHubGetEmailsResponse ParseResponse(SocialHttpResponse response) {
+        public static GitHubGetEmailsResponse ParseResponse(IHttpResponse response) {
             if (response == null) throw new ArgumentNullException(nameof(response));
             return new GitHubGetEmailsResponse(response);
         }

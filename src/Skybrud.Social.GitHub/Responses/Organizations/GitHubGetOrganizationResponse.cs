@@ -1,6 +1,6 @@
 ﻿using System;
+using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Organizations;
-using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Responses.Organizations {
 
@@ -11,7 +11,7 @@ namespace Skybrud.Social.GitHub.Responses.Organizations {
 
         #region Constructors
 
-        private GitHubGetOrganizationResponse(SocialHttpResponse response) : base(response) {
+        private GitHubGetOrganizationResponse(IHttpResponse response) : base(response) {
 
             // Validate the response
             ValidateResponse(response);
@@ -28,9 +28,9 @@ namespace Skybrud.Social.GitHub.Responses.Organizations {
         /// <summary>
         /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubGetOrganizationResponse"/>.
         /// </summary>
-        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
+        /// <param name="response">The instance of <see cref="IHttpResponse"/> representing the raw response.</param>
         /// <returns>An instance of <see cref="GitHubGetOrganizationResponse"/> representing the response.</returns>
-        public static GitHubGetOrganizationResponse ParseResponse(SocialHttpResponse response) {
+        public static GitHubGetOrganizationResponse ParseResponse(IHttpResponse response) {
             if (response == null) throw new ArgumentNullException(nameof(response));
             return new GitHubGetOrganizationResponse(response);
         }

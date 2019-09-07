@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using Skybrud.Social.Http;
+using Skybrud.Essentials.Http;
 
 namespace Skybrud.Social.GitHub.Models {
 
@@ -57,7 +57,7 @@ namespace Skybrud.Social.GitHub.Models {
         /// </summary>
         /// <param name="response">The response.</param>
         /// <returns>An instance of <see cref="GitHubLinkHeader"/>.</returns>
-        public static GitHubLinkHeader Parse(SocialHttpResponse response) {
+        public static GitHubLinkHeader Parse(IHttpResponse response) {
             if (response == null) throw new ArgumentNullException(nameof(response));
             return Parse(response.Headers["Link"]);
         }

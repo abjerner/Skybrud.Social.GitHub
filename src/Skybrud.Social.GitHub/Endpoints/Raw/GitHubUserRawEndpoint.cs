@@ -1,5 +1,5 @@
+using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
-using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Endpoints.Raw {
 
@@ -30,32 +30,32 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <summary>
         /// Gets information about the authenticated user.
         /// </summary>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse GetUser() {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetUser() {
             return Client.DoHttpGetRequest("/user");
         }
 
         /// <summary>
         /// Gets a list of email addresses of the authenticated user.
         /// </summary>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse GetEmails() {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetEmails() {
             return Client.DoHttpGetRequest("/user/emails");
         }
 
         /// <summary>
         /// Gets a list of users following the authenticated user.
         /// </summary>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse GetFollowers() {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetFollowers() {
             return Client.DoHttpGetRequest("/user/followers");
         }
 
         /// <summary>
         /// Gets a list of users the authenticated user is following.
         /// </summary>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse GetFollowing() {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetFollowing() {
             return Client.DoHttpGetRequest("/user/followers");
         }
 
@@ -63,24 +63,24 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// Gets whether the authenticated user is following the user with the specified <paramref name="username"/>.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse IsFollowing(string username) {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse IsFollowing(string username) {
             return Client.DoHttpGetRequest("/user/following/" + username);
         }
 
         /// <summary>
         /// Gets a list of repositories of the authenticated user.
         /// </summary>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse GetRepositories() {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetRepositories() {
             return Client.DoHttpGetRequest("/user/repos");
         }
 
         /// <summary>
         /// Gets a list of organizations the authenticated user is a member of.
         /// </summary>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse GetOrganizations() {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetOrganizations() {
             return Client.DoHttpGetRequest("/user/orgs");
         }
 

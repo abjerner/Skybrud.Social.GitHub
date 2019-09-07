@@ -1,6 +1,6 @@
 ﻿using System;
+using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Time;
-using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Models.Common {
     
@@ -31,7 +31,7 @@ namespace Skybrud.Social.GitHub.Models.Common {
 
         #region Constructors
 
-        private GitHubRateLimiting(SocialHttpResponse response) {
+        private GitHubRateLimiting(IHttpResponse response) {
             
             int limit;
             int remaining;
@@ -55,7 +55,7 @@ namespace Skybrud.Social.GitHub.Models.Common {
         /// </summary>
         /// <param name="response">The response that holds the rate-limiting information.</param>
         /// <returns>An instance of <see cref="GitHubRateLimiting"/>.</returns>
-        public static GitHubRateLimiting GetFromResponse(SocialHttpResponse response) {
+        public static GitHubRateLimiting GetFromResponse(IHttpResponse response) {
             return new GitHubRateLimiting(response);
         }
 

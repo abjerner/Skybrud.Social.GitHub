@@ -1,6 +1,6 @@
 using System;
+using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
-using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Endpoints.Raw {
 
@@ -38,8 +38,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// Gets information about the repository matching the specified <paramref name="owner"/> and
         /// <paramref name="repository"/>.
         /// </summary>
-        /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
-        public SocialHttpResponse GetRepository(string owner, string repository) {
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetRepository(string owner, string repository) {
             if (String.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (String.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
             return Client.DoHttpGetRequest("/repos/" + owner + "/" + repository);

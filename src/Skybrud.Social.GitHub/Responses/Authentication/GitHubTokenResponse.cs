@@ -1,6 +1,7 @@
 ﻿using System;
+using Skybrud.Essentials.Http;
+using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Models.Authentication;
-using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Responses.Authentication {
 
@@ -11,13 +12,13 @@ namespace Skybrud.Social.GitHub.Responses.Authentication {
         
         #region Constructors
 
-        private GitHubTokenResponse(SocialHttpResponse response) : base(response) {
+        private GitHubTokenResponse(IHttpResponse response) : base(response) {
 
             // Validate the response
             ValidateResponse(response);
             
             // Parse the response body
-            Body = GitHubToken.Parse(SocialHttpQueryString.ParseQueryString(response.Body));
+            Body = GitHubToken.Parse(HttpQueryString.ParseQueryString(response.Body));
         
         }
 
@@ -28,9 +29,9 @@ namespace Skybrud.Social.GitHub.Responses.Authentication {
         /// <summary>
         /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubTokenResponse"/>.
         /// </summary>
-        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
+        /// <param name="response">The instance of <see cref="IHttpResponse"/> representing the raw response.</param>
         /// <returns>An instance of <see cref="GitHubTokenResponse"/> representing the response.</returns>
-        public static GitHubTokenResponse ParseResponse(SocialHttpResponse response) {
+        public static GitHubTokenResponse ParseResponse(IHttpResponse response) {
             if (response == null) throw new ArgumentNullException(nameof(response));
             return new GitHubTokenResponse(response);
         }

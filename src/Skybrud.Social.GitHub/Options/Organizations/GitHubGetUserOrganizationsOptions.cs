@@ -1,5 +1,5 @@
-﻿using Skybrud.Social.Http;
-using Skybrud.Social.Interfaces.Http;
+﻿using Skybrud.Essentials.Http.Collections;
+using Skybrud.Essentials.Http.Options;
 
 namespace Skybrud.Social.GitHub.Options.Organizations {
 
@@ -77,7 +77,7 @@ namespace Skybrud.Social.GitHub.Options.Organizations {
         /// <returns>An instance of <see cref="IHttpQueryString"/>.</returns>
         public IHttpQueryString GetQueryString() {
 
-            IHttpQueryString query = new SocialHttpQueryString();
+            IHttpQueryString query = new HttpQueryString();
 
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);

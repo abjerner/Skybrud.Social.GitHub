@@ -1,6 +1,6 @@
 ﻿using System;
+using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.PullRequests;
-using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Responses.PullRequests {
 
@@ -11,7 +11,7 @@ namespace Skybrud.Social.GitHub.Responses.PullRequests {
 
         #region Constructors
 
-        private GitHubGetPullRequestsResponse(SocialHttpResponse response) : base(response) {
+        private GitHubGetPullRequestsResponse(IHttpResponse response) : base(response) {
 
             // Validate the response
             ValidateResponse(response);
@@ -28,9 +28,9 @@ namespace Skybrud.Social.GitHub.Responses.PullRequests {
         /// <summary>
         /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubGetPullRequestsResponse"/>.
         /// </summary>
-        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
+        /// <param name="response">The instance of <see cref="IHttpResponse"/> representing the raw response.</param>
         /// <returns>An instance of <see cref="GitHubGetPullRequestsResponse"/> representing the response.</returns>
-        public static GitHubGetPullRequestsResponse ParseResponse(SocialHttpResponse response) {
+        public static GitHubGetPullRequestsResponse ParseResponse(IHttpResponse response) {
             if (response == null) throw new ArgumentNullException(nameof(response));
             return new GitHubGetPullRequestsResponse(response);
         }

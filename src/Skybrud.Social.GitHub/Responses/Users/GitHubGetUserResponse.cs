@@ -1,6 +1,6 @@
 ﻿using System;
+using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Users;
-using Skybrud.Social.Http;
 
 namespace Skybrud.Social.GitHub.Responses.Users {
 
@@ -11,7 +11,7 @@ namespace Skybrud.Social.GitHub.Responses.Users {
 
         #region Constructors
 
-        private GitHubGetUserResponse(SocialHttpResponse response) : base(response) {
+        private GitHubGetUserResponse(IHttpResponse response) : base(response) {
 
             // Validate the response
             ValidateResponse(response);
@@ -28,9 +28,9 @@ namespace Skybrud.Social.GitHub.Responses.Users {
         /// <summary>
         /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubGetUserResponse"/>.
         /// </summary>
-        /// <param name="response">The instance of <see cref="SocialHttpResponse"/> representing the raw response.</param>
+        /// <param name="response">The instance of <see cref="IHttpResponse"/> representing the raw response.</param>
         /// <returns>An instance of <see cref="GitHubGetUserResponse"/> representing the response.</returns>
-        public static GitHubGetUserResponse ParseResponse(SocialHttpResponse response) {
+        public static GitHubGetUserResponse ParseResponse(IHttpResponse response) {
             if (response == null) throw new ArgumentNullException(nameof(response));
             return new GitHubGetUserResponse(response);
         }

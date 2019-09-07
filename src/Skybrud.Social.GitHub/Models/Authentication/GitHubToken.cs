@@ -1,6 +1,6 @@
 ﻿using System;
+using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Scopes;
-using Skybrud.Social.Interfaces.Http;
 
 namespace Skybrud.Social.GitHub.Models.Authentication {
 
