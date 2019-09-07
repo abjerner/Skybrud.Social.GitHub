@@ -1,4 +1,8 @@
 ﻿using System;
+using Newtonsoft.Json.Linq;
+using Skybrud.Essentials.Common;
+using Skybrud.Essentials.Http;
+using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Issues;
 
 namespace Skybrud.Social.GitHub.Options.Issues.Comments {
@@ -6,7 +10,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
     /// <summary>
     /// Class representing the options for adding a comment to a GitHub issue.
     /// </summary>
-    public class GitHubAddIssueCommentOptions {
+    public class GitHubAddIssueCommentOptions : IHttpRequestOptions {
 
         #region Properties
         
@@ -68,6 +72,31 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
             Repository = issue.Repository.Name;
             Number = issue.Number;
             Body = body;
+        }
+
+        #endregion
+
+        #region Member methods
+
+        /// <summary>
+        /// Returns a new <see cref="IHttpRequest"/> instance for this options instance.
+        /// </summary>
+        /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
+        public IHttpRequest GetRequest() {
+
+            if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
+            if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
+            if (Number == 0) throw new PropertyNotSetException(nameof(Number));
+            if (string.IsNullOrWhiteSpace(Body)) throw new PropertyNotSetException(nameof(Body));
+
+            // Generate the payload for the request body
+            JObject body = new JObject {
+                {"body", Body}
+            };
+
+            // Make the request to the API
+            return HttpRequest.Post($"/repos/{Owner}/{Repository}/issues/{Number}/comments", body);
+
         }
 
         #endregion

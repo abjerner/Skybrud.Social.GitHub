@@ -1,10 +1,8 @@
 using System;
-using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Issues;
-using Skybrud.Social.GitHub.Options.Issues.Comments;
 
 namespace Skybrud.Social.GitHub.Endpoints.Raw {
 
@@ -20,12 +18,24 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         public GitHubOAuthClient Client { get; }
 
+        /// <summary>
+        /// Gets a reference to the raw <strong>Issues/Comments</strong> endpoint.
+        /// </summary>
+        public GitHubIssuesCommentsRawEndpoint Comments { get; }
+
+        /// <summary>
+        /// Gets a reference to the raw <strong>Issues/Events</strong> endpoint.
+        /// </summary>
+        public GitHubIssuesEventsRawEndpoint Events { get; }
+
         #endregion
 
         #region Constructors
 
         internal GitHubIssuesRawEndpoint(GitHubOAuthClient client) {
             Client = client;
+            Comments = new GitHubIssuesCommentsRawEndpoint(client);
+            Events = new GitHubIssuesEventsRawEndpoint(client);
         }
 
         #endregion
@@ -72,40 +82,6 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
             if (string.IsNullOrWhiteSpace(options.Owner)) throw new ArgumentNullException(nameof(options.Owner));
             if (string.IsNullOrWhiteSpace(options.Repository)) throw new PropertyNotSetException(nameof(options.Repository));
             return Client.Get($"/repos/{options.Owner}/{options.Repository}/issues", options);
-        }
-
-        /// <summary>
-        /// Adds a new comment to the issue matching the specified <paramref name="options"/>.
-        /// </summary>
-        /// <param name="options">The options for the request.</param>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-        public IHttpResponse AddComment(GitHubAddIssueCommentOptions options) {
-
-            if (options == null) throw new ArgumentNullException(nameof(options));
-            if (string.IsNullOrWhiteSpace(options.Owner)) throw new PropertyNotSetException(nameof(options.Owner));
-            if (string.IsNullOrWhiteSpace(options.Repository)) throw new PropertyNotSetException(nameof(options.Repository));
-            if (options.Number == 0) throw new PropertyNotSetException(nameof(options.Number));
-            if (string.IsNullOrWhiteSpace(options.Body)) throw new PropertyNotSetException(nameof(options.Body));
-
-            // Generate the payload for the request body
-            JObject body = new JObject {
-                {"body", options.Body}
-            };
-
-            // Make the request to the API
-            return Client.Post($"/repos/{options.Owner}/{options.Repository}/issues/{options.Number}/comments", body);
-
-        }
-
-        /// <summary>
-        /// Gets the events of the issue matching the specified <paramref name="owner"/>, <paramref name="repository"/> and <paramref name="number"/>.
-        /// </summary>
-        /// <param name="owner">The username (login) of the owner of the repository.</param>
-        /// <param name="repository">The slug of the repository.</param>
-        /// <param name="number">The number of the issue to which the comment should be added.</param>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-        public IHttpResponse GetEvents(string owner, string repository, int number) {
-            return null;
         }
 
         #endregion
