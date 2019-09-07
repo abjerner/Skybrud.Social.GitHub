@@ -105,9 +105,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <returns>An instance of <see cref="SocialHttpResponse"/> representing the raw response.</returns>
         public SocialHttpResponse GetEvents(string owner, string repository, int number)
         {
-            
-
-
+            return null;
         }
 
         #endregion
