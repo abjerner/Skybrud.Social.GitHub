@@ -1,4 +1,7 @@
-﻿namespace Skybrud.Social.GitHub.Options.Issues.Comments {
+﻿using System;
+using Skybrud.Social.GitHub.Models.Issues;
+
+namespace Skybrud.Social.GitHub.Options.Issues.Comments {
 
     /// <summary>
     /// Class representing the options for adding a comment to a GitHub issue.
@@ -51,6 +54,19 @@
             Owner = owner;
             Repository = repository;
             Number = number;
+            Body = body;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="issue"/> and <paramref name="body"/>.
+        /// </summary>
+        /// <param name="issue">The issue to which the comment will be added.</param>
+        /// <param name="body">The Markdown-based body of the comment.</param>
+        public GitHubAddIssueCommentOptions(GitHubIssue issue, string body) {
+            if (issue == null) throw new ArgumentNullException(nameof(issue));
+            Owner = issue.Repository.Owner.Login;
+            Repository = issue.Repository.Name;
+            Number = issue.Number;
             Body = body;
         }
 
