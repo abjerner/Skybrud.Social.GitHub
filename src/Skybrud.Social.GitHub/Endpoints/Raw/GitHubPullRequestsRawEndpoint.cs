@@ -43,7 +43,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         public IHttpResponse GetPullRequest(string owner, string repository, int number) {
             if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-            return Client.DoHttpGetRequest($"/repos/{owner}/{repository}/pulls/" + number);
+            return Client.Get($"/repos/{owner}/{repository}/pulls/" + number);
         }
         
         /// <summary>
@@ -55,7 +55,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         public IHttpResponse GetPullRequests(string owner, string repository) {
             if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-            return Client.DoHttpGetRequest($"/repos/{owner}/{repository}/pulls");
+            return Client.Get($"/repos/{owner}/{repository}/pulls");
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
             if (options == null) throw new ArgumentNullException(nameof(options));
             if (string.IsNullOrWhiteSpace(options.Owner)) throw new PropertyNotSetException(nameof(options.Owner));
             if (string.IsNullOrWhiteSpace(options.Repository)) throw new PropertyNotSetException(nameof(options.Repository));
-            return Client.DoHttpGetRequest($"/repos/{options.Owner}/{options.Repository}/pulls", options);
+            return Client.Get($"/repos/{options.Owner}/{options.Repository}/pulls", options);
         }
 
         #endregion

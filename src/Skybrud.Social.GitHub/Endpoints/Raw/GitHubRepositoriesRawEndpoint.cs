@@ -42,7 +42,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         public IHttpResponse GetRepository(string owner, string repository) {
             if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-            return Client.DoHttpGetRequest("/repos/" + owner + "/" + repository);
+            return Client.Get($"/repos/{owner}/{repository}");
         }
 
         #endregion

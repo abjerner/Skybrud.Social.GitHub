@@ -37,7 +37,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetIssues() {
-            return Client.DoHttpGetRequest("/issues");
+            return Client.Get("/issues");
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetIssues(GitHubGetIssuesOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
-            return Client.DoHttpGetRequest("/issues", options);
+            return Client.Get("/issues", options);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         public IHttpResponse GetIssues(string owner, string repository) {
             if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-            return Client.DoHttpGetRequest($"/repos/{owner}/{repository}/issues");
+            return Client.Get($"/repos/{owner}/{repository}/issues");
         }
 
         /// <summary>
@@ -68,9 +68,10 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="options">The options for the request to the API.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetIssues(GitHubGetRepositoryIssuesOptions options) {
+            if (options == null) throw new ArgumentNullException(nameof(options));
             if (string.IsNullOrWhiteSpace(options.Owner)) throw new ArgumentNullException(nameof(options.Owner));
             if (string.IsNullOrWhiteSpace(options.Repository)) throw new PropertyNotSetException(nameof(options.Repository));
-            return Client.DoHttpGetRequest($"/repos/{options.Owner}/{options.Repository}/issues", options);
+            return Client.Get($"/repos/{options.Owner}/{options.Repository}/issues", options);
         }
 
         /// <summary>
@@ -92,7 +93,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
             };
 
             // Make the request to the API
-            return Client.DoHttpPostRequest($"/repos/{options.Owner}/{options.Repository}/issues/{options.Number}/comments", body);
+            return Client.Post($"/repos/{options.Owner}/{options.Repository}/issues/{options.Number}/comments", body);
 
         }
 

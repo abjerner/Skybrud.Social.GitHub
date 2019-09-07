@@ -35,7 +35,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetUser(string username) {
             if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
-            return Client.DoHttpGetRequest("/users/" + username);
+            return Client.Get($"/users/{username}");
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetRepositories(string username) {
             if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
-            return Client.DoHttpGetRequest("/users/" + username + "/repos");
+            return Client.Get($"/users/{username}/repos");
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetOrganizations(string username) {
             if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
-            return Client.DoHttpGetRequest("/users/" + username + "/orgs");
+            return Client.Get($"/users/{username}/orgs");
         }
 
         #endregion

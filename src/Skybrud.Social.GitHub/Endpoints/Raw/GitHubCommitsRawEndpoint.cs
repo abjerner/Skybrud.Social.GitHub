@@ -1,4 +1,5 @@
 ﻿using System;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Commits;
@@ -41,7 +42,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
             if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
             if (string.IsNullOrWhiteSpace(sha)) throw new ArgumentNullException(nameof(sha));
-            return Client.DoHttpGetRequest("/repos/" + owner + "/" + repository + "/commits/" + sha);
+            return Client.Get($"/repos/{owner}/{repository}/commits/{sha}");
         }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         public IHttpResponse GetCommits(string owner, string repository) {
             if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-            return Client.DoHttpGetRequest("/repos/" + owner + "/" + repository + "/commits");
+            return Client.Get($"/repos/{owner}/{repository}/commits");
         }
 
         /// <summary>
@@ -64,7 +65,9 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetCommits(GitHubGetCommitsOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
-            return Client.DoHttpGetRequest("/repos/" + options.Owner + "/" + options.Repository + "/commits", options);
+            if (string.IsNullOrWhiteSpace(options.Owner)) throw new PropertyNotSetException(nameof(options.Owner));
+            if (string.IsNullOrWhiteSpace(options.Repository)) throw new PropertyNotSetException(nameof(options.Repository));
+            return Client.Get($"/repos/{options.Owner}/{options.Repository}/commits", options);
         }
 
         #endregion

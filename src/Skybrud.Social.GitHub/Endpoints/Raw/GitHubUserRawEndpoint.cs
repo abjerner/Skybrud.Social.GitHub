@@ -1,3 +1,4 @@
+using System;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 
@@ -32,7 +33,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetUser() {
-            return Client.DoHttpGetRequest("/user");
+            return Client.Get("/user");
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetEmails() {
-            return Client.DoHttpGetRequest("/user/emails");
+            return Client.Get("/user/emails");
         }
 
         /// <summary>
@@ -48,7 +49,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetFollowers() {
-            return Client.DoHttpGetRequest("/user/followers");
+            return Client.Get("/user/followers");
         }
 
         /// <summary>
@@ -56,7 +57,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetFollowing() {
-            return Client.DoHttpGetRequest("/user/followers");
+            return Client.Get("/user/followers");
         }
 
         /// <summary>
@@ -65,7 +66,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <param name="username">The username (login) of the user.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse IsFollowing(string username) {
-            return Client.DoHttpGetRequest("/user/following/" + username);
+            if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
+            return Client.Get("/user/following/" + username);
         }
 
         /// <summary>
@@ -73,7 +75,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetRepositories() {
-            return Client.DoHttpGetRequest("/user/repos");
+            return Client.Get("/user/repos");
         }
 
         /// <summary>
@@ -81,7 +83,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetOrganizations() {
-            return Client.DoHttpGetRequest("/user/orgs");
+            return Client.Get("/user/orgs");
         }
 
         #endregion
