@@ -42,12 +42,8 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Skybrud.Social.GitHub.xml</DocumentationFile>
   </PropertyGroup>
 
-  <Target Name="PreBuildEvent" BeforeTargets="DispatchToInnerBuilds" Condition="'$(RunBuildTargets)'=='true'">
-    <Exec Command="&quot;$(SolutionDir)build/Skybrud.Social.PreBuildTool.exe&quot; /date=2015-12-27 /projectPath=&quot;$(SolutionDir)Skybrud.Social.GitHub\Skybrud.Social.GitHub.csproj&quot;" />
-  </Target>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="mkdir $(ProjectDir)bin\Dev\$(TargetFramework)&#xD;&#xA;xcopy $(ProjectDir)bin\$(ConfigurationName)\$(TargetFramework)\$(TargetName).* $(ProjectDir)bin\Dev\$(TargetFramework)\ /y&#xD;&#xA;&quot;$(ProjectDir)..\build\UpdateAssemblyInfoJson.exe&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot;" />
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(ConfigurationName)'=='Release' AND '$(BuildTools)'=='1'">
+    <Exec Command="&quot;$(ProjectDir)..\build\Skybrud.BuildTools.Tasks.exe&quot; &quot;postBuild&quot; &quot;$(ConfigurationName)&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot;" />
   </Target>
 
 </Project>
