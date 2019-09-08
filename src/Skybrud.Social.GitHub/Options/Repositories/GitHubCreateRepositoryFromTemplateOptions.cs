@@ -15,8 +15,14 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the alias of the organization or person who owns the template repository.
+        /// </summary>
         public string TemplateOwner { get; set; }
 
+        /// <summary>
+        /// Gets or sets the slug of the template repository.
+        /// </summary>
         public string TemplateRepository { get; set; }
 
         /// <summary>
@@ -42,6 +48,41 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
         #endregion
 
         #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance with default options.
+        /// </summary>
+        public GitHubCreateRepositoryFromTemplateOptions() { }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="templateOwner"/>, <paramref name="templateRepository"/>, <paramref name="owner"/> and <paramref name="name"/>.
+        /// </summary>
+        /// <param name="templateOwner">The alias of the organization or person who owns the template repository.</param>
+        /// <param name="templateRepository">The slug of the template repository.</param>
+        /// <param name="owner">The organization or person who will own the new repository.</param>
+        /// <param name="name">The name of the new repository.</param>
+        public GitHubCreateRepositoryFromTemplateOptions(string templateOwner, string templateRepository, string owner, string name) {
+            TemplateOwner = templateOwner;
+            TemplateRepository = templateRepository;
+            Owner = owner;
+            Name = name;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="templateOwner"/>, <paramref name="templateRepository"/>, <paramref name="owner"/> and <paramref name="name"/>.
+        /// </summary>
+        /// <param name="templateOwner">The alias of the organization or person who owns the template repository.</param>
+        /// <param name="templateRepository">The slug of the template repository.</param>
+        /// <param name="owner">The organization or person who will own the new repository.</param>
+        /// <param name="name">The name of the new repository.</param>
+        /// <param name="isPrivate">Whether to create a new private repository.</param>
+        public GitHubCreateRepositoryFromTemplateOptions(string templateOwner, string templateRepository, string owner, string name, bool isPrivate) {
+            TemplateOwner = templateOwner;
+            TemplateRepository = templateRepository;
+            Owner = owner;
+            Name = name;
+            IsPrivate = isPrivate;
+        }
 
         #endregion
 

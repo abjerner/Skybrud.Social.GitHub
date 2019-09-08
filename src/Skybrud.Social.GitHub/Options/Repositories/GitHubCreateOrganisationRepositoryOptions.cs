@@ -62,6 +62,36 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance based on default options.
+        /// </summary>
+        public GitHubCreateOrganisationRepositoryOptions() {
+            HasIssues = true;
+            HasIssues = true;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="name"/> and <paramref name="name"/>.
+        /// </summary>
+        /// <param name="organisation">The organization who will own the new repository.</param>
+        /// <param name="name">The name of the repository.</param>
+        public GitHubCreateOrganisationRepositoryOptions(string organisation, string name) : this() {
+            Organisation = organisation;
+            Name = name;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="name"/> and <paramref name="name"/>.
+        /// </summary>
+        /// <param name="organisation">The organization who will own the new repository.</param>
+        /// <param name="name">The name of the repository.</param>
+        /// <param name="isPrivate">Whether to create a new private repository.</param>
+        public GitHubCreateOrganisationRepositoryOptions(string organisation, string name, bool isPrivate) : this() {
+            Organisation = organisation;
+            Name = name;
+            IsPrivate = isPrivate;
+        }
+
         #endregion
 
         #region Member methods

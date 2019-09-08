@@ -71,6 +71,16 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
             Name = name;
         }
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="name"/>.
+        /// </summary>
+        /// <param name="name">The name of the repository.</param>
+        /// <param name="isPrivate">Whether to create a new private repository.</param>
+        public GitHubCreateUserRepositoryOptions(string name, bool isPrivate) : this() {
+            Name = name;
+            IsPrivate = isPrivate;
+        }
+
         #endregion
 
         #region Member methods
