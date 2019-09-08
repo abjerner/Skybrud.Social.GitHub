@@ -58,7 +58,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// <see>
         ///     <cref>https://developer.github.com/v3/issues/events/#list-events-for-an-issue</cref>
         /// </see>
-        public IHttpResponse GetEvents(GitHubIssue issue) {
+        public IHttpResponse GetEvents(GitHubIssueBase issue) {
             if (issue == null) throw new ArgumentNullException(nameof(issue));
             return GetEvents(new GitHubGetIssueEventsOptions(issue));
         }

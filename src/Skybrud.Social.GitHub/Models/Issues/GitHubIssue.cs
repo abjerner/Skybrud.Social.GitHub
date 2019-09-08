@@ -5,7 +5,7 @@ namespace Skybrud.Social.GitHub.Models.Issues {
     /// <summary>
     /// Class representing a GitHub issue.
     /// </summary>
-    public class GitHubIssue : GitHubIssueItem {
+    public class GitHubIssue : GitHubIssueBase {
 
         #region Properties
 
@@ -28,7 +28,7 @@ namespace Skybrud.Social.GitHub.Models.Issues {
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubIssue"/>.</returns>
-        public new static GitHubIssue Parse(JObject obj) {
+        public static GitHubIssue Parse(JObject obj) {
             return obj == null ? null : new GitHubIssue(obj);
         }
 

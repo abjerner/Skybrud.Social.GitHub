@@ -67,7 +67,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Events {
         /// Initializes a new instance based on the specified <paramref name="issue"/>.
         /// </summary>
         /// <param name="issue">The issue for which to get events.</param>
-        public GitHubGetIssueEventsOptions(GitHubIssue issue) {
+        public GitHubGetIssueEventsOptions(GitHubIssueBase issue) {
             if (issue == null) throw new ArgumentNullException(nameof(issue));
             Owner = issue.Repository.Owner.Login;
             Repository = issue.Repository.Name;
