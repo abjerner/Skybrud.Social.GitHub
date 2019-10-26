@@ -58,6 +58,7 @@ namespace Skybrud.Social.GitHub.Models.Users {
             switch (strType) {
                 case "User": type = GitHubUserType.User; break;
                 case "Organization": type = GitHubUserType.Organization; break;
+                case "Bot": type = GitHubUserType.Bot; break;
                 default: throw new Exception("Unknown user type \"" + strType + "\".");
             }
             

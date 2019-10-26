@@ -1,7 +1,7 @@
 ﻿namespace Skybrud.Social.GitHub.Models.Users {
     
     /// <summary>
-    /// Enum class specifying whether a user is a normal GitHub user or an organization.
+    /// Enum class specifying the type of a GitHub user.
     /// </summary>
     public enum GitHubUserType {
 
@@ -13,7 +13,12 @@
         /// <summary>
         /// Indicates that a user is an GitHub organisation.
         /// </summary>
-        Organization
+        Organization,
+
+        /// <summary>
+        /// Indicates that the user is a bot.
+        /// </summary>
+        Bot
     
     }
 
