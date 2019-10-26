@@ -5,7 +5,7 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
     /// <summary>
     /// Class representing a GitHub pull request.
     /// </summary>
-    public class GitHubPullRequest : GitHubPullRequestItem {
+    public class GitHubPullRequest : GitHubPullRequestBase {
 
         #region Constructors
 
