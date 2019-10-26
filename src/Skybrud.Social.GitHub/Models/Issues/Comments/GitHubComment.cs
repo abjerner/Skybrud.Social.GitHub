@@ -1,21 +1,21 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Models.Users;
 
-namespace Skybrud.Social.GitHub.Models.Issues {
+namespace Skybrud.Social.GitHub.Models.Issues.Comments {
 
     /// <summary>
-    /// Class representing a comment of an issue.
+    /// Class representing a comment of a GitHub issue.
     /// </summary>
-    public class GitHubIssueComment : GitHubObject {
+    public class GitHubComment : GitHubObject {
 
         #region Properties
 
         /// <summary>
         /// Gets the ID of the comment.
         /// </summary>
-        public int Id { get; }
+        public long Id { get; }
 
         /// <summary>
         /// Gets the node ID of the comment.
@@ -45,30 +45,36 @@ namespace Skybrud.Social.GitHub.Models.Issues {
         /// <summary>
         /// Gets a timestamp for when the comment was created.
         /// </summary>
-        public DateTimeOffset CreatedAt { get; }
+        public EssentialsTime CreatedAt { get; }
 
         /// <summary>
         /// Gets a timestamp for when the comment was last updated.
         /// </summary>
-        public DateTimeOffset UpdatedAt { get; }
+        public EssentialsTime UpdatedAt { get; }
+
+        /// <summary>
+        /// Gets a collection/map of URLs related to the comment.
+        /// </summary>
+        public GitHubCommentUrlCollection Urls { get; }
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="obj"/>.
+        /// Initializes a new instance from the specified <paramref name="obj"/>.
         /// </summary>
-        /// <param name="obj">The an instance of <see cref="JObject"/> representing the comment.</param>
-        protected GitHubIssueComment(JObject obj) : base(obj) {
-            Id = obj.GetInt32("id");
+        /// <param name="obj">The instance of <see cref="JObject"/> representing the issue.</param>
+        protected GitHubComment(JObject obj) : base(obj) {
+            Id = obj.GetInt64("id");
             NodeId = obj.GetString("node_id");
             Url = obj.GetString("url");
             HtmlUrl = obj.GetString("html_url");
             Body = obj.GetString("body");
             User = obj.GetObject("user", GitHubUserItem.Parse);
-            CreatedAt = obj.GetString("created_at", DateTimeOffset.Parse);
-            UpdatedAt = obj.GetString("updated_at", DateTimeOffset.Parse);
+            CreatedAt = obj.GetString("created_at", EssentialsTime.Parse);
+            UpdatedAt = obj.GetString("updated_at", EssentialsTime.Parse);
+            Urls = GitHubCommentUrlCollection.Parse(obj);
         }
 
         #endregion
@@ -76,12 +82,12 @@ namespace Skybrud.Social.GitHub.Models.Issues {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubIssueComment"/>.
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubComment"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="GitHubIssueComment"/>.</returns>
-        public static GitHubIssueComment Parse(JObject obj) {
-            return obj == null ? null : new GitHubIssueComment(obj);
+        /// <returns>An instance of <see cref="GitHubComment"/>.</returns>
+        public static GitHubComment Parse(JObject obj) {
+            return obj == null ? null : new GitHubComment(obj);
         }
 
         #endregion

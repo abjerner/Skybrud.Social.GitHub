@@ -87,19 +87,6 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         }
 
         /// <summary>
-        /// Gets a list of comments of the specified <paramref name="issue"/>.
-        /// </summary>
-        /// <param name="issue">The issue to get comments for.</param>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-        /// <see>
-        ///     <cref>https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue</cref>
-        /// </see>
-        public IHttpResponse GetComments(GitHubIssue issue) {
-            if (issue == null) throw new ArgumentNullException(nameof(issue));
-            return GetComments(new GitHubGetIssueCommentsOptions(issue));
-        }
-
-        /// <summary>
         /// Gets a list of comments of the issue matching the specified <paramref name="options"/>.
         /// </summary>
         /// <param name="options">The options for the request to the API.</param>

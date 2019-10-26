@@ -4,6 +4,7 @@ using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Issues;
+using Skybrud.Social.GitHub.Models.PullRequests;
 
 namespace Skybrud.Social.GitHub.Options.Issues.Comments {
     
@@ -73,11 +74,22 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
         /// Initializes a new instance based on the specified <paramref name="issue"/>.
         /// </summary>
         /// <param name="issue">The issue for which to get comments.</param>
-        public GitHubGetIssueCommentsOptions(GitHubIssue issue) {
+        public GitHubGetIssueCommentsOptions(GitHubIssueBase issue) {
             if (issue == null) throw new ArgumentNullException(nameof(issue));
             Owner = issue.Repository.Owner.Login;
             Repository = issue.Repository.Name;
             Number = issue.Number;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="pullRequest"/>.
+        /// </summary>
+        /// <param name="pullRequest">The pull request for which to get comments.</param>
+        public GitHubGetIssueCommentsOptions(GitHubPullRequestBase pullRequest) {
+            if (pullRequest == null) throw new ArgumentNullException(nameof(pullRequest));
+            Owner = pullRequest.RepositoryOwner;
+            Repository = pullRequest.RepositorySlug;
+            Number = pullRequest.Number;
         }
 
         #endregion

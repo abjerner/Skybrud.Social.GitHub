@@ -177,8 +177,8 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
             Url = obj.GetString("url");
 
             string[] url = Url.Split('/');
-            RepositoryOwner = url[5];
-            RepositorySlug = url[6];
+            RepositoryOwner = url[4];
+            RepositorySlug = url[5];
 
             Number = obj.GetInt32("number");
             State = obj.GetEnum<GitHubIssueState>("state");

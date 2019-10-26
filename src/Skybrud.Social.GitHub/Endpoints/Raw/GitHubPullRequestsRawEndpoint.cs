@@ -7,7 +7,7 @@ using Skybrud.Social.GitHub.Options.PullRequests;
 namespace Skybrud.Social.GitHub.Endpoints.Raw {
     
     /// <summary>
-    /// Class representing the raw <strong>Pull requests</strong> endpoint.
+    /// Class representing the raw <strong>Pull Requests</strong> endpoint.
     /// </summary>
     /// <see>
     ///     <cref>https://developer.github.com/v3/pulls/</cref>
