@@ -12,13 +12,7 @@ namespace Skybrud.Social.GitHub.Responses.PullRequests {
         #region Constructors
 
         private GitHubGetPullRequestResponse(IHttpResponse response) : base(response) {
-
-            // Validate the response
-            ValidateResponse(response);
-
-            // Parse the response body
             Body = ParseJsonObject(response.Body, GitHubPullRequest.Parse);
-
         }
 
         #endregion

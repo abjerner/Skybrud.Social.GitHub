@@ -38,9 +38,6 @@ namespace Skybrud.Social.GitHub.Responses.Issues {
 
         private GitHubGetIssuesResponse(IHttpResponse response) : base(response) {
 
-            // Validate the response
-            ValidateResponse(response);
-
             // Parse the response body
             Body = ParseJsonArray(response.Body, GitHubIssueItem.Parse);
             

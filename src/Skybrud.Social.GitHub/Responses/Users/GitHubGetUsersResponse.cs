@@ -12,13 +12,7 @@ namespace Skybrud.Social.GitHub.Responses.Users {
         #region Constructors
 
         private GitHubGetUsersResponse(IHttpResponse response) : base(response) {
-
-            // Validate the response
-            ValidateResponse(response);
-
-            // Parse the response body
             Body = ParseJsonArray(response.Body, GitHubUserItem.Parse);
-
         }
 
         #endregion

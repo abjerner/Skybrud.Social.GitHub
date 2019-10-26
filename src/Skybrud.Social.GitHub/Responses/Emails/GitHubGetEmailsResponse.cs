@@ -12,13 +12,7 @@ namespace Skybrud.Social.GitHub.Responses.Emails {
         #region Constructor
 
         private GitHubGetEmailsResponse(IHttpResponse response) : base(response) {
-
-            // Validate the response
-            ValidateResponse(response);
-
-            // Parse the response body
             Body = ParseJsonArray(response.Body, GitHubEmail.Parse);
-
         }
 
         #endregion

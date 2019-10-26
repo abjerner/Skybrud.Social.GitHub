@@ -12,13 +12,7 @@ namespace Skybrud.Social.GitHub.Responses.Organizations {
         #region Constructors
 
         private GitHubGetOrganizationsResponse(IHttpResponse response) : base(response) {
-
-            // Validate the response
-            ValidateResponse(response);
-
-            // Parse the response body
             Body = ParseJsonArray(response.Body, GitHubOrganizationItem.Parse);
-
         }
 
         #endregion

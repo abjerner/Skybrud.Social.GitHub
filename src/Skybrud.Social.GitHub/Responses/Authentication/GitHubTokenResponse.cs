@@ -13,13 +13,7 @@ namespace Skybrud.Social.GitHub.Responses.Authentication {
         #region Constructors
 
         private GitHubTokenResponse(IHttpResponse response) : base(response) {
-
-            // Validate the response
-            ValidateResponse(response);
-            
-            // Parse the response body
             Body = GitHubToken.Parse(HttpQueryString.ParseQueryString(response.Body));
-        
         }
 
         #endregion

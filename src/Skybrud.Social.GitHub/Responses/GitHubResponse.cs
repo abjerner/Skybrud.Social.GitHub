@@ -32,19 +32,9 @@ namespace Skybrud.Social.GitHub.Responses {
         /// </summary>
         /// <param name="response">The raw response the instance should be based on.</param>
         protected GitHubResponse(IHttpResponse response) : base(response) {
+
             if (response.Headers["X-RateLimit-Limit"] != null) RateLimiting = GitHubRateLimiting.GetFromResponse(response);
-        }
-
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Validates the specified <paramref name="response"/>.
-        /// </summary>
-        /// <param name="response">The response to be validated.</param>
-        public static void ValidateResponse(IHttpResponse response) {
-
+  
             // If an error occurs during authorization, the error code will still be "OK"
             if (response.ContentType.StartsWith("application/x-www-form-urlencoded") && response.Body.StartsWith("error=")) {
                 IHttpQueryString body = HttpQueryString.ParseQueryString(response.Body, true);

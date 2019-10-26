@@ -22,16 +22,8 @@ namespace Skybrud.Social.GitHub.Responses.Commits {
         #region Constructors
 
         private GitHubGetCommitsResponse(IHttpResponse response) : base(response) {
-
-            // Validate the response
-            ValidateResponse(response);
-
-            // Parse the link header
             Link = GitHubLinkHeader.Parse(response);
-
-            // Parse the response body
             Body = ParseJsonArray(response.Body, GitHubCommitSummary.Parse);
-
         }
 
         #endregion
