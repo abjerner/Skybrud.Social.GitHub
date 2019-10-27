@@ -4,7 +4,7 @@ using Skybrud.Social.GitHub.Models.Issues;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Issues.Events;
 
-namespace Skybrud.Social.GitHub.Endpoints.Raw {
+namespace Skybrud.Social.GitHub.Endpoints.Issues.Events {
 
     /// <summary>
     /// Class representing the raw <strong>Issues/Events</strong> endpoint.

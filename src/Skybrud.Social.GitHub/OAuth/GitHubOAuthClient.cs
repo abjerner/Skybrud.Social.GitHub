@@ -4,6 +4,7 @@ using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Client;
 using Skybrud.Essentials.Http.Collections;
+using Skybrud.Social.GitHub.Endpoints.Issues;
 using Skybrud.Social.GitHub.Endpoints.PullRequests;
 using Skybrud.Social.GitHub.Endpoints.Raw;
 using Skybrud.Social.GitHub.Http;

@@ -1,10 +1,12 @@
 using System;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
+using Skybrud.Social.GitHub.Endpoints.Issues.Comments;
+using Skybrud.Social.GitHub.Endpoints.Issues.Events;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Issues;
 
-namespace Skybrud.Social.GitHub.Endpoints.Raw {
+namespace Skybrud.Social.GitHub.Endpoints.Issues {
 
     /// <summary>
     /// Class representing the raw <strong>Issues</strong> endpoint.

@@ -1,9 +1,8 @@
-using Skybrud.Social.GitHub.Endpoints.Raw;
 using Skybrud.Social.GitHub.Models.Issues;
 using Skybrud.Social.GitHub.Options.Issues.Events;
 using Skybrud.Social.GitHub.Responses.Events;
 
-namespace Skybrud.Social.GitHub.Endpoints {
+namespace Skybrud.Social.GitHub.Endpoints.Issues.Events {
 
     /// <summary>
     /// Class representing the <strong>Issues/Events</strong> endpoint.

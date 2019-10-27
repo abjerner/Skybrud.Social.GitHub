@@ -1,11 +1,10 @@
 using System;
-using Skybrud.Social.GitHub.Endpoints.Raw;
 using Skybrud.Social.GitHub.Models.Issues;
 using Skybrud.Social.GitHub.Models.PullRequests;
 using Skybrud.Social.GitHub.Options.Issues.Comments;
 using Skybrud.Social.GitHub.Responses.Issues.Comments;
 
-namespace Skybrud.Social.GitHub.Endpoints {
+namespace Skybrud.Social.GitHub.Endpoints.Issues.Comments {
 
     /// <summary>
     /// Class representing the <strong>Issues/Comments</strong> endpoint.
