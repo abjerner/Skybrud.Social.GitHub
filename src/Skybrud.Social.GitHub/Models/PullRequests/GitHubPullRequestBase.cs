@@ -26,19 +26,6 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         public string NodeId { get; }
 
         /// <summary>
-        /// Gets the API URL of the pull request.
-        /// </summary>
-        public string Url { get; }
-
-        // TODO: Add support for the "html_url" property
-
-        // TODO: Add support for the "diff_url" property
-
-        // TODO: Add support for the "patch_url" property
-
-        // TODO: Add support for the "issue_url" property
-
-        /// <summary>
         /// Gets the owner of the repository the pull request belongs to.
         /// </summary>
         public string RepositoryOwner { get; }
@@ -158,9 +145,12 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
 
         // TODO: Add support for the "base" property
 
-        // TODO: Add support for the "_links" property
-
         // TODO: Add support for the "author_association" property
+
+        /// <summary>
+        /// Gets a collection of URLs related to the pull request.
+        /// </summary>
+        public GitHubPullRequestUrls Urls { get; }
 
         #endregion
 
@@ -174,9 +164,8 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
 
             Id = obj.GetInt64("id");
             NodeId = obj.GetString("node_id");
-            Url = obj.GetString("url");
 
-            string[] url = Url.Split('/');
+            string[] url = obj.GetString("url").Split('/');
             RepositoryOwner = url[4];
             RepositorySlug = url[5];
 
@@ -195,6 +184,8 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
             Assignees = obj.GetArrayItems("assignees", GitHubUserItem.Parse);
             Labels = obj.GetArrayItems("labels", GitHubLabel.Parse);
             Milestone = obj.GetObject("milestone", GitHubMilestone.Parse);
+
+            Urls = GitHubPullRequestUrls.Parse(obj);
 
         }
 

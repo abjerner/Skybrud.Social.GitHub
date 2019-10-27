@@ -1,10 +1,11 @@
 using System;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
+using Skybrud.Social.GitHub.Endpoints.PullRequests.Reviews;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.PullRequests;
 
-namespace Skybrud.Social.GitHub.Endpoints.Raw {
+namespace Skybrud.Social.GitHub.Endpoints.PullRequests {
     
     /// <summary>
     /// Class representing the raw <strong>Pull Requests</strong> endpoint.
@@ -21,12 +22,18 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         /// </summary>
         public GitHubOAuthClient Client { get; }
 
+        /// <summary>
+        /// Gets a reference to the raw <strong>Pull Requests/Reviews</strong> endpoint.
+        /// </summary>
+        public GitHubPullReviewsRawEndpoint Reviews { get; }
+
         #endregion
 
         #region Constructors
 
         internal GitHubPullRequestsRawEndpoint(GitHubOAuthClient client) {
             Client = client;
+            Reviews = new GitHubPullReviewsRawEndpoint(client);
         }
 
         #endregion

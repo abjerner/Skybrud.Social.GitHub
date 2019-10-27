@@ -7,15 +7,15 @@ using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Issues;
 using Skybrud.Social.GitHub.Models.PullRequests;
 
-namespace Skybrud.Social.GitHub.Options.Issues.Comments {
-    
+namespace Skybrud.Social.GitHub.Options.PullRequests.Reviews {
+
     /// <summary>
-    /// Options for a request to get comments of a given GitHub issue.
+    /// Options for a request to get reviews of a given GitHub pull request.
     /// </summary>
     /// <see>
-    ///     <cref>https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue</cref>
+    ///     <cref>https://developer.github.com/v3/pulls/reviews/#list-reviews-on-a-pull-request</cref>
     /// </see>
-    public class GitHubGetIssueCommentsOptions : IHttpRequestOptions {
+    public class GitHubGetReviewsOptions : IHttpRequestOptions {
 
         #region Properties
 
@@ -30,14 +30,9 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
         public string Repository { get; set; }
 
         /// <summary>
-        /// Gets or sets the number of the issue.
+        /// Gets or sets the number of the pull request.
         /// </summary>
         public int Number { get; set; }
-
-        /// <summary>
-        /// Only comments updated at or after this time are returned.
-        /// </summary>
-        public EssentialsTime Since { get; set; }
 
         /// <summary>
         /// Gets or sets the page to be returned. Default is <c>0</c>, indicating the first page.
@@ -45,7 +40,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
         public int Page { get; set; }
 
         /// <summary>
-        /// Gets or sets the maximum amount of comments to be returned by each page.
+        /// Gets or sets the maximum amount of reviews to be returned by each page.
         /// </summary>
         public int PerPage { get; set; }
 
@@ -56,7 +51,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
         /// <summary>
         /// Initializes a new instance with default options.
         /// </summary>
-        public GitHubGetIssueCommentsOptions() { }
+        public GitHubGetReviewsOptions() { }
 
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="owner"/>, <paramref name="repository"/> and
@@ -64,8 +59,8 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
         /// </summary>
         /// <param name="owner">The username (login) of the owner of the repository.</param>
         /// <param name="repository">The slug of the repository.</param>
-        /// <param name="number">The number of the issue.</param>
-        public GitHubGetIssueCommentsOptions(string owner, string repository, int number) {
+        /// <param name="number">The number of the pull request.</param>
+        public GitHubGetReviewsOptions(string owner, string repository, int number) {
             Owner = owner;
             Repository = repository;
             Number = number;
@@ -75,7 +70,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
         /// Initializes a new instance based on the specified <paramref name="issue"/>.
         /// </summary>
         /// <param name="issue">The issue for which to get comments.</param>
-        public GitHubGetIssueCommentsOptions(GitHubIssueBase issue) {
+        public GitHubGetReviewsOptions(GitHubIssueBase issue) {
             if (issue == null) throw new ArgumentNullException(nameof(issue));
             Owner = issue.Repository.Owner.Login;
             Repository = issue.Repository.Name;
@@ -86,7 +81,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
         /// Initializes a new instance based on the specified <paramref name="pullRequest"/>.
         /// </summary>
         /// <param name="pullRequest">The pull request for which to get comments.</param>
-        public GitHubGetIssueCommentsOptions(GitHubPullRequestBase pullRequest) {
+        public GitHubGetReviewsOptions(GitHubPullRequestBase pullRequest) {
             if (pullRequest == null) throw new ArgumentNullException(nameof(pullRequest));
             Owner = pullRequest.RepositoryOwner;
             Repository = pullRequest.RepositorySlug;
@@ -107,11 +102,10 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
 
             IHttpQueryString query = new HttpQueryString();
-            if (Since != null) query.Add("since", Since.Iso8601);
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
 
-            return HttpRequest.Get($"/repos/{Owner}/{Repository}/issues/{Number}/comments", query);
+            return HttpRequest.Get($"/repos/{Owner}/{Repository}/pulls/{Number}/reviews", query);
 
         }
 

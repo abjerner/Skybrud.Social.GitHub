@@ -1,8 +1,8 @@
-using Skybrud.Social.GitHub.Endpoints.Raw;
+using Skybrud.Social.GitHub.Endpoints.PullRequests.Reviews;
 using Skybrud.Social.GitHub.Options.PullRequests;
 using Skybrud.Social.GitHub.Responses.PullRequests;
 
-namespace Skybrud.Social.GitHub.Endpoints {
+namespace Skybrud.Social.GitHub.Endpoints.PullRequests {
 
     /// <summary>
     /// Class representing the <strong>Pull Requests</strong> endpoint.
@@ -24,12 +24,18 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// </summary>
         public GitHubPullRequestsRawEndpoint Raw => Service.Client.PullRequests;
 
+        /// <summary>
+        /// Gets a reference to the <strong>Pull Requests/Reviews</strong> endpoint.
+        /// </summary>
+        public GitHubPullReviewsEndpoint Reviews { get; }
+
         #endregion
 
         #region Constructors
 
         internal GitHubPullRequestsEndpoint(GitHubService service) {
             Service = service;
+            Reviews = new GitHubPullReviewsEndpoint(service);
         }
 
         #endregion
