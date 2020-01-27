@@ -45,6 +45,29 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues {
         #region Methods
 
         /// <summary>
+        /// Gets information about the issue matching the specified <paramref name="owner"/>, <paramref name="repository"/> and <paramref name="number"/>.
+        /// </summary>
+        /// <param name="owner">The username (login) of the owner of the repository.</param>
+        /// <param name="repository">The slug of the repository.</param>
+        /// <param name="number">The number of the issue.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetIssue(string owner, string repository, int number) {
+            if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
+            if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
+            return GetIssue(new GitHubGetIssueOptions(owner, repository, number));
+        }
+
+        /// <summary>
+        /// Gets information about the issue matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetIssue(GitHubGetIssueOptions options) {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            return Client.GetResponse(options);
+        }
+
+        /// <summary>
         /// Gets a list of issues assigned to the authenticated user.
         /// </summary>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
