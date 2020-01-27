@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
-using Skybrud.Social.GitHub.Http;
+using Skybrud.Essentials.Http.Options;
 using Skybrud.Social.GitHub.Models.Issues;
 
 namespace Skybrud.Social.GitHub.Options.Issues.Comments {

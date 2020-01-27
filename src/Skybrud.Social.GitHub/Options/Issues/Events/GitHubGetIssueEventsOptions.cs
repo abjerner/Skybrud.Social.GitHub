@@ -1,7 +1,7 @@
 ﻿using System;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
-using Skybrud.Social.GitHub.Http;
+using Skybrud.Essentials.Http.Options;
 using Skybrud.Social.GitHub.Models.Issues;
 
 namespace Skybrud.Social.GitHub.Options.Issues.Events {

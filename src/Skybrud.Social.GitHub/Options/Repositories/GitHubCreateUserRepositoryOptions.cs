@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
-using Skybrud.Social.GitHub.Http;
+using Skybrud.Essentials.Http.Options;
 
 namespace Skybrud.Social.GitHub.Options.Repositories {
     

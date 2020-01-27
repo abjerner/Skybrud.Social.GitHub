@@ -2,8 +2,7 @@
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
-using Skybrud.Essentials.Time;
-using Skybrud.Social.GitHub.Http;
+using Skybrud.Essentials.Http.Options;
 using Skybrud.Social.GitHub.Models.Issues;
 using Skybrud.Social.GitHub.Models.PullRequests;
 
