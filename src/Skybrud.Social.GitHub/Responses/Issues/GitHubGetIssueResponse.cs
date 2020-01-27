@@ -7,6 +7,9 @@ namespace Skybrud.Social.GitHub.Responses.Issues {
     /// <summary>
     /// Class representing the response for getting information about a GitHub issue.
     /// </summary>
+    /// <see>
+    ///     <cref>https://developer.github.com/v3/issues/#get-a-single-issue</cref>
+    /// </see>
     public class GitHubGetIssueResponse : GitHubResponse<GitHubIssue> {
 
         #region Constructors

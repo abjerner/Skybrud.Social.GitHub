@@ -51,6 +51,9 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues {
         /// <param name="repository">The slug of the repository.</param>
         /// <param name="number">The number of the issue.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://developer.github.com/v3/issues/#get-a-single-issue</cref>
+        /// </see>
         public IHttpResponse GetIssue(string owner, string repository, int number) {
             if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
@@ -62,6 +65,9 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues {
         /// </summary>
         /// <param name="options">The options for the request to the API.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://developer.github.com/v3/issues/#get-a-single-issue</cref>
+        /// </see>
         public IHttpResponse GetIssue(GitHubGetIssueOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
             return Client.GetResponse(options);
