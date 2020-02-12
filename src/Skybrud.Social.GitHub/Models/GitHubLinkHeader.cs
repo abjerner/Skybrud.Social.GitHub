@@ -127,7 +127,7 @@ namespace Skybrud.Social.GitHub.Models {
             }
 
             // If we're at the last page, the "last" link is not included
-            TotalPages = Math.Max(TotalPages, Current);
+            if (TotalPages == 1) TotalPages = Math.Max(TotalPages, Current);
 
         }
 
