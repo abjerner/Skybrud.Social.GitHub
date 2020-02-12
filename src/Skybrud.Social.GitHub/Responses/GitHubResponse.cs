@@ -9,7 +9,7 @@ namespace Skybrud.Social.GitHub.Responses {
     /// <summary>
     /// Class representing a response from the GitHub API.
     /// </summary>
-    public abstract class GitHubResponse : HttpResponseBase {
+    public class GitHubResponse : HttpResponseBase {
 
         #region Properties
 
@@ -31,7 +31,7 @@ namespace Skybrud.Social.GitHub.Responses {
         /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The raw response the instance should be based on.</param>
-        protected GitHubResponse(IHttpResponse response) : base(response) {
+        public GitHubResponse(IHttpResponse response) : base(response) {
 
             if (response.Headers["X-RateLimit-Limit"] != null) RateLimiting = GitHubRateLimiting.GetFromResponse(response);
   
@@ -44,6 +44,7 @@ namespace Skybrud.Social.GitHub.Responses {
             // Skip error checking if the server responds with an OK status code
             if (response.StatusCode == HttpStatusCode.OK) return;
             if (response.StatusCode == HttpStatusCode.Created) return;
+            if (response.StatusCode == HttpStatusCode.NoContent) return;
 
             // Parse the error message from the response body
             GitHubError error = ParseJsonObject(response.Body, GitHubError.Parse);

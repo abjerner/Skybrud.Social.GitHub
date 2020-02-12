@@ -13,7 +13,10 @@ namespace Skybrud.Social.GitHub.Models.Milestones {
 
         #region Properties
 
-        // TODO: Add support for the "url" property
+        /// <summary>
+        /// Gets the API URL of the milestone.
+        /// </summary>
+        public string Url { get; }
 
         // TODO: Add support for the "html_url" property
 
@@ -100,6 +103,7 @@ namespace Skybrud.Social.GitHub.Models.Milestones {
         #region Constructors
 
         private GitHubMilestone(JObject obj) : base(obj) {
+            Url = obj.GetString("url");
             Id = obj.GetInt64("id");
             NodeId = obj.GetString("node_id");
             Number = obj.GetInt32("number");
