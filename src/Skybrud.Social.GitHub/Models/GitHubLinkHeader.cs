@@ -80,6 +80,7 @@ namespace Skybrud.Social.GitHub.Models {
             First = 1;
             Current = 1;
             TotalPages = 1;
+            Last = 1;
 
             if (string.IsNullOrWhiteSpace(value)) return;
 
