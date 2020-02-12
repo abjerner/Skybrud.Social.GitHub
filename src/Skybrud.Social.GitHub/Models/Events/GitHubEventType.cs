@@ -126,6 +126,11 @@
         Subscribed,
 
         /// <summary>
+        /// The issue was transferred to another repository.
+        /// </summary>
+        Transfered,
+
+        /// <summary>
         /// The actor was unassigned from the issue.
         /// </summary>
         Unassigned,
@@ -144,7 +149,12 @@
         /// An issue that a user had previously marked as a duplicate of another issue is no longer considered a
         /// duplicate, or a pull request that a user had previously marked as a duplicate of another pull request is no longer considered a duplicate.
         /// </summary>
-        UnmarkedAsDuplicate
+        UnmarkedAsDuplicate,
+
+        /// <summary>
+        /// An organization owner blocked a user from the organization.
+        /// </summary>
+        UserBlocked
 
     }
 
