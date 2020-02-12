@@ -88,6 +88,18 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues.Milestones {
         }
 
         /// <summary>
+        /// Updates the milestone with the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="GitHubMilestoneResponse"/> representing the response.</returns>
+        /// <see>
+        ///     <cref>https://developer.github.com/v3/issues/milestones/#update-a-milestone</cref>
+        /// </see>
+        public GitHubMilestoneResponse UpdateMilestone(GitHubUpdateMilestoneOptions options) {
+            return new GitHubMilestoneResponse(Raw.UpdateMilestone(options));
+        }
+
+        /// <summary>
         /// Deletes the milestone matching the specified <paramref name="owner"/>, <paramref name="repository"/> and <paramref name="number"/>.
         /// </summary>
         /// <param name="owner">The username (login) of the owner of the repository.</param>
