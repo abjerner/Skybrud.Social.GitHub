@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Newtonsoft.Json;
+using Skybrud.Essentials.Json.Converters.Enums;
+using Skybrud.Essentials.Strings;
 
 namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
 
+    [JsonConverter(typeof(EnumStringConverter), TextCasing.Underscore)]
     public enum GitHubMilestoneState {
         Open,
-        Closed,
-        All
+        Closed
     }
+
 }

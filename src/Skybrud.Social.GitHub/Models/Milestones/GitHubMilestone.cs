@@ -67,7 +67,7 @@ namespace Skybrud.Social.GitHub.Models.Milestones {
         /// <summary>
         /// Gets the state of the milestone, indicating whether the milestone is open or closed.
         /// </summary>
-        public GitHubIssueState State { get; }
+        public GitHubMilestoneState State { get; }
 
         /// <summary>
         /// Gets a timestamp for when the issue was created.
@@ -108,7 +108,7 @@ namespace Skybrud.Social.GitHub.Models.Milestones {
             Creator = obj.GetObject("creator", GitHubUser.Parse);
             OpenIssues = obj.GetInt32("open_issues");
             ClosedIssues = obj.GetInt32("closed_issues");
-            State = obj.GetEnum<GitHubIssueState>("state");
+            State = obj.GetEnum<GitHubMilestoneState>("state");
             CreatedAt = obj.GetString("created_at", EssentialsTime.Parse);
             UpdatedAt = obj.GetString("updated_at", EssentialsTime.Parse);
             DueOn = obj.GetString("due_on", EssentialsTime.Parse);

@@ -33,6 +33,33 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues.Milestones {
         #region Methods
 
         /// <summary>
+        /// Creates a new milestone with <paramref name="title"/> in the repository matching the specified
+        /// <paramref name="owner"/> and <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="owner">The username (login) of the owner of the repository.</param>
+        /// <param name="repository">The slug of the repository.</param>
+        /// <param name="title">The title of the milestone.</param>
+        /// <returns>An instance of <see cref="GitHubMilestoneResponse"/> representing the response.</returns>
+        /// <see>
+        ///     <cref>https://developer.github.com/v3/issues/milestones/#create-a-milestone</cref>
+        /// </see>
+        public GitHubMilestoneResponse CreateMilestone(string owner, string repository, string title) {
+            return new GitHubMilestoneResponse(Raw.CreateMilestone(owner, repository, title));
+        }
+
+        /// <summary>
+        /// Creates a new milestone in the repository matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="GitHubMilestoneResponse"/> representing the response.</returns>
+        /// <see>
+        ///     <cref>https://developer.github.com/v3/issues/milestones/#create-a-milestone</cref>
+        /// </see>
+        public GitHubMilestoneResponse CreateMilestone(GitHubCreateMilestoneOptions options) {
+            return new GitHubMilestoneResponse(Raw.CreateMilestone(options));
+        }
+
+        /// <summary>
         /// Gets the milestone matching the specified <paramref name="owner"/>, <paramref name="repository"/> and <paramref name="number"/>.
         /// </summary>
         /// <param name="owner">The username (login) of the owner of the repository.</param>

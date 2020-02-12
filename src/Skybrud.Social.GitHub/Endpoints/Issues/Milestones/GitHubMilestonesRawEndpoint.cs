@@ -31,6 +31,37 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues.Milestones {
         #endregion
 
         #region Methods
+        
+        /// <summary>
+        /// Creates a new milestone with <paramref name="title"/> in the repository matching the specified
+        /// <paramref name="owner"/> and <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="owner">The username (login) of the owner of the repository.</param>
+        /// <param name="repository">The slug of the repository.</param>
+        /// <param name="title">The title of the milestone.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://developer.github.com/v3/issues/milestones/#create-a-milestone</cref>
+        /// </see>
+        public IHttpResponse CreateMilestone(string owner, string repository, string title) {
+            if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
+            if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
+            if (string.IsNullOrWhiteSpace(title)) throw new ArgumentNullException(nameof(title));
+            return CreateMilestone(new GitHubCreateMilestoneOptions(owner, repository, title));
+        }
+
+        /// <summary>
+        /// Creates a new milestone in the repository matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://developer.github.com/v3/issues/milestones/#create-a-milestone</cref>
+        /// </see>
+        public IHttpResponse CreateMilestone(GitHubCreateMilestoneOptions options) {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            return Client.GetResponse(options);
+        }
 
         /// <summary>
         /// Gets the milestone matching the specified <paramref name="owner"/>, <paramref name="repository"/> and <paramref name="number"/>.

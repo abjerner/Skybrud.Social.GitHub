@@ -28,10 +28,10 @@ namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
 
         /// <summary>
         /// Gets or sets the state of the milestones to be returned. Possible values are
-        /// <see cref="GitHubMilestoneState.Open"/> (default), <see cref="GitHubMilestoneState.Closed"/> and
-        /// <see cref="GitHubMilestoneState.All"/>.
+        /// <see cref="GitHubMilestoneStateFilter.Open"/> (default), <see cref="GitHubMilestoneStateFilter.Closed"/> and
+        /// <see cref="GitHubMilestoneStateFilter.All"/>.
         /// </summary>
-        public GitHubMilestoneState State { get; set; }
+        public GitHubMilestoneStateFilter State { get; set; }
 
         /// <summary>
         /// Gets or sets the field the results should be sorted by. Possible values are
