@@ -1,5 +1,6 @@
 using Skybrud.Social.GitHub.Endpoints.Issues.Comments;
 using Skybrud.Social.GitHub.Endpoints.Issues.Events;
+using Skybrud.Social.GitHub.Endpoints.Issues.Milestones;
 using Skybrud.Social.GitHub.Options.Issues;
 using Skybrud.Social.GitHub.Responses.Issues;
 
@@ -32,6 +33,11 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues {
         /// </summary>
         public GitHubIssuesEventsEndpoint Events { get; }
 
+        /// <summary>
+        /// Gets a reference to the <strong>Issues/Milestones</strong> endpoint.
+        /// </summary>
+        public GitHubMilestonesEndpoint Milestones { get; }
+
         #endregion
 
         #region Constructors
@@ -40,6 +46,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues {
             Service = service;
             Comments = new GitHubIssuesCommentsEndpoint(service);
             Events = new GitHubIssuesEventsEndpoint(service);
+            Milestones = new GitHubMilestonesEndpoint(service);
         }
 
         #endregion

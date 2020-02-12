@@ -1,0 +1,81 @@
+using System;
+using Skybrud.Essentials.Http;
+using Skybrud.Social.GitHub.OAuth;
+using Skybrud.Social.GitHub.Options.Issues.Milestones;
+
+namespace Skybrud.Social.GitHub.Endpoints.Issues.Milestones {
+
+    /// <summary>
+    /// Class representing the raw <strong>Issues/Milestones</strong> endpoint.
+    /// </summary>
+    /// <see>
+    ///     <cref>https://developer.github.com/v3/issues/milestones/</cref>
+    /// </see>
+    public class GitHubMilestonesRawEndpoint {
+
+        #region Properties
+
+        /// <summary>
+        /// Gets a reference to the parent OAuth client.
+        /// </summary>
+        public GitHubOAuthClient Client { get; }
+
+        #endregion
+
+        #region Constructors
+
+        internal GitHubMilestonesRawEndpoint(GitHubOAuthClient client) {
+            Client = client;
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Gets the milestone matching the specified <paramref name="owner"/>, <paramref name="repository"/> and <paramref name="number"/>.
+        /// </summary>
+        /// <param name="owner">The username (login) of the owner of the repository.</param>
+        /// <param name="repository">The slug of the repository.</param>
+        /// <param name="number">The number of the milestone.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://developer.github.com/v3/issues/milestones/#get-a-single-milestone</cref>
+        /// </see>
+        public IHttpResponse GetMilestone(string owner, string repository, int number) {
+            if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
+            if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
+            return Client.GetResponse(new GitHubGetMilestoneOptions(owner, repository, number));
+        }
+
+        /// <summary>
+        /// Gets the milestone matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://developer.github.com/v3/issues/milestones/#get-a-single-milestone</cref>
+        /// </see>
+        public IHttpResponse GetMilestone(GitHubGetMilestoneOptions options) {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            return Client.GetResponse(options);
+        }
+
+        /// <summary>
+        /// Gets the milestones of the repository matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://developer.github.com/v3/issues/milestones/#list-milestones-for-a-repository</cref>
+        /// </see>
+        public IHttpResponse GetMilestones(GitHubGetMilestonesOptions options) {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            return Client.GetResponse(options);
+        }
+
+        #endregion
+
+    }
+
+}

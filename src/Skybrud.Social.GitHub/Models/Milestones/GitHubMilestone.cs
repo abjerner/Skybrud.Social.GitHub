@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Models.Issues;
@@ -24,6 +23,11 @@ namespace Skybrud.Social.GitHub.Models.Milestones {
         /// Gets the ID of the milestone.
         /// </summary>
         public long Id { get; }
+
+        /// <summary>
+        /// Gets the node ID of the milestone.
+        /// </summary>
+        public string NodeId { get; }
 
         /// <summary>
         /// Gets the number of the milestone.
@@ -97,6 +101,7 @@ namespace Skybrud.Social.GitHub.Models.Milestones {
 
         private GitHubMilestone(JObject obj) : base(obj) {
             Id = obj.GetInt64("id");
+            NodeId = obj.GetString("node_id");
             Number = obj.GetInt32("number");
             Title = obj.GetString("title");
             Description = obj.GetString("description");

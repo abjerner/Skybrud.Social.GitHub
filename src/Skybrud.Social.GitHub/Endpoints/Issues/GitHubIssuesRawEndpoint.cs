@@ -3,6 +3,7 @@ using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Endpoints.Issues.Comments;
 using Skybrud.Social.GitHub.Endpoints.Issues.Events;
+using Skybrud.Social.GitHub.Endpoints.Issues.Milestones;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Issues;
 
@@ -30,6 +31,11 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues {
         /// </summary>
         public GitHubIssuesEventsRawEndpoint Events { get; }
 
+        /// <summary>
+        /// Gets a reference to the raw <strong>Issues/Milestones</strong> endpoint.
+        /// </summary>
+        public GitHubMilestonesRawEndpoint Milestones { get; }
+
         #endregion
 
         #region Constructors
@@ -38,6 +44,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues {
             Client = client;
             Comments = new GitHubIssuesCommentsRawEndpoint(client);
             Events = new GitHubIssuesEventsRawEndpoint(client);
+            Milestones = new GitHubMilestonesRawEndpoint(client);
         }
 
         #endregion
