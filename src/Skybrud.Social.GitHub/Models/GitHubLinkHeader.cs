@@ -90,7 +90,7 @@ namespace Skybrud.Social.GitHub.Models {
                 string rel = match.Groups[2].Value;
 
                 // Match the page parameter from the query string
-                Match m2 = Regex.Match(url, "&page=([0-9]+)");
+                Match m2 = Regex.Match(url, "page=([0-9]+)");
 
                 // Skip the URL if a page number wasn't part of the URL
                 if (!m2.Success) continue;
