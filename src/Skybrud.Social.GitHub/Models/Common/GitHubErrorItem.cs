@@ -3,6 +3,9 @@ using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Common {
 
+    /// <summary>
+    /// Class representing an individual error of an error response.
+    /// </summary>
     public class GitHubErrorItem : GitHubObject {
 
         #region Properties

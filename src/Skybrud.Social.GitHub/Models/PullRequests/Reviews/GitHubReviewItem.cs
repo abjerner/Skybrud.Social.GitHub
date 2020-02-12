@@ -5,6 +5,9 @@ using Skybrud.Social.GitHub.Models.Users;
 
 namespace Skybrud.Social.GitHub.Models.PullRequests.Reviews {
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class GitHubReviewItem : GitHubObject {
 
         #region Properties
@@ -14,16 +17,34 @@ namespace Skybrud.Social.GitHub.Models.PullRequests.Reviews {
         /// </summary>
         public long Id { get; }
 
+        /// <summary>
+        /// Gets the node ID of the review.
+        /// </summary>
         public string NodeId { get; }
 
+        /// <summary>
+        /// Gets a reference to the user who made the review.
+        /// </summary>
         public GitHubUserItem User { get; }
 
+        /// <summary>
+        /// Gets the body of the review.
+        /// </summary>
         public string Body { get; }
 
+        /// <summary>
+        /// Gets the state of the review.
+        /// </summary>
         public GitHubReviewState State { get; }
 
+        /// <summary>
+        /// Gets the GitHub website URL of the review.
+        /// </summary>
         public string HtmlUrl { get; }
 
+        /// <summary>
+        /// Gets the pull request URL of the review.
+        /// </summary>
         public string PullRequestUrl { get; }
 
         // TODO: Add support for the "author_association" property

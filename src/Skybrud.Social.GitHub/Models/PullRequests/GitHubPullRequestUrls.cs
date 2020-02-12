@@ -20,8 +20,14 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         /// </summary>
         public string HtmlUrl { get; }
 
+        /// <summary>
+        /// Gets the diff URL of the pull request.
+        /// </summary>
         public string DiffUrl { get; }
 
+        /// <summary>
+        /// Gets the patch URL of the pull request.
+        /// </summary>
         public string PatchUrl { get; }
 
         /// <summary>
@@ -34,12 +40,24 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         /// </summary>
         public string CommitsUrl { get; }
 
+        /// <summary>
+        /// Gets the review comments URL of the pull request.
+        /// </summary>
         public string ReviewCommentsUrl { get; }
 
+        /// <summary>
+        /// Gets the review comment URL of the pull request.
+        /// </summary>
         public string ReviewCommentUrl { get; }
 
+        /// <summary>
+        /// Gets the comments URL of the pull request.
+        /// </summary>
         public string CommentsUrl { get; }
 
+        /// <summary>
+        /// Gets the statuses URL of the pull request.
+        /// </summary>
         public string StatusesUrl { get; }
 
         #endregion
