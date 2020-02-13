@@ -128,7 +128,7 @@
         /// <summary>
         /// The issue was transferred to another repository.
         /// </summary>
-        Transfered,
+        Transferred,
 
         /// <summary>
         /// The actor was unassigned from the issue.
