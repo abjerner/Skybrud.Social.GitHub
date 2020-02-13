@@ -84,6 +84,11 @@
         MovedColumnsInProject,
 
         /// <summary>
+        /// Not documented by GitHub.
+        /// </summary>
+        ReadyForReview,
+
+        /// <summary>
         ///  The issue was referenced from a commit message.The commit_id attribute is the commit SHA1 of where that
         /// happened.
         /// </summary>
