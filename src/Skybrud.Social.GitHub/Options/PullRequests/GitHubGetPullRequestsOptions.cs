@@ -1,6 +1,10 @@
-﻿using Skybrud.Essentials.Http.Collections;
+﻿using Skybrud.Essentials.Common;
+using Skybrud.Essentials.Http;
+using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Strings.Extensions;
+using Skybrud.Social.GitHub.Extensions;
+using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Options.Issues;
 using Skybrud.Social.GitHub.Options.Repositories;
 
@@ -12,7 +16,7 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
     /// <see>
     ///     <cref>https://developer.github.com/v3/pulls/#list-pull-requests</cref>
     /// </see>
-    public class GitHubGetPullRequestsOptions : IHttpGetOptions {
+    public class GitHubGetPullRequestsOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
 
         #region Properties
 
@@ -53,13 +57,32 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
 
         #endregion
 
-        #region Member methods
+        #region Constructors
 
         /// <summary>
-        /// Generates an instance of <see cref="IHttpQueryString"/> representing the options.
+        /// Initializes a new instance with default options.
         /// </summary>
-        /// <returns>An instance of <see cref="IHttpQueryString"/>.</returns>
-        public IHttpQueryString GetQueryString() {
+        public GitHubGetPullRequestsOptions() { }
+
+        /// <summary>
+        /// Initializes a new instance with the specified <paramref name="owner"/> and <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="owner">The username (login) of the owner of the repository.</param>
+        /// <param name="repository">The slug of the repository.</param>
+        public GitHubGetPullRequestsOptions(string owner, string repository) {
+            Owner = owner;
+            Repository = repository;
+        }
+
+        #endregion
+
+        #region Member methods
+
+        /// <inheritdoc />
+        public IHttpRequest GetRequest() {
+
+            if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
+            if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
 
             IHttpQueryString query = new HttpQueryString {
                 {"state", State.ToKebabCase()}
@@ -67,11 +90,13 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
 
             query.Add("sort", Sort.ToKebabCase());
             query.Add("direction", Direction == GitHubSortDirection.Descending ? "desc" : "asc");
-
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
-
-            return query;
+            
+            // Initialize the request
+            return HttpRequest
+                .Get($"/repos/{Owner}/{Repository}/pulls", query)
+                .SetAcceptHeader(MediaTypes);
 
         }
 

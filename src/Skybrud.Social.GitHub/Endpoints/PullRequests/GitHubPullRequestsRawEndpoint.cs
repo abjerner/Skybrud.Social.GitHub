@@ -62,7 +62,7 @@ namespace Skybrud.Social.GitHub.Endpoints.PullRequests {
         public IHttpResponse GetPullRequests(string owner, string repository) {
             if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-            return Client.Get($"/repos/{owner}/{repository}/pulls");
+            return Client.GetResponse(new GitHubGetPullRequestsOptions(owner, repository));
         }
 
         /// <summary>
@@ -72,9 +72,7 @@ namespace Skybrud.Social.GitHub.Endpoints.PullRequests {
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetPullRequests(GitHubGetPullRequestsOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
-            if (string.IsNullOrWhiteSpace(options.Owner)) throw new PropertyNotSetException(nameof(options.Owner));
-            if (string.IsNullOrWhiteSpace(options.Repository)) throw new PropertyNotSetException(nameof(options.Repository));
-            return Client.Get($"/repos/{options.Owner}/{options.Repository}/pulls", options);
+            return Client.GetResponse(options);
         }
 
         #endregion

@@ -152,6 +152,17 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         /// </summary>
         public GitHubPullRequestUrls Urls { get; }
 
+        /// <summary>
+        /// Gets whether the pull request is a draft.
+        /// </summary>
+        /// <remarks>Draft pull requests are currently in preview, meaning the <c>draft</c> property is only part of
+        /// the returned JSON when the <c>application/vnd.github.shadow-cat-preview+json</c> media type is expclicitly
+        /// specified in the request.</remarks>
+        /// <see>
+        ///     <cref>https://social.skybrud.dk/github/media-types/</cref>
+        /// </see>
+        public GitHubBoolean IsDraft { get; }
+
         #endregion
 
         #region Constructors
@@ -184,6 +195,8 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
             Assignees = obj.GetArrayItems("assignees", GitHubUserItem.Parse);
             Labels = obj.GetArrayItems("labels", GitHubLabel.Parse);
             Milestone = obj.GetObject("milestone", GitHubMilestone.Parse);
+
+            IsDraft = obj.GetEnum("draft", GitHubBoolean.Unspecified);
 
             Urls = GitHubPullRequestUrls.Parse(obj);
 
