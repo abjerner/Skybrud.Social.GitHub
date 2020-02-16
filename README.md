@@ -1,7 +1,8 @@
-Skybrud.Social.GitHub
-=====================
+# Skybrud.Social.GitHub [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md) [![NuGet](https://img.shields.io/nuget/v/Skybrud.Social.GitHub.svg)](https://www.nuget.org/packages/Skybrud.Social.GitHub) [![NuGet](https://img.shields.io/nuget/dt/Skybrud.Social.GitHub.svg)](https://www.nuget.org/packages/Skybrud.Social.GitHub)
 
-As an add-on for [Skybrud.Social](https://github.com/abjerner/Skybrud.Social), **Skybrud.Social.GitHub** helps you with both authentication as well as raw and object-oriented communication with the GitHub API.
+
+
+**Skybrud.Social.GitHub** is an API wrapper for the GitHub API and helps you with both authentication as well as raw and object-oriented communication with the API.
 
 ### Installation
 
