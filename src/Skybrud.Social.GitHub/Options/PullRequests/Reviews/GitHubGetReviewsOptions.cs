@@ -3,6 +3,8 @@ using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Http.Options;
+using Skybrud.Social.GitHub.Extensions;
+using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Issues;
 using Skybrud.Social.GitHub.Models.PullRequests;
 
@@ -14,7 +16,7 @@ namespace Skybrud.Social.GitHub.Options.PullRequests.Reviews {
     /// <see>
     ///     <cref>https://developer.github.com/v3/pulls/reviews/#list-reviews-on-a-pull-request</cref>
     /// </see>
-    public class GitHubGetReviewsOptions : IHttpRequestOptions {
+    public class GitHubGetReviewsOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
 
         #region Properties
 
@@ -99,12 +101,15 @@ namespace Skybrud.Social.GitHub.Options.PullRequests.Reviews {
 
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
+            if (Number == 0) throw new PropertyNotSetException(nameof(Number));
 
             IHttpQueryString query = new HttpQueryString();
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
 
-            return HttpRequest.Get($"/repos/{Owner}/{Repository}/pulls/{Number}/reviews", query);
+            return HttpRequest
+                .Get($"/repos/{Owner}/{Repository}/pulls/{Number}/reviews", query)
+                .SetAcceptHeader(MediaTypes);
 
         }
 

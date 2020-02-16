@@ -54,14 +54,12 @@ namespace Skybrud.Social.GitHub.Endpoints.PullRequests {
         }
 
         /// <summary>
-        /// Gets the pull request matching the specified <paramref name="owner"/>, <paramref name="repository"/> and <paramref name="number"/>.
+        /// Gets the pull request matching the specified <paramref name="options"/>.
         /// </summary>
-        /// <param name="owner">The alias of the repository owner.</param>
-        /// <param name="repository">The alias of the repository.</param>
-        /// <param name="number">The number of the pull request.</param>
+        /// <param name="options">The options for the request to the API.</param>
         /// <returns>An instance of <see cref="GitHubGetPullRequestResponse"/> representing the response.</returns>
-        public GitHubGetPullRequestResponse GetPullRequests(string owner, string repository, int number) {
-            return GitHubGetPullRequestResponse.ParseResponse(Raw.GetPullRequest(owner, repository, number));
+        public GitHubGetPullRequestResponse GetPullRequest(GitHubGetPullRequestOptions options) {
+            return GitHubGetPullRequestResponse.ParseResponse(Raw.GetPullRequest(options));
         }
 
         /// <summary>

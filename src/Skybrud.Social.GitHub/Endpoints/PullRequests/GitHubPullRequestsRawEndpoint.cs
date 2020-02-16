@@ -1,5 +1,4 @@
 using System;
-using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Endpoints.PullRequests.Reviews;
 using Skybrud.Social.GitHub.OAuth;
@@ -50,7 +49,17 @@ namespace Skybrud.Social.GitHub.Endpoints.PullRequests {
         public IHttpResponse GetPullRequest(string owner, string repository, int number) {
             if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-            return Client.Get($"/repos/{owner}/{repository}/pulls/" + number);
+            return GetPullRequest(new GitHubGetPullRequestOptions(owner, repository, number));
+        }
+
+        /// <summary>
+        /// Gets the pull request matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetPullRequest(GitHubGetPullRequestOptions options) {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            return Client.GetResponse(options);
         }
         
         /// <summary>
@@ -62,7 +71,7 @@ namespace Skybrud.Social.GitHub.Endpoints.PullRequests {
         public IHttpResponse GetPullRequests(string owner, string repository) {
             if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-            return Client.GetResponse(new GitHubGetPullRequestsOptions(owner, repository));
+            return GetPullRequests(new GitHubGetPullRequestsOptions(owner, repository));
         }
 
         /// <summary>
