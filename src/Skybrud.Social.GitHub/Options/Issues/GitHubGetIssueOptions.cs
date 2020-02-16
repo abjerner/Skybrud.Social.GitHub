@@ -1,13 +1,15 @@
 ﻿using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Options;
+using Skybrud.Social.GitHub.Extensions;
+using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Issues {
 
     /// <summary>
     /// Options for getting a single GitHub issue.
     /// </summary>
-    public class GitHubGetIssueOptions : IHttpRequestOptions {
+    public class GitHubGetIssueOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
 
         #region Properties
         
@@ -56,8 +58,11 @@ namespace Skybrud.Social.GitHub.Options.Issues {
 
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
+            if (Number == 0) throw new PropertyNotSetException(nameof(Number));
 
-            return HttpRequest.Get($"/repos/{Owner}/{Repository}/issues/{Number}");
+            return HttpRequest
+                .Get($"/repos/{Owner}/{Repository}/issues/{Number}")
+                .SetAcceptHeader(MediaTypes);
 
         }
 

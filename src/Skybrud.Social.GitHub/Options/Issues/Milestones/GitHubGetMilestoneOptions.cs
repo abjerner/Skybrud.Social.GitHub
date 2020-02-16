@@ -1,6 +1,8 @@
 ﻿using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Options;
+using Skybrud.Social.GitHub.Extensions;
+using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
 
@@ -10,7 +12,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#get-a-single-milestone</cref>
     /// </see>
-    public class GitHubGetMilestoneOptions : IHttpRequestOptions {
+    public class GitHubGetMilestoneOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
 
         #region Properties
 
@@ -64,7 +66,9 @@ namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
             if (Number == 0) throw new PropertyNotSetException(nameof(Number));
 
-            return HttpRequest.Get($"/repos/{Owner}/{Repository}/milestones/{Number}");
+            return HttpRequest
+                .Get($"/repos/{Owner}/{Repository}/milestones/{Number}")
+                .SetAcceptHeader(MediaTypes);
 
         }
 

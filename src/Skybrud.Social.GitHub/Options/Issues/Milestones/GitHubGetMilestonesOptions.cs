@@ -3,6 +3,8 @@ using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Strings.Extensions;
+using Skybrud.Social.GitHub.Extensions;
+using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
 
@@ -12,7 +14,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#list-milestones-for-a-repository</cref>
     /// </see>
-    public class GitHubGetMilestonesOptions : IHttpRequestOptions {
+    public class GitHubGetMilestonesOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
 
         #region Properties
 
@@ -87,16 +89,21 @@ namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
 
+            // Initialzie the query string
             IHttpQueryString query = new HttpQueryString {
                 { "state", State.ToUnderscore() },
                 { "sort", Sort.ToUnderscore() },
                 { "direction", Direction == GitHubSortDirection.Descending ? "desc" : "asc" }
             };
 
+            // Update the query string with additional parameters
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
 
-            return HttpRequest.Get($"/repos/{Owner}/{Repository}/milestones", query);
+            // Initialize the request
+            return HttpRequest
+                .Get($"/repos/{Owner}/{Repository}/milestones", query)
+                .SetAcceptHeader(MediaTypes);
 
         }
 

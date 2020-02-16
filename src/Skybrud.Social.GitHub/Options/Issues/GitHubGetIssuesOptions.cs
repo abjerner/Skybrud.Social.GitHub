@@ -1,9 +1,10 @@
-using System;
+using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Strings;
 using Skybrud.Essentials.Time;
-using Skybrud.Social.GitHub.Constants;
+using Skybrud.Social.GitHub.Extensions;
+using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Issues {
     
@@ -13,7 +14,7 @@ namespace Skybrud.Social.GitHub.Options.Issues {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/#list-issues</cref>
     /// </see>
-    public class GitHubGetIssuesOptions : IHttpGetOptions {
+    public class GitHubGetIssuesOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
 
         #region Properties
 
@@ -61,28 +62,27 @@ namespace Skybrud.Social.GitHub.Options.Issues {
 
         #region Member methods
 
-        /// <summary>
-        /// Generates an instance of <see cref="IHttpQueryString"/> representing the options.
-        /// </summary>
-        /// <returns>An instance of <see cref="IHttpQueryString"/>.</returns>
-        public IHttpQueryString GetQueryString() {
+        /// <inheritdoc />
+        public IHttpRequest GetRequest() {
 
+            // Initialzie the query string
             IHttpQueryString query = new HttpQueryString {
                 {"filter", StringUtils.ToLower(Filter)},
                 {"state", StringUtils.ToLower(State)}
             };
 
+            // Update the query string with additional parameters
             if (Labels != null && Labels.Length > 0) query.Add("labels", string.Join(",", Labels));
-
             query.Add("sort", StringUtils.ToLower(Sort));
             query.Add("direction", StringUtils.ToLower(Direction));
-            
             if (Since != null) query.Add("since", Since.Iso8601);
-
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
 
-            return query;
+            // Initialize the request
+            return HttpRequest
+                .Get("/issues", query)
+                .SetAcceptHeader(MediaTypes);
 
         }
 

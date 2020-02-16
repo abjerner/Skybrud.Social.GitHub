@@ -4,6 +4,8 @@ using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Extensions;
+using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Issues;
 using Skybrud.Social.GitHub.Models.PullRequests;
 
@@ -15,7 +17,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue</cref>
     /// </see>
-    public class GitHubGetIssueCommentsOptions : IHttpRequestOptions {
+    public class GitHubGetIssueCommentsOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
 
         #region Properties
 
@@ -111,7 +113,9 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
 
-            return HttpRequest.Get($"/repos/{Owner}/{Repository}/issues/{Number}/comments", query);
+            return HttpRequest
+                .Get($"/repos/{Owner}/{Repository}/issues/{Number}/comments", query)
+                .SetAcceptHeader(MediaTypes);
 
         }
 

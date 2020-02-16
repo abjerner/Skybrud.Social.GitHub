@@ -2,6 +2,8 @@
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Http.Options;
+using Skybrud.Social.GitHub.Extensions;
+using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Issues;
 
 namespace Skybrud.Social.GitHub.Options.Issues.Events {
@@ -12,7 +14,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Events {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/events/#list-events-for-an-issue</cref>
     /// </see>
-    public class GitHubGetIssueEventsOptions : IHttpRequestOptions {
+    public class GitHubGetIssueEventsOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
 
         #region Properties
 
@@ -88,7 +90,9 @@ namespace Skybrud.Social.GitHub.Options.Issues.Events {
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
 
-            return HttpRequest.Get($"/repos/{Owner}/{Repository}/issues/{Number}/events", query);
+            return HttpRequest
+                .Get($"/repos/{Owner}/{Repository}/issues/{Number}/events", query)
+                .SetAcceptHeader(MediaTypes);
 
         }
 

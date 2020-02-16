@@ -3,6 +3,8 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Options;
+using Skybrud.Social.GitHub.Extensions;
+using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Issues;
 
 namespace Skybrud.Social.GitHub.Options.Issues.Comments {
@@ -10,7 +12,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
     /// <summary>
     /// Class representing the options for adding a comment to a GitHub issue.
     /// </summary>
-    public class GitHubAddIssueCommentOptions : IHttpRequestOptions {
+    public class GitHubAddIssueCommentOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
 
         #region Properties
         
@@ -95,7 +97,9 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
             };
 
             // Make the request to the API
-            return HttpRequest.Post($"/repos/{Owner}/{Repository}/issues/{Number}/comments", body);
+            return HttpRequest
+                .Post($"/repos/{Owner}/{Repository}/issues/{Number}/comments", body)
+                .SetAcceptHeader(MediaTypes);
 
         }
 

@@ -74,6 +74,8 @@ namespace Skybrud.Social.GitHub.Constants {
 
         public const string ProtectedBranchesRequiredApprovingApiPreview = "application/vnd.github.luke-cage-preview+json";
 
+        public const string Baptiste = "application/vnd.github.baptiste-preview+json";
+
     }
 
 }

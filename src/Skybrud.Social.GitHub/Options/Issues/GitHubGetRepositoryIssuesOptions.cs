@@ -1,16 +1,18 @@
-using System;
+using Skybrud.Essentials.Common;
+using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Strings;
 using Skybrud.Essentials.Time;
-using Skybrud.Social.GitHub.Constants;
+using Skybrud.Social.GitHub.Extensions;
+using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Issues {
 
     /// <summary>
     /// Class representing the options for getting the issues of a GitHub repository.
     /// </summary>
-    public class GitHubGetRepositoryIssuesOptions : IHttpGetOptions {
+    public class GitHubGetRepositoryIssuesOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
 
         #region Properties
 
@@ -83,33 +85,55 @@ namespace Skybrud.Social.GitHub.Options.Issues {
 
         #endregion
 
-        #region Member methods
+        #region Constructors
 
         /// <summary>
-        /// Generates an instance of <see cref="IHttpQueryString"/> representing the options.
+        /// Initializes a new instance with default options.
         /// </summary>
-        /// <returns>An instance of <see cref="IHttpQueryString"/>.</returns>
-        public IHttpQueryString GetQueryString() {
+        public GitHubGetRepositoryIssuesOptions() { }
 
+        /// <summary>
+        /// Initializes a new instance with the specified <paramref name="owner"/> and <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="owner">The username (login) of the owner of the repository.</param>
+        /// <param name="repository">The slug of the repository.</param>
+        public GitHubGetRepositoryIssuesOptions(string owner, string repository) {
+            Owner = owner;
+            Repository = repository;
+        }
+
+        #endregion
+
+        #region Member methods
+
+        /// <inheritdoc />
+        public IHttpRequest GetRequest() {
+
+            if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
+            if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
+
+            // Initialzie the query string
             IHttpQueryString query = new HttpQueryString {
                 {"state", StringUtils.ToLower(State)}
             };
 
+            // Update the query string with additional parameters
             if (!string.IsNullOrWhiteSpace(Milestone)) query.Add("milestone", Milestone);
             if (!string.IsNullOrWhiteSpace(Assignee)) query.Add("assignee", Assignee);
             if (!string.IsNullOrWhiteSpace(Creator)) query.Add("creator", Creator);
             if (!string.IsNullOrWhiteSpace(Mentioned)) query.Add("mentioned", Mentioned);
             if (Labels != null && Labels.Length > 0) query.Add("labels", string.Join(",", Labels));
-
             query.Add("sort", StringUtils.ToLower(Sort));
             query.Add("direction", StringUtils.ToLower(Direction));
-            
             if (Since != null) query.Add("since", Since.Iso8601);
-
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
 
-            return query;
+
+            // Initialize the request
+            return HttpRequest
+                .Get($"/repos/{Owner}/{Repository}/issues", query)
+                .SetAcceptHeader(MediaTypes);
 
         }
 

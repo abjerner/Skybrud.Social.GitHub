@@ -2,6 +2,8 @@
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Options;
+using Skybrud.Social.GitHub.Extensions;
+using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Repositories {
     
@@ -11,7 +13,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create-repository-using-a-repository-template</cref>
     /// </see>
-    public class GitHubCreateOrganisationRepositoryOptions : IHttpRequestOptions {
+    public class GitHubCreateOrganisationRepositoryOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
 
         #region Properties
 
@@ -54,7 +56,8 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
         public bool HasWiki { get; set; }
 
         /// <summary>
-        /// Gets or sets whether the repository to be created should be available as a template.
+        /// Gets or sets whether the repository to be created should be available as a template. Requires the
+        /// <c>application/vnd.github.baptiste-preview+json</c> media type.
         /// </summary>
         public bool IsTemplate { get; set; }
 
@@ -120,14 +123,10 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
             // Append the "is_template" parameter to the request body (if true)
             if (IsTemplate) body.Add("is_template", "true");
 
-            // Initialize a new request
-            HttpRequest request = HttpRequest.Post($"/orgs/{Organisation}/repos", body);
-
-            // Make sure we can access the preview feature (if "is_template" is present)
-            if (IsTemplate) request.Accept = "application/vnd.github.baptiste-preview+json";
-
-            return request;
-
+            // Initialize the request
+            return HttpRequest
+                .Post($"/orgs/{Organisation}/repos", body)
+                .SetAcceptHeader(MediaTypes);
 
         }
 

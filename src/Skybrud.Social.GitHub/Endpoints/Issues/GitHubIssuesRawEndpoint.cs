@@ -95,7 +95,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues {
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetIssues(GitHubGetIssuesOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
-            return Client.Get("/issues", options);
+            return Client.GetResponse(options);
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues {
         public IHttpResponse GetIssues(string owner, string repository) {
             if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-            return Client.Get($"/repos/{owner}/{repository}/issues");
+            return GetIssues(new GitHubGetRepositoryIssuesOptions(owner, repository));
         }
 
         /// <summary>
@@ -117,9 +117,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues {
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetIssues(GitHubGetRepositoryIssuesOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
-            if (string.IsNullOrWhiteSpace(options.Owner)) throw new ArgumentNullException(nameof(options.Owner));
-            if (string.IsNullOrWhiteSpace(options.Repository)) throw new PropertyNotSetException(nameof(options.Repository));
-            return Client.Get($"/repos/{options.Owner}/{options.Repository}/issues", options);
+            return Client.GetResponse(options);
         }
 
         #endregion

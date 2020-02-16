@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Options;
+using Skybrud.Social.GitHub.Extensions;
+using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Milestones;
 
 namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
@@ -13,7 +15,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#delete-a-milestone</cref>
     /// </see>
-    public class GitHubDeleteMilestoneOptions : IHttpRequestOptions {
+    public class GitHubDeleteMilestoneOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
 
         #region Properties
 
@@ -82,7 +84,9 @@ namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
             if (Number == 0) throw new PropertyNotSetException(nameof(Number));
 
             // Make the request to the API
-            return new HttpRequest(HttpMethod.Delete, $"/repos/{Owner}/{Repository}/milestones/{Number}");
+            return HttpRequest
+                .Delete($"/repos/{Owner}/{Repository}/milestones/{Number}")
+                .SetAcceptHeader(MediaTypes);
 
         }
 
