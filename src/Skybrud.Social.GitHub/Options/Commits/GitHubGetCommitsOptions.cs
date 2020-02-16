@@ -1,8 +1,6 @@
-using System;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Time;
-using static Skybrud.Social.GitHub.GitHubUtils;
 
 namespace Skybrud.Social.GitHub.Options.Commits {
 
