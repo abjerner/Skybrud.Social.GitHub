@@ -1,5 +1,6 @@
 using System.Net;
 using Skybrud.Essentials.Http;
+using Skybrud.Essentials.Http.Exceptions;
 using Skybrud.Social.GitHub.Models.Common;
 
 namespace Skybrud.Social.GitHub.Exceptions {
@@ -7,7 +8,7 @@ namespace Skybrud.Social.GitHub.Exceptions {
     /// <summary>
     /// Class representing an exception returned by the GitHub API.
     /// </summary>
-    public class GitHubHttpException : GitHubException {
+    public class GitHubHttpException : GitHubException, IHttpException {
 
         #region Properties
 
