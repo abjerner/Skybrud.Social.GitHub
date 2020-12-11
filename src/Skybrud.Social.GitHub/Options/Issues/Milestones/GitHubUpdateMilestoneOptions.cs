@@ -5,7 +5,6 @@ using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Time;
-using Skybrud.Social.GitHub.Extensions;
 using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Milestones;
 
