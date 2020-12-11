@@ -40,6 +40,11 @@ namespace Skybrud.Social.GitHub.Models.Events {
         public GitHubEventType Event { get; }
 
         /// <summary>
+        /// Identifies the actual type of event that occurred.
+        /// </summary>
+        public string EventRaw { get; }
+
+        /// <summary>
         /// Gets the string SHA of the commit that referenced this issue.
         /// </summary>
         public string CommitId { get; }
@@ -108,7 +113,8 @@ namespace Skybrud.Social.GitHub.Models.Events {
             NodeId = obj.GetString("node_id");
             Url = obj.GetString("url");
             Actor = obj.GetObject("actor", GitHubUserItem.Parse);
-            Event = obj.GetEnum<GitHubEventType>("event");
+            Event = obj.GetEnum("event", GitHubEventType.Other);
+            EventRaw = obj.GetString("event");
             CommitId = obj.GetString("commit_id");
             CommitUrl = obj.GetString("commit_url");
             CreatedAt = obj.GetString("created_at", EssentialsTime.Parse);

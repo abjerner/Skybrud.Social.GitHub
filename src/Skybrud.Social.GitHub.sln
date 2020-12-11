@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skybrud.Social.GitHub", "Skybrud.Social.GitHub\Skybrud.Social.GitHub.csproj", "{F27F84A5-7434-4493-AE1F-61D2129A2EE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Skybrud.Social.GitHub", "Skybrud.Social.GitHub\Skybrud.Social.GitHub.csproj", "{F27F84A5-7434-4493-AE1F-61D2129A2EE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{ED013541-6B89-4D86-8863-CD0B98863E2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{F27F84A5-7434-4493-AE1F-61D2129A2EE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F27F84A5-7434-4493-AE1F-61D2129A2EE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F27F84A5-7434-4493-AE1F-61D2129A2EE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED013541-6B89-4D86-8863-CD0B98863E2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED013541-6B89-4D86-8863-CD0B98863E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED013541-6B89-4D86-8863-CD0B98863E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED013541-6B89-4D86-8863-CD0B98863E2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DDEE94C7-3D1F-48FB-8EA0-E5AEE0155040}
 	EndGlobalSection
 EndGlobal
