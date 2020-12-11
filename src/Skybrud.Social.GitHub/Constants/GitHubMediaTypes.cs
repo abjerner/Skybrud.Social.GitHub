@@ -14,6 +14,8 @@ namespace Skybrud.Social.GitHub.Constants {
     /// </see>
     public static class GitHubMediaTypes {
 
+        #region Friendly names
+
         public const string StableVersion = "application/vnd.github.v3";
 
         public const string StableVersionHtml = "application/vnd.github.html";
@@ -54,7 +56,7 @@ namespace Skybrud.Social.GitHub.Constants {
 
         public const string PullRequestReviewsApiPreview = "application/vnd.github.black-cat-preview+json";
 
-        public const string DraftPullRequestApiPreview = "application/vnd.github.shadow-cat-preview+json";
+        public const string DraftPullRequestApiPreview = ShadowCat;
 
         public const string ProjectsApiPreview = "application/vnd.github.inertia-preview+json";
 
@@ -72,9 +74,21 @@ namespace Skybrud.Social.GitHub.Constants {
 
         public const string ChecksApiPreview = "application/vnd.github.antiope-preview+json";
 
-        public const string ProtectedBranchesRequiredApprovingApiPreview = "application/vnd.github.luke-cage-preview+json";
+        public const string ProtectedBranchesRequiredApprovingApiPreview = LukeCage;
+
+        #endregion
+
+        #region Funny names
 
         public const string Baptiste = "application/vnd.github.baptiste-preview+json";
+
+        public const string LukeCage = "application/vnd.github.luke-cage-preview+json";
+
+        public const string SailorV = "application/vnd.github.sailor-v-preview+json";
+
+        public const string ShadowCat = "application/vnd.github.shadow-cat-preview+json";
+
+        #endregion
 
     }
 
