@@ -1,8 +1,7 @@
-using Skybrud.Social.GitHub.Endpoints.Raw;
 using Skybrud.Social.GitHub.Options.Organizations;
 using Skybrud.Social.GitHub.Responses.Organizations;
 
-namespace Skybrud.Social.GitHub.Endpoints {
+namespace Skybrud.Social.GitHub.Endpoints.Organizations {
 
     /// <summary>
     /// Class representing the <strong>Organizations</strong> endpoint.
@@ -21,12 +20,18 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// </summary>
         public GitHubOrganizationsRawEndpoint Raw => Service.Client.Organizations;
 
+        /// <summary>
+        /// Gets a reference to the <strong>Organizations/Members</strong> endpoint.
+        /// </summary>
+        public GitHubOrganizationMembersEndpoint Members { get; }
+
         #endregion
 
         #region Constructors
 
         internal GitHubOrganizationsEndpoint(GitHubService service) {
             Service = service;
+            Members = new GitHubOrganizationMembersEndpoint(service);
         }
 
         #endregion

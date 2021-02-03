@@ -55,17 +55,17 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <summary>
         /// Gets a list of users following the authenticated user.
         /// </summary>
-        /// <returns>An instance of <see cref="GitHubGetUsersResponse"/> representing the response.</returns>
-        public GitHubGetUsersResponse GetFollowers() {
-            return GitHubGetUsersResponse.ParseResponse(Raw.GetFollowers());
+        /// <returns>An instance of <see cref="GitHubUserListResponse"/> representing the response.</returns>
+        public GitHubUserListResponse GetFollowers() {
+            return new GitHubUserListResponse(Raw.GetFollowers());
         }
 
         /// <summary>
         /// Gets a list of users the authenticated user is following.
         /// </summary>
-        /// <returns>An instance of <see cref="GitHubGetUsersResponse"/> representing the response.</returns>
-        public GitHubGetUsersResponse GetFollowing() {
-            return GitHubGetUsersResponse.ParseResponse(Raw.GetFollowing());
+        /// <returns>An instance of <see cref="GitHubUserListResponse"/> representing the response.</returns>
+        public GitHubUserListResponse GetFollowing() {
+            return new GitHubUserListResponse(Raw.GetFollowing());
         }
 
         /// <summary>

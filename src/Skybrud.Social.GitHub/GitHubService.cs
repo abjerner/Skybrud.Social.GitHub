@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using Skybrud.Social.GitHub.Endpoints;
 using Skybrud.Social.GitHub.Endpoints.Issues;
+using Skybrud.Social.GitHub.Endpoints.Organizations;
 using Skybrud.Social.GitHub.Endpoints.PullRequests;
 using Skybrud.Social.GitHub.OAuth;
 
