@@ -1,5 +1,6 @@
 ﻿using System;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Options.Organizations.Members;
 
 namespace Skybrud.Social.GitHub {
 
@@ -25,6 +26,28 @@ namespace Skybrud.Social.GitHub {
         public static string FormatDate(EssentialsDateTime timestamp) {
             if (timestamp == null) throw new ArgumentNullException(nameof(timestamp));
             return FormatDate(timestamp.DateTime);
+        }
+
+        /// <summary>
+        /// Returns a string representation of the specified <paramref name="filter"/>.
+        /// </summary>
+        /// <param name="filter">The filter.</param>
+        /// <returns>A string representation of <paramref name="filter"/>.</returns>
+        public static string ToString(GitHubMemberFilter filter) {
+
+            switch (filter) {
+
+                case GitHubMemberFilter.TwoFactorDisabled:
+                    return "2fa_disabled";
+
+                case GitHubMemberFilter.All:
+                    return "all";
+
+                default:
+                    return string.Empty;
+
+            }
+
         }
 
     }

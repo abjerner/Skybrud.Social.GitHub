@@ -2,14 +2,17 @@
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Http.Options;
-using Skybrud.Essentials.Strings.Extensions;
+using Skybrud.Social.GitHub.Options.Organizations.Members;
 
-namespace Skybrud.Social.GitHub.Options.Organizations.Members {
+namespace Skybrud.Social.GitHub.Options.Organizations.OutsideCollaborators {
     
     /// <summary>
-    /// Class representing the options for listing the members of a GitHub organization.
+    /// Options for getting a list of outside collaborators of a GitHub organization.
     /// </summary>
-    public class GitHubGetOrganizationMembersOptions : IHttpRequestOptions {
+    /// <see>
+    ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-outside-collaborators-for-an-organization</cref>
+    /// </see>
+    public class GitHubGetOutsideCollaboratorsOptions : IHttpRequestOptions {
 
         #region Properties
 
@@ -19,14 +22,9 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Members {
         public string Organization { get; set; }
 
         /// <summary>
-        /// Gets or sets a filter for the members returned in the list.
+        /// Gets or sets a filter for the users returned in the list.
         /// </summary>
         public GitHubMemberFilter Filter { get; set; }
-
-        /// <summary>
-        /// Gets or sets the role the returned members should match.
-        /// </summary>
-        public GitHubMemberRole Role { get; set; }
 
         /// <summary>
         /// Gets or sets the maximuim amount of results per page (max is <c>100</c>).
@@ -45,13 +43,13 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Members {
         /// <summary>
         /// Initializes a new instacne with default options.
         /// </summary>
-        public GitHubGetOrganizationMembersOptions() { }
-        
+        public GitHubGetOutsideCollaboratorsOptions() { }
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="organization"/>.
         /// </summary>
         /// <param name="organization">The alias (username) of the organization.</param>
-        public GitHubGetOrganizationMembersOptions(string organization) {
+        public GitHubGetOutsideCollaboratorsOptions(string organization) {
             Organization = organization;
         }
 
@@ -60,7 +58,7 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Members {
         /// </summary>
         /// <param name="organization">The alias (username) of the organization.</param>
         /// <param name="perPage">The maximuim amount of results per page (max is <c>100</c>).</param>
-        public GitHubGetOrganizationMembersOptions(string organization, int perPage) {
+        public GitHubGetOutsideCollaboratorsOptions(string organization, int perPage) {
             Organization = organization;
             PerPage = perPage;
         }
@@ -71,7 +69,7 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Members {
         /// <param name="organization">The alias (username) of the organization.</param>
         /// <param name="perPage">The maximuim amount of results per page (max is <c>100</c>).</param>
         /// <param name="page">The page to fetch.</param>
-        public GitHubGetOrganizationMembersOptions(string organization, int perPage, int page) {
+        public GitHubGetOutsideCollaboratorsOptions(string organization, int perPage, int page) {
             Organization = organization;
             PerPage = perPage;
             Page = page;
@@ -91,12 +89,11 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Members {
 
             // Append optional parameters
             if (Filter != default) query.Add("filter", GitHubUtils.ToString(Filter));
-            if (Role != default) query.Add("role", Role.ToLower());
             if (PerPage > 0) query.Add("per_page", PerPage);
             if (Page > 0) query.Add("page", Page);
 
             // Initialize and return a new GET request
-            return HttpRequest.Get($"/orgs/{Organization}/members", query);
+            return HttpRequest.Get($"/orgs/{Organization}/outside_collaborators", query);
 
         }
 

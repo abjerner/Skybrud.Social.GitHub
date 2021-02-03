@@ -27,6 +27,11 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         /// </summary>
         public GitHubOrganizationMembersRawEndpoint Members { get; }
 
+        /// <summary>
+        /// Gets a reference to the raw <strong>Organizations/OutsideCollaborators</strong> endpoint.
+        /// </summary>
+        public GitHubOrganizationOutsideCollaboratorsRawEndpoint OutsideCollaborators { get; }
+
         #endregion
 
         #region Constructors
@@ -34,6 +39,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         internal GitHubOrganizationsRawEndpoint(GitHubOAuthClient client) {
             Client = client;
             Members = new GitHubOrganizationMembersRawEndpoint(client);
+            OutsideCollaborators = new GitHubOrganizationOutsideCollaboratorsRawEndpoint(client);
         }
 
         #endregion
@@ -101,32 +107,6 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
             if (options == null) throw new ArgumentNullException(nameof(options));
             if (string.IsNullOrWhiteSpace(options.Username)) throw new PropertyNotSetException(nameof(options.Username));
             return Client.Get($"/users/{options.Username}/orgs");
-        }
-
-        /// <summary>
-        /// Gets a list of the members of the specified <paramref name="organization"/>.
-        /// </summary>
-        /// <param name="organization">The alias (username) of the organization.</param>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-        /// <see>
-        ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organization-members</cref>
-        /// </see>
-        public IHttpResponse GetMembers(string organization) {
-            if (string.IsNullOrWhiteSpace(organization)) throw new ArgumentNullException(nameof(organization));
-            return GetMembers(new GitHubGetOrganizationMembersOptions(organization));
-        }
-
-        /// <summary>
-        /// Gets a list of the members of the specified <paramref name="options"/>.
-        /// </summary>
-        /// <param name="options">The options for the request to the API.</param>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-        /// <see>
-        ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organization-members</cref>
-        /// </see>
-        public IHttpResponse GetMembers(GitHubGetOrganizationMembersOptions options) {
-            if (options == null) throw new ArgumentNullException(nameof(options));
-            return Client.GetResponse(options);
         }
 
         #endregion
