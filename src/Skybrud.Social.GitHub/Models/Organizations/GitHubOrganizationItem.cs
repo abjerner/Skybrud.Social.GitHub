@@ -23,7 +23,7 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         /// <summary>
         /// Gets a collection of URLs related to the organization.
         /// </summary>
-        public GitHubOrganizationUrlCollection Urls { get; }
+        public GitHubOrganizationUrls Urls { get; }
 
         /// <summary>
         /// Gets the avatar URL of the organization.
@@ -51,7 +51,7 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         protected GitHubOrganizationItem(JObject obj) : base(obj) {
             Login = obj.GetString("login");
             Id = obj.GetInt32("id");
-            Urls = GitHubOrganizationUrlCollection.Parse(obj);
+            Urls = GitHubOrganizationUrls.Parse(obj);
             AvatarUrl = obj.GetString("avatar_url");
             Description = obj.GetString("description");
         }

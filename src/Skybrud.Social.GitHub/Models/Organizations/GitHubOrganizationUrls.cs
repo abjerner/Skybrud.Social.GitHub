@@ -6,7 +6,7 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
     /// <summary>
     /// Class representing a collection of URLs related to a GitHub organization.
     /// </summary>
-    public class GitHubOrganizationUrlCollection {
+    public class GitHubOrganizationUrls {
 
         #region Properties
         
@@ -54,7 +54,7 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
 
         #region Constructors
 
-        private GitHubOrganizationUrlCollection(JObject obj) {
+        private GitHubOrganizationUrls(JObject obj) {
             Url = obj.GetString("url");
             ReposUrl = obj.GetString("repos_url");
             EventsUrl = obj.GetString("events_url");
@@ -70,12 +70,12 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubOrganizationUrlCollection"/>.
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubOrganizationUrls"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="GitHubOrganizationUrlCollection"/>.</returns>
-        public static GitHubOrganizationUrlCollection Parse(JObject obj) {
-            return obj == null ? null : new GitHubOrganizationUrlCollection(obj);
+        /// <returns>An instance of <see cref="GitHubOrganizationUrls"/>.</returns>
+        public static GitHubOrganizationUrls Parse(JObject obj) {
+            return obj == null ? null : new GitHubOrganizationUrls(obj);
         }
 
         #endregion
