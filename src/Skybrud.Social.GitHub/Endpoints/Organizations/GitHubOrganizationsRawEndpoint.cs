@@ -51,8 +51,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         /// <param name="id">The ID of the organization.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetOrganization(int id) {
-            if (string.IsNullOrWhiteSpace(alias)) throw new ArgumentNullException(nameof(alias));
-            return Client.Get($"/orgs/{alias}");
+            return Client.Get($"/organizations/{id}");
         }
 
         /// <summary>
