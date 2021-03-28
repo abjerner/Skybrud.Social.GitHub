@@ -3,7 +3,6 @@ using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Organizations;
-using Skybrud.Social.GitHub.Options.Organizations.Members;
 
 namespace Skybrud.Social.GitHub.Endpoints.Organizations {
     
@@ -45,6 +44,16 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Gets information about the organisation with the specified <paramref name="id"/>.
+        /// </summary>
+        /// <param name="id">The ID of the organization.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetOrganization(int id) {
+            if (string.IsNullOrWhiteSpace(alias)) throw new ArgumentNullException(nameof(alias));
+            return Client.Get($"/orgs/{alias}");
+        }
 
         /// <summary>
         /// Gets information about the organisation with the specified <paramref name="alias"/>.
