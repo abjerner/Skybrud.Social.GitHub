@@ -48,64 +48,64 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         /// Gets information about the organisation with the specified <paramref name="id"/>.
         /// </summary>
         /// <param name="id">The ID of the organization.</param>
-        /// <returns>An instance of <see cref="GitHubGetOrganizationResponse"/> representing the response.</returns>
-        public GitHubGetOrganizationResponse GetOrganization(int id) {
-            return GitHubGetOrganizationResponse.ParseResponse(Raw.GetOrganization(id));
+        /// <returns>An instance of <see cref="GitHubOrganizationResponse"/> representing the response.</returns>
+        public GitHubOrganizationResponse GetOrganization(int id) {
+            return new GitHubOrganizationResponse(Raw.GetOrganization(id));
         }
 
         /// <summary>
         /// Gets information about the organisation with the specified <paramref name="alias"/>.
         /// </summary>
         /// <param name="alias">The alias (login) of the organization.</param>
-        /// <returns>An instance of <see cref="GitHubGetOrganizationResponse"/> representing the response.</returns>
-        public GitHubGetOrganizationResponse GetOrganization(string alias) {
-            return GitHubGetOrganizationResponse.ParseResponse(Raw.GetOrganization(alias));
+        /// <returns>An instance of <see cref="GitHubOrganizationResponse"/> representing the response.</returns>
+        public GitHubOrganizationResponse GetOrganization(string alias) {
+            return new GitHubOrganizationResponse(Raw.GetOrganization(alias));
         }
 
         /// <summary>
         /// Gets the organizations of the authenticated user.
         /// </summary>
-        /// <returns>An instance of <see cref="GitHubGetOrganizationsResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubOrganizationListResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://developer.github.com/v3/orgs/#list-your-organizations</cref>
         /// </see>
-        public GitHubGetOrganizationsResponse GetOrganizations() {
-            return GitHubGetOrganizationsResponse.ParseResponse(Raw.GetOrganizations());
+        public GitHubOrganizationListResponse GetOrganizations() {
+            return new GitHubOrganizationListResponse(Raw.GetOrganizations());
         }
 
         /// <summary>
         /// Gets the organizations of the authenticated user.
         /// </summary>
-        /// <returns>An instance of <see cref="GitHubGetOrganizationsResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubOrganizationListResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://developer.github.com/v3/orgs/#list-your-organizations</cref>
         /// </see>
-        public GitHubGetOrganizationsResponse GetOrganizations(GitHubGetOrganizationsOptions options) {
-            return GitHubGetOrganizationsResponse.ParseResponse(Raw.GetOrganizations(options));
+        public GitHubOrganizationListResponse GetOrganizations(GitHubGetOrganizationsOptions options) {
+            return new GitHubOrganizationListResponse(Raw.GetOrganizations(options));
         }
 
         /// <summary>
         /// Gets a list of public organizations of the user with the specified <paramref name="username"/>.
         /// </summary>
         /// <param name="username">The username of the user.</param>
-        /// <returns>An instance of <see cref="GitHubGetOrganizationsResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubOrganizationListResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://developer.github.com/v3/orgs/#list-user-organizations</cref>
         /// </see>
-        public GitHubGetOrganizationsResponse GetOrganizations(string username) {
-            return GitHubGetOrganizationsResponse.ParseResponse(Raw.GetOrganizations(username));
+        public GitHubOrganizationListResponse GetOrganizations(string username) {
+            return new GitHubOrganizationListResponse(Raw.GetOrganizations(username));
         }
 
         /// <summary>
         /// Gets a list of public organizations of the user matching the specified <paramref name="options"/>.
         /// </summary>
         /// <param name="options">The options for the request to the API.</param>
-        /// <returns>An instance of <see cref="GitHubGetOrganizationsResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubOrganizationListResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://developer.github.com/v3/orgs/#list-user-organizations</cref>
         /// </see>
-        public GitHubGetOrganizationsResponse GetOrganizations(GitHubGetUserOrganizationsOptions options) {
-            return GitHubGetOrganizationsResponse.ParseResponse(Raw.GetOrganizations(options));
+        public GitHubOrganizationListResponse GetOrganizations(GitHubGetUserOrganizationsOptions options) {
+            return new GitHubOrganizationListResponse(Raw.GetOrganizations(options));
         }
 
         #endregion

@@ -88,9 +88,9 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <summary>
         /// Gets a list of organizations the authenticated user is a member of.
         /// </summary>
-        /// <returns>An instance of <see cref="GitHubGetOrganizationsResponse"/> representing the response.</returns>
-        public GitHubGetOrganizationsResponse GetOrganizations() {
-            return GitHubGetOrganizationsResponse.ParseResponse(Raw.GetOrganizations());
+        /// <returns>An instance of <see cref="GitHubOrganizationListResponse"/> representing the response.</returns>
+        public GitHubOrganizationListResponse GetOrganizations() {
+            return new GitHubOrganizationListResponse(Raw.GetOrganizations());
         }
 
         #endregion
