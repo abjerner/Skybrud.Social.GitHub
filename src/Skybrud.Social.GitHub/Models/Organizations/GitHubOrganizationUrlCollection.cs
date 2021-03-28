@@ -19,11 +19,21 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         /// Gets the API URL for getting a list of repositories of the organization.
         /// </summary>
         public string ReposUrl { get; }
-        
+
         /// <summary>
         /// Gets the API URL for getting a list of events made by members of the organization.
         /// </summary>
         public string EventsUrl { get; }
+
+        /// <summary>
+        /// Gets the API URL for getting a list of hooks of the organization.
+        /// </summary>
+        public string HooksUrl { get; }
+
+        /// <summary>
+        /// Gets the API URL for getting a list of issues of the organization.
+        /// </summary>
+        public string IssuesUrl { get; }
 
         /// <summary>
         /// Gets the API URL for getting a list of members of the organization.
@@ -48,6 +58,8 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
             Url = obj.GetString("url");
             ReposUrl = obj.GetString("repos_url");
             EventsUrl = obj.GetString("events_url");
+            HooksUrl = obj.GetString("hooks_url");
+            IssuesUrl = obj.GetString("issues_url");
             MembersUrl = obj.GetString("members_url");
             PublicMembersUrl = obj.GetString("public_members_url");
             HtmlUrl = obj.GetString("html_url");
