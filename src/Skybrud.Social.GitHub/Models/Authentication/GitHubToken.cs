@@ -1,5 +1,4 @@
-﻿using System;
-using Skybrud.Essentials.Http.Collections;
+﻿using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Scopes;
 
 namespace Skybrud.Social.GitHub.Models.Authentication {
@@ -17,9 +16,9 @@ namespace Skybrud.Social.GitHub.Models.Authentication {
         public string AccessToken { get; }
 
         /// <summary>
-        /// Gets a collection representing the granted scope.
+        /// Gets a list representing the granted scope.
         /// </summary>
-        public GitHubScopeCollection Scope { get; }
+        public GitHubScopeList Scope { get; }
 
         /// <summary>
         /// Gets the type of the access token.
@@ -31,28 +30,9 @@ namespace Skybrud.Social.GitHub.Models.Authentication {
         #region Constructors
 
         private GitHubToken(IHttpQueryString query) {
-
-            GitHubScopeCollection scopes = new GitHubScopeCollection();
-
-            foreach (string scope in (query["scope"] ?? string.Empty).Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)) {
-                switch (scope) {
-                    case "user": scopes.Add(GitHubScopes.User); break;
-                    case "user:email": scopes.Add(GitHubScopes.UserEmail); break;
-                    case "user:follow": scopes.Add(GitHubScopes.UserFollow); break;
-                    case "public_repo": scopes.Add(GitHubScopes.PublicRepo); break;
-                    case "repo": scopes.Add(GitHubScopes.Repo); break;
-                    case "repo:status": scopes.Add(GitHubScopes.RepoStatus); break;
-                    case "delete_repo": scopes.Add(GitHubScopes.DeleteRepo); break;
-                    case "notifications": scopes.Add(GitHubScopes.Notifications); break;
-                    case "gist": scopes.Add(GitHubScopes.Gist); break;
-                    default: scopes.Add(new GitHubScope(scope)); break;
-                }
-            }
-
             AccessToken = query["access_token"];
-            Scope = scopes;
+            Scope = GitHubScopeList.Parse(query["scope"]);
             TokenType = query["token_type"];
-
         }
 
         #endregion

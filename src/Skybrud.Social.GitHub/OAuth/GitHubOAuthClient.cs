@@ -158,7 +158,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// <param name="state">A unique state for the request.</param>
         /// <returns>A <see cref="String"/> with the authorization URL.</returns>
         public string GetAuthorizationUrl(string state) {
-            return GetAuthorizationUrl(state, default(GitHubScopeCollection));
+            return GetAuthorizationUrl(state, default(GitHubScopeList));
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// <param name="scope">The scope of your application.</param>
         /// <returns>A <see cref="String"/> with the authorization URL.</returns>
         public string GetAuthorizationUrl(string state, GitHubScope scope) {
-            return GetAuthorizationUrl(state, scope == null ? null : new GitHubScopeCollection(scope));
+            return GetAuthorizationUrl(state, scope == null ? null : new GitHubScopeList(scope));
         }
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// <param name="scope">The scope of your application.</param>
         /// <returns>A <see cref="String"/> with the authorization URL.</returns>
         public string GetAuthorizationUrl(string state, params GitHubScope[] scope) {
-            return GetAuthorizationUrl(state, scope == null ? null : new GitHubScopeCollection(scope));
+            return GetAuthorizationUrl(state, scope == null ? null : new GitHubScopeList(scope));
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// <param name="state">A unique state for the request.</param>
         /// <param name="scope">The scope of your application.</param>
         /// <returns>A <see cref="String"/> with the authorization URL.</returns>
-        public string GetAuthorizationUrl(string state, GitHubScopeCollection scope) {
+        public string GetAuthorizationUrl(string state, GitHubScopeList scope) {
             return GetAuthorizationUrl(state, scope == null ? "" : scope.ToString());
         }
 
