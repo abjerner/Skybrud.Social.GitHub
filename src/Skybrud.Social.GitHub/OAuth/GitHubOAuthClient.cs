@@ -1,5 +1,3 @@
-using System;
-using System.Net;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Client;
@@ -8,8 +6,11 @@ using Skybrud.Social.GitHub.Endpoints.Issues;
 using Skybrud.Social.GitHub.Endpoints.Organizations;
 using Skybrud.Social.GitHub.Endpoints.PullRequests;
 using Skybrud.Social.GitHub.Endpoints.Raw;
+using Skybrud.Social.GitHub.Endpoints.Teams;
 using Skybrud.Social.GitHub.Responses.Authentication;
 using Skybrud.Social.GitHub.Scopes;
+using System;
+using System.Net;
 
 namespace Skybrud.Social.GitHub.OAuth {
 
@@ -73,6 +74,11 @@ namespace Skybrud.Social.GitHub.OAuth {
         public GitHubRepositoriesRawEndpoint Repositories { get; }
 
         /// <summary>
+        /// Gets a reference to the raw <strong>Teams</strong> endpoint.
+        /// </summary>
+        public GitHubTeamsRawEndpoint Teams { get; }
+
+        /// <summary>
         /// Gets a reference to the raw user endpoint.
         /// </summary>
         public GitHubUserRawEndpoint User { get; }
@@ -95,6 +101,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             Organizations = new GitHubOrganizationsRawEndpoint(this);
             PullRequests = new GitHubPullRequestsRawEndpoint(this);
             Repositories = new GitHubRepositoriesRawEndpoint(this);
+            Teams = new GitHubTeamsRawEndpoint(this);
             User = new GitHubUserRawEndpoint(this);
             Users = new GitHubUsersRawEndpoint(this);
         }
