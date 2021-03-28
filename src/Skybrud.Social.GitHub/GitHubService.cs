@@ -68,13 +68,11 @@ namespace Skybrud.Social.GitHub {
         /// <summary>
         /// Initializes a new services instance with default settings.
         ///
-        /// Notice: By default this instance does not a user context, meaning you can only access public resources in
+        /// Notice: By default this instance does not have a user context, meaning you can only access public resources in
         /// the GitHub API. You can use the static <see cref="CreateFromAccessToken"/> method instead for initializing
         /// a new service instance from an access token.
         /// </summary>
-        public GitHubService() {
-            Client = new GitHubOAuthClient();
-        }
+        public GitHubService() : this(new GitHubOAuthClient()) { }
 
         private GitHubService(GitHubOAuthClient client) {
             Client = client;
