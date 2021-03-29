@@ -58,7 +58,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <param name="username">The username (login) of the user.</param>
         /// <returns>An instance of <see cref="GitHubOrganizationListResponse"/> representing the response.</returns>
         public GitHubOrganizationListResponse GetOrganizations(string username) {
-            return GitHubOrganizationListResponse.ParseResponse(Raw.GetOrganizations(username));
+            return new GitHubOrganizationListResponse(Raw.GetOrganizations(username));
         }
 
         #endregion

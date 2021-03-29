@@ -54,7 +54,7 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
             if (string.IsNullOrWhiteSpace(Team)) throw new PropertyNotSetException(nameof(Team));
 
             // Initialize and return a new GET request
-            return HttpRequest.Get($"/orgs/{Organization}/team/{Team}");
+            return HttpRequest.Get($"/orgs/{Organization}/teams/{Team}");
 
         }
 
