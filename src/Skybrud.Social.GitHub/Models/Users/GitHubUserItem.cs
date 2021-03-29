@@ -1,6 +1,6 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Social.GitHub.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Users {
 
@@ -26,7 +26,10 @@ namespace Skybrud.Social.GitHub.Models.Users {
         /// </summary>
         public string AvatarUrl { get; }
 
-        // TODO: Add support for the "gravatar_id" property
+        /// <summary>
+        /// Gets the gravatar ID of the user.
+        /// </summary>
+        public string GravatarId { get; }
 
         /// <summary>
         /// Gets the collection of URLs related to the user.
@@ -48,27 +51,17 @@ namespace Skybrud.Social.GitHub.Models.Users {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance from the specified <paramref name="obj"/>.
+        /// Initializes a new instance from the specified <paramref name="json"/> object.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> representing the user.</param>
-        protected GitHubUserItem(JObject obj) : base(obj) {
-
-            string strType = obj.GetString("type");
-            GitHubUserType type;
-            switch (strType) {
-                case "User": type = GitHubUserType.User; break;
-                case "Organization": type = GitHubUserType.Organization; break;
-                case "Bot": type = GitHubUserType.Bot; break;
-                default: throw new Exception("Unknown user type \"" + strType + "\".");
-            }
-            
-            Login = obj.GetString("login");
-            Id = obj.GetInt32("id");
-            AvatarUrl = obj.GetString("avatar_url");
-            Urls = GitHubUserUrlCollection.Parse(obj);
-            Type = type;
-            IsSiteAdmin = obj.GetBoolean("site_admin");
-
+        /// <param name="json">The instance of <see cref="JObject"/> representing the user.</param>
+        protected GitHubUserItem(JObject json) : base(json) {
+            Login = json.GetString("login");
+            Id = json.GetInt32("id");
+            AvatarUrl = json.GetString("avatar_url");
+            GravatarId = json.GetString("gravatar_id");
+            Urls = GitHubUserUrlCollection.Parse(json);
+            Type = json.GetEnumWithFallbacks<GitHubUserType>("type");
+            IsSiteAdmin = json.GetBoolean("site_admin");
         }
 
         #endregion
@@ -76,12 +69,12 @@ namespace Skybrud.Social.GitHub.Models.Users {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubUserItem"/>.
+        /// Parses the specified <paramref name="json"/> object into an instance of <see cref="GitHubUserItem"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubUserItem"/>.</returns>
-        public static GitHubUserItem Parse(JObject obj) {
-            return obj == null ? null : new GitHubUserItem(obj);
+        public static GitHubUserItem Parse(JObject json) {
+            return json == null ? null : new GitHubUserItem(json);
         }
 
         #endregion

@@ -1,6 +1,6 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Essentials.Time;
 
 namespace Skybrud.Social.GitHub.Models.Users {
 
@@ -64,30 +64,30 @@ namespace Skybrud.Social.GitHub.Models.Users {
         /// <summary>
         /// Gets a timestamp for when the user was created.
         /// </summary>
-        public DateTime CreatedAt { get; }
+        public EssentialsTime CreatedAt { get; }
 
         /// <summary>
         /// Gets a timestamp for when the user was last updated.
         /// </summary>
-        public DateTime UpdatedAt { get; }
+        public EssentialsTime UpdatedAt { get; }
 
         #endregion
 
         #region Constructors
 
-        private GitHubUser(JObject obj) : base(obj) {
-            Name = obj.GetString("name");
-            Company = obj.GetString("company");
-            Location = obj.GetString("location");
-            Email = obj.GetString("email");
-            IsHireable = obj.GetString("hireable");
-            Bio = obj.GetString("bio");
-            PublicRepos = obj.GetInt32("public_repos");
-            PublicGists = obj.GetInt32("public_gists");
-            Followers = obj.GetInt32("followers");
-            Following = obj.GetInt32("following");
-            CreatedAt = obj.GetDateTime("created_at");
-            UpdatedAt = obj.GetDateTime("updated_at");
+        private GitHubUser(JObject json) : base(json) {
+            Name = json.GetString("name");
+            Company = json.GetString("company");
+            Location = json.GetString("location");
+            Email = json.GetString("email");
+            IsHireable = json.GetString("hireable");
+            Bio = json.GetString("bio");
+            PublicRepos = json.GetInt32("public_repos");
+            PublicGists = json.GetInt32("public_gists");
+            Followers = json.GetInt32("followers");
+            Following = json.GetInt32("following");
+            CreatedAt = json.GetDateTime("created_at");
+            UpdatedAt = json.GetDateTime("updated_at");
         }
 
         #endregion
@@ -95,12 +95,12 @@ namespace Skybrud.Social.GitHub.Models.Users {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubUser"/>.
+        /// Parses the specified <paramref name="json"/> object into an instance of <see cref="GitHubUser"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubUser"/>.</returns>
-        public new static GitHubUser Parse(JObject obj) {
-            return obj == null ? null : new GitHubUser(obj);
+        public static new GitHubUser Parse(JObject json) {
+            return json == null ? null : new GitHubUser(json);
         }
 
         #endregion
