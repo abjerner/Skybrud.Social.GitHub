@@ -18,10 +18,49 @@ namespace Skybrud.Social.GitHub.Scopes {
         );
 
         /// <summary>
+        /// Gets an array of all build-in scopes.
+        /// </summary>
+        /// <returns></returns>
+        public static readonly GitHubScope[] All = {
+            Default,
+            Repositories.Write,
+            Repositories.Status,
+            Repositories.Deployment,
+            Repositories.Public,
+            Repositories.Invite,
+            Repositories.Delete,
+            SecurityEvents.Write,
+            RepositoryHooks.Admin,
+            RepositoryHooks.Write,
+            RepositoryHooks.Read,
+            Organizations.Admin,
+            Organizations.Write,
+            Organizations.Read,
+            PublicKeys.Admin,
+            PublicKeys.Write,
+            PublicKeys.Read,
+            OrganizationHooks.Admin,
+            Gists.Write,
+            Notifications.Read,
+            Users.Write,
+            Users.Read,
+            Users.Email,
+            Users.Follow,
+            Discussions.Write,
+            Discussions.Read,
+            Packages.Write,
+            Packages.Read,
+            Packages.Delete,
+            GpgKeys.Admin,
+            GpgKeys.Write,
+            GpgKeys.Read,
+            Workflow.Write
+        };
+
+        /// <summary>
         /// Scopes related to repositories.
         /// </summary>
         public static class Repositories {
-
 
             /// <summary>
             /// Grants full access to repositories, including private repositories. That includes read/write access to code, commit statuses, repository and organization projects, invitations, collaborators, adding team memberships, deployment statuses, and repository webhooks for repositories and organizations. Also grants ability to manage user projects.
@@ -58,7 +97,6 @@ namespace Skybrud.Social.GitHub.Scopes {
                 "Repositories: Public",
                 "Limits access to public repositories. That includes read/write access to code, commit statuses, repository projects, collaborators, and deployment statuses for public repositories and organizations. Also required for starring public repositories."
             );
-
 
             /// <summary>
             /// Grants accept/decline abilities for invitations to collaborate on a repository. This scope is only necessary to grant other users or services access to invites <em>without</em> granting access to the code.
@@ -291,7 +329,6 @@ namespace Skybrud.Social.GitHub.Scopes {
 
         }
 
-
         /// <summary>
         /// Scopes related to discussions.
         /// </summary>
@@ -351,14 +388,6 @@ namespace Skybrud.Social.GitHub.Scopes {
 
 
         }
-
-
-
-
-
-
-
-
 
         /// <summary>
         /// Scopes related to GPG Keys.
