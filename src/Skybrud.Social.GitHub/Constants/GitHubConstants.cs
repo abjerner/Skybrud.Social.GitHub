@@ -12,9 +12,15 @@ namespace Skybrud.Social.GitHub.Constants {
         /// </summary>
         public const string DateTimeFormat = TimeUtils.Iso8601DateFormat;
 
-        public const int Unspecified = 0;
-
+        /// <summary>
+        /// Enum ordinal value used to indicate an unrecognized value.
+        /// </summary>
         public const int Unrecognized = -1;
+
+        /// <summary>
+        /// Enum ordinal value used to indicate an unspecified value.
+        /// </summary>
+        public const int Unspecified = 0;
 
     }
 
