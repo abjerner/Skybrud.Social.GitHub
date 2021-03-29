@@ -45,7 +45,7 @@ namespace Skybrud.Social.GitHub.Scopes {
             /// Grants access to deployment statuses for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, <em>without</em> granting access to the code.
             /// </summary>
             public static readonly GitHubScope Deployment = GitHubScope.RegisterScope(
-                "repo:status",
+                "repo_deployment",
                 "Repositories: Deployment",
                 "Grants access to deployment statuses for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, <em>without</em> granting access to the code."
             );
@@ -284,7 +284,7 @@ namespace Skybrud.Social.GitHub.Scopes {
             /// Grants access to follow or unfollow other users.
             /// </summary>
             public static readonly GitHubScope Follow = GitHubScope.RegisterScope(
-                "user",
+                "user:follow",
                 "User: Follow",
                 "Grants access to follow or unfollow other users."
             );
