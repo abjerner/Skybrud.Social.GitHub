@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Social.GitHub.Extensions;
 using Skybrud.Social.GitHub.Models.Common;
 
 namespace Skybrud.Social.GitHub.Models.Teams {
@@ -60,13 +61,13 @@ namespace Skybrud.Social.GitHub.Models.Teams {
             NodeId = json.GetString("node_id");
             Slug = json.GetString("slug");
             Description = json.GetString("description");
-            Privacy = json.GetEnum<GitHubTeamPrivacy>("privacy");
+            Privacy = json.GetEnumWithFallbacks<GitHubTeamPrivacy>("privacy");
             // TODO: Add support for the "url" property
             // TODO: Add support for the "html_url" property
             // TODO: Add support for the "members_url" property
             // TODO: Add support for the "repositories_url" property
             // TODO: Add support for the "url" property
-            Permission = json.GetEnum<GitHubPermissionLevel>("permission");
+            Permission = json.GetEnumWithFallbacks<GitHubPermissionLevel>("permission");
             // TODO: Add support for the "parent" property
         }
 

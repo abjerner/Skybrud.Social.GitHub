@@ -12,6 +12,10 @@ namespace Skybrud.Social.GitHub.Constants {
         /// </summary>
         public const string DateTimeFormat = TimeUtils.Iso8601DateFormat;
 
+        public const int Unspecified = 0;
+
+        public const int Unrecognized = -1;
+
     }
 
 }
