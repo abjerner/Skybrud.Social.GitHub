@@ -6,6 +6,7 @@ using Skybrud.Social.GitHub.Endpoints.Issues;
 using Skybrud.Social.GitHub.Endpoints.Organizations;
 using Skybrud.Social.GitHub.Endpoints.PullRequests;
 using Skybrud.Social.GitHub.Endpoints.Raw;
+using Skybrud.Social.GitHub.Endpoints.Repositories;
 using Skybrud.Social.GitHub.Endpoints.Teams;
 using Skybrud.Social.GitHub.Responses.Authentication;
 using Skybrud.Social.GitHub.Scopes;
