@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Users {
 
@@ -86,8 +87,8 @@ namespace Skybrud.Social.GitHub.Models.Users {
             PublicGists = json.GetInt32("public_gists");
             Followers = json.GetInt32("followers");
             Following = json.GetInt32("following");
-            CreatedAt = json.GetDateTime("created_at");
-            UpdatedAt = json.GetDateTime("updated_at");
+            CreatedAt = json.GetEssentialsTime("created_at");
+            UpdatedAt = json.GetEssentialsTime("updated_at");
         }
 
         #endregion

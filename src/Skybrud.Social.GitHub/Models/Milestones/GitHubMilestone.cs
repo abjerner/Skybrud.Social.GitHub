@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Extensions;
 using Skybrud.Social.GitHub.Models.Issues;
 using Skybrud.Social.GitHub.Models.Users;
 
@@ -113,10 +114,10 @@ namespace Skybrud.Social.GitHub.Models.Milestones {
             OpenIssues = obj.GetInt32("open_issues");
             ClosedIssues = obj.GetInt32("closed_issues");
             State = obj.GetEnum<GitHubMilestoneState>("state");
-            CreatedAt = obj.GetString("created_at", EssentialsTime.Parse);
-            UpdatedAt = obj.GetString("updated_at", EssentialsTime.Parse);
-            DueOn = obj.GetString("due_on", EssentialsTime.Parse);
-            ClosedAt = obj.GetString("closed_at", EssentialsTime.Parse);
+            CreatedAt = obj.GetEssentialsTime("created_at");
+            UpdatedAt = obj.GetEssentialsTime("updated_at");
+            DueOn = obj.GetEssentialsTime("due_on");
+            ClosedAt = obj.GetEssentialsTime("closed_at");
         }
 
         #endregion

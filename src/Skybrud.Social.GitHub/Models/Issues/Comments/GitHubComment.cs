@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Extensions;
 using Skybrud.Social.GitHub.Models.Users;
 
 namespace Skybrud.Social.GitHub.Models.Issues.Comments {
@@ -72,8 +73,8 @@ namespace Skybrud.Social.GitHub.Models.Issues.Comments {
             HtmlUrl = obj.GetString("html_url");
             Body = obj.GetString("body");
             User = obj.GetObject("user", GitHubUserItem.Parse);
-            CreatedAt = obj.GetString("created_at", EssentialsTime.Parse);
-            UpdatedAt = obj.GetString("updated_at", EssentialsTime.Parse);
+            CreatedAt = obj.GetEssentialsTime("created_at");
+            UpdatedAt = obj.GetEssentialsTime("updated_at");
             Urls = GitHubCommentUrlCollection.Parse(obj);
         }
 

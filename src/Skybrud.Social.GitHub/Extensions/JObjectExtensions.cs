@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Enums;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Constants;
+using System;
 
 // ReSharper disable InconsistentNaming
 
@@ -36,6 +38,16 @@ namespace Skybrud.Social.GitHub.Extensions {
         public static T GetEnumWithFallbacks<T>(this JObject json, string path) where T : struct {
             string value = json.GetString(path);
             return string.IsNullOrWhiteSpace(value) ? (T) (object) GitHubConstants.Unspecified : EnumUtils.ParseEnum(value, (T) (object) GitHubConstants.Unrecognized);
+        }
+
+        public static EssentialsTime GetEssentialsTime(this JObject json, string propertyName) {
+            if (string.IsNullOrWhiteSpace(propertyName)) throw new ArgumentNullException(nameof(propertyName));
+            return EssentialsTime.Parse(json?.GetValue(propertyName)?.Value<string>());
+        }
+        
+        public static EssentialsTime GetEssentialsTimeByPath(this JObject json, string path) {
+            if (string.IsNullOrWhiteSpace(path)) throw new ArgumentNullException(nameof(path));
+            return EssentialsTime.Parse(json?.SelectToken(path)?.Value<string>());
         }
 
     }

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Extensions;
 using Skybrud.Social.GitHub.Models.Organizations;
 
 namespace Skybrud.Social.GitHub.Models.Teams {
@@ -46,8 +47,8 @@ namespace Skybrud.Social.GitHub.Models.Teams {
         /// </summary>
         /// <param name="json">The instance of <see cref="JObject"/> representing the team.</param>
         protected GitHubTeam(JObject json) : base(json) {
-            CreatedAt = json.GetDateTime("created_at");
-            UpdatedAt = json.GetDateTime("updated_at");
+            CreatedAt = json.GetEssentialsTime("created_at");
+            UpdatedAt = json.GetEssentialsTime("updated_at");
             MembersCount = json.GetInt32("members_count");
             ReposCount = json.GetInt32("repos_count");
             Organization = json.GetObject("organization", GitHubOrganization.Parse);

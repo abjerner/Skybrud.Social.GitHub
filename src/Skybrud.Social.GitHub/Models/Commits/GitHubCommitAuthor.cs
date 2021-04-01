@@ -1,6 +1,7 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Commits {
     
@@ -24,7 +25,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// <summary>
         /// Gets the date of the commit.
         /// </summary>
-        public DateTime Date { get; }
+        public EssentialsTime Date { get; }
         
         #endregion
 
@@ -33,7 +34,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         private GitHubCommitAuthor(JObject obj) : base(obj) {
             Name = obj.GetString("name");
             Email = obj.GetString("email");
-            Date = obj.GetDateTime("date");
+            Date = obj.GetEssentialsTime("date");
         }
 
         #endregion

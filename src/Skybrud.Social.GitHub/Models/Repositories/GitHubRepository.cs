@@ -1,6 +1,7 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Extensions;
 using Skybrud.Social.GitHub.Models.Users;
 
 namespace Skybrud.Social.GitHub.Models.Repositories {
@@ -18,12 +19,12 @@ namespace Skybrud.Social.GitHub.Models.Repositories {
         public int Id { get; }
 
         /// <summary>
-        /// Gets the name of the repository - eg. <code>Skybrud.Social</code>.
+        /// Gets the name of the repository - eg. <c>Skybrud.Social</c>.
         /// </summary>
         public string Name { get; }
 
         /// <summary>
-        /// Gets the full name of the repository - eg. <code>abjerner/Skybrud.Social</code>.
+        /// Gets the full name of the repository - eg. <c>abjerner/Skybrud.Social</c>.
         /// </summary>
         public string FullName { get; }
 
@@ -55,17 +56,17 @@ namespace Skybrud.Social.GitHub.Models.Repositories {
         /// <summary>
         /// Gets a timestamp for when the repository was created.
         /// </summary>
-        public DateTime CreatedAt { get; }
+        public EssentialsTime CreatedAt { get; }
 
         /// <summary>
         /// Gets a timestamp for when the repository was last updated.
         /// </summary>
-        public DateTime UpdatedAt { get; }
+        public EssentialsTime UpdatedAt { get; }
 
         /// <summary>
         /// Gets the timestamp for when a user last pushed to the repository.
         /// </summary>
-        public DateTime PushedAt { get; }
+        public EssentialsTime PushedAt { get; }
 
         /// <summary>
         /// Gets the URL for the website behind project.
@@ -165,9 +166,9 @@ namespace Skybrud.Social.GitHub.Models.Repositories {
             Urls = GitHubRepositoryUrlCollection.Parse(obj);
             Description = obj.GetString("description");
             IsFork = obj.GetBoolean("fork");
-            CreatedAt = obj.GetDateTime("created_at");
-            UpdatedAt = obj.GetDateTime("updated_at");
-            PushedAt = obj.GetDateTime("pushed_at");
+            CreatedAt = obj.GetEssentialsTime("created_at");
+            UpdatedAt = obj.GetEssentialsTime("updated_at");
+            PushedAt = obj.GetEssentialsTime("pushed_at");
             Homepage = obj.GetString("homepage");
             Size = obj.GetInt64("size");
             StargazersCount = obj.GetInt32("stargazers_count");

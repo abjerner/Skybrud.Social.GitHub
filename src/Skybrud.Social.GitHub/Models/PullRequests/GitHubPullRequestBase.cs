@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Extensions;
 using Skybrud.Social.GitHub.Models.Issues;
 using Skybrud.Social.GitHub.Models.Labels;
 using Skybrud.Social.GitHub.Models.Milestones;
@@ -186,10 +187,10 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
             Title = obj.GetString("title");
             User = obj.GetObject("user", GitHubUserItem.Parse);
             Body = obj.GetString("body");
-            CreatedAt = obj.GetString("created_at", EssentialsTime.Parse);
-            UpdatedAt = obj.GetString("updated_at", EssentialsTime.Parse);
-            ClosedAt = obj.GetString("closed_at", EssentialsTime.Parse);
-            MergedAt = obj.GetString("merged_at", EssentialsTime.Parse);
+            CreatedAt = obj.GetEssentialsTime("created_at");
+            UpdatedAt = obj.GetEssentialsTime("updated_at");
+            ClosedAt = obj.GetEssentialsTime("closed_at");
+            MergedAt = obj.GetEssentialsTime("merged_at");
             MergeCommitSha = obj.GetString("merge_commit_sha");
             Assignee = obj.GetObject("assignee", GitHubUserItem.Parse);
             Assignees = obj.GetArrayItems("assignees", GitHubUserItem.Parse);

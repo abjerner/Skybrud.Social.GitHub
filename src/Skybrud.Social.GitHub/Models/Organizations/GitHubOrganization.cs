@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Organizations {
 
@@ -115,8 +116,8 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
             PublicGists = obj.GetInt32("public_gists");
             Followers = obj.GetInt32("followers");
             Following = obj.GetInt32("following");
-            CreatedAt = obj.GetDateTime("created_at");
-            UpdatedAt = obj.GetDateTime("updated_at");
+            CreatedAt = obj.GetEssentialsTime("created_at");
+            UpdatedAt = obj.GetEssentialsTime("updated_at");
             // Add support for the "total_private_repos" property
             // Add support for the "owned_private_repos" property
             // Add support for the "private_gists" property

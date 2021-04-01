@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Extensions;
 using Skybrud.Social.GitHub.Models.Labels;
 using Skybrud.Social.GitHub.Models.Milestones;
 using Skybrud.Social.GitHub.Models.Users;
@@ -117,7 +118,7 @@ namespace Skybrud.Social.GitHub.Models.Events {
             EventRaw = obj.GetString("event");
             CommitId = obj.GetString("commit_id");
             CommitUrl = obj.GetString("commit_url");
-            CreatedAt = obj.GetString("created_at", EssentialsTime.Parse);
+            CreatedAt = obj.GetEssentialsTime("created_at");
 
             ReviewRequester = obj.GetObject("review_requester", GitHubUserItem.Parse);
             RequestedReviewer = obj.GetObject("requested_reviewers", GitHubUserItem.Parse);

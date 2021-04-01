@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Extensions;
 using Skybrud.Social.GitHub.Models.Labels;
 using Skybrud.Social.GitHub.Models.Milestones;
 using Skybrud.Social.GitHub.Models.Repositories;
@@ -132,9 +133,9 @@ namespace Skybrud.Social.GitHub.Models.Issues {
             Assignees = obj.GetArrayItems("assignees", GitHubUserItem.Parse);
             Milestone = obj.GetObject("milestone", GitHubMilestone.Parse);
             Comments = obj.GetInt32("comments");
-            CreatedAt = obj.GetString("created_at", EssentialsTime.Parse);
-            UpdatedAt = obj.GetString("updated_at", EssentialsTime.Parse);
-            ClosedAt = obj.GetString("closed_at", EssentialsTime.Parse);
+            CreatedAt = obj.GetEssentialsTime("created_at");
+            UpdatedAt = obj.GetEssentialsTime("updated_at");
+            ClosedAt = obj.GetEssentialsTime("closed_at");
             Repository = obj.GetObject("repository", GitHubRepositoryItem.Parse);
             Body = obj.GetString("body");
             Urls = GitHubIssueUrlCollection.Parse(obj);
