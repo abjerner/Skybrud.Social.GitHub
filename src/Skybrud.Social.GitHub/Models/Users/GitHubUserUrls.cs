@@ -6,7 +6,7 @@ namespace Skybrud.Social.GitHub.Models.Users {
     /// <summary>
     /// Class representing a collection of URLs related to a GitHub user.
     /// </summary>
-    public class GitHubUserUrlCollection {
+    public class GitHubUserUrls {
 
         #region Properties
 
@@ -69,7 +69,7 @@ namespace Skybrud.Social.GitHub.Models.Users {
 
         #region Constructors
 
-        private GitHubUserUrlCollection(JObject obj) {
+        private GitHubUserUrls(JObject obj) {
             Url = obj.GetString("url");
             HtmlUrl = obj.GetString("html_url");
             FollowersUrl = obj.GetString("followers_url");
@@ -88,12 +88,12 @@ namespace Skybrud.Social.GitHub.Models.Users {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubUserUrlCollection"/>.
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubUserUrls"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="GitHubUserUrlCollection"/>.</returns>
-        public static GitHubUserUrlCollection Parse(JObject obj) {
-            return obj == null ? null : new GitHubUserUrlCollection(obj);
+        /// <returns>An instance of <see cref="GitHubUserUrls"/>.</returns>
+        public static GitHubUserUrls Parse(JObject obj) {
+            return obj == null ? null : new GitHubUserUrls(obj);
         }
 
         #endregion

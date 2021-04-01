@@ -111,7 +111,7 @@ namespace Skybrud.Social.GitHub.Models.Issues {
         /// <summary>
         /// Gets a collection/map of URLs related to the issue.
         /// </summary>
-        public GitHubIssueUrlCollection Urls { get; }
+        public GitHubIssueUrls Urls { get; }
 
         #endregion
 
@@ -138,7 +138,7 @@ namespace Skybrud.Social.GitHub.Models.Issues {
             ClosedAt = obj.GetEssentialsTime("closed_at");
             Repository = obj.GetObject("repository", GitHubRepositoryItem.Parse);
             Body = obj.GetString("body");
-            Urls = GitHubIssueUrlCollection.Parse(obj);
+            Urls = GitHubIssueUrls.Parse(obj);
         }
 
         #endregion

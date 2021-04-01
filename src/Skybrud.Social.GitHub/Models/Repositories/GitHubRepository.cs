@@ -41,7 +41,7 @@ namespace Skybrud.Social.GitHub.Models.Repositories {
         /// <summary>
         /// Gets a reference to a collection of URLs related to the repository.
         /// </summary>
-        public GitHubRepositoryUrlCollection Urls { get; }
+        public GitHubRepositoryUrls Urls { get; }
 
         /// <summary>
         /// Gets the description of the repository.
@@ -163,7 +163,7 @@ namespace Skybrud.Social.GitHub.Models.Repositories {
             FullName = obj.GetString("full_name");
             Owner = obj.GetObject("owner", GitHubUserItem.Parse);
             IsPrivate = obj.GetBoolean("private");
-            Urls = GitHubRepositoryUrlCollection.Parse(obj);
+            Urls = GitHubRepositoryUrls.Parse(obj);
             Description = obj.GetString("description");
             IsFork = obj.GetBoolean("fork");
             CreatedAt = obj.GetEssentialsTime("created_at");

@@ -6,7 +6,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
     /// <summary>
     /// Class representing a collection of URLs related to a GitHub commit.
     /// </summary>
-    public class GitHubCommitUrlCollection {
+    public class GitHubCommitUrls {
 
         #region Properties
 
@@ -29,7 +29,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
 
         #region Constructors
 
-        private GitHubCommitUrlCollection(JObject obj) {
+        private GitHubCommitUrls(JObject obj) {
             Url = obj.GetString("url");
             HtmlUrl = obj.GetString("html_url");
             CommentsUrl = obj.GetString("comments_url");
@@ -40,12 +40,12 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubCommitUrlCollection"/>.
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubCommitUrls"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="GitHubCommitUrlCollection"/>.</returns>
-        public static GitHubCommitUrlCollection Parse(JObject obj) {
-            return obj == null ? null : new GitHubCommitUrlCollection(obj);
+        /// <returns>An instance of <see cref="GitHubCommitUrls"/>.</returns>
+        public static GitHubCommitUrls Parse(JObject obj) {
+            return obj == null ? null : new GitHubCommitUrls(obj);
         }
 
         #endregion

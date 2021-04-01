@@ -34,7 +34,7 @@ namespace Skybrud.Social.GitHub.Models.Users {
         /// <summary>
         /// Gets the collection of URLs related to the user.
         /// </summary>
-        public GitHubUserUrlCollection Urls { get; }
+        public GitHubUserUrls Urls { get; }
 
         /// <summary>
         /// Gets the type of the user.
@@ -59,7 +59,7 @@ namespace Skybrud.Social.GitHub.Models.Users {
             Id = json.GetInt32("id");
             AvatarUrl = json.GetString("avatar_url");
             GravatarId = json.GetString("gravatar_id");
-            Urls = GitHubUserUrlCollection.Parse(json);
+            Urls = GitHubUserUrls.Parse(json);
             Type = json.GetEnumWithFallbacks<GitHubUserType>("type");
             IsSiteAdmin = json.GetBoolean("site_admin");
         }

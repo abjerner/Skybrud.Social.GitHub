@@ -24,7 +24,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// <summary>
         /// Gets a reference to a collection of URLs related to the commit.
         /// </summary>
-        public GitHubCommitUrlCollection Urls { get; }
+        public GitHubCommitUrls Urls { get; }
 
         /// <summary>
         /// Gets information about the author of the commit.
@@ -68,7 +68,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         private GitHubCommit(JObject obj) : base(obj) {
             Sha = obj.GetString("sha");
             Commit = obj.GetObject("commit", GitHubCommitDetails.Parse);
-            Urls = GitHubCommitUrlCollection.Parse(obj);
+            Urls = GitHubCommitUrls.Parse(obj);
             Author = obj.GetObject("author", GitHubUserItem.Parse);
             Committer = obj.GetObject("committer", GitHubUserItem.Parse);
             Parents = obj.GetArray("parents", GitHubCommitParent.Parse);
