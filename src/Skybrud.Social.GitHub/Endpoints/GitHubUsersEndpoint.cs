@@ -47,9 +47,9 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// Gets a list of repositories of the user with the specified <paramref name="username"/>.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>An instance of <see cref="GitHubGetRepositoriesResponse"/> representing the response.</returns>
-        public GitHubGetRepositoriesResponse GetRepositories(string username) {
-            return GitHubGetRepositoriesResponse.ParseResponse(Raw.GetRepositories(username));
+        /// <returns>An instance of <see cref="GitHubRepositoryListResponse"/> representing the response.</returns>
+        public GitHubRepositoryListResponse GetRepositories(string username) {
+            return new GitHubRepositoryListResponse(Raw.GetRepositories(username));
         }
 
         /// <summary>

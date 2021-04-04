@@ -40,9 +40,9 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// Gets information about the repository matching the specified <paramref name="owner"/> and
         /// <paramref name="repository"/>.
         /// </summary>
-        /// <returns>An instance of <see cref="GitHubGetRepositoryResponse"/> representing the response.</returns>
-        public GitHubGetRepositoryResponse GetRepository(string owner, string repository) {
-            return GitHubGetRepositoryResponse.ParseResponse(Raw.GetRepository(owner, repository));
+        /// <returns>An instance of <see cref="GitHubRepositoryResponse"/> representing the response.</returns>
+        public GitHubRepositoryResponse GetRepository(string owner, string repository) {
+            return new GitHubRepositoryResponse(Raw.GetRepository(owner, repository));
         }
 
         /// <summary>
@@ -52,12 +52,12 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// <param name="templateRepository">The slug of the template repository.</param>
         /// <param name="owner">The organization or person who will own the new repository.</param>
         /// <param name="name">The name of the new repository.</param>
-        /// <returns>An instance of <see cref="GitHubCreateRepositoryResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubRepositoryResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://developer.github.com/v3/repos/#create-repository-using-a-repository-template</cref>
         /// </see>
-        public GitHubCreateRepositoryResponse CreateRepositoryFromTemplate(string templateOwner, string templateRepository, string owner, string name) {
-            return GitHubCreateRepositoryResponse.ParseResponse(Raw.CreateRepositoryFromTemplate(templateOwner, templateRepository, owner, name));
+        public GitHubRepositoryResponse CreateRepositoryFromTemplate(string templateOwner, string templateRepository, string owner, string name) {
+            return new GitHubRepositoryResponse(Raw.CreateRepositoryFromTemplate(templateOwner, templateRepository, owner, name));
         }
 
         /// <summary>
@@ -68,36 +68,36 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// <param name="owner">The organization or person who will own the new repository.</param>
         /// <param name="name">The name of the new repository.</param>
         /// <param name="isPrivate">Whether to create a new private repository.</param>
-        /// <returns>An instance of <see cref="GitHubCreateRepositoryResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubRepositoryResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://developer.github.com/v3/repos/#create-repository-using-a-repository-template</cref>
         /// </see>
-        public GitHubCreateRepositoryResponse CreateRepositoryFromTemplate(string templateOwner, string templateRepository, string owner, string name, bool isPrivate) {
-            return GitHubCreateRepositoryResponse.ParseResponse(Raw.CreateRepositoryFromTemplate(templateOwner, templateRepository, owner, name, isPrivate));
+        public GitHubRepositoryResponse CreateRepositoryFromTemplate(string templateOwner, string templateRepository, string owner, string name, bool isPrivate) {
+            return new GitHubRepositoryResponse(Raw.CreateRepositoryFromTemplate(templateOwner, templateRepository, owner, name, isPrivate));
         }
 
         /// <summary>
         /// Creates a new repository using a repository template.
         /// </summary>
         /// <param name="options">The options for the request to the API.</param>
-        /// <returns>An instanceo of <see cref="GitHubCreateRepositoryResponse"/> representing the response.</returns>
+        /// <returns>An instanceo of <see cref="GitHubRepositoryResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://developer.github.com/v3/repos/#create-repository-using-a-repository-template</cref>
         /// </see>
-        public GitHubCreateRepositoryResponse CreateRepositoryFromTemplate(GitHubCreateRepositoryFromTemplateOptions options) {
-            return GitHubCreateRepositoryResponse.ParseResponse(Raw.CreateRepositoryFromTemplate(options));
+        public GitHubRepositoryResponse CreateRepositoryFromTemplate(GitHubCreateRepositoryFromTemplateOptions options) {
+            return new GitHubRepositoryResponse(Raw.CreateRepositoryFromTemplate(options));
         }
 
         /// <summary>
         /// Creates a new repository for the authenticated user.
         /// </summary>
         /// <param name="name">The name of the repository.</param>
-        /// <returns>An instance of <see cref="GitHubCreateRepositoryResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubRepositoryResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://developer.github.com/v3/repos/#create</cref>
         /// </see>
-        public GitHubCreateRepositoryResponse CreateUserRepository(string name) {
-            return GitHubCreateRepositoryResponse.ParseResponse(Raw.CreateUserRepository(name));
+        public GitHubRepositoryResponse CreateUserRepository(string name) {
+            return new GitHubRepositoryResponse(Raw.CreateUserRepository(name));
         }
 
         /// <summary>
@@ -105,24 +105,24 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// </summary>
         /// <param name="name">The name of the repository.</param>
         /// <param name="isPrivate">Whether to create a new private repository.</param>
-        /// <returns>An instance of <see cref="GitHubCreateRepositoryResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubRepositoryResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://developer.github.com/v3/repos/#create</cref>
         /// </see>
-        public GitHubCreateRepositoryResponse CreateUserRepository(string name, bool isPrivate) {
-            return GitHubCreateRepositoryResponse.ParseResponse(Raw.CreateUserRepository(name, isPrivate));
+        public GitHubRepositoryResponse CreateUserRepository(string name, bool isPrivate) {
+            return new GitHubRepositoryResponse(Raw.CreateUserRepository(name, isPrivate));
         }
 
         /// <summary>
         /// Creates a new repository for the authenticated user.
         /// </summary>
         /// <param name="options">The options for the request to the API.</param>
-        /// <returns>An instanceo of <see cref="GitHubCreateRepositoryResponse"/> representing the response.</returns>
+        /// <returns>An instanceo of <see cref="GitHubRepositoryResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://developer.github.com/v3/repos/#create</cref>
         /// </see>
-        public GitHubCreateRepositoryResponse CreateUserRepository(GitHubCreateUserRepositoryOptions options) {
-            return GitHubCreateRepositoryResponse.ParseResponse(Raw.CreateUserRepository(options));
+        public GitHubRepositoryResponse CreateUserRepository(GitHubCreateUserRepositoryOptions options) {
+            return new GitHubRepositoryResponse(Raw.CreateUserRepository(options));
         }
 
         /// <summary>
@@ -130,12 +130,12 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// </summary>
         /// <param name="organisation">The organization who will own the new repository.</param>
         /// <param name="name">The name of the repository.</param>
-        /// <returns>An instance of <see cref="GitHubCreateRepositoryResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubRepositoryResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://developer.github.com/v3/repos/#create</cref>
         /// </see>
-        public GitHubCreateRepositoryResponse CreateOrganisationRepository(string organisation, string name) {
-            return GitHubCreateRepositoryResponse.ParseResponse(Raw.CreateOrganisationRepository(organisation, name));
+        public GitHubRepositoryResponse CreateOrganisationRepository(string organisation, string name) {
+            return new GitHubRepositoryResponse(Raw.CreateOrganisationRepository(organisation, name));
         }
 
         /// <summary>
@@ -144,24 +144,24 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// <param name="organisation">The organization who will own the new repository.</param>
         /// <param name="name">The name of the repository.</param>
         /// <param name="isPrivate">Whether to create a new private repository.</param>
-        /// <returns>An instance of <see cref="GitHubCreateRepositoryResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="GitHubRepositoryResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://developer.github.com/v3/repos/#create</cref>
         /// </see>
-        public GitHubCreateRepositoryResponse CreateOrganisationRepository(string organisation, string name, bool isPrivate) {
-            return GitHubCreateRepositoryResponse.ParseResponse(Raw.CreateOrganisationRepository(organisation, name, isPrivate));
+        public GitHubRepositoryResponse CreateOrganisationRepository(string organisation, string name, bool isPrivate) {
+            return new GitHubRepositoryResponse(Raw.CreateOrganisationRepository(organisation, name, isPrivate));
         }
 
         /// <summary>
         /// Creates a new repository in the specified organization. The authenticated user must be a member of the organization.
         /// </summary>
         /// <param name="options">The options for the request to the API.</param>
-        /// <returns>An instanceo of <see cref="GitHubCreateRepositoryResponse"/> representing the response.</returns>
+        /// <returns>An instanceo of <see cref="GitHubRepositoryResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://developer.github.com/v3/repos/#create</cref>
         /// </see>
-        public GitHubCreateRepositoryResponse CreateOrganisationRepository(GitHubCreateOrganisationRepositoryOptions options) {
-            return GitHubCreateRepositoryResponse.ParseResponse(Raw.CreateOrganisationRepository(options));
+        public GitHubRepositoryResponse CreateOrganisationRepository(GitHubCreateOrganisationRepositoryOptions options) {
+            return new GitHubRepositoryResponse(Raw.CreateOrganisationRepository(options));
         }
 
         /// <summary>

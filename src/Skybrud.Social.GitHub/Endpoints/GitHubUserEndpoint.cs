@@ -80,9 +80,9 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <summary>
         /// Gets a list of repositories of the authenticated user.
         /// </summary>
-        /// <returns>An instance of <see cref="GitHubGetRepositoriesResponse"/> representing the response.</returns>
-        public GitHubGetRepositoriesResponse GetRepositories() {
-            return GitHubGetRepositoriesResponse.ParseResponse(Raw.GetRepositories());
+        /// <returns>An instance of <see cref="GitHubRepositoryListResponse"/> representing the response.</returns>
+        public GitHubRepositoryListResponse GetRepositories() {
+            return new GitHubRepositoryListResponse(Raw.GetRepositories());
         }
 
         /// <summary>

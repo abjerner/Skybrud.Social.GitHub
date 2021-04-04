@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Skybrud.Essentials.Strings.Extensions;
+using System;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Options;
 using Skybrud.Social.GitHub.Options.Organizations.Members;
 
 namespace Skybrud.Social.GitHub {
@@ -45,6 +47,47 @@ namespace Skybrud.Social.GitHub {
 
                 default:
                     return string.Empty;
+
+            }
+
+        }
+
+        /// <summary>
+        /// Returns a string representation of the specified enum <paramref name="value"/>.
+        /// </summary>
+        /// <param name="value">The enum value.</param>
+        /// <returns>The string representation of the enum value.</returns>
+        public static string ToString(GitHubSortDirection value) {
+
+            switch (value) {
+                
+                case GitHubSortDirection.Ascending: return "asc";
+                
+                case GitHubSortDirection.Descending: return "desc";
+                
+                default: return string.Empty;
+
+            }
+
+        }
+
+        /// <summary>
+        /// Returns a string representation of the specified enum <paramref name="value"/>.
+        /// </summary>
+        /// <param name="value">The enum value.</param>
+        /// <returns>The string representation of the enum value.</returns>
+        public static string ToString(Enum value) {
+
+            switch (value) {
+
+                case GitHubMemberFilter filter:
+                    return ToString(filter);
+
+                case GitHubSortDirection direction:
+                    return ToString(direction);
+
+                default:
+                    return value.ToUnderscore();
 
             }
 

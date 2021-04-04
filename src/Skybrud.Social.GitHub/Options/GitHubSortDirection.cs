@@ -6,6 +6,11 @@
     public enum GitHubSortDirection {
 
         /// <summary>
+        /// Indicates that a sort direction isn't specified, using API default instead.
+        /// </summary>
+        Unspecified,
+
+        /// <summary>
         /// Indicates that results should be sorted in ascending order.
         /// </summary>
         Ascending,
