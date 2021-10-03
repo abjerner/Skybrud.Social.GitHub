@@ -19,12 +19,12 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
         /// <summary>
         /// Gets or sets the ID of the organization.
         /// </summary>
-        public int Id { get; set; }
+        public int OrganizationId { get; set; }
 
         /// <summary>
         /// Gets or sets the alias of the organization.
         /// </summary>
-        public string Alias { get; set; }
+        public string OrganizationAlias { get; set; }
 
         /// <summary>
         /// Gets or sets the page to be returned. Default is <c>1</c>, indicating the first page.
@@ -50,30 +50,30 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
         /// <summary>
         /// Initializes a new instance with default options.
         /// </summary>
-        /// <param name="id">The ID of the organization.</param>
-        public GitHubGetTeamsOptions(int id) {
-            Id = id;
+        /// <param name="organizationId">The ID of the organization.</param>
+        public GitHubGetTeamsOptions(int organizationId) {
+            OrganizationId = organizationId;
             Page = 1;
         }
 
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="page"/>.
         /// </summary>
-        /// <param name="id">The ID of the organization.</param>
+        /// <param name="organizationId">The ID of the organization.</param>
         /// <param name="page">The page to be returned. Default is <c>1</c>, indicating the first page.</param>
-        public GitHubGetTeamsOptions(int id, int page) {
-            Id = id;
+        public GitHubGetTeamsOptions(int organizationId, int page) {
+            OrganizationId = organizationId;
             Page = page;
         }
 
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="page"/> and <paramref name="perPage"/>.
         /// </summary>
-        /// <param name="id">The ID of the organization.</param>
+        /// <param name="organizationId">The ID of the organization.</param>
         /// <param name="page">The page to be returned. Default is <c>1</c>, indicating the first page.</param>
         /// <param name="perPage">The maximum amount of pull requests to be returned by each page.</param>
-        public GitHubGetTeamsOptions(int id, int page, int perPage) {
-            Id = id;
+        public GitHubGetTeamsOptions(int organizationId, int page, int perPage) {
+            OrganizationId = organizationId;
             Page = page;
             PerPage = perPage;
         }
@@ -81,30 +81,30 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
         /// <summary>
         /// Initializes a new instance with default options.
         /// </summary>
-        /// <param name="alias">The alias/slug of the organization.</param>
-        public GitHubGetTeamsOptions(string alias) {
-            Alias = alias;
+        /// <param name="organizationAlias">The alias/slug of the organization.</param>
+        public GitHubGetTeamsOptions(string organizationAlias) {
+            OrganizationAlias = organizationAlias;
             Page = 1;
         }
 
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="page"/>.
         /// </summary>
-        /// <param name="alias">The alias/slug of the organization.</param>
+        /// <param name="organizationAlias">The alias/slug of the organization.</param>
         /// <param name="page">The page to be returned. Default is <c>1</c>, indicating the first page.</param>
-        public GitHubGetTeamsOptions(string alias, int page) {
-            Alias = alias;
+        public GitHubGetTeamsOptions(string organizationAlias, int page) {
+            OrganizationAlias = organizationAlias;
             Page = page;
         }
 
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="page"/> and <paramref name="perPage"/>.
         /// </summary>
-        /// <param name="alias">The alias/slug of the organization.</param>
+        /// <param name="organizationAlias">The alias/slug of the organization.</param>
         /// <param name="page">The page to be returned. Default is <c>1</c>, indicating the first page.</param>
         /// <param name="perPage">The maximum amount of pull requests to be returned by each page.</param>
-        public GitHubGetTeamsOptions(string alias, int page, int perPage) {
-            Alias = alias;
+        public GitHubGetTeamsOptions(string organizationAlias, int page, int perPage) {
+            OrganizationAlias = organizationAlias;
             Page = page;
             PerPage = perPage;
         }
@@ -116,10 +116,10 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
         /// <inheritdoc />
         public IHttpRequest GetRequest() {
 
-            if (Id == 0 && string.IsNullOrWhiteSpace(Alias)) throw new PropertyNotSetException(nameof(Alias));
+            if (OrganizationId == 0 && string.IsNullOrWhiteSpace(OrganizationAlias)) throw new PropertyNotSetException(nameof(OrganizationAlias));
 
             // Determine the URL either from the alias or the ID
-            string url = Alias.HasValue() ? $"/orgs/{Alias}/teams" : $"/organizations/{Id}/teams";
+            string url = OrganizationAlias.HasValue() ? $"/orgs/{OrganizationAlias}/teams" : $"/organizations/{OrganizationId}/teams";
 
             // Construct the query string
             IHttpQueryString query = new HttpQueryString();

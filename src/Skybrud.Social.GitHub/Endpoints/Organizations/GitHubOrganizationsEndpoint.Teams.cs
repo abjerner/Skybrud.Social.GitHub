@@ -6,24 +6,24 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
     public partial class GitHubOrganizationsEndpoint {
 
         /// <summary>
-        /// Creates a new team with the specified <paramref name="name"/> and in the organization with the specified <paramref name="org"/>.
+        /// Creates a new team with the specified <paramref name="name"/> and in the organization with the specified <paramref name="organisationAlias"/>.
         /// </summary>
-        /// <param name="org">The alias/slug og the organization.</param>
+        /// <param name="organisationAlias">The alias/slug og the organization.</param>
         /// <param name="name">The name of the team to be created.</param>
         /// <returns>An instance of <see cref="GitHubTeamResponse"/> representing the response.</returns>
-        public GitHubTeamResponse CreateTeam(string org, string name) {
-            return new GitHubTeamResponse(Raw.CreateTeam(org, name));
+        public GitHubTeamResponse CreateTeam(string organisationAlias, string name) {
+            return new GitHubTeamResponse(Raw.CreateTeam(organisationAlias, name));
         }
 
         /// <summary>
-        /// Creates a new team with the specified <paramref name="name"/> and in the organization with the specified <paramref name="org"/>.
+        /// Creates a new team with the specified <paramref name="name"/> and in the organization with the specified <paramref name="organisationAlias"/>.
         /// </summary>
-        /// <param name="org">The alias/slug og the organization.</param>
+        /// <param name="organisationAlias">The alias/slug og the organization.</param>
         /// <param name="name">The name of the team to be created.</param>
         /// <param name="description">The description of the team to be created.</param>
         /// <returns>An instance of <see cref="GitHubTeamResponse"/> representing the response.</returns>
-        public GitHubTeamResponse CreateTeam(string org, string name, string description) {
-            return new GitHubTeamResponse(Raw.CreateTeam(org, name, description));
+        public GitHubTeamResponse CreateTeam(string organisationAlias, string name, string description) {
+            return new GitHubTeamResponse(Raw.CreateTeam(organisationAlias, name, description));
         }
 
         /// <summary>
@@ -36,63 +36,63 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         }
 
         /// <summary>
-        /// Gets the teams of the organization with the specified <paramref name="id"/>.
+        /// Gets the teams of the organization with the specified <paramref name="organizationId"/>.
         /// </summary>
-        /// <param name="id">The ID of the organization.</param>
+        /// <param name="organizationId">The ID of the organization.</param>
         /// <returns>An instance of <see cref="GitHubTeamListResponse"/> representing the response.</returns>
-        public GitHubTeamListResponse GetTeams(int id) {
-            return new GitHubTeamListResponse(Raw.GetTeams(id));
+        public GitHubTeamListResponse GetTeams(int organizationId) {
+            return new GitHubTeamListResponse(Raw.GetTeams(organizationId));
         }
 
         /// <summary>
-        /// Gets the teams of the organization with the specified <paramref name="id"/>.
+        /// Gets the teams of the organization with the specified <paramref name="organizationId"/>.
         /// </summary>
-        /// <param name="id">The ID of the organization.</param>
+        /// <param name="organizationId">The ID of the organization.</param>
         /// <param name="page">The page to be returned. </param>
         /// <returns>An instance of <see cref="GitHubTeamListResponse"/> representing the response.</returns>
-        public GitHubTeamListResponse GetTeams(int id, int page) {
-            return new GitHubTeamListResponse(Raw.GetTeams(id, page));
+        public GitHubTeamListResponse GetTeams(int organizationId, int page) {
+            return new GitHubTeamListResponse(Raw.GetTeams(organizationId, page));
         }
 
         /// <summary>
-        /// Gets the teams of the organization with the specified <paramref name="id"/>.
+        /// Gets the teams of the organization with the specified <paramref name="organizationId"/>.
         /// </summary>
-        /// <param name="id">The ID of the organization.</param>
-        /// <param name="page">The page to be returned. </param>
-        /// <param name="perPage">The maximum amount of teams to be returned by each page.</param>
-        /// <returns>An instance of <see cref="GitHubTeamListResponse"/> representing the response.</returns>
-        public GitHubTeamListResponse GetTeams(int id, int page, int perPage) {
-            return new GitHubTeamListResponse(Raw.GetTeams(id, page, perPage));
-        }
-
-        /// <summary>
-        /// Gets the teams of the organization with the specified <paramref name="alias"/>.
-        /// </summary>
-        /// <param name="alias">The alias of the organization.</param>
-        /// <returns>An instance of <see cref="GitHubTeamListResponse"/> representing the response.</returns>
-        public GitHubTeamListResponse GetTeams(string alias) {
-            return new GitHubTeamListResponse(Raw.GetTeams(alias));
-        }
-
-        /// <summary>
-        /// Gets the teams of the organization with the specified <paramref name="alias"/>.
-        /// </summary>
-        /// <param name="alias">The alias of the organization.</param>
-        /// <param name="page">The page to be returned. </param>
-        /// <returns>An instance of <see cref="GitHubTeamListResponse"/> representing the response.</returns>
-        public GitHubTeamListResponse GetTeams(string alias, int page) {
-            return new GitHubTeamListResponse(Raw.GetTeams(alias, page));
-        }
-
-        /// <summary>
-        /// Gets the teams of the organization with the specified <paramref name="alias"/>.
-        /// </summary>
-        /// <param name="alias">The alias of the organization.</param>
+        /// <param name="organizationId">The ID of the organization.</param>
         /// <param name="page">The page to be returned. </param>
         /// <param name="perPage">The maximum amount of teams to be returned by each page.</param>
         /// <returns>An instance of <see cref="GitHubTeamListResponse"/> representing the response.</returns>
-        public GitHubTeamListResponse GetTeams(string alias, int page, int perPage) {
-            return new GitHubTeamListResponse(Raw.GetTeams(alias, page, perPage));
+        public GitHubTeamListResponse GetTeams(int organizationId, int page, int perPage) {
+            return new GitHubTeamListResponse(Raw.GetTeams(organizationId, page, perPage));
+        }
+
+        /// <summary>
+        /// Gets the teams of the organization with the specified <paramref name="organizationAlias"/>.
+        /// </summary>
+        /// <param name="organizationAlias">The alias of the organization.</param>
+        /// <returns>An instance of <see cref="GitHubTeamListResponse"/> representing the response.</returns>
+        public GitHubTeamListResponse GetTeams(string organizationAlias) {
+            return new GitHubTeamListResponse(Raw.GetTeams(organizationAlias));
+        }
+
+        /// <summary>
+        /// Gets the teams of the organization with the specified <paramref name="organizationAlias"/>.
+        /// </summary>
+        /// <param name="organizationAlias">The alias of the organization.</param>
+        /// <param name="page">The page to be returned. </param>
+        /// <returns>An instance of <see cref="GitHubTeamListResponse"/> representing the response.</returns>
+        public GitHubTeamListResponse GetTeams(string organizationAlias, int page) {
+            return new GitHubTeamListResponse(Raw.GetTeams(organizationAlias, page));
+        }
+
+        /// <summary>
+        /// Gets the teams of the organization with the specified <paramref name="organizationAlias"/>.
+        /// </summary>
+        /// <param name="organizationAlias">The alias of the organization.</param>
+        /// <param name="page">The page to be returned. </param>
+        /// <param name="perPage">The maximum amount of teams to be returned by each page.</param>
+        /// <returns>An instance of <see cref="GitHubTeamListResponse"/> representing the response.</returns>
+        public GitHubTeamListResponse GetTeams(string organizationAlias, int page, int perPage) {
+            return new GitHubTeamListResponse(Raw.GetTeams(organizationAlias, page, perPage));
         }
 
     }
