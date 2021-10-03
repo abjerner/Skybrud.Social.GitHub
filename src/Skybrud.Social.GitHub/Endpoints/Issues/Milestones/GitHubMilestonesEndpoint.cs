@@ -15,7 +15,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues.Milestones {
         /// <summary>
         /// Gets a reference to the GitHub service.
         /// </summary>
-        public GitHubService Service { get; }
+        public GitHubHttpService Service { get; }
 
         /// <summary>
         /// Gets a reference to the raw endpoint.
@@ -26,7 +26,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues.Milestones {
 
         #region Constructors
 
-        internal GitHubMilestonesEndpoint(GitHubService service) {
+        internal GitHubMilestonesEndpoint(GitHubHttpService service) {
             Service = service;
         }
 

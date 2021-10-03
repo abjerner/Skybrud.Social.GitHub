@@ -13,7 +13,7 @@ namespace Skybrud.Social.GitHub {
     /// <summary>
     /// Class representing the object oriented implementation of the GitHub API.
     /// </summary>
-    public class GitHubService {
+    public class GitHubHttpService {
 
         #region Properties
 
@@ -73,9 +73,9 @@ namespace Skybrud.Social.GitHub {
         /// the GitHub API. You can use the static <see cref="CreateFromAccessToken"/> method instead for initializing
         /// a new service instance from an access token.
         /// </summary>
-        public GitHubService() : this(new GitHubOAuthClient()) { }
+        public GitHubHttpService() : this(new GitHubOAuthClient()) { }
 
-        private GitHubService(GitHubOAuthClient client) {
+        private GitHubHttpService(GitHubOAuthClient client) {
             Client = client;
             Commits = new GitHubCommitsEndpoint(this);
             Issues = new GitHubIssuesEndpoint(this);
@@ -95,16 +95,16 @@ namespace Skybrud.Social.GitHub {
         /// Initialize a new service instance from the specified OAuth client.
         /// </summary>
         /// <param name="client">The OAuth client.</param>
-        public static GitHubService CreateFromOAuthClient(GitHubOAuthClient client) {
+        public static GitHubHttpService CreateFromOAuthClient(GitHubOAuthClient client) {
             if (client == null) throw new ArgumentNullException(nameof(client));
-            return new GitHubService(client);
+            return new GitHubHttpService(client);
         }
 
         /// <summary>
         /// Initializes a new service instance from the specified OAuth 2 <paramref name="accessToken"/>.
         /// </summary>
         /// <param name="accessToken">The access token.</param>
-        public static GitHubService CreateFromAccessToken(string accessToken) {
+        public static GitHubHttpService CreateFromAccessToken(string accessToken) {
             if (string.IsNullOrWhiteSpace(accessToken)) throw new ArgumentNullException(nameof(accessToken));
             return CreateFromOAuthClient(new GitHubOAuthClient(accessToken));
         }
@@ -116,7 +116,7 @@ namespace Skybrud.Social.GitHub {
         /// </summary>
         /// <param name="username">The username of the user on GitHub.com</param>
         /// <param name="password">The password of the user on GitHub.com</param>
-        public static GitHubService CreateFromCredentials(string username, string password) {
+        public static GitHubHttpService CreateFromCredentials(string username, string password) {
             if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
             if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException(nameof(password));
             return CreateFromOAuthClient(new GitHubOAuthClient {
@@ -130,7 +130,7 @@ namespace Skybrud.Social.GitHub {
         /// OAuth 2.
         /// </summary>
         /// <param name="credentials">The credentials of the user on GitHub.com</param>
-        public static GitHubService CreateFromCredentials(NetworkCredential credentials) {
+        public static GitHubHttpService CreateFromCredentials(NetworkCredential credentials) {
             return CreateFromOAuthClient(new GitHubOAuthClient {
                 Credentials = credentials
             });

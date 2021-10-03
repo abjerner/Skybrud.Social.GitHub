@@ -15,7 +15,7 @@ namespace Skybrud.Social.GitHub.Endpoints.PullRequests.Reviews {
         /// <summary>
         /// Gets a reference to the GitHub service.
         /// </summary>
-        public GitHubService Service { get; }
+        public GitHubHttpService Service { get; }
 
         /// <summary>
         /// Gets a reference to the raw endpoint.
@@ -26,7 +26,7 @@ namespace Skybrud.Social.GitHub.Endpoints.PullRequests.Reviews {
 
         #region Constructors
 
-        internal GitHubPullReviewsEndpoint(GitHubService service) {
+        internal GitHubPullReviewsEndpoint(GitHubHttpService service) {
             Service = service;
         }
 

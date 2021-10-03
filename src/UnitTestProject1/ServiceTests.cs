@@ -11,7 +11,7 @@ namespace UnitTestProject1 {
         [TestMethod]
         public void Constructor1() {
 
-            GitHubService service = new GitHubService();
+            GitHubHttpService service = new GitHubHttpService();
 
             Assert.IsNotNull(service.Client);
             Assert.IsNotNull(service.Commits);
@@ -28,7 +28,7 @@ namespace UnitTestProject1 {
         [TestMethod]
         public void Constructor2() {
 
-            GitHubService service = GitHubService.CreateFromAccessToken("1234");
+            GitHubHttpService service = GitHubHttpService.CreateFromAccessToken("1234");
 
             Assert.IsNotNull(service.Client);
             Assert.IsNotNull(service.Commits);

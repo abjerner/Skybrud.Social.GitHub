@@ -14,7 +14,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <summary>
         /// Gets a reference to the GitHub service.
         /// </summary>
-        public GitHubService Service { get; }
+        public GitHubHttpService Service { get; }
 
         /// <summary>
         /// Gets a reference to the raw endpoint.
@@ -25,7 +25,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
 
         #region Constructors
 
-        internal GitHubCommitsEndpoint(GitHubService service) {
+        internal GitHubCommitsEndpoint(GitHubHttpService service) {
             Service = service;
         }
 
