@@ -1,9 +1,7 @@
 using Skybrud.Social.GitHub.Options.Organizations;
 using Skybrud.Social.GitHub.Options.Organizations.Repositories;
-using Skybrud.Social.GitHub.Options.Organizations.Teams;
 using Skybrud.Social.GitHub.Responses.Organizations;
 using Skybrud.Social.GitHub.Responses.Repositories;
-using Skybrud.Social.GitHub.Responses.Teams;
 using System;
 
 namespace Skybrud.Social.GitHub.Endpoints.Organizations {
@@ -26,11 +24,6 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         public GitHubOrganizationsRawEndpoint Raw => Service.Client.Organizations;
 
         /// <summary>
-        /// Gets a reference to the <strong>Organizations/Members</strong> endpoint.
-        /// </summary>
-        public GitHubOrganizationMembersEndpoint Members { get; }
-
-        /// <summary>
         /// Gets a reference to the <strong>Organizations/OutsideCollaborators</strong> endpoint.
         /// </summary>
         public GitHubOrganizationOutsideCollaboratorsEndpoint OutsideCollaborators { get; }
@@ -41,7 +34,6 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
 
         internal GitHubOrganizationsEndpoint(GitHubHttpService service) {
             Service = service;
-            Members = new GitHubOrganizationMembersEndpoint(service);
             OutsideCollaborators = new GitHubOrganizationOutsideCollaboratorsEndpoint(service);
         }
 

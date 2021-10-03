@@ -24,11 +24,6 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         public GitHubOAuthClient Client { get; }
 
         /// <summary>
-        /// Gets a reference to the raw <strong>Organizations/Members</strong> endpoint.
-        /// </summary>
-        public GitHubOrganizationMembersRawEndpoint Members { get; }
-
-        /// <summary>
         /// Gets a reference to the raw <strong>Organizations/OutsideCollaborators</strong> endpoint.
         /// </summary>
         public GitHubOrganizationOutsideCollaboratorsRawEndpoint OutsideCollaborators { get; }
@@ -39,7 +34,6 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
 
         internal GitHubOrganizationsRawEndpoint(GitHubOAuthClient client) {
             Client = client;
-            Members = new GitHubOrganizationMembersRawEndpoint(client);
             OutsideCollaborators = new GitHubOrganizationOutsideCollaboratorsRawEndpoint(client);
         }
 
