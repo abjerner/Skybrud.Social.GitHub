@@ -11,7 +11,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
     /// <summary>
     /// Class representing the <strong>Organizations</strong> endpoint.
     /// </summary>
-    public class GitHubOrganizationsEndpoint {
+    public partial class GitHubOrganizationsEndpoint {
 
         #region Properties
 

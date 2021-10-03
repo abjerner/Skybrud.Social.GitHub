@@ -14,7 +14,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
     /// <see>
     ///     <cref>https://developer.github.com/v3/orgs/</cref>
     /// </see>
-    public class GitHubOrganizationsRawEndpoint {
+    public partial class GitHubOrganizationsRawEndpoint {
 
         #region Properties
 
