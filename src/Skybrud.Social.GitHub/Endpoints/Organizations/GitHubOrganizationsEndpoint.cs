@@ -23,18 +23,12 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         /// </summary>
         public GitHubOrganizationsRawEndpoint Raw => Service.Client.Organizations;
 
-        /// <summary>
-        /// Gets a reference to the <strong>Organizations/OutsideCollaborators</strong> endpoint.
-        /// </summary>
-        public GitHubOrganizationOutsideCollaboratorsEndpoint OutsideCollaborators { get; }
-
         #endregion
 
         #region Constructors
 
         internal GitHubOrganizationsEndpoint(GitHubHttpService service) {
             Service = service;
-            OutsideCollaborators = new GitHubOrganizationOutsideCollaboratorsEndpoint(service);
         }
 
         #endregion

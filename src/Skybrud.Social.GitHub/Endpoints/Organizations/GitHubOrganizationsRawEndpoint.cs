@@ -4,7 +4,6 @@ using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Organizations;
 using Skybrud.Social.GitHub.Options.Organizations.Repositories;
-using Skybrud.Social.GitHub.Options.Organizations.Teams;
 
 namespace Skybrud.Social.GitHub.Endpoints.Organizations {
     
@@ -23,18 +22,12 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         /// </summary>
         public GitHubOAuthClient Client { get; }
 
-        /// <summary>
-        /// Gets a reference to the raw <strong>Organizations/OutsideCollaborators</strong> endpoint.
-        /// </summary>
-        public GitHubOrganizationOutsideCollaboratorsRawEndpoint OutsideCollaborators { get; }
-
         #endregion
 
         #region Constructors
 
         internal GitHubOrganizationsRawEndpoint(GitHubOAuthClient client) {
             Client = client;
-            OutsideCollaborators = new GitHubOrganizationOutsideCollaboratorsRawEndpoint(client);
         }
 
         #endregion
@@ -42,22 +35,22 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         #region Methods
 
         /// <summary>
-        /// Gets information about the organisation with the specified <paramref name="id"/>.
+        /// Gets information about the organisation with the specified <paramref name="organizationId"/>.
         /// </summary>
-        /// <param name="id">The ID of the organization.</param>
+        /// <param name="organizationId">The ID of the organization.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-        public IHttpResponse GetOrganization(int id) {
-            return Client.Get($"/organizations/{id}");
+        public IHttpResponse GetOrganization(int organizationId) {
+            return Client.Get($"/organizations/{organizationId}");
         }
 
         /// <summary>
-        /// Gets information about the organisation with the specified <paramref name="alias"/>.
+        /// Gets information about the organisation with the specified <paramref name="organizationAlias"/>.
         /// </summary>
-        /// <param name="alias">The alias (login) of the organization.</param>
+        /// <param name="organizationAlias">The alias (login) of the organization.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-        public IHttpResponse GetOrganization(string alias) {
-            if (string.IsNullOrWhiteSpace(alias)) throw new ArgumentNullException(nameof(alias));
-            return Client.Get($"/orgs/{alias}");
+        public IHttpResponse GetOrganization(string organizationAlias) {
+            if (string.IsNullOrWhiteSpace(organizationAlias)) throw new ArgumentNullException(nameof(organizationAlias));
+            return Client.Get($"/orgs/{organizationAlias}");
         }
 
         /// <summary>

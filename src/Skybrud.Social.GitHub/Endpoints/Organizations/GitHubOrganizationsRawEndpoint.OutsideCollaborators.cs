@@ -1,36 +1,10 @@
 using System;
 using Skybrud.Essentials.Http;
-using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Organizations.OutsideCollaborators;
 
 namespace Skybrud.Social.GitHub.Endpoints.Organizations {
 
-    /// <summary>
-    /// Class representing the raw <strong>Organizations/OutsideCollaborators</strong> endpoint.
-    /// </summary>
-    /// <see>
-    ///     <cref>https://docs.github.com/en/rest/reference/orgs#outside-collaborators</cref>
-    /// </see>
-    public class GitHubOrganizationOutsideCollaboratorsRawEndpoint {
-
-        #region Properties
-
-        /// <summary>
-        /// Gets a reference to the parent OAuth client.
-        /// </summary>
-        public GitHubOAuthClient Client { get; }
-
-        #endregion
-
-        #region Constructors
-
-        internal GitHubOrganizationOutsideCollaboratorsRawEndpoint(GitHubOAuthClient client) {
-            Client = client;
-        }
-
-        #endregion
-
-        #region Methods
+    public partial class GitHubOrganizationsRawEndpoint {
 
         /// <summary>
         /// Gets a list of the outside collaborators of the specified <paramref name="organization"/>.
@@ -57,8 +31,6 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
             if (options == null) throw new ArgumentNullException(nameof(options));
             return Client.GetResponse(options);
         }
-
-        #endregion
 
     }
 

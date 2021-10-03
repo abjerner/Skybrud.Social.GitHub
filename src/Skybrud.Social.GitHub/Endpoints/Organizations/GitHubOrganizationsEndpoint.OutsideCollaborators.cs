@@ -2,38 +2,8 @@ using Skybrud.Social.GitHub.Options.Organizations.OutsideCollaborators;
 using Skybrud.Social.GitHub.Responses.Users;
 
 namespace Skybrud.Social.GitHub.Endpoints.Organizations {
-    
-    /// <summary>
-    /// Class representing the <strong>Organizations/OutsideCollaborators</strong> endpoint.
-    /// </summary>
-    /// <see>
-    ///     <cref>https://docs.github.com/en/rest/reference/orgs#outside-collaborators</cref>
-    /// </see>
-    public class GitHubOrganizationOutsideCollaboratorsEndpoint {
 
-        #region Properties
-
-        /// <summary>
-        /// Gets a reference to the GitHub service.
-        /// </summary>
-        public GitHubHttpService Service { get; }
-
-        /// <summary>
-        /// Gets a reference to the raw endpoint.
-        /// </summary>
-        public GitHubOrganizationOutsideCollaboratorsRawEndpoint Raw => Service.Client.Organizations.OutsideCollaborators;
-
-        #endregion
-
-        #region Constructors
-
-        internal GitHubOrganizationOutsideCollaboratorsEndpoint(GitHubHttpService service) {
-            Service = service;
-        }
-
-        #endregion
-
-        #region member methods
+    public partial class GitHubOrganizationsEndpoint {
 
         /// <summary>
         /// Gets a list of the outside collaborators of the specified <paramref name="organization"/>.
@@ -59,8 +29,6 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
             return new GitHubUserListResponse(Raw.GetOutsideCollaborators(options));
         }
 
-        #endregion
-    
     }
 
 }
