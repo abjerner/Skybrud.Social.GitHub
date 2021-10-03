@@ -1,5 +1,4 @@
 using System;
-using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Endpoints.Issues.Comments;
 using Skybrud.Social.GitHub.Endpoints.Issues.Events;
@@ -50,6 +49,19 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues {
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Creates a new issue matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/reference/issues#create-an-issue</cref>
+        /// </see>
+        public IHttpResponse CreateIssue(GitHubCreateIssueOptions options) {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            return Client.GetResponse(options);
+        }
 
         /// <summary>
         /// Gets information about the issue matching the specified <paramref name="owner"/>, <paramref name="repository"/> and <paramref name="number"/>.

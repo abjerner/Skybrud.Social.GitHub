@@ -8,7 +8,7 @@ namespace Skybrud.Social.GitHub.Responses.Issues {
     /// <summary>
     /// Class representing the response for getting a list of GitHub issues.
     /// </summary>
-    public class GitHubGetIssuesResponse : GitHubResponse<GitHubIssueItem[]> {
+    public class GitHubIssueListResponse : GitHubResponse<GitHubIssueItem[]> {
 
         #region Properties
 
@@ -36,7 +36,7 @@ namespace Skybrud.Social.GitHub.Responses.Issues {
 
         #region Constructors
 
-        private GitHubGetIssuesResponse(IHttpResponse response) : base(response) {
+        private GitHubIssueListResponse(IHttpResponse response) : base(response) {
 
             // Parse the response body
             Body = ParseJsonArray(response.Body, GitHubIssueItem.Parse);
@@ -89,13 +89,13 @@ namespace Skybrud.Social.GitHub.Responses.Issues {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubGetIssuesResponse"/>.
+        /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubIssueListResponse"/>.
         /// </summary>
         /// <param name="response">The instance of <see cref="IHttpResponse"/> representing the raw response.</param>
-        /// <returns>An instance of <see cref="GitHubGetIssuesResponse"/> representing the response.</returns>
-        public static GitHubGetIssuesResponse ParseResponse(IHttpResponse response) {
+        /// <returns>An instance of <see cref="GitHubIssueListResponse"/> representing the response.</returns>
+        public static GitHubIssueListResponse ParseResponse(IHttpResponse response) {
             if (response == null) throw new ArgumentNullException(nameof(response));
-            return new GitHubGetIssuesResponse(response);
+            return new GitHubIssueListResponse(response);
         }
 
         #endregion
