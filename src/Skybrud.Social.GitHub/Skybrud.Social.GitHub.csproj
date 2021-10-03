@@ -11,19 +11,20 @@
   <PropertyGroup>
     <RootNamespace>Skybrud.Social.GitHub</RootNamespace>
     <Version>1.0.0-beta009</Version>
-    <Company>Skybrud.dk a/s</Company>
+    <Company>Limbo</Company>
     <Product>Skybrud.Social</Product>
     <Authors>Anders Bjerner</Authors>
-    <Copyright>Copyright © 2020</Copyright>
+    <Copyright>Copyright © 2021</Copyright>
     <Description>Authentication and service implementation for the GitHub API.</Description>
-    <RepositoryUrl>https://github.com/abjerner/Skybrud.Social.GitHub</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageTags>GitHub, Graph, API, Skybrud, Social, OAuth, JSON</PackageTags>
+    <PackageTags>GitHub, Graph, API, Skybrud, Social, OAuth, JSON, Limbo</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://social.skybrud.dk/github/</PackageProjectUrl>
-    <PackageIconUrl>http://www.skybrud.dk/img/5431sk/icon/favicon.ico</PackageIconUrl>
+    <PackageIcon>Limbo.png</PackageIcon>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/abjerner/Skybrud.Social.GitHub</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
