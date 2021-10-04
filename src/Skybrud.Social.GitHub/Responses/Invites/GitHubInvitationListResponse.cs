@@ -4,7 +4,7 @@ using Skybrud.Social.GitHub.Models.Invitations;
 namespace Skybrud.Social.GitHub.Responses.Invites {
 
     /// <summary>
-    /// Class representing the response with a list of GitHub invitations.
+    /// Class representing the response with a list of <see cref="GitHubInvitationItem"/>.
     /// </summary>
     public class GitHubInvitationListResponse : GitHubListResponse<GitHubInvitationItem> {
 

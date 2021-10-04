@@ -4,7 +4,7 @@ using Skybrud.Social.GitHub.Models.Branches;
 namespace Skybrud.Social.GitHub.Responses.Branches {
 
     /// <summary>
-    /// Class representing the response with information about a GitHub branch.
+    /// Class representing the response with information about a <see cref="GitHubBranch"/>.
     /// </summary>
     public class GitHubBranchResponse : GitHubResponse<GitHubBranch> {
 

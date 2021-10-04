@@ -34,22 +34,22 @@ namespace Skybrud.Social.GitHub.Endpoints {
 
         #endregion
 
-        #region Methods
+        #region Member methods
 
         /// <summary>
         /// Gets information about the authenticated user.
         /// </summary>
-        /// <returns>An instance of <see cref="GitHubGetUserResponse"/> representing the response.</returns>
-        public GitHubGetUserResponse GetUser() {
-            return GitHubGetUserResponse.ParseResponse(Raw.GetUser());
+        /// <returns>An instance of <see cref="GitHubUserResponse"/> representing the response.</returns>
+        public GitHubUserResponse GetUser() {
+            return new GitHubUserResponse(Raw.GetUser());
         }
 
         /// <summary>
         /// Gets a list of email addresses of the authenticated user.
         /// </summary>
-        /// <returns>An instance of <see cref="GitHubGetEmailsResponse"/> representing the response.</returns>
-        public GitHubGetEmailsResponse GetEmails() {
-            return GitHubGetEmailsResponse.ParseResponse(Raw.GetEmails());
+        /// <returns>An instance of <see cref="GitHubEmailListResponse"/> representing the response.</returns>
+        public GitHubEmailListResponse GetEmails() {
+            return new GitHubEmailListResponse(Raw.GetEmails());
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <param name="username">The username (login) of the user.</param>
         /// <returns>An instance of <see cref="GitHubGetFollowingResponse"/> representing the response.</returns>
         public GitHubGetFollowingResponse IsFollowing(string username) {
-            return GitHubGetFollowingResponse.ParseResponse(Raw.IsFollowing(username));
+            return new GitHubGetFollowingResponse(Raw.IsFollowing(username));
         }
 
         /// <summary>

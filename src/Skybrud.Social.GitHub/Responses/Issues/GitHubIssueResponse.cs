@@ -4,7 +4,7 @@ using Skybrud.Social.GitHub.Models.Issues;
 namespace Skybrud.Social.GitHub.Responses.Issues {
 
     /// <summary>
-    /// Class representing the response describing a single GitHub issue.
+    /// Class representing the response with information about a <see cref="GitHubIssue"/>.
     /// </summary>
     public class GitHubIssueResponse : GitHubResponse<GitHubIssue> {
 

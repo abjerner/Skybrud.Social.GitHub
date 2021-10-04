@@ -4,7 +4,7 @@ using Skybrud.Social.GitHub.Models.Organizations;
 namespace Skybrud.Social.GitHub.Responses.Organizations {
 
     /// <summary>
-    /// Class representing the response for getting information about a GitHub organiszation.
+    /// Class representing the response with information about a <see cref="GitHubOrganization"/>.
     /// </summary>
     public class GitHubOrganizationResponse : GitHubResponse<GitHubOrganization> {
 

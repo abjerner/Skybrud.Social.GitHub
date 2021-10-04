@@ -48,18 +48,18 @@ namespace Skybrud.Social.GitHub.Endpoints.PullRequests {
         /// <param name="owner">The alias of the repository owner.</param>
         /// <param name="repository">The alias of the repository.</param>
         /// <param name="number">The number of the pull request.</param>
-        /// <returns>An instance of <see cref="GitHubGetPullRequestResponse"/> representing the response.</returns>
-        public GitHubGetPullRequestResponse GetPullRequest(string owner, string repository, int number) {
-            return GitHubGetPullRequestResponse.ParseResponse(Raw.GetPullRequest(owner, repository, number));
+        /// <returns>An instance of <see cref="GitHubPullRequestResponse"/> representing the response.</returns>
+        public GitHubPullRequestResponse GetPullRequest(string owner, string repository, int number) {
+            return new GitHubPullRequestResponse(Raw.GetPullRequest(owner, repository, number));
         }
 
         /// <summary>
         /// Gets the pull request matching the specified <paramref name="options"/>.
         /// </summary>
         /// <param name="options">The options for the request to the API.</param>
-        /// <returns>An instance of <see cref="GitHubGetPullRequestResponse"/> representing the response.</returns>
-        public GitHubGetPullRequestResponse GetPullRequest(GitHubGetPullRequestOptions options) {
-            return GitHubGetPullRequestResponse.ParseResponse(Raw.GetPullRequest(options));
+        /// <returns>An instance of <see cref="GitHubPullRequestResponse"/> representing the response.</returns>
+        public GitHubPullRequestResponse GetPullRequest(GitHubGetPullRequestOptions options) {
+            return new GitHubPullRequestResponse(Raw.GetPullRequest(options));
         }
 
         /// <summary>
@@ -67,18 +67,18 @@ namespace Skybrud.Social.GitHub.Endpoints.PullRequests {
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
         /// <param name="repository">The alias of the repository.</param>
-        /// <returns>An instance of <see cref="GitHubGetPullRequestsResponse"/> representing the response.</returns>
-        public GitHubGetPullRequestsResponse GetPullRequests(string owner, string repository) {
-            return GitHubGetPullRequestsResponse.ParseResponse(Raw.GetPullRequests(owner, repository));
+        /// <returns>An instance of <see cref="GitHubPullRequestListResponse"/> representing the response.</returns>
+        public GitHubPullRequestListResponse GetPullRequests(string owner, string repository) {
+            return new GitHubPullRequestListResponse(Raw.GetPullRequests(owner, repository));
         }
 
         /// <summary>
         /// Gets a list of pull requests matching the repository matching the specified <paramref name="options"/>.
         /// </summary>
         /// <param name="options">The options for the request to the API.</param>
-        /// <returns>An instance of <see cref="GitHubGetPullRequestsResponse"/> representing the response.</returns>
-        public GitHubGetPullRequestsResponse GetPullRequests(GitHubGetPullRequestsOptions options) {
-            return GitHubGetPullRequestsResponse.ParseResponse(Raw.GetPullRequests(options));
+        /// <returns>An instance of <see cref="GitHubPullRequestListResponse"/> representing the response.</returns>
+        public GitHubPullRequestListResponse GetPullRequests(GitHubGetPullRequestsOptions options) {
+            return new GitHubPullRequestListResponse(Raw.GetPullRequests(options));
         }
 
         #endregion

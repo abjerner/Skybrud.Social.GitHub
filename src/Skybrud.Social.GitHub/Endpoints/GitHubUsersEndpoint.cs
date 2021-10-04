@@ -38,9 +38,9 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// Gets information about the user with the specified <paramref name="username"/>.
         /// </summary>
         /// <param name="username">The username (login) of the user.</param>
-        /// <returns>An instance of <see cref="GitHubGetUserResponse"/> representing the response.</returns>
-        public GitHubGetUserResponse GetUser(string username) {
-            return GitHubGetUserResponse.ParseResponse(Raw.GetUser(username));
+        /// <returns>An instance of <see cref="GitHubUserResponse"/> representing the response.</returns>
+        public GitHubUserResponse GetUser(string username) {
+            return new GitHubUserResponse(Raw.GetUser(username));
         }
 
         /// <summary>

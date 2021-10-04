@@ -253,7 +253,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             IHttpResponse response = HttpUtils.Requests.Post("https://github.com/login/oauth/access_token", null, parameters);
             
             // Return the response
-            return GitHubTokenResponse.ParseResponse(response);
+            return new GitHubTokenResponse(response);
 
         }
         

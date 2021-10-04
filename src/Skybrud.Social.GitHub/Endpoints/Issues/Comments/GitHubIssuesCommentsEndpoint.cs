@@ -41,7 +41,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues.Comments {
         /// <param name="options">The options for the request.</param>
         /// <returns>An instance of <see cref="GitHubCommentResponse"/> representing the response.</returns>
         public GitHubCommentResponse AddComment(GitHubAddIssueCommentOptions options) {
-            return GitHubCommentResponse.Parse(Raw.AddComment(options));
+            return new GitHubCommentResponse(Raw.AddComment(options));
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues.Comments {
         /// <param name="number">The number of the issue to which the comment should be added.</param>
         /// <returns>An instance of <see cref="GitHubCommentListResponse"/> representing the response.</returns>
         public GitHubCommentListResponse GetComments(string owner, string repository, int number) {
-            return GitHubCommentListResponse.Parse(Raw.GetComments(owner, repository, number));
+            return new GitHubCommentListResponse(Raw.GetComments(owner, repository, number));
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues.Comments {
         /// <param name="options">The options for the request to the API.</param>
         /// <returns>An instance of <see cref="GitHubCommentListResponse"/> representing the response.</returns>
         public GitHubCommentListResponse GetComments(GitHubGetIssueCommentsOptions options) {
-            return GitHubCommentListResponse.Parse(Raw.GetComments(options));
+            return new GitHubCommentListResponse(Raw.GetComments(options));
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues.Comments {
         /// <returns>An instance of <see cref="GitHubCommentListResponse"/> representing the response.</returns>
         public GitHubCommentListResponse GetComments(GitHubIssueBase issue) {
             if (issue == null) throw new ArgumentNullException(nameof(issue));
-            return GitHubCommentListResponse.Parse(Raw.GetComments(new GitHubGetIssueCommentsOptions(issue)));
+            return new GitHubCommentListResponse(Raw.GetComments(new GitHubGetIssueCommentsOptions(issue)));
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues.Comments {
         /// <returns>An instance of <see cref="GitHubCommentListResponse"/> representing the response.</returns>
         public GitHubCommentListResponse GetComments(GitHubPullRequestBase pullRequest) {
             if (pullRequest == null) throw new ArgumentNullException(nameof(pullRequest));
-            return GitHubCommentListResponse.Parse(Raw.GetComments(new GitHubGetIssueCommentsOptions(pullRequest)));
+            return new GitHubCommentListResponse(Raw.GetComments(new GitHubGetIssueCommentsOptions(pullRequest)));
         }
 
         #endregion

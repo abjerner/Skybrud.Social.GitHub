@@ -20,8 +20,12 @@ namespace Skybrud.Social.GitHub.Responses.Followers {
         #endregion
 
         #region Constructor
-
-        private GitHubGetFollowingResponse(IHttpResponse response) : base(response) {
+        
+        /// <summary>
+        /// Initializes a new instance from the specified <paramref name="response"/>.
+        /// </summary>
+        /// <param name="response">The raw response the instance should be based on.</param>
+        public GitHubGetFollowingResponse(IHttpResponse response) : base(response) {
 
             switch (response.StatusCode) {
 
@@ -41,19 +45,6 @@ namespace Skybrud.Social.GitHub.Responses.Followers {
 
             }
 
-        }
-
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Parses the specified <paramref name="response"/> into an instance of <see cref="GitHubGetFollowingResponse"/>.
-        /// </summary>
-        /// <param name="response">The instance of <see cref="IHttpResponse"/> representing the raw response.</param>
-        /// <returns>An instance of <see cref="GitHubGetFollowingResponse"/> representing the response.</returns>
-        public static GitHubGetFollowingResponse ParseResponse(IHttpResponse response) {
-            return response == null ? null : new GitHubGetFollowingResponse(response);
         }
 
         #endregion

@@ -31,7 +31,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
 
         #endregion
 
-        #region Methods
+        #region Member methods
 
         /// <summary>
         /// Gets information about the commit matching the specified <paramref name="owner"/>,
@@ -40,9 +40,9 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// <param name="owner">The alias (login) of the owner.</param>
         /// <param name="repository">The slug of the repository.</param>
         /// <param name="sha">The SHA hash of the commit.</param>
-        /// <returns>An instance of <see cref="GitHubGetCommitResponse"/> representing the response.</returns>
-        public GitHubGetCommitResponse GetCommit(string owner, string repository, string sha) {
-            return GitHubGetCommitResponse.ParseResponse(Raw.GetCommit(owner, repository, sha));
+        /// <returns>An instance of <see cref="GitHubCommitResponse"/> representing the response.</returns>
+        public GitHubCommitResponse GetCommit(string owner, string repository, string sha) {
+            return new GitHubCommitResponse(Raw.GetCommit(owner, repository, sha));
         }
 
         /// <summary>
@@ -51,18 +51,18 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// </summary>
         /// <param name="owner">The alias (login) of the owner.</param>
         /// <param name="repository">The slug of the repository.</param>
-        /// <returns>An instance of <see cref="GitHubGetCommitsResponse"/> representing the response.</returns>
-        public GitHubGetCommitsResponse GetCommits(string owner, string repository) {
-            return GitHubGetCommitsResponse.ParseResponse(Raw.GetCommits(owner, repository));
+        /// <returns>An instance of <see cref="GitHubCommitListResponse"/> representing the response.</returns>
+        public GitHubCommitListResponse GetCommits(string owner, string repository) {
+            return new GitHubCommitListResponse(Raw.GetCommits(owner, repository));
         }
 
         /// <summary>
         /// Gets a list of commits of the repository matching the specified <paramref name="options"/>.
         /// </summary>
         /// <param name="options">The options for the call to the API.</param>
-        /// <returns>An instance of <see cref="GitHubGetCommitsResponse"/> representing the response.</returns>
-        public GitHubGetCommitsResponse GetCommits(GitHubGetCommitsOptions options) {
-            return GitHubGetCommitsResponse.ParseResponse(Raw.GetCommits(options));
+        /// <returns>An instance of <see cref="GitHubCommitListResponse"/> representing the response.</returns>
+        public GitHubCommitListResponse GetCommits(GitHubGetCommitsOptions options) {
+            return new GitHubCommitListResponse(Raw.GetCommits(options));
         }
 
         #endregion

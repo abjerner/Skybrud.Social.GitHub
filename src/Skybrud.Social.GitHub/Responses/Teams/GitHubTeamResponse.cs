@@ -4,7 +4,7 @@ using Skybrud.Social.GitHub.Models.Teams;
 namespace Skybrud.Social.GitHub.Responses.Teams {
 
     /// <summary>
-    /// Class representing the response with information about a GitHub user.
+    /// Class representing the response with information about a <see cref="GitHubTeam"/>.
     /// </summary>
     public class GitHubTeamResponse : GitHubResponse<GitHubTeam> {
 

@@ -4,7 +4,7 @@ using Skybrud.Social.GitHub.Models.Repositories;
 namespace Skybrud.Social.GitHub.Responses.Repositories {
 
     /// <summary>
-    /// Class representing the response for getting a list of GitHub repositories.
+    /// Class representing the response for getting a list of <see cref="GitHubRepositoryItem"/>.
     /// </summary>
     public class GitHubRepositoryListResponse : GitHubListResponse<GitHubRepositoryItem> {
 

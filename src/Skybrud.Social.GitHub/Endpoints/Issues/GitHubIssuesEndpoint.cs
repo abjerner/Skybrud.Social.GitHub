@@ -96,7 +96,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues {
         /// </summary>
         /// <returns>An instance of <see cref="GitHubIssueListResponse"/> representing the response.</returns>
         public GitHubIssueListResponse GetIssues() {
-            return GitHubIssueListResponse.ParseResponse(Raw.GetIssues());
+            return new GitHubIssueListResponse(Raw.GetIssues());
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues {
         /// <param name="options">The options for the call to the API.</param>
         /// <returns>An instance of <see cref="GitHubIssueListResponse"/> representing the response.</returns>
         public GitHubIssueListResponse GetIssues(GitHubGetIssuesOptions options) {
-            return GitHubIssueListResponse.ParseResponse(Raw.GetIssues(options));
+            return new GitHubIssueListResponse(Raw.GetIssues(options));
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues {
         /// <param name="repository">The alias of the repository.</param>
         /// <returns>An instance of <see cref="GitHubIssueListResponse"/> representing the response.</returns>
         public GitHubIssueListResponse GetIssues(string owner, string repository) {
-            return GitHubIssueListResponse.ParseResponse(Raw.GetIssues(owner, repository));
+            return new GitHubIssueListResponse(Raw.GetIssues(owner, repository));
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues {
         /// <param name="options">The options for the request to the API.</param>
         /// <returns>An instance of <see cref="GitHubIssueListResponse"/> representing the response.</returns>
         public GitHubIssueListResponse GetIssues(GitHubGetRepositoryIssuesOptions options) {
-            return GitHubIssueListResponse.ParseResponse(Raw.GetIssues(options));
+            return new GitHubIssueListResponse(Raw.GetIssues(options));
         }
 
         #endregion

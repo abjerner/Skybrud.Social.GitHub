@@ -29,7 +29,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
 
         #endregion
 
-        #region Methods
+        #region Member methods
         
         /// <summary>
         /// Gets information about the repository matching the specified <paramref name="owner"/> and

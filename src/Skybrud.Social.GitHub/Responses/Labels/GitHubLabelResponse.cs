@@ -4,7 +4,7 @@ using Skybrud.Social.GitHub.Models.Labels;
 namespace Skybrud.Social.GitHub.Responses.Labels {
 
     /// <summary>
-    /// Class representing the response with information about a GitHub label.
+    /// Class representing the response with information about a <see cref="GitHubLabel"/>.
     /// </summary>
     public class GitHubLabelResponse : GitHubResponse<GitHubLabel> {
 

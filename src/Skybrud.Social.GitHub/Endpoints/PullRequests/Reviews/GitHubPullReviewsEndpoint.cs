@@ -52,7 +52,7 @@ namespace Skybrud.Social.GitHub.Endpoints.PullRequests.Reviews {
         /// <returns>An instance of <see cref="GitHubReviewListResponse"/> representing the response.</returns>
         public GitHubReviewListResponse GetReviews(GitHubPullRequestBase pullRequest) {
             if (pullRequest == null) throw new ArgumentNullException(nameof(pullRequest));
-            return GitHubReviewListResponse.Parse(Raw.GetReviews(new GitHubGetReviewsOptions(pullRequest)));
+            return new GitHubReviewListResponse(Raw.GetReviews(new GitHubGetReviewsOptions(pullRequest)));
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Skybrud.Social.GitHub.Endpoints.PullRequests.Reviews {
         /// <param name="options">The options for the request to the API.</param>
         /// <returns>An instance of <see cref="GitHubReviewListResponse"/> representing the response.</returns>
         public GitHubReviewListResponse GetReviews(GitHubGetReviewsOptions options) {
-            return GitHubReviewListResponse.Parse(Raw.GetReviews(options));
+            return new GitHubReviewListResponse(Raw.GetReviews(options));
         }
 
         #endregion
