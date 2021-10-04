@@ -2,6 +2,8 @@
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Http;
+using Skybrud.Social.GitHub.Models.Repositories;
+using System;
 
 namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
     
@@ -64,6 +66,30 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
         public GitHubGetLabelsOptions(string owner, string repo, int perPage, int page) {
             Owner = owner;
             Repo = repo;
+            PerPage = perPage;
+            Page = page;
+        }
+        
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        public GitHubGetLabelsOptions(GitHubRepositoryItem repository) {
+            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            Owner = repository.Owner.Login;
+            Repo = repository.Name;
+        }
+        
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="perPage">The maximum amount of labels to returned by each page. Maximum is <c>100</c>.</param>
+        /// <param name="page">The page to be returned.</param>
+        public GitHubGetLabelsOptions(GitHubRepositoryItem repository, int perPage, int page) {
+            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            Owner = repository.Owner.Login;
+            Repo = repository.Name;
             PerPage = perPage;
             Page = page;
         }
