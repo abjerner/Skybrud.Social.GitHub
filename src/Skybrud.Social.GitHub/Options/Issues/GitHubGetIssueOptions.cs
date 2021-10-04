@@ -1,6 +1,5 @@
 ﻿using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Http.Options;
 using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Issues {
@@ -8,7 +7,7 @@ namespace Skybrud.Social.GitHub.Options.Issues {
     /// <summary>
     /// Options for getting a single GitHub issue.
     /// </summary>
-    public class GitHubGetIssueOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
+    public class GitHubGetIssueOptions : GitHubHttpRequestOptions {
 
         #region Properties
         
@@ -53,7 +52,7 @@ namespace Skybrud.Social.GitHub.Options.Issues {
         #region Memberm mehtods
 
         /// <inheritdoc />
-        public IHttpRequest GetRequest() {
+        public override IHttpRequest GetRequest() {
 
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));

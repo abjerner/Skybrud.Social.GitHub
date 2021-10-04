@@ -64,10 +64,11 @@ namespace Skybrud.Social.GitHub.Options.Issues {
             
             if (Labels != null && Labels.Count > 0) body.Add("labels", new JArray(Labels));
             if (Assignees != null && Assignees.Count > 0) body.Add("assignees", new JArray(Assignees));
-
+            
+            // Initialize the request
             return HttpRequest
                 .Post(url, body)
-                .SetAcceptHeader(MediaTypes);;
+                .SetAcceptHeader(MediaTypes);
 
         }
 

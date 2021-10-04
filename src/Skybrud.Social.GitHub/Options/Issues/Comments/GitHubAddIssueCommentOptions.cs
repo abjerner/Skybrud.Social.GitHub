@@ -2,7 +2,6 @@
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Http.Options;
 using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Issues;
 
@@ -11,7 +10,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
     /// <summary>
     /// Class representing the options for adding a comment to a GitHub issue.
     /// </summary>
-    public class GitHubAddIssueCommentOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
+    public class GitHubAddIssueCommentOptions : GitHubHttpRequestOptions {
 
         #region Properties
         
@@ -83,8 +82,9 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
         /// Returns a new <see cref="IHttpRequest"/> instance for this options instance.
         /// </summary>
         /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
-        public IHttpRequest GetRequest() {
-
+        public override IHttpRequest GetRequest() {
+            
+            // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
             if (Number == 0) throw new PropertyNotSetException(nameof(Number));
@@ -94,8 +94,8 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
             JObject body = new JObject {
                 {"body", Body}
             };
-
-            // Make the request to the API
+            
+            // Initialize the request
             return HttpRequest
                 .Post($"/repos/{Owner}/{Repository}/issues/{Number}/comments", body)
                 .SetAcceptHeader(MediaTypes);

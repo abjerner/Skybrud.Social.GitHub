@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Strings.Extensions;
+using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Teams;
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/teams#create-a-team</cref>
     /// </see>
-    public class GitHubCreateTeamOptions: IHttpRequestOptions {
+    public class GitHubCreateTeamOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -116,21 +116,23 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
         #region Member methods
 
         /// <inheritdoc />
-        public IHttpRequest GetRequest() {
-
+        public override IHttpRequest GetRequest() {
+            
+            // Validate required parameters
             if (string.IsNullOrWhiteSpace(Org)) throw new ArgumentNullException(nameof(Org));
             if (string.IsNullOrWhiteSpace(Name)) throw new ArgumentNullException(nameof(Name));
-
-            JObject body = new JObject {
-                {"name", Name }
-            };
-
+            
+            // Initialize and construct the POST body
+            JObject body = new JObject {{"name", Name }};
             if (Description.HasValue()) body.Add("description", Description);
             if (Maintainers != null && Maintainers.Count > 0) body.Add("maintainers", new JArray(Maintainers));
             if (Privacy != GitHubTeamPrivacy.Unspecified) body.Add("privacy", Privacy.ToLower());
             if (ParentTeamId > 0) body.Add("parent_team_id", ParentTeamId);
-
-            return HttpRequest.Post($"/orgs/{Org}/teams", body);
+            
+            // Initialize the request
+            return HttpRequest
+                .Post($"/orgs/{Org}/teams", body)
+                .SetAcceptHeader(MediaTypes);
 
         }
 

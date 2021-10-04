@@ -1,5 +1,4 @@
 ﻿using System;
-using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Commits;
@@ -42,7 +41,17 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
             if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
             if (string.IsNullOrWhiteSpace(sha)) throw new ArgumentNullException(nameof(sha));
-            return Client.Get($"/repos/{owner}/{repository}/commits/{sha}");
+            return GetCommit(new GitHubGetCommitOptions(owner, repository, sha));
+        }
+
+        /// <summary>
+        /// Gets information about the commit matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetCommit(GitHubGetCommitOptions options) {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            return Client.GetResponse(options);
         }
 
         /// <summary>
@@ -55,19 +64,17 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         public IHttpResponse GetCommits(string owner, string repository) {
             if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-            return Client.Get($"/repos/{owner}/{repository}/commits");
+            return GetCommits(new GitHubGetCommitsOptions(owner, repository));
         }
 
         /// <summary>
         /// Gets a list of commits of the repository matching the specified <paramref name="options"/>.
         /// </summary>
-        /// <param name="options">The options for the call to the API.</param>
+        /// <param name="options">The options for the request to the API.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetCommits(GitHubGetCommitsOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
-            if (string.IsNullOrWhiteSpace(options.Owner)) throw new PropertyNotSetException(nameof(options.Owner));
-            if (string.IsNullOrWhiteSpace(options.Repository)) throw new PropertyNotSetException(nameof(options.Repository));
-            return Client.Get($"/repos/{options.Owner}/{options.Repository}/commits", options);
+            return Client.GetResponse(options);
         }
 
         #endregion

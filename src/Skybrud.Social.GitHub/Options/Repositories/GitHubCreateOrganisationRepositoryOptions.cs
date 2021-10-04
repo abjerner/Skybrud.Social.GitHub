@@ -12,7 +12,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create-repository-using-a-repository-template</cref>
     /// </see>
-    public class GitHubCreateOrganisationRepositoryOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
+    public class GitHubCreateOrganisationRepositoryOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -102,7 +102,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
         /// Returns a new <see cref="IHttpRequest"/> instance for this options instance.
         /// </summary>
         /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
-        public IHttpRequest GetRequest() {
+        public override IHttpRequest GetRequest() {
 
             if (string.IsNullOrWhiteSpace(Organisation)) throw new PropertyNotSetException(nameof(Organisation));
             if (string.IsNullOrWhiteSpace(Name)) throw new PropertyNotSetException(nameof(Name));

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Http.Options;
+using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Labels;
 using System;
 
@@ -13,7 +13,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#update-a-label</cref>
     /// </see>
-    public class GitHubUpdateLabelOptions : IHttpRequestOptions {
+    public class GitHubUpdateLabelOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -92,9 +92,9 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
         #region Member methods
 
         /// <inheritdoc />
-        public IHttpRequest GetRequest() {
-
-            // Input validation
+        public override IHttpRequest GetRequest() {
+            
+            // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repo)) throw new PropertyNotSetException(nameof(Repo));
             if (string.IsNullOrWhiteSpace(Name)) throw new PropertyNotSetException(nameof(Name));
@@ -106,9 +106,11 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
             if (!string.IsNullOrWhiteSpace(NewName)) body.Add("new_name", NewName);
             if (!string.IsNullOrWhiteSpace(Color)) body.Add("color", Color);
             if (!string.IsNullOrWhiteSpace(Description)) body.Add("description", Description);
-
-            // Initialize a new POST request
-            return HttpRequest.Patch($"/repos/{Owner}/{Repo}/labels/{Name}", body);
+            
+            // Initialize the request
+            return HttpRequest
+                .Patch($"/repos/{Owner}/{Repo}/labels/{Name}", body)
+                .SetAcceptHeader(MediaTypes);
 
         }
 

@@ -11,7 +11,7 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
     /// <see>
     ///     <cref>https://developer.github.com/v3/pulls/#get-a-single-pull-request</cref>
     /// </see>
-    public class GitHubGetPullRequestOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
+    public class GitHubGetPullRequestOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -56,8 +56,9 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
         #region Member methods
 
         /// <inheritdoc />
-        public IHttpRequest GetRequest() {
-
+        public override IHttpRequest GetRequest() {
+            
+            // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
             if (Number == 0) throw new PropertyNotSetException(nameof(Number));

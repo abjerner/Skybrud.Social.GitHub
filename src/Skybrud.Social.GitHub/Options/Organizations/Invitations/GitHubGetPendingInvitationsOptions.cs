@@ -1,7 +1,7 @@
 ﻿using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
-using Skybrud.Essentials.Http.Options;
+using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Organizations;
 using System;
 
@@ -10,7 +10,7 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Invitations {
     /// <summary>
     /// Class with options for getting a list of pending invitations of a GitHub organization.
     /// </summary>
-    public class GitHubGetPendingInvitationsOptions : IHttpRequestOptions {
+    public class GitHubGetPendingInvitationsOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -81,16 +81,20 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Invitations {
         #region Member methods
 
         /// <inheritdoc />
-        public IHttpRequest GetRequest() {
+        public override IHttpRequest GetRequest() {
             
+            // Validate required parameters
             if (string.IsNullOrWhiteSpace(OrganizationAlias)) throw new PropertyNotSetException(nameof(OrganizationAlias));
-
-            IHttpQueryString query = new HttpQueryString();
             
+            // Initialize and construct the query string
+            IHttpQueryString query = new HttpQueryString();
             if (PerPage > 0) query.Add("per_page", PerPage);
             if (Page > 0) query.Add("page", Page);
-
-            return HttpRequest.Get($"/orgs/{OrganizationAlias}/invitations", query);
+            
+            // Initialize the request
+            return HttpRequest
+                .Get($"/orgs/{OrganizationAlias}/invitations", query)
+                .SetAcceptHeader(MediaTypes);
 
         }
 

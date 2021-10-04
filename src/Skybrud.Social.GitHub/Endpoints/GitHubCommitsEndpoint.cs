@@ -46,6 +46,15 @@ namespace Skybrud.Social.GitHub.Endpoints {
         }
 
         /// <summary>
+        /// Gets information about the commit matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="GitHubCommitResponse"/> representing the response.</returns>
+        public GitHubCommitResponse GetCommit(GitHubGetCommitOptions options) {
+            return new GitHubCommitResponse(Raw.GetCommit(options));
+        }
+
+        /// <summary>
         /// Gets a list of commits of the repository matching the specified <paramref name="owner"/> and
         /// <paramref name="repository"/>.
         /// </summary>

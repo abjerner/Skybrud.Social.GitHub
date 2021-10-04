@@ -1,8 +1,8 @@
 ﻿using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
-using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Strings.Extensions;
+using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
     
@@ -12,7 +12,7 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
     /// <see>
     ///     <cref>https://developer.github.com/v3/orgs/#list-your-organizations</cref>
     /// </see>
-    public class GitHubGetTeamsOptions : IHttpRequestOptions {
+    public class GitHubGetTeamsOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -114,7 +114,7 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
         #region Member methods
 
         /// <inheritdoc />
-        public IHttpRequest GetRequest() {
+        public override IHttpRequest GetRequest() {
 
             if (OrganizationId == 0 && string.IsNullOrWhiteSpace(OrganizationAlias)) throw new PropertyNotSetException(nameof(OrganizationAlias));
 
@@ -126,7 +126,10 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
 
-            return HttpRequest.Get(url, query);
+            // Initialize the request
+            return HttpRequest
+                .Get(url, query)
+                .SetAcceptHeader(MediaTypes);
 
         }
 

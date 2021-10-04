@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Http.Options;
+using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Repositories {
     
@@ -11,7 +11,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create-repository-using-a-repository-template</cref>
     /// </see>
-    public class GitHubCreateRepositoryFromTemplateOptions : IHttpRequestOptions {
+    public class GitHubCreateRepositoryFromTemplateOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -92,8 +92,9 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
         /// Returns a new <see cref="IHttpRequest"/> instance for this options instance.
         /// </summary>
         /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
-        public IHttpRequest GetRequest() {
-
+        public override IHttpRequest GetRequest() {
+            
+            // Validate required parameters
             if (string.IsNullOrWhiteSpace(TemplateOwner)) throw new PropertyNotSetException(nameof(TemplateOwner));
             if (string.IsNullOrWhiteSpace(TemplateRepository)) throw new PropertyNotSetException(nameof(TemplateRepository));
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));

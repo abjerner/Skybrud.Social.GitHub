@@ -2,15 +2,12 @@
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Http;
 
-namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
-
+namespace Skybrud.Social.GitHub.Options.Commits {
+    
     /// <summary>
-    /// Options for getting about a milestone of a GitHub repository.
+    /// Class representing the options for getting a single commit.
     /// </summary>
-    /// <see>
-    ///     <cref>https://developer.github.com/v3/issues/milestones/#get-a-single-milestone</cref>
-    /// </see>
-    public class GitHubGetMilestoneOptions : GitHubHttpRequestOptions {
+    public class GitHubGetCommitOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -25,54 +22,55 @@ namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
         public string Repository { get; set; }
 
         /// <summary>
-        /// Gets or sets the number of the milestone.
+        /// Gets or sets the SHA of the commit.
         /// </summary>
-        public int Number { get; set; }
+        public string Sha { get; set; }
 
         #endregion
 
         #region Constructors
-
+        
         /// <summary>
         /// Initializes a new instance with default options.
         /// </summary>
-        public GitHubGetMilestoneOptions() { }
+        public GitHubGetCommitOptions() { }
 
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repository"/>.
         /// </summary>
-        /// <param name="owner">The username (login) of the owner of the repository.</param>
+        /// <param name="owner">The alias (login) of the owner.</param>
         /// <param name="repository">The slug of the repository.</param>
-        /// <param name="number">The number of the milestone.</param>
-        public GitHubGetMilestoneOptions(string owner, string repository, int number) {
+        /// <param name="sha">The SHA hash of the commit.</param>
+        public GitHubGetCommitOptions(string owner, string repository, string sha) {
             Owner = owner;
             Repository = repository;
-            Number = number;
         }
 
         #endregion
 
         #region Member methods
-
-        /// <summary>
-        /// Returns a new <see cref="IHttpRequest"/> instance for this options instance.
-        /// </summary>
-        /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
+        
+        /// <inheritdoc />
         public override IHttpRequest GetRequest() {
             
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
-            if (Number == 0) throw new PropertyNotSetException(nameof(Number));
-
+            if (string.IsNullOrWhiteSpace(Sha)) throw new PropertyNotSetException(nameof(Sha));
+            
+            // Declare the URL to request
+            string url = $"/repos/{Owner}/{Repository}/commits/{Sha}";
+            
             // Initialize the request
             return HttpRequest
-                .Get($"/repos/{Owner}/{Repository}/milestones/{Number}")
+                .Get(url)
                 .SetAcceptHeader(MediaTypes);
 
         }
 
         #endregion
+
+
 
     }
 

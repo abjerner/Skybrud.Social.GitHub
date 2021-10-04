@@ -1,7 +1,7 @@
 ﻿using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
-using Skybrud.Essentials.Http.Options;
+using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Options.Organizations.Members;
 
 namespace Skybrud.Social.GitHub.Options.Organizations.OutsideCollaborators {
@@ -12,7 +12,7 @@ namespace Skybrud.Social.GitHub.Options.Organizations.OutsideCollaborators {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-outside-collaborators-for-an-organization</cref>
     /// </see>
-    public class GitHubGetOutsideCollaboratorsOptions : IHttpRequestOptions {
+    public class GitHubGetOutsideCollaboratorsOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -80,20 +80,21 @@ namespace Skybrud.Social.GitHub.Options.Organizations.OutsideCollaborators {
         #region Member methods
 
         /// <inheritdoc />
-        public IHttpRequest GetRequest() {
+        public override IHttpRequest GetRequest() {
             
+            // Validate required parameters
             if (string.IsNullOrWhiteSpace(Organization)) throw new PropertyNotSetException(nameof(Organization));
-
-            // Initialize a new query string
+            
+            // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString();
-
-            // Append optional parameters
             if (Filter != default) query.Add("filter", GitHubUtils.ToString(Filter));
             if (PerPage > 0) query.Add("per_page", PerPage);
             if (Page > 0) query.Add("page", Page);
-
-            // Initialize and return a new GET request
-            return HttpRequest.Get($"/orgs/{Organization}/outside_collaborators", query);
+            
+            // Initialize the request
+            return HttpRequest
+                .Get($"/orgs/{Organization}/outside_collaborators", query)
+                .SetAcceptHeader(MediaTypes);
 
         }
 

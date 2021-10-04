@@ -1,7 +1,6 @@
 ﻿using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
-using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Strings.Extensions;
 using Skybrud.Social.GitHub.Http;
 
@@ -13,7 +12,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#list-milestones-for-a-repository</cref>
     /// </see>
-    public class GitHubGetMilestonesOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
+    public class GitHubGetMilestonesOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -83,7 +82,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
         /// Returns a new <see cref="IHttpRequest"/> instance for this options instance.
         /// </summary>
         /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
-        public IHttpRequest GetRequest() {
+        public override IHttpRequest GetRequest() {
 
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
@@ -91,13 +90,13 @@ namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
             // Initialzie the query string
             IHttpQueryString query = new HttpQueryString {
                 { "state", State.ToUnderscore() },
-                { "sort", Sort.ToUnderscore() },
-                { "direction", Direction == GitHubSortDirection.Descending ? "desc" : "asc" }
+                { "sort", Sort.ToUnderscore() }
             };
 
             // Update the query string with additional parameters
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
+            if (Direction > 0) query.Add("direction", ToString(Direction));
 
             // Initialize the request
             return HttpRequest

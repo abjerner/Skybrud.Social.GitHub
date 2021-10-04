@@ -16,7 +16,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue</cref>
     /// </see>
-    public class GitHubGetIssueCommentsOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
+    public class GitHubGetIssueCommentsOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -102,16 +102,20 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
         /// Returns a new <see cref="IHttpRequest"/> instance for this options instance.
         /// </summary>
         /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
-        public IHttpRequest GetRequest() {
-
+        public override IHttpRequest GetRequest() {
+            
+            // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
-
+            if (Number == 0) throw new PropertyNotSetException(nameof(Number));
+            
+            // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString();
             if (Since != null) query.Add("since", Since.Iso8601);
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
-
+            
+            // Initialize the request
             return HttpRequest
                 .Get($"/repos/{Owner}/{Repository}/issues/{Number}/comments", query)
                 .SetAcceptHeader(MediaTypes);

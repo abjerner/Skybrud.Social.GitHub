@@ -1,5 +1,7 @@
-﻿using Skybrud.Essentials.Http.Collections;
-using Skybrud.Essentials.Http.Options;
+﻿using Skybrud.Essentials.Common;
+using Skybrud.Essentials.Http;
+using Skybrud.Essentials.Http.Collections;
+using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Organizations {
 
@@ -9,7 +11,7 @@ namespace Skybrud.Social.GitHub.Options.Organizations {
     /// <see>
     ///     <cref>https://developer.github.com/v3/orgs/#list-user-organizations</cref>
     /// </see>
-    public class GitHubGetUserOrganizationsOptions : IHttpGetOptions {
+    public class GitHubGetUserOrganizationsOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -78,11 +80,31 @@ namespace Skybrud.Social.GitHub.Options.Organizations {
         public IHttpQueryString GetQueryString() {
 
             IHttpQueryString query = new HttpQueryString();
-
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
 
             return query;
+
+        }
+        
+        /// <summary>
+        /// Returns a new <see cref="IHttpRequest"/> instance for this options instance.
+        /// </summary>
+        /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
+        public override IHttpRequest GetRequest() {
+            
+            // Validate required parameters
+            if (string.IsNullOrWhiteSpace(Username)) throw new PropertyNotSetException(nameof(Username));
+            
+            // Initialize and construct the query string
+            IHttpQueryString query = new HttpQueryString();
+            if (Page > 0) query.Add("page", Page);
+            if (PerPage > 0) query.Add("per_page", PerPage);
+            
+            // Initialize the request
+            return HttpRequest
+                .Get($"/users/{Username}/orgs")
+                .SetAcceptHeader(MediaTypes);
 
         }
 

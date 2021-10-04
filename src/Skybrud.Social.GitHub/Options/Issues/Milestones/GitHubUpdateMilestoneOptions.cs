@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Milestones;
@@ -16,7 +15,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#update-a-milestone</cref>
     /// </see>
-    public class GitHubUpdateMilestoneOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
+    public class GitHubUpdateMilestoneOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -90,16 +89,17 @@ namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
         /// Returns a new <see cref="IHttpRequest"/> instance for this options instance.
         /// </summary>
         /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
-        public IHttpRequest GetRequest() {
-
+        public override IHttpRequest GetRequest() {
+            
+            // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
             if (string.IsNullOrWhiteSpace(Title)) throw new PropertyNotSetException(nameof(Title));
 
             // Generate the payload for the request body
             JObject body = JObject.FromObject(this);
-
-            // Make the request to the API
+            
+            // Initialize the request
             return HttpRequest
                 .Patch($"/repos/{Owner}/{Repository}/milestones/{Number}", body)
                 .SetAcceptHeader(MediaTypes);

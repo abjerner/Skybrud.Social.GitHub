@@ -1,7 +1,6 @@
 ﻿using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
-using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Strings.Extensions;
 using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Options.Issues;
@@ -15,7 +14,7 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
     /// <see>
     ///     <cref>https://developer.github.com/v3/pulls/#list-pull-requests</cref>
     /// </see>
-    public class GitHubGetPullRequestsOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
+    public class GitHubGetPullRequestsOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -78,15 +77,16 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
         #region Member methods
 
         /// <inheritdoc />
-        public IHttpRequest GetRequest() {
-
+        public override IHttpRequest GetRequest() {
+            
+            // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
-
+            
+            // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString {
                 {"state", State.ToKebabCase()}
             };
-
             query.Add("sort", Sort.ToKebabCase());
             query.Add("direction", Direction == GitHubSortDirection.Descending ? "desc" : "asc");
             if (Page > 0) query.Add("page", Page);

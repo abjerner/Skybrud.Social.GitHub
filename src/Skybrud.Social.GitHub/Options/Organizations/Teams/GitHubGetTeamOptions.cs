@@ -1,13 +1,13 @@
 ﻿using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Http.Options;
+using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
     
     /// <summary>
     /// Options for getting information about a team, indentified by the organization and team IDs respectively.
     /// </summary>
-    public class GitHubGetTeamOptions : IHttpRequestOptions {
+    public class GitHubGetTeamOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -45,13 +45,16 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
         #region Member methods
 
         /// <inheritdoc />
-        public IHttpRequest GetRequest() {
-
+        public override IHttpRequest GetRequest() {
+            
+            // Validate required parameters
             if (OrganizationId == 0) throw new PropertyNotSetException(nameof(OrganizationId));
             if (TeamId == 0) throw new PropertyNotSetException(nameof(OrganizationId));
-
-            // Initialize and return a new GET request
-            return HttpRequest.Get($"/organizations/{OrganizationId}/team/{TeamId}");
+            
+            // Initialize the request
+            return HttpRequest
+                .Get($"/organizations/{OrganizationId}/team/{TeamId}")
+                .SetAcceptHeader(MediaTypes);
 
         }
 

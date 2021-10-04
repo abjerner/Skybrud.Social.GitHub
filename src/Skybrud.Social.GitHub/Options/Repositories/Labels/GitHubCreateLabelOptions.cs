@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Http.Options;
+using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
     
@@ -11,7 +11,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#create-a-label</cref>
     /// </see>
-    public class GitHubCreateLabelOptions : IHttpRequestOptions {
+    public class GitHubCreateLabelOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -82,7 +82,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
         #region Member methods
 
         /// <inheritdoc />
-        public IHttpRequest GetRequest() {
+        public override IHttpRequest GetRequest() {
 
             // Input validation
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
@@ -99,7 +99,9 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
             if (!string.IsNullOrWhiteSpace(Description)) body.Add("description", Description);
 
             // Initialize a new POST request
-            return HttpRequest.Post($"/repos/{Owner}/{Repo}/labels", body);
+            return HttpRequest
+                .Post($"/repos/{Owner}/{Repo}/labels", body)
+                .SetAcceptHeader(MediaTypes);
 
         }
 

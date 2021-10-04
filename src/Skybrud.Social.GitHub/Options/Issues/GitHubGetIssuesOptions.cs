@@ -1,6 +1,5 @@
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
-using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Strings;
 using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Http;
@@ -13,7 +12,7 @@ namespace Skybrud.Social.GitHub.Options.Issues {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/#list-issues</cref>
     /// </see>
-    public class GitHubGetIssuesOptions : GitHubHttpOptionsBase, IHttpRequestOptions {
+    public class GitHubGetIssuesOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -62,7 +61,7 @@ namespace Skybrud.Social.GitHub.Options.Issues {
         #region Member methods
 
         /// <inheritdoc />
-        public IHttpRequest GetRequest() {
+        public override IHttpRequest GetRequest() {
 
             // Initialzie the query string
             IHttpQueryString query = new HttpQueryString {

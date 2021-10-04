@@ -1,8 +1,8 @@
 ﻿using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
-using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Strings.Extensions;
+using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models;
 
 namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
@@ -13,7 +13,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-branches</cref>
     /// </see>
-    public class GitHubGetBranchesOptions : IHttpRequestOptions {
+    public class GitHubGetBranchesOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -82,18 +82,22 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
         #region Member methods
 
         /// <inheritdoc />
-        public IHttpRequest GetRequest() {
+        public override IHttpRequest GetRequest() {
             
+            // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repo)) throw new PropertyNotSetException(nameof(Repo));
-
+            
+            // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString();
-
             if (Protected != GitHubBoolean.Unspecified) query.Add("protected", Protected.ToLower());
             if (PerPage > 0) query.Add("per_page", PerPage);
             if (Page > 0) query.Add("page", Page);
-
-            return HttpRequest.Get($"/repos/{Owner}/{Repo}/branches", query);
+            
+            // Initialize the request
+            return HttpRequest
+                .Get($"/repos/{Owner}/{Repo}/branches", query)
+                .SetAcceptHeader(MediaTypes);
 
         }
 

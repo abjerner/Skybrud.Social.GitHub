@@ -1,6 +1,6 @@
 ﻿using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Http.Options;
+using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
 
@@ -10,7 +10,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#get-a-branch</cref>
     /// </see>
-    public class GitHubGetBranchOptions : IHttpRequestOptions {
+    public class GitHubGetBranchOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -55,13 +55,17 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
         #region Member methods
 
         /// <inheritdoc />
-        public IHttpRequest GetRequest() {
-
+        public override IHttpRequest GetRequest() {
+            
+            // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repo)) throw new PropertyNotSetException(nameof(Repo));
             if (string.IsNullOrWhiteSpace(Name)) throw new PropertyNotSetException(nameof(Name));
-
-            return HttpRequest.Get($"/repos/{Owner}/{Repo}/branches/{Name}");
+            
+            // Initialize the request
+            return HttpRequest
+                .Get($"/repos/{Owner}/{Repo}/branches/{Name}")
+                .SetAcceptHeader(MediaTypes);
 
         }
 

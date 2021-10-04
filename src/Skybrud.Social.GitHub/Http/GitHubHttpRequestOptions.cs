@@ -1,5 +1,6 @@
 ﻿using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Options;
+using System;
 using System.Collections.Generic;
 
 namespace Skybrud.Social.GitHub.Http {
@@ -16,6 +17,15 @@ namespace Skybrud.Social.GitHub.Http {
 
         /// <inheritdoc />
         public abstract IHttpRequest GetRequest();
+        
+        /// <summary>
+        /// Returns a string representation of the specified enum <paramref name="value"/>.
+        /// </summary>
+        /// <param name="value">The enum value.</param>
+        /// <returns>The string representation of the enum value.</returns>
+        public static string ToString(Enum value) {
+            return GitHubUtils.ToString(value);
+        }
 
     }
 

@@ -1,5 +1,4 @@
 using System;
-using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Organizations;
@@ -75,7 +74,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
             // TODO: consider new name, as name may collide with https://api.github.com/organizations
 
             if (options == null) throw new ArgumentNullException(nameof(options));
-            return Client.Get("/user/orgs", options);
+            return Client.GetResponse(options);
         }
         
         /// <summary>
@@ -101,8 +100,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         /// </see>
         public IHttpResponse GetOrganizations(GitHubGetUserOrganizationsOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
-            if (string.IsNullOrWhiteSpace(options.Username)) throw new PropertyNotSetException(nameof(options.Username));
-            return Client.Get($"/users/{options.Username}/orgs");
+            return Client.GetResponse(options);
         }
         
         #endregion

@@ -47,7 +47,7 @@
 //        }
 
 //        /// <inheritdoc />
-//        public IHttpRequest GetRequest() {
+//        public override IHttpRequest GetRequest() {
             
 //            if (string.IsNullOrWhiteSpace(OrgAlias)) throw new PropertyNotSetException(nameof(OrgAlias));
 

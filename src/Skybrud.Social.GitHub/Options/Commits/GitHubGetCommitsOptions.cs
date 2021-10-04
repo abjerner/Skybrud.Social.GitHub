@@ -1,6 +1,8 @@
+using Skybrud.Essentials.Common;
+using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
-using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Commits {
 
@@ -10,7 +12,7 @@ namespace Skybrud.Social.GitHub.Options.Commits {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository</cref>
     /// </see>
-    public class GitHubGetCommitsOptions: IHttpGetOptions {
+    public class GitHubGetCommitsOptions : GitHubHttpRequestOptions {
 
         #region Properties
 
@@ -63,13 +65,35 @@ namespace Skybrud.Social.GitHub.Options.Commits {
 
         #endregion
 
-        #region Member methods
+        #region Constructors
+        
+        /// <summary>
+        /// Initializes a new instance with default options.
+        /// </summary>
+        public GitHubGetCommitsOptions() { }
 
         /// <summary>
-        /// Generates an instance of <see cref="IHttpQueryString"/> representing the options.
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repository"/>.
         /// </summary>
-        /// <returns>An instance of <see cref="IHttpQueryString"/>.</returns>
-        public IHttpQueryString GetQueryString() {
+        /// <param name="owner">The alias (login) of the owner.</param>
+        /// <param name="repository">The slug of the repository.</param>
+        public GitHubGetCommitsOptions(string owner, string repository) {
+            Owner = owner;
+            Repository = repository;
+        }
+
+        #endregion
+
+        #region Member methods
+        
+        /// <inheritdoc />
+        public override IHttpRequest GetRequest() {
+            
+            // Validate required parameters
+            if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
+            if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
+
+            // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString();
             if (!string.IsNullOrWhiteSpace(Sha)) query.Add("sha", Sha);
             if (!string.IsNullOrWhiteSpace(Path)) query.Add("path", Path);
@@ -78,7 +102,15 @@ namespace Skybrud.Social.GitHub.Options.Commits {
             if (Until != null) query.Add("until", Until.Iso8601);
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
-            return query;
+            
+            // Declare the URL to request
+            string url = $"/repos/{Owner}/{Repository}/commits";
+            
+            // Initialize the request
+            return HttpRequest
+                .Get(url, query)
+                .SetAcceptHeader(MediaTypes);
+
         }
 
         #endregion
