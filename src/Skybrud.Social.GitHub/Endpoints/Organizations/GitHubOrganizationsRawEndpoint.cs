@@ -1,7 +1,6 @@
 using System;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
-using Skybrud.Social.GitHub.Options.Organizations;
 
 namespace Skybrud.Social.GitHub.Endpoints.Organizations {
     
@@ -49,58 +48,6 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         public IHttpResponse GetOrganization(string organizationAlias) {
             if (string.IsNullOrWhiteSpace(organizationAlias)) throw new ArgumentNullException(nameof(organizationAlias));
             return Client.Get($"/orgs/{organizationAlias}");
-        }
-
-        /// <summary>
-        /// Gets the organizations of the authenticated user.
-        /// </summary>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-        /// <see>
-        ///     <cref>https://developer.github.com/v3/orgs/#list-your-organizations</cref>
-        /// </see>
-        public IHttpResponse GetOrganizations() {
-            return Client.Get("/user/orgs");
-        }
-
-        /// <summary>
-        /// Gets the organizations of the authenticated user.
-        /// </summary>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-        /// <see>
-        ///     <cref>https://developer.github.com/v3/orgs/#list-your-organizations</cref>
-        /// </see>
-        public IHttpResponse GetOrganizations(GitHubGetOrganizationsOptions options) {
-
-            // TODO: consider new name, as name may collide with https://api.github.com/organizations
-
-            if (options == null) throw new ArgumentNullException(nameof(options));
-            return Client.GetResponse(options);
-        }
-        
-        /// <summary>
-        /// Gets a list of public organizations of the user with the specified <paramref name="username"/>.
-        /// </summary>
-        /// <param name="username">The username of the user.</param>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-        /// <see>
-        ///     <cref>https://developer.github.com/v3/orgs/#list-user-organizations</cref>
-        /// </see>
-        public IHttpResponse GetOrganizations(string username) {
-            if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
-            return GetOrganizations(new GitHubGetUserOrganizationsOptions(username));
-        }
-
-        /// <summary>
-        /// Gets a list of public organizations of the user matching the specified <paramref name="options"/>.
-        /// </summary>
-        /// <param name="options">The options for the request to the API.</param>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-        /// <see>
-        ///     <cref>https://developer.github.com/v3/orgs/#list-user-organizations</cref>
-        /// </see>
-        public IHttpResponse GetOrganizations(GitHubGetUserOrganizationsOptions options) {
-            if (options == null) throw new ArgumentNullException(nameof(options));
-            return Client.GetResponse(options);
         }
         
         #endregion

@@ -1,11 +1,11 @@
-using Skybrud.Social.GitHub.Endpoints.Raw;
+using Skybrud.Social.GitHub.Options.User.Organizations;
 using Skybrud.Social.GitHub.Responses.Emails;
 using Skybrud.Social.GitHub.Responses.Followers;
 using Skybrud.Social.GitHub.Responses.Organizations;
 using Skybrud.Social.GitHub.Responses.Repositories;
 using Skybrud.Social.GitHub.Responses.Users;
 
-namespace Skybrud.Social.GitHub.Endpoints {
+namespace Skybrud.Social.GitHub.Endpoints.User {
 
     /// <summary>
     /// Class representing the <strong>User</strong> endpoint.
@@ -89,8 +89,23 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// Gets a list of organizations the authenticated user is a member of.
         /// </summary>
         /// <returns>An instance of <see cref="GitHubOrganizationListResponse"/> representing the response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-the-authenticated-user</cref>
+        /// </see>
         public GitHubOrganizationListResponse GetOrganizations() {
             return new GitHubOrganizationListResponse(Raw.GetOrganizations());
+        }
+
+        /// <summary>
+        /// Returns a list of organizations the authenticated user is a member of.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="GitHubOrganizationListResponse"/> representing the response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-the-authenticated-user</cref>
+        /// </see>
+        public GitHubOrganizationListResponse GetOrganizations(GitHubGetOrganizationsOptions options) {
+            return new GitHubOrganizationListResponse(Raw.GetOrganizations(options));
         }
 
         #endregion

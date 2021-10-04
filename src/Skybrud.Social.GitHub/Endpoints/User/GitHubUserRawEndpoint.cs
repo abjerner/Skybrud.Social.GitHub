@@ -1,8 +1,9 @@
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
+using Skybrud.Social.GitHub.Options.User.Organizations;
 using System;
 
-namespace Skybrud.Social.GitHub.Endpoints {
+namespace Skybrud.Social.GitHub.Endpoints.User {
 
     /// <summary>
     /// Class representing the raw <strong>User</strong> endpoint.
@@ -57,7 +58,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// </summary>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public IHttpResponse GetFollowing() {
-            return Client.Get("/user/followers");
+            return Client.Get("/user/following");
         }
 
         /// <summary>
@@ -82,8 +83,24 @@ namespace Skybrud.Social.GitHub.Endpoints {
         /// Gets a list of organizations the authenticated user is a member of.
         /// </summary>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-the-authenticated-user</cref>
+        /// </see>
         public IHttpResponse GetOrganizations() {
-            return Client.Get("/user/orgs");
+            return GetOrganizations(new GitHubGetOrganizationsOptions());
+        }
+
+        /// <summary>
+        /// Returns a list of organizations the authenticated user is a member of.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-the-authenticated-user</cref>
+        /// </see>
+        public IHttpResponse GetOrganizations(GitHubGetOrganizationsOptions options) {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            return Client.GetResponse(options);
         }
 
         #endregion
