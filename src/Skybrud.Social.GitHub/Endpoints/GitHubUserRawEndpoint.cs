@@ -1,8 +1,8 @@
-using System;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
+using System;
 
-namespace Skybrud.Social.GitHub.Endpoints.Raw {
+namespace Skybrud.Social.GitHub.Endpoints {
 
     /// <summary>
     /// Class representing the raw <strong>User</strong> endpoint.

@@ -6,6 +6,7 @@ using Skybrud.Social.GitHub.Endpoints.Organizations;
 using Skybrud.Social.GitHub.Endpoints.PullRequests;
 using Skybrud.Social.GitHub.Endpoints.Repositories;
 using Skybrud.Social.GitHub.Endpoints.Teams;
+using Skybrud.Social.GitHub.Endpoints.Users;
 using Skybrud.Social.GitHub.OAuth;
 
 namespace Skybrud.Social.GitHub {
