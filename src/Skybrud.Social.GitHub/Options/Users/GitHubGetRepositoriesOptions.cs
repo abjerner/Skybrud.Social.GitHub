@@ -6,7 +6,7 @@ using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Options.Repositories;
 
 namespace Skybrud.Social.GitHub.Options.Users {
-    
+
     /// <summary>
     /// Options for getting the repositories of a GitHub user.
     /// </summary>
@@ -50,7 +50,7 @@ namespace Skybrud.Social.GitHub.Options.Users {
         public int Page { get; set; }
 
         #endregion
-        
+
         #region Constructors
 
         /// <summary>
