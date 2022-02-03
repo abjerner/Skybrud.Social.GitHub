@@ -95,7 +95,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         public GitHubUserListResponse GetMembers(GitHubOrganizationItem organization) {
             return new GitHubUserListResponse(Raw.GetMembers(organization));
         }
-        
+
         /// <summary>
         /// Gets a list of the members of the specified <paramref name="organization"/>.
         /// </summary>
@@ -108,7 +108,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         public GitHubUserListResponse GetMembers(GitHubOrganizationItem organization, int perPage) {
             return new GitHubUserListResponse(Raw.GetMembers(organization, perPage));
         }
-        
+
         /// <summary>
         /// Gets a list of the members of the specified <paramref name="organization"/>.
         /// </summary>

@@ -100,7 +100,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
             if (organization == null) throw new ArgumentNullException(nameof(organization));
             return GetMembers(new GitHubGetOrganizationMembersOptions(organization));
         }
-        
+
         /// <summary>
         /// Gets a list of the members of the specified <paramref name="organization"/>.
         /// </summary>
@@ -114,7 +114,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
             if (organization == null) throw new ArgumentNullException(nameof(organization));
             return GetMembers(new GitHubGetOrganizationMembersOptions(organization, perPage));
         }
-        
+
         /// <summary>
         /// Gets a list of the members of the specified <paramref name="organization"/>.
         /// </summary>
