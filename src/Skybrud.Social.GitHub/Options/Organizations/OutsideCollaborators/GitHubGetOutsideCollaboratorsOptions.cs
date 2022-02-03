@@ -1,7 +1,9 @@
-﻿using Skybrud.Essentials.Common;
+﻿using System;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Http;
+using Skybrud.Social.GitHub.Models.Organizations;
 using Skybrud.Social.GitHub.Options.Organizations.Members;
 
 namespace Skybrud.Social.GitHub.Options.Organizations.OutsideCollaborators {
@@ -17,9 +19,14 @@ namespace Skybrud.Social.GitHub.Options.Organizations.OutsideCollaborators {
         #region Properties
 
         /// <summary>
+        /// Gets or sets the ID of the organization.
+        /// </summary>
+        public int OrganizationId { get; set; }
+
+        /// <summary>
         /// Gets or sets the alias of the organization.
         /// </summary>
-        public string Organization { get; set; }
+        public string OrganizationAlias { get; set; }
 
         /// <summary>
         /// Gets or sets a filter for the users returned in the list.
@@ -46,31 +53,94 @@ namespace Skybrud.Social.GitHub.Options.Organizations.OutsideCollaborators {
         public GitHubGetOutsideCollaboratorsOptions() { }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="organization"/>.
+        /// Initializes a new instance based on the specified <paramref name="organizationId"/>.
         /// </summary>
-        /// <param name="organization">The alias (username) of the organization.</param>
-        public GitHubGetOutsideCollaboratorsOptions(string organization) {
-            Organization = organization;
+        /// <param name="organizationId">The ID of the organization.</param>
+        public GitHubGetOutsideCollaboratorsOptions(int organizationId) {
+            OrganizationId = organizationId;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="organizationId"/>.
+        /// </summary>
+        /// <param name="organizationId">The ID of the organization.</param>
+        /// <param name="perPage">The maximuim amount of results per page (max is <c>100</c>).</param>
+        public GitHubGetOutsideCollaboratorsOptions(int organizationId, int perPage) {
+            OrganizationId = organizationId;
+            PerPage = perPage;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="organizationId"/>.
+        /// </summary>
+        /// <param name="organizationId">The ID of the organization.</param>
+        /// <param name="perPage">The maximuim amount of results per page (max is <c>100</c>).</param>
+        /// <param name="page">The page to fetch.</param>
+        public GitHubGetOutsideCollaboratorsOptions(int organizationId, int perPage, int page) {
+            OrganizationId = organizationId;
+            PerPage = perPage;
+            Page = page;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="organizationAlias"/>.
+        /// </summary>
+        /// <param name="organizationAlias">The alias (username) of the organization.</param>
+        public GitHubGetOutsideCollaboratorsOptions(string organizationAlias) {
+            OrganizationAlias = organizationAlias;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="organizationAlias"/>.
+        /// </summary>
+        /// <param name="organizationAlias">The alias (username) of the organization.</param>
+        /// <param name="perPage">The maximuim amount of results per page (max is <c>100</c>).</param>
+        public GitHubGetOutsideCollaboratorsOptions(string organizationAlias, int perPage) {
+            OrganizationAlias = organizationAlias;
+            PerPage = perPage;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="organizationAlias"/>.
+        /// </summary>
+        /// <param name="organizationAlias">The alias (username) of the organization.</param>
+        /// <param name="perPage">The maximuim amount of results per page (max is <c>100</c>).</param>
+        /// <param name="page">The page to fetch.</param>
+        public GitHubGetOutsideCollaboratorsOptions(string organizationAlias, int perPage, int page) {
+            OrganizationAlias = organizationAlias;
+            PerPage = perPage;
+            Page = page;
         }
 
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="organization"/>.
         /// </summary>
-        /// <param name="organization">The alias (username) of the organization.</param>
+        /// <param name="organization">The organization.</param>
+        public GitHubGetOutsideCollaboratorsOptions(GitHubOrganizationItem organization) {
+            if (organization == null) throw new ArgumentNullException(nameof(organization));
+            OrganizationAlias = organization.Login;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="organization"/>.
+        /// </summary>
+        /// <param name="organization">The organization.</param>
         /// <param name="perPage">The maximuim amount of results per page (max is <c>100</c>).</param>
-        public GitHubGetOutsideCollaboratorsOptions(string organization, int perPage) {
-            Organization = organization;
+        public GitHubGetOutsideCollaboratorsOptions(GitHubOrganizationItem organization, int perPage) {
+            if (organization == null) throw new ArgumentNullException(nameof(organization));
+            OrganizationAlias = organization.Login;
             PerPage = perPage;
         }
 
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="organization"/>.
         /// </summary>
-        /// <param name="organization">The alias (username) of the organization.</param>
+        /// <param name="organization">The organization.</param>
         /// <param name="perPage">The maximuim amount of results per page (max is <c>100</c>).</param>
         /// <param name="page">The page to fetch.</param>
-        public GitHubGetOutsideCollaboratorsOptions(string organization, int perPage, int page) {
-            Organization = organization;
+        public GitHubGetOutsideCollaboratorsOptions(GitHubOrganizationItem organization, int perPage, int page) {
+            if (organization == null) throw new ArgumentNullException(nameof(organization));
+            OrganizationAlias = organization.Login;
             PerPage = perPage;
             Page = page;
         }
@@ -82,8 +152,13 @@ namespace Skybrud.Social.GitHub.Options.Organizations.OutsideCollaborators {
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
 
-            // Validate required parameters
-            if (string.IsNullOrWhiteSpace(Organization)) throw new PropertyNotSetException(nameof(Organization));
+            // Make sure we have either a organization ID or a alias/login
+            if (OrganizationId == 0 && string.IsNullOrWhiteSpace(OrganizationAlias)) throw new PropertyNotSetException(nameof(OrganizationAlias));
+
+            // Construct the URL
+            string url = string.IsNullOrWhiteSpace(OrganizationAlias)
+                ? $"/organizations/{OrganizationId}/outside_collaborators"
+                : $"/orgs/{OrganizationAlias}/outside_collaborators";
 
             // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString();
@@ -93,7 +168,7 @@ namespace Skybrud.Social.GitHub.Options.Organizations.OutsideCollaborators {
 
             // Initialize the request
             return HttpRequest
-                .Get($"/orgs/{Organization}/outside_collaborators", query)
+                .Get(url, query)
                 .SetAcceptHeader(MediaTypes);
 
         }
