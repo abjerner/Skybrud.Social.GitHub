@@ -1,4 +1,3 @@
-using Skybrud.Social.GitHub.Options.Organizations;
 using Skybrud.Social.GitHub.Responses.Organizations;
 
 namespace Skybrud.Social.GitHub.Endpoints.Organizations {
