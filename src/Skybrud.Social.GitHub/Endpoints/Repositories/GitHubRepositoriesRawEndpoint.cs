@@ -1,5 +1,6 @@
 using System;
 using Skybrud.Essentials.Http;
+using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.Branches;
@@ -345,6 +346,66 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
             if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (string.IsNullOrWhiteSpace(repo)) throw new ArgumentNullException(nameof(repo));
             return GetLabels(new GitHubGetLabelsOptions(owner, repo));
+        }
+
+        /// <summary>
+        /// Returns a list of labels of the repository matching the specified <paramref name="owner"/> and <paramref name="repo"/> slug.
+        /// </summary>
+        /// <param name="owner">The alias of the repository owner.</param>
+        /// <param name="repo">The alias/slug of the repository.</param>
+        /// <param name="perPage">The maximum amount of labels to returned by each page. Maximum is <c>100</c>.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetLabels(string owner, string repo, int perPage) {
+            if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
+            if (string.IsNullOrWhiteSpace(repo)) throw new ArgumentNullException(nameof(repo));
+            return GetLabels(new GitHubGetLabelsOptions(owner, repo, perPage, default));
+        }
+
+        /// <summary>
+        /// Returns a list of labels of the repository matching the specified <paramref name="owner"/> and <paramref name="repo"/> slug.
+        /// </summary>
+        /// <param name="owner">The alias of the repository owner.</param>
+        /// <param name="repo">The alias/slug of the repository.</param>
+        /// <param name="perPage">The maximum amount of labels to returned by each page. Maximum is <c>100</c>.</param>
+        /// <param name="page">The page to be returned.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetLabels(string owner, string repo, int perPage, int page) {
+            if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
+            if (string.IsNullOrWhiteSpace(repo)) throw new ArgumentNullException(nameof(repo));
+            return GetLabels(new GitHubGetLabelsOptions(owner, repo, perPage, page));
+        }
+
+        /// <summary>
+        /// Returns a list of labels of the specified <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetLabels(GitHubRepositoryItem repository) {
+            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            return GetLabels(new GitHubGetLabelsOptions(repository));
+        }
+
+        /// <summary>
+        /// Returns a list of labels of the specified <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="perPage">The maximum amount of labels to returned by each page. Maximum is <c>100</c>.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetLabels(GitHubRepositoryItem repository, int perPage) {
+            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            return GetLabels(new GitHubGetLabelsOptions(repository, perPage, default));
+        }
+
+        /// <summary>
+        /// Returns a list of labels of the specified <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="perPage">The maximum amount of labels to returned by each page. Maximum is <c>100</c>.</param>
+        /// <param name="page">The page to be returned.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetLabels(GitHubRepositoryItem repository, int perPage, int page) {
+            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            return GetLabels(new GitHubGetLabelsOptions(repository, perPage, page));
         }
 
         /// <summary>

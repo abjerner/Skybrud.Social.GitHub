@@ -1,4 +1,5 @@
 using System;
+using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.Branches;
 using Skybrud.Social.GitHub.Options.Repositories.Collaborators;
@@ -315,6 +316,59 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// </see>
         public GitHubLabelListResponse GetLabels(string owner, string repo) {
             return new GitHubLabelListResponse(Raw.GetLabels(owner, repo));
+        }
+
+        /// <summary>
+        /// Returns a list of labels of the repository matching the specified <paramref name="owner"/> and <paramref name="repo"/> slug.
+        /// </summary>
+        /// <param name="owner">The alias of the repository owner.</param>
+        /// <param name="repo">The alias/slug of the repository.</param>
+        /// <param name="perPage">The maximum amount of labels to returned by each page. Maximum is <c>100</c>.</param>
+        /// <returns>An instance of <see cref="GitHubLabelListResponse"/> representing the response.</returns>
+        public GitHubLabelListResponse GetLabels(string owner, string repo, int perPage) {
+            return new GitHubLabelListResponse(Raw.GetLabels(owner, repo, perPage));
+        }
+
+        /// <summary>
+        /// Returns a list of labels of the repository matching the specified <paramref name="owner"/> and <paramref name="repo"/> slug.
+        /// </summary>
+        /// <param name="owner">The alias of the repository owner.</param>
+        /// <param name="repo">The alias/slug of the repository.</param>
+        /// <param name="perPage">The maximum amount of labels to returned by each page. Maximum is <c>100</c>.</param>
+        /// <param name="page">The page to be returned.</param>
+        /// <returns>An instance of <see cref="GitHubLabelListResponse"/> representing the response.</returns>
+        public GitHubLabelListResponse GetLabels(string owner, string repo, int perPage, int page) {
+            return new GitHubLabelListResponse(Raw.GetLabels(owner, repo, perPage, page));
+        }
+
+        /// <summary>
+        /// Returns a list of labels of the specified <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <returns>An instance of <see cref="GitHubLabelListResponse"/> representing the response.</returns>
+        public GitHubLabelListResponse GetLabels(GitHubRepositoryItem repository) {
+            return new GitHubLabelListResponse(Raw.GetLabels(repository));
+        }
+
+        /// <summary>
+        /// Returns a list of labels of the specified <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="perPage">The maximum amount of labels to returned by each page. Maximum is <c>100</c>.</param>
+        /// <returns>An instance of <see cref="GitHubLabelListResponse"/> representing the response.</returns>
+        public GitHubLabelListResponse GetLabels(GitHubRepositoryItem repository, int perPage) {
+            return new GitHubLabelListResponse(Raw.GetLabels(repository, perPage));
+        }
+
+        /// <summary>
+        /// Returns a list of labels of the specified <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="perPage">The maximum amount of labels to returned by each page. Maximum is <c>100</c>.</param>
+        /// <param name="page">The page to be returned.</param>
+        /// <returns>An instance of <see cref="GitHubLabelListResponse"/> representing the response.</returns>
+        public GitHubLabelListResponse GetLabels(GitHubRepositoryItem repository, int perPage, int page) {
+            return new GitHubLabelListResponse(Raw.GetLabels(repository, perPage, page));
         }
 
         /// <summary>
