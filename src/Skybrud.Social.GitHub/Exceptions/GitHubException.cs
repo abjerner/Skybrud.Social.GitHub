@@ -1,7 +1,7 @@
 using System;
 
 namespace Skybrud.Social.GitHub.Exceptions {
-    
+
     /// <summary>
     /// Class representing a basic GitHub exception.
     /// </summary>

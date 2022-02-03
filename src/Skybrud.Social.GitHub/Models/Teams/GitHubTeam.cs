@@ -12,7 +12,7 @@ namespace Skybrud.Social.GitHub.Models.Teams {
     public class GitHubTeam : GitHubTeamItem {
 
         #region Properties
-        
+
         /// <summary>
         /// Gets a timestamp for when the team was created.
         /// </summary>

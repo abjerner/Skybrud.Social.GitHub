@@ -32,7 +32,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues.Milestones {
         #endregion
 
         #region Methods
-        
+
         /// <summary>
         /// Creates a new milestone with <paramref name="title"/> in the repository matching the specified
         /// <paramref name="owner"/> and <paramref name="repository"/>.

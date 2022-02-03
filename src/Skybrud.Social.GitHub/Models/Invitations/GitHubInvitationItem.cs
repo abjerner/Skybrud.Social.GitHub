@@ -2,7 +2,7 @@
 using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Invitations {
-    
+
     /// <summary>
     /// Class representing a GitHub invitation.
     /// </summary>

@@ -3,7 +3,7 @@ using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Users {
-    
+
     /// <summary>
     /// Class reprensting the options for getting information about a GitHub user.
     /// </summary>
@@ -25,7 +25,7 @@ namespace Skybrud.Social.GitHub.Options.Users {
         public string Username { get; set; }
 
         #endregion
-        
+
         #region Constructors
 
         /// <summary>

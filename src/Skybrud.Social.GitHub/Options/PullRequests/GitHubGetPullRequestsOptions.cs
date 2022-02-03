@@ -78,11 +78,11 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
 
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
-            
+
             // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString {
                 {"state", State.ToKebabCase()}
@@ -91,7 +91,7 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
             query.Add("direction", Direction == GitHubSortDirection.Descending ? "desc" : "asc");
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
-            
+
             // Initialize the request
             return HttpRequest
                 .Get($"/repos/{Owner}/{Repository}/pulls", query)

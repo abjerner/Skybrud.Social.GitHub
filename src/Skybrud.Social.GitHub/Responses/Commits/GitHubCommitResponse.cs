@@ -7,7 +7,7 @@ namespace Skybrud.Social.GitHub.Responses.Commits {
     /// Class representing the response with information about a <see cref="GitHubCommit"/>.
     /// </summary>
     public class GitHubCommitResponse : GitHubResponse<GitHubCommit> {
-        
+
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>

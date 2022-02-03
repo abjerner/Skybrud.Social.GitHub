@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
+using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Labels;
-using System;
 
 namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
 
@@ -93,7 +93,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
 
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repo)) throw new PropertyNotSetException(nameof(Repo));
@@ -106,7 +106,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
             if (!string.IsNullOrWhiteSpace(NewName)) body.Add("new_name", NewName);
             if (!string.IsNullOrWhiteSpace(Color)) body.Add("color", Color);
             if (!string.IsNullOrWhiteSpace(Description)) body.Add("description", Description);
-            
+
             // Initialize the request
             return HttpRequest
                 .Patch($"/repos/{Owner}/{Repo}/labels/{Name}", body)

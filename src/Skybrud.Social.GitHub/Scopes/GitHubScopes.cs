@@ -106,7 +106,7 @@ namespace Skybrud.Social.GitHub.Scopes {
                 "Repositories: Invite",
                 "Grants accept/decline abilities for invitations to collaborate on a repository. This scope is only necessary to grant other users or services access to invites <em>without</em> granting access to the code."
             );
-            
+
             /// <summary>
             /// Grants access to delete adminable repositories.
             /// </summary>
@@ -122,7 +122,7 @@ namespace Skybrud.Social.GitHub.Scopes {
         /// Scopes related to security events.
         /// </summary>
         public static class SecurityEvents {
-            
+
             /// <summary>
             /// Grants:
             /// read and write access to security events in the <a href="https://docs.github.com/en/rest/reference/code-scanning" target="_blank" rel="noreferrer">code scanning API</a>
@@ -209,7 +209,7 @@ namespace Skybrud.Social.GitHub.Scopes {
         /// Scopes related to public keys.
         /// </summary>
         public static class PublicKeys {
-            
+
             /// <summary>
             /// Fully manage public keys.
             /// </summary>

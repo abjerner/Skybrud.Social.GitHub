@@ -5,10 +5,10 @@ using Skybrud.Social.GitHub.Models.Events;
 // ReSharper disable InconsistentNaming
 
 namespace UnitTestProject1.Enums {
-    
+
     [TestClass]
     public class UnitTest1 {
-       
+
         [TestMethod]
         public void AddedToProject() {
             Assert.AreEqual(GitHubEventType.AddedToProject, EnumUtils.ParseEnum<GitHubEventType>("added_to_project"));

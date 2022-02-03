@@ -24,7 +24,7 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
         /// Mandatory: Gets or sets the slug of the repository.
         /// </summary>
         public string Repository { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the number of the issue.
         /// </summary>
@@ -57,12 +57,12 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
 
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
             if (Number == 0) throw new PropertyNotSetException(nameof(Number));
-            
+
             // Initialize the request
             return HttpRequest
                 .Get($"/repos/{Owner}/{Repository}/pulls/{Number}")

@@ -47,7 +47,7 @@
 //        public GitHubGetOrganizationsOptions(int page) {
 //            Page = page;
 //        }
-        
+
 //        /// <summary>
 //        /// Initializes a new instance based on the specified <paramref name="page"/> and <paramref name="perPage"/>.
 //        /// </summary>
@@ -61,7 +61,7 @@
 //        #endregion
 
 //        #region Member methods
-        
+
 //        /// <summary>
 //        /// Returns a new <see cref="IHttpRequest"/> instance for this options instance.
 //        /// </summary>
@@ -73,7 +73,7 @@
 //            //if (Since > 0) query.Add("since", Since);
 //            if (Page > 0) query.Add("page", Page);
 //            if (PerPage > 0) query.Add("per_page", PerPage);
-            
+
 //            // Initialize the request
 //            return HttpRequest
 //                .Get("/user/orgs")

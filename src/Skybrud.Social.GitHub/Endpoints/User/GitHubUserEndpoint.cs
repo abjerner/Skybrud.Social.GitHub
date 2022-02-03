@@ -138,7 +138,7 @@ namespace Skybrud.Social.GitHub.Endpoints.User {
         }
 
         #endregion
-    
+
     }
 
 }

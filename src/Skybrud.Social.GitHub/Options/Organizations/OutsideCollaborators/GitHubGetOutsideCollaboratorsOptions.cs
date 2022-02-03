@@ -5,7 +5,7 @@ using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Options.Organizations.Members;
 
 namespace Skybrud.Social.GitHub.Options.Organizations.OutsideCollaborators {
-    
+
     /// <summary>
     /// Options for getting a list of outside collaborators of a GitHub organization.
     /// </summary>
@@ -81,16 +81,16 @@ namespace Skybrud.Social.GitHub.Options.Organizations.OutsideCollaborators {
 
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Organization)) throw new PropertyNotSetException(nameof(Organization));
-            
+
             // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString();
             if (Filter != default) query.Add("filter", GitHubUtils.ToString(Filter));
             if (PerPage > 0) query.Add("per_page", PerPage);
             if (Page > 0) query.Add("page", Page);
-            
+
             // Initialize the request
             return HttpRequest
                 .Get($"/orgs/{Organization}/outside_collaborators", query)

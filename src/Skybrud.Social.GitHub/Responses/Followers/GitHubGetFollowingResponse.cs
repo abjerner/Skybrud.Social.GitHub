@@ -20,7 +20,7 @@ namespace Skybrud.Social.GitHub.Responses.Followers {
         #endregion
 
         #region Constructor
-        
+
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>

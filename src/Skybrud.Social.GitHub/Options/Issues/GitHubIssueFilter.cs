@@ -19,7 +19,7 @@
         /// Issues in which the authenticated user has been mentioned.
         /// </summary>
         Mentioned,
-        
+
         /// <summary>
         /// Issues to which the authenticated user has subscribed.
         /// </summary>

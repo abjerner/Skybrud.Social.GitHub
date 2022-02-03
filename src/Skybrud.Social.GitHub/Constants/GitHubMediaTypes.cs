@@ -2,7 +2,7 @@
 #pragma warning disable 1591
 
 namespace Skybrud.Social.GitHub.Constants {
-    
+
     /// <summary>
     /// Static class with constants for various GitHub media types.
     /// </summary>

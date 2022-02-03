@@ -1,11 +1,11 @@
-﻿using Skybrud.Essentials.Http;
+﻿using System;
+using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
-using System;
 
 namespace Skybrud.Social.GitHub.Options.Repositories.Releases {
-    
+
     /// <summary>
     /// Options class for returning a list of releases of a GitHub repository.
     /// </summary>
@@ -15,12 +15,12 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Releases {
     public class GitHubGetReleasesOptions : GitHubHttpRequestOptions {
 
         #region Properties
-        
+
         /// <summary>
         /// Gets or sets the alias of the repository owner.
         /// </summary>
         public string OwnerAlias { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the alias of the repository.
         /// </summary>
@@ -39,12 +39,12 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Releases {
         #endregion
 
         #region Constructors
-        
+
         /// <summary>
         /// Initialize a new instance with default options.
         /// </summary>
         public GitHubGetReleasesOptions() { }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repository"/> alias.
         /// </summary>
@@ -54,7 +54,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Releases {
             OwnerAlias = owner;
             RepositoryAlias = repository;
         }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repository"/> alias.
         /// </summary>
@@ -66,7 +66,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Releases {
             RepositoryAlias = repository;
             PerPage = perPage;
         }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repository"/> alias.
         /// </summary>
@@ -80,7 +80,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Releases {
             PerPage = perPage;
             Page = page;
         }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="repository"/>.
         /// </summary>
@@ -90,7 +90,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Releases {
             OwnerAlias = repository.Owner.Login;
             RepositoryAlias = repository.Name;
         }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="repository"/>.
         /// </summary>
@@ -102,7 +102,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Releases {
             RepositoryAlias = repository.Name;
             PerPage = perPage;
         }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="repository"/>.
         /// </summary>
@@ -120,10 +120,10 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Releases {
         #endregion
 
         #region Member methods
-        
+
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Determine the URL either from the ID or the alias
             if (string.IsNullOrWhiteSpace(OwnerAlias)) throw new ArgumentNullException(nameof(OwnerAlias));
             if (string.IsNullOrWhiteSpace(RepositoryAlias)) throw new ArgumentNullException(nameof(RepositoryAlias));

@@ -4,7 +4,7 @@ using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Repositories {
-    
+
     /// <summary>
     /// Options for a request to create a new repository using an existing repository as template.
     /// </summary>
@@ -93,7 +93,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
         /// </summary>
         /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(TemplateOwner)) throw new PropertyNotSetException(nameof(TemplateOwner));
             if (string.IsNullOrWhiteSpace(TemplateRepository)) throw new PropertyNotSetException(nameof(TemplateRepository));

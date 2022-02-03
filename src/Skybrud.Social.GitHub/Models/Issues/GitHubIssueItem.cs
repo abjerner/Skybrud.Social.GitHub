@@ -6,7 +6,7 @@ namespace Skybrud.Social.GitHub.Models.Issues {
     /// Class representing a GitHub issue.
     /// </summary>
     public class GitHubIssueItem : GitHubIssueBase {
-        
+
         #region Constructors
 
         /// <summary>

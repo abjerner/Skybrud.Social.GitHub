@@ -5,7 +5,7 @@ using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Issues {
-    
+
     /// <summary>
     /// Class representing the options for getting a list of issues.
     /// </summary>

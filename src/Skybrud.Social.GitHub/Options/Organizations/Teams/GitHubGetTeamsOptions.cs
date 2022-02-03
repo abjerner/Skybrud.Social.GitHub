@@ -5,7 +5,7 @@ using Skybrud.Essentials.Strings.Extensions;
 using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
-    
+
     /// <summary>
     /// Class representing the options for getting a list of team of a GitHub organization.
     /// </summary>

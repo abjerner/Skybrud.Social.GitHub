@@ -4,7 +4,7 @@ using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Repositories {
-    
+
     /// <summary>
     /// Options for a request to create a new repository belonging to the autehtnicated user.
     /// </summary>
@@ -91,7 +91,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
         /// </summary>
         /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Name)) throw new PropertyNotSetException(nameof(Name));
 

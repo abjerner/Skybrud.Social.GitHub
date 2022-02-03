@@ -3,7 +3,7 @@ using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
-    
+
     /// <summary>
     /// Options for getting information about a team, indentified by the organization and team IDs respectively.
     /// </summary>
@@ -46,11 +46,11 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
 
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (OrganizationId == 0) throw new PropertyNotSetException(nameof(OrganizationId));
             if (TeamId == 0) throw new PropertyNotSetException(nameof(OrganizationId));
-            
+
             // Initialize the request
             return HttpRequest
                 .Get($"/organizations/{OrganizationId}/team/{TeamId}")

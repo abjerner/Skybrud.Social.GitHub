@@ -4,7 +4,7 @@ using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Models.Users;
 
 namespace Skybrud.Social.GitHub.Models.Releases {
-    
+
     /// <summary>
     /// Class describing a GitHub release.
     /// </summary>
@@ -66,7 +66,7 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         /// Gets whether this release is a draft.
         /// </summary>
         public string IsDraft { get; }
-        
+
         /// <summary>
         /// Gets whether this release is a pre-release.
         /// </summary>
@@ -91,12 +91,12 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         /// Gets the tarball URL of this release.
         /// </summary>
         public string TarballUrl { get; }
-        
+
         /// <summary>
         /// Gets the zipball URL of this release.
         /// </summary>
         public string ZipballUrl { get; }
-        
+
         /// <summary>
         /// Gets the markdown body of this release.
         /// </summary>
@@ -110,7 +110,7 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         #endregion
 
         #region Constructors
-        
+
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="json"/>.
         /// </summary>
@@ -140,7 +140,7 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         #endregion
 
         #region Static methods
-        
+
         /// <summary>
         /// Parses the specified <paramref name="json"/> into an instance of <see cref="GitHubReleaseItem"/>.
         /// </summary>

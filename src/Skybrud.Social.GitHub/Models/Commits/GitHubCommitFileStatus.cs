@@ -1,5 +1,5 @@
 ﻿namespace Skybrud.Social.GitHub.Models.Commits {
-    
+
     /// <summary>
     /// Enum class indicating status of a file in a commit.
     /// </summary>
@@ -24,7 +24,7 @@
         /// Indicates that the file was removed from the repository.
         /// </summary>
         Removed
-    
+
     }
 
 }

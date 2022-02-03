@@ -1,7 +1,7 @@
+using System;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Users;
-using System;
 
 namespace Skybrud.Social.GitHub.Endpoints.Users {
 

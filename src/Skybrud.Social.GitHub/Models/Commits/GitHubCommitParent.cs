@@ -2,7 +2,7 @@
 using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Commits {
-    
+
     /// <summary>
     /// Class representing the parent commit of a given commit.
     /// </summary>
@@ -14,17 +14,17 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// Gets the SHA hash of the commit.
         /// </summary>
         public string Sha { get; }
-        
+
         /// <summary>
         /// Gets the API URL of the commit.
         /// </summary>
         public string Url { get; }
-        
+
         /// <summary>
         /// Gets the HTML (website) URL of the commit.
         /// </summary>
         public string HtmlUrl { get; }
-        
+
         #endregion
 
         #region Constructors

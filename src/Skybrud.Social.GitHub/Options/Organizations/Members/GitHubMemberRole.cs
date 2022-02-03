@@ -1,5 +1,5 @@
 ﻿namespace Skybrud.Social.GitHub.Options.Organizations.Members {
-    
+
     /// <summary>
     /// Enum class representing the role the returned members should match.
     /// </summary>

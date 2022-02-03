@@ -82,7 +82,7 @@ namespace Skybrud.Social.GitHub.Endpoints.PullRequests {
         }
 
         #endregion
-    
+
     }
 
 }

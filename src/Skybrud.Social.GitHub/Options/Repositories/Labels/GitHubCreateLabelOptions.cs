@@ -4,7 +4,7 @@ using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
-    
+
     /// <summary>
     /// Options for creating a new label in a GitHub repository.
     /// </summary>

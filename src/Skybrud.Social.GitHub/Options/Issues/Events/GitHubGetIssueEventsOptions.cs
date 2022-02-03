@@ -1,5 +1,5 @@
-﻿using Skybrud.Essentials.Common;
-using System;
+﻿using System;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Http;
@@ -84,17 +84,17 @@ namespace Skybrud.Social.GitHub.Options.Issues.Events {
         /// </summary>
         /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
             if (Number == 0) throw new PropertyNotSetException(nameof(Number));
-            
+
             // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString();
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
-            
+
             // Initialize the request
             return HttpRequest
                 .Get($"/repos/{Owner}/{Repository}/issues/{Number}/events", query)

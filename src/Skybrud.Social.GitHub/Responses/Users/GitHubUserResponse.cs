@@ -7,7 +7,7 @@ namespace Skybrud.Social.GitHub.Responses.Users {
     /// Class representing the response with information about a <see cref="GitHubUser"/>.
     /// </summary>
     public class GitHubUserResponse : GitHubResponse<GitHubUser> {
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified raw <paramref name="response"/> response.
         /// </summary>

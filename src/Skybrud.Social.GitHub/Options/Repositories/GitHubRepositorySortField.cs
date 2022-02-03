@@ -1,5 +1,5 @@
 ﻿namespace Skybrud.Social.GitHub.Options.Repositories {
-    
+
     /// <summary>
     /// Enum class indicating the sort order when returning a list of repositories.
     /// </summary>

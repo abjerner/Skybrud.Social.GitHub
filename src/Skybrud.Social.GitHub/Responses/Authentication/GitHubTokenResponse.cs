@@ -8,7 +8,7 @@ namespace Skybrud.Social.GitHub.Responses.Authentication {
     /// Class representing the response of a call to exchange an authorization code for an access token.
     /// </summary>
     public class GitHubTokenResponse : GitHubResponse<GitHubToken> {
-        
+
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>

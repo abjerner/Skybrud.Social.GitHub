@@ -1,12 +1,12 @@
-﻿using Skybrud.Essentials.Common;
+﻿using System;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
-using System;
 
 namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
-    
+
     /// <summary>
     /// Options for getting the labels of a GitHub repository.
     /// </summary>
@@ -69,7 +69,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
             PerPage = perPage;
             Page = page;
         }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="repository"/>.
         /// </summary>
@@ -79,7 +79,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
             Owner = repository.Owner.Login;
             Repo = repository.Name;
         }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="repository"/>.
         /// </summary>
@@ -100,16 +100,16 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
 
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repo)) throw new PropertyNotSetException(nameof(Repo));
-            
+
             // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString();
             if (PerPage > 0) query.Add("per_page", PerPage);
             if (Page > 0) query.Add("page", Page);
-            
+
             // Initialize the request
             return HttpRequest
                 .Get($"/repos/{Owner}/{Repo}/labels", query)

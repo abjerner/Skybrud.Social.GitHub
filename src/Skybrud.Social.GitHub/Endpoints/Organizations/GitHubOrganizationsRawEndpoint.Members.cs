@@ -3,7 +3,7 @@ using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Options.Organizations.Members;
 
 namespace Skybrud.Social.GitHub.Endpoints.Organizations {
-    
+
     public partial class GitHubOrganizationsRawEndpoint {
 
         /// <summary>

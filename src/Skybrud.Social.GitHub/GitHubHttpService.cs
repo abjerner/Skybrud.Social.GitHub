@@ -139,7 +139,7 @@ namespace Skybrud.Social.GitHub {
         }
 
         #endregion
-    
+
     }
 
 }

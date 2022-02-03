@@ -4,7 +4,7 @@ using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Models.Users;
 
 namespace Skybrud.Social.GitHub.Models.Releases {
-    
+
     /// <summary>
     /// Class describing an asset of a GitHub release.
     /// </summary>
@@ -56,7 +56,7 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         /// Gets the file size of the asset.
         /// </summary>
         public long Size { get; }
-        
+
         /// <summary>
         /// Gets the download count of the asset.
         /// </summary>
@@ -80,7 +80,7 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         #endregion
 
         #region Constructors
-        
+
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="json"/>.
         /// </summary>
@@ -104,7 +104,7 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         #endregion
 
         #region Static methods
-        
+
         /// <summary>
         /// Parses the specified <paramref name="json"/> into an instance of <see cref="GitHubReleaseAsset"/>.
         /// </summary>

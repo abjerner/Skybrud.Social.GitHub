@@ -5,7 +5,7 @@ using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.PullRequests;
 
 namespace Skybrud.Social.GitHub.Endpoints.PullRequests {
-    
+
     /// <summary>
     /// Class representing the raw <strong>Pull Requests</strong> endpoint.
     /// </summary>
@@ -61,7 +61,7 @@ namespace Skybrud.Social.GitHub.Endpoints.PullRequests {
             if (options == null) throw new ArgumentNullException(nameof(options));
             return Client.GetResponse(options);
         }
-        
+
         /// <summary>
         /// Gets a list of pull requests matching the repository 
         /// </summary>

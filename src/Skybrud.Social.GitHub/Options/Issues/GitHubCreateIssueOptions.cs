@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Http;
-using System.Collections.Generic;
 
 namespace Skybrud.Social.GitHub.Options.Issues {
-    
+
     /// <summary>
     /// Class with options for creating a new issue.
     /// </summary>
@@ -49,22 +49,22 @@ namespace Skybrud.Social.GitHub.Options.Issues {
         #endregion
 
         #region Member methods
-        
+
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
 
             if (string.IsNullOrWhiteSpace(Title)) throw new PropertyNotSetException(nameof(Title));
-            
+
             string url = $"/repos/{OrganizationAlias}/{RepositoryAlias}/issues";
 
             JObject body = new JObject {
                 {"title", Title },
                 {"body", Body ?? string.Empty }
             };
-            
+
             if (Labels != null && Labels.Count > 0) body.Add("labels", new JArray(Labels));
             if (Assignees != null && Assignees.Count > 0) body.Add("assignees", new JArray(Assignees));
-            
+
             // Initialize the request
             return HttpRequest
                 .Post(url, body)

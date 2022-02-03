@@ -2,7 +2,7 @@
 using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Tags {
-    
+
     /// <summary>
     /// Class describing the commit a GitHub tag is based on.
     /// </summary>
@@ -23,7 +23,7 @@ namespace Skybrud.Social.GitHub.Models.Tags {
         #endregion
 
         #region Constructors
-        
+
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="json"/>.
         /// </summary>
@@ -36,7 +36,7 @@ namespace Skybrud.Social.GitHub.Models.Tags {
         #endregion
 
         #region Static methods
-        
+
         /// <summary>
         /// Parses the specified <paramref name="json"/> into an instance of <see cref="GitHubTagCommit"/>.
         /// </summary>

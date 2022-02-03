@@ -3,7 +3,7 @@ using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 
 namespace Skybrud.Social.GitHub.Endpoints.Organizations {
-    
+
     /// <summary>
     /// Class representing the raw <strong>Organizations</strong> endpoint.
     /// </summary>
@@ -49,7 +49,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
             if (string.IsNullOrWhiteSpace(organizationAlias)) throw new ArgumentNullException(nameof(organizationAlias));
             return Client.Get($"/orgs/{organizationAlias}");
         }
-        
+
         #endregion
 
     }

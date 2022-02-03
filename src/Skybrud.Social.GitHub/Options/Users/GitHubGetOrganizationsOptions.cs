@@ -36,7 +36,7 @@ namespace Skybrud.Social.GitHub.Options.Users {
         public int Page { get; set; }
 
         #endregion
-        
+
         #region Constructors
 
         /// <summary>

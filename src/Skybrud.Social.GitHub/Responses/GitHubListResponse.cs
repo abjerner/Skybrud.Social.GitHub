@@ -2,7 +2,7 @@
 using Skybrud.Social.GitHub.Models;
 
 namespace Skybrud.Social.GitHub.Responses {
-    
+
     /// <summary>
     /// Class representing a response from the GitHub API.
     /// </summary>

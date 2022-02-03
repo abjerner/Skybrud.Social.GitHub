@@ -44,7 +44,7 @@ namespace Skybrud.Social.GitHub.Endpoints.PullRequests.Reviews {
             if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
             return GetReviews(new GitHubGetReviewsOptions(owner, repository, number));
         }
-        
+
         /// <summary>
         /// Gets a list of reviews matching the specified <paramref name="options"/>.
         /// </summary>

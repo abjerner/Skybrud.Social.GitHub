@@ -75,7 +75,7 @@ namespace Skybrud.Social.GitHub.Endpoints {
         }
 
         #endregion
-    
+
     }
 
 }

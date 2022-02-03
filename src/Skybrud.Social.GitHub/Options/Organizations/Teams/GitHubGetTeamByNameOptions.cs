@@ -3,7 +3,7 @@ using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
-    
+
     /// <summary>
     /// Options for getting information about a team, indentified by the organization and team slugs respectively.
     /// </summary>
@@ -49,7 +49,7 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
 
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Organization)) throw new PropertyNotSetException(nameof(Organization));
             if (string.IsNullOrWhiteSpace(Team)) throw new PropertyNotSetException(nameof(Team));

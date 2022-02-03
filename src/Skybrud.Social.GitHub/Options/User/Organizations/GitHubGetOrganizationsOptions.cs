@@ -3,7 +3,7 @@ using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.User.Organizations {
-    
+
     /// <summary>
     /// Options class for getting the organizations of the authenticated user.
     /// </summary>
@@ -25,7 +25,7 @@ namespace Skybrud.Social.GitHub.Options.User.Organizations {
         public int Page { get; set; }
 
         #endregion
-        
+
         #region Constructors
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Skybrud.Social.GitHub.Options.User.Organizations {
         #endregion
 
         #region Member methods
-        
+
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
 

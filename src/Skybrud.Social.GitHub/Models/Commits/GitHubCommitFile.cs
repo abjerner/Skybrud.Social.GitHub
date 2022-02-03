@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Commits {
-    
+
     /// <summary>
     /// Class representing a file of a commit.
     /// </summary>
@@ -55,7 +55,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// Gets the patch notes of the commit.
         /// </summary>
         public string Patch { get; }
-        
+
         #endregion
 
         #region Constructors

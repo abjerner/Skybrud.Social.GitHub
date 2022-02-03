@@ -66,7 +66,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         public IHttpResponse GetTeams(int organizationId, int page, int perPage) {
             return Client.GetResponse(new GitHubGetTeamsOptions(organizationId, page, perPage));
         }
-        
+
         /// <summary>
         /// Gets the teams of the organization with the specified <paramref name="organizationAlias"/>.
         /// </summary>

@@ -9,7 +9,7 @@ namespace Skybrud.Social.GitHub.Models.Teams {
     public class GitHubTeamUrls {
 
         #region Properties
-        
+
         /// <summary>
         /// Gets the API URL of the team.
         /// </summary>

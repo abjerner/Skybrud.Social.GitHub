@@ -28,7 +28,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         public GitHubUserListResponse GetMembers(GitHubGetOrganizationMembersOptions options) {
             return new GitHubUserListResponse(Raw.GetMembers(options));
         }
-    
+
     }
 
 }

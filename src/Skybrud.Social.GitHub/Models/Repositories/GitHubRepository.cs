@@ -77,12 +77,12 @@ namespace Skybrud.Social.GitHub.Models.Repositories {
         /// Gets the size of the repository.
         /// </summary>
         public long Size { get; }
-        
+
         /// <summary>
         /// Gets the amount of users who have starred the repository.
         /// </summary>
         public int StargazersCount { get; }
-        
+
         /// <summary>
         /// Gets the amount of users watching the repository.
         /// </summary>
@@ -112,7 +112,7 @@ namespace Skybrud.Social.GitHub.Models.Repositories {
         /// Gets whether the repository has any pages.
         /// </summary>
         public bool HasPages { get; }
-        
+
         /// <summary>
         /// Gets the amount of forks of the repository.
         /// </summary>
@@ -127,7 +127,7 @@ namespace Skybrud.Social.GitHub.Models.Repositories {
         /// Gets the amount of forks of the repository.
         /// </summary>
         public int Forks { get; }
-        
+
         /// <summary>
         /// Gets the amount of open issues.
         /// </summary>

@@ -1,3 +1,4 @@
+using System;
 using Skybrud.Social.GitHub.Options.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.Branches;
 using Skybrud.Social.GitHub.Options.Repositories.Collaborators;
@@ -12,7 +13,6 @@ using Skybrud.Social.GitHub.Responses.Repositories;
 using Skybrud.Social.GitHub.Responses.Tags;
 using Skybrud.Social.GitHub.Responses.Teams;
 using Skybrud.Social.GitHub.Responses.Users;
-using System;
 
 namespace Skybrud.Social.GitHub.Endpoints.Repositories {
 
@@ -44,7 +44,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         #endregion
 
         #region Methods
-        
+
         /// <summary>
         /// Gets information about the repository matching the specified <paramref name="owner"/> and
         /// <paramref name="repository"/>.
@@ -328,7 +328,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         public GitHubLabelListResponse GetLabels(GitHubGetLabelsOptions options) {
             return new GitHubLabelListResponse(Raw.GetLabels(options));
         }
-        
+
         /// <summary>
         /// Returns a list of teams of the repository matching the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
@@ -338,7 +338,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         public GitHubTeamListResponse GetTeams(string owner, string repositoryAlias) {
             return new GitHubTeamListResponse(Raw.GetTeams(owner, repositoryAlias));
         }
-        
+
         /// <summary>
         /// Returns a list of teams of the repository matching the specified <paramref name="options"/>.
         /// </summary>
@@ -357,7 +357,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         public GitHubUserListResponse GetCollaborators(string owner, string repositoryAlias) {
             return new GitHubUserListResponse(Raw.GetCollaborators(owner, repositoryAlias));
         }
-        
+
         /// <summary>
         /// Returns a list of teams of the repository matching the specified <paramref name="options"/>.
         /// </summary>
@@ -366,7 +366,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         public GitHubUserListResponse GetCollaborators(GitHubGetCollaboratorsOptions options) {
             return new GitHubUserListResponse(Raw.GetCollaborators(options));
         }
-        
+
         /// <summary>
         /// Returns a list of releases of the repository matching the specified <paramref name="ownerAlias"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
@@ -401,7 +401,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         public GitHubReleaseListResponse GetReleases(string ownerAlias, string repositoryAlias, int perPage, int page) {
             return new GitHubReleaseListResponse(Raw.GetReleases(ownerAlias, repositoryAlias, perPage, page));
         }
-        
+
         /// <summary>
         /// Returns a list of releases of the repository matching the specified <paramref name="options"/>.
         /// </summary>
@@ -410,7 +410,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         public GitHubReleaseListResponse GetReleases(GitHubGetReleasesOptions options) {
             return new GitHubReleaseListResponse(Raw.GetReleases(options));
         }
-        
+
         /// <summary>
         /// Returns a list of tags of the repository matching the specified <paramref name="ownerAlias"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
@@ -443,7 +443,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         public GitHubTagListResponse GetTags(string ownerAlias, string repositoryAlias, int perPage, int page) {
             return new GitHubTagListResponse(Raw.GetTags(ownerAlias, repositoryAlias, perPage, page));
         }
-        
+
         /// <summary>
         /// Returns a list of tags of the repository matching the specified <paramref name="options"/>.
         /// </summary>

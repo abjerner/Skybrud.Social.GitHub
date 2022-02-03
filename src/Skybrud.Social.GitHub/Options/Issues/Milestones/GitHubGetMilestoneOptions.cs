@@ -59,7 +59,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
         /// </summary>
         /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));

@@ -1,10 +1,10 @@
-﻿using Skybrud.Essentials.Http.Collections;
-using Skybrud.Social.GitHub.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Skybrud.Essentials.Http.Collections;
+using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Extensions {
-    
+
     /// <summary>
     /// Various extension methods for the GitHub implementation.
     /// </summary>
@@ -38,7 +38,7 @@ namespace Skybrud.Social.GitHub.Extensions {
         public static bool HasValue(this int value) {
             return value != 0;
         }
-        
+
         /// <summary>
         /// Adds the specified <paramref name="mediaType"/> to the <strong>Accept</strong> header of the request.
         /// </summary>

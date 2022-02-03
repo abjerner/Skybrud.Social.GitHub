@@ -5,7 +5,7 @@ using Skybrud.Social.GitHub.Options.Organizations.Invitations;
 namespace Skybrud.Social.GitHub.Endpoints.Organizations {
 
     public partial class GitHubOrganizationsRawEndpoint {
- 
+
         /// <summary>
         /// Returns a list of pending invitation to the organization with the specified <paramref name="orgAlias"/>.
         /// </summary>
@@ -15,7 +15,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
             if (string.IsNullOrWhiteSpace(orgAlias)) throw new ArgumentNullException(nameof(orgAlias));
             return GetPendingInvitations(new GitHubGetPendingInvitationsOptions(orgAlias));
         }
-        
+
         /// <summary>
         /// Returns a list of pending invitation to the organization with the specified <paramref name="orgAlias"/>.
         /// </summary>
@@ -26,7 +26,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
             if (string.IsNullOrWhiteSpace(orgAlias)) throw new ArgumentNullException(nameof(orgAlias));
             return GetPendingInvitations(new GitHubGetPendingInvitationsOptions(orgAlias, perPage));
         }
-        
+
         /// <summary>
         /// Returns a list of pending invitation to the organization matching the specified <paramref name="options"/>.
         /// </summary>
@@ -46,7 +46,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
             if (string.IsNullOrWhiteSpace(orgAlias)) throw new ArgumentNullException(nameof(orgAlias));
             return GetFailedInvitations(new GitHubGetFailedInvitationsOptions(orgAlias));
         }
-        
+
         /// <summary>
         /// Returns a list of failed invitation to the organization with the specified <paramref name="orgAlias"/>.
         /// </summary>
@@ -57,7 +57,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
             if (string.IsNullOrWhiteSpace(orgAlias)) throw new ArgumentNullException(nameof(orgAlias));
             return GetFailedInvitations(new GitHubGetFailedInvitationsOptions(orgAlias, perPage));
         }
-        
+
         /// <summary>
         /// Returns a list of failed invitation to the organization matching the specified <paramref name="options"/>.
         /// </summary>

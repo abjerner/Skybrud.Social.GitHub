@@ -2,7 +2,7 @@
 using Skybrud.Social.GitHub.Models.Milestones;
 
 namespace Skybrud.Social.GitHub.Responses.Issues.Milestones {
-    
+
     /// <summary>
     /// Class representing a response with information about a <see cref="GitHubMilestone"/>.
     /// </summary>

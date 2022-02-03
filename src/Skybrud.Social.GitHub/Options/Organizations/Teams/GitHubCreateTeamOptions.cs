@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Strings.Extensions;
 using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Teams;
-using System;
-using System.Collections.Generic;
 
 namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
-    
+
     /// <summary>
     /// Class with options for creating a GitHub team.
     /// </summary>
@@ -117,18 +117,18 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Teams {
 
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Org)) throw new ArgumentNullException(nameof(Org));
             if (string.IsNullOrWhiteSpace(Name)) throw new ArgumentNullException(nameof(Name));
-            
+
             // Initialize and construct the POST body
-            JObject body = new JObject {{"name", Name }};
+            JObject body = new JObject { { "name", Name } };
             if (Description.HasValue()) body.Add("description", Description);
             if (Maintainers != null && Maintainers.Count > 0) body.Add("maintainers", new JArray(Maintainers));
             if (Privacy != GitHubTeamPrivacy.Unspecified) body.Add("privacy", Privacy.ToLower());
             if (ParentTeamId > 0) body.Add("parent_team_id", ParentTeamId);
-            
+
             // Initialize the request
             return HttpRequest
                 .Post($"/orgs/{Org}/teams", body)

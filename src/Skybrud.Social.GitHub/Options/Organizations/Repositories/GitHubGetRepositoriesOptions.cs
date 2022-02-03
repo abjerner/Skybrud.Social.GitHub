@@ -6,7 +6,7 @@ using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Options.Repositories;
 
 namespace Skybrud.Social.GitHub.Options.Organizations.Repositories {
-    
+
     /// <summary>
     /// Options for getting repositories of a GitHub organization.
     /// </summary>
@@ -50,17 +50,17 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Repositories {
 
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(OrganizationAlias)) throw new PropertyNotSetException(nameof(OrganizationAlias));
-            
+
             // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString();
             if (Sort != GitHubRepositorySortField.Unspecified) query.AddEnumValue("sort", Sort);
             if (Direction != GitHubSortDirection.Unspecified) query.AddEnumValue("direction", Direction);
             if (PerPage > 0) query.Add("per_page", PerPage);
             if (Page > 0) query.Add("page", Page);
-            
+
             // Initialize the request
             return HttpRequest
                 .Get($"/orgs/{OrganizationAlias}/repos", query)

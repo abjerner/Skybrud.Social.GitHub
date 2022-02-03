@@ -56,12 +56,12 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
 
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repo)) throw new PropertyNotSetException(nameof(Repo));
             if (string.IsNullOrWhiteSpace(Name)) throw new PropertyNotSetException(nameof(Name));
-            
+
             // Initialize the request
             return HttpRequest
                 .Get($"/repos/{Owner}/{Repo}/branches/{Name}")

@@ -1,6 +1,6 @@
-﻿using Skybrud.Essentials.Enums;
+﻿using System;
+using Skybrud.Essentials.Enums;
 using Skybrud.Essentials.Strings.Extensions;
-using System;
 using Skybrud.Social.GitHub.Options;
 using Skybrud.Social.GitHub.Options.Organizations.Members;
 using Skybrud.Social.GitHub.Options.Repositories;

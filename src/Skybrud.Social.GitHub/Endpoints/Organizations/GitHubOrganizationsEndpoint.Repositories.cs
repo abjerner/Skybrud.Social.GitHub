@@ -1,11 +1,11 @@
-﻿using Skybrud.Social.GitHub.Options.Organizations.Repositories;
+﻿using System;
+using Skybrud.Social.GitHub.Options.Organizations.Repositories;
 using Skybrud.Social.GitHub.Responses.Repositories;
-using System;
 
 namespace Skybrud.Social.GitHub.Endpoints.Organizations {
 
     public partial class GitHubOrganizationsEndpoint {
-        
+
         /// <summary>
         /// Returns a list of repositories of the organization matching the specified <paramref name="options"/>.
         /// </summary>

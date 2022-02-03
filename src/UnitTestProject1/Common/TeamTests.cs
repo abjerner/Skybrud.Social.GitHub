@@ -7,15 +7,15 @@ using Skybrud.Social.GitHub.Models.Teams;
 // ReSharper disable once InconsistentNaming
 
 namespace UnitTestProject1.Common {
-    
+
     [TestClass]
     public class PermissionLevelTests {
 
         [TestMethod]
         public void GetEnumValues() {
-            
+
             Assert.AreEqual(8, EnumUtils.GetEnumValues<GitHubPermissionLevel>().Length);
-            
+
             Assert.AreEqual(-1, (int) GitHubPermissionLevel.Unrecognized);
             Assert.AreEqual(+0, (int) GitHubPermissionLevel.Unspecified);
             Assert.AreEqual(+1, (int) GitHubPermissionLevel.None);

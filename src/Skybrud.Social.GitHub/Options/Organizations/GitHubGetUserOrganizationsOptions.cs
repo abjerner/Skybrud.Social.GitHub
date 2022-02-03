@@ -19,7 +19,7 @@
 //        /// Gets or sets the username of the user you wish to retrieve organizations for.
 //        /// </summary>
 //        public string Username { get; set; }
-        
+
 //        /// <summary>
 //        /// Gets or sets the page to be returned. Default is <code>0</code>, indicating the first page.
 //        /// </summary>
@@ -46,7 +46,7 @@
 //        public GitHubGetUserOrganizationsOptions(string username) {
 //            Username = username;
 //        }
-        
+
 //        /// <summary>
 //        /// Initializes a new instance based on the specified <paramref name="username"/> and <paramref name="page"/>.
 //        /// </summary>
@@ -56,7 +56,7 @@
 //            Username = username;
 //            Page = page;
 //        }
-        
+
 //        /// <summary>
 //        /// Initializes a new instance based on the specified <paramref name="username"/>, <paramref name="page"/> and <paramref name="perPage"/>.
 //        /// </summary>
@@ -86,21 +86,21 @@
 //            return query;
 
 //        }
-        
+
 //        /// <summary>
 //        /// Returns a new <see cref="IHttpRequest"/> instance for this options instance.
 //        /// </summary>
 //        /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
 //        public override IHttpRequest GetRequest() {
-            
+
 //            // Validate required parameters
 //            if (string.IsNullOrWhiteSpace(Username)) throw new PropertyNotSetException(nameof(Username));
-            
+
 //            // Initialize and construct the query string
 //            IHttpQueryString query = new HttpQueryString();
 //            if (Page > 0) query.Add("page", Page);
 //            if (PerPage > 0) query.Add("per_page", PerPage);
-            
+
 //            // Initialize the request
 //            return HttpRequest
 //                .Get($"/users/{Username}/orgs")

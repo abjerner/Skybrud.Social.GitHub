@@ -5,7 +5,7 @@ using Skybrud.Essentials.Strings.Extensions;
 using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Organizations.Members {
-    
+
     /// <summary>
     /// Class representing the options for listing the members of a GitHub organization.
     /// </summary>
@@ -46,7 +46,7 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Members {
         /// Initializes a new instacne with default options.
         /// </summary>
         public GitHubGetOrganizationMembersOptions() { }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="organizationAlias"/>.
         /// </summary>
@@ -83,17 +83,17 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Members {
 
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(OrganizationAlias)) throw new PropertyNotSetException(nameof(OrganizationAlias));
-            
+
             // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString();
             if (Filter != default) query.Add("filter", GitHubUtils.ToString(Filter));
             if (Role != default) query.Add("role", Role.ToLower());
             if (PerPage > 0) query.Add("per_page", PerPage);
             if (Page > 0) query.Add("page", Page);
-            
+
             // Initialize the request
             return HttpRequest
                 .Get($"/orgs/{OrganizationAlias}/members", query)

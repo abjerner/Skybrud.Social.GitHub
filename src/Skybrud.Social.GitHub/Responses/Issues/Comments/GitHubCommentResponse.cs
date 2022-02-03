@@ -7,7 +7,7 @@ namespace Skybrud.Social.GitHub.Responses.Issues.Comments {
     /// Class representing the response with information about a <see cref="GitHubComment"/>.
     /// </summary>
     public class GitHubCommentResponse : GitHubResponse<GitHubComment> {
-        
+
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>

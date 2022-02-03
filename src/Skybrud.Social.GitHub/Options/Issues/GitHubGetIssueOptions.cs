@@ -10,7 +10,7 @@ namespace Skybrud.Social.GitHub.Options.Issues {
     public class GitHubGetIssueOptions : GitHubHttpRequestOptions {
 
         #region Properties
-        
+
         /// <summary>
         /// Gets or sets the username (login) of the owner of the repository.
         /// </summary>

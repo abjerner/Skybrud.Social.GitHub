@@ -2,7 +2,7 @@
 using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Tags {
-    
+
     /// <summary>
     /// Class describing a GitHub tag.
     /// </summary>
@@ -19,17 +19,17 @@ namespace Skybrud.Social.GitHub.Models.Tags {
         /// Gets the zipball URL of the tag.
         /// </summary>
         public string ZipballUrl { get; }
-        
+
         /// <summary>
         /// Gets the tarball URL of the tag.
         /// </summary>
         public string TarballUrl { get; }
-        
+
         /// <summary>
         /// Gets a reference to the commit the tag is based on.
         /// </summary>
         public GitHubTagCommit Commit { get; }
-        
+
         /// <summary>
         /// Gets the node ID of the tag.
         /// </summary>
@@ -54,7 +54,7 @@ namespace Skybrud.Social.GitHub.Models.Tags {
         #endregion
 
         #region Static methods
-        
+
         /// <summary>
         /// Parses the specified <paramref name="json"/> into an instance of <see cref="GitHubTagItem"/>.
         /// </summary>

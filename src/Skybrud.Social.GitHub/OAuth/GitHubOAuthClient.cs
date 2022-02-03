@@ -1,3 +1,5 @@
+using System;
+using System.Net;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Client;
@@ -13,8 +15,6 @@ using Skybrud.Social.GitHub.Endpoints.User;
 using Skybrud.Social.GitHub.Endpoints.Users;
 using Skybrud.Social.GitHub.Responses.Authentication;
 using Skybrud.Social.GitHub.Scopes;
-using System;
-using System.Net;
 
 namespace Skybrud.Social.GitHub.OAuth {
 
@@ -254,12 +254,12 @@ namespace Skybrud.Social.GitHub.OAuth {
 
             // Get the response from the server
             IHttpResponse response = HttpUtils.Requests.Post("https://github.com/login/oauth/access_token", null, parameters);
-            
+
             // Return the response
             return new GitHubTokenResponse(response);
 
         }
-        
+
         /// <summary>
         /// Virtual method that can be used for configuring a request.
         /// </summary>
@@ -271,7 +271,7 @@ namespace Skybrud.Social.GitHub.OAuth {
 
             // GitHub requires a user agent - see https://developer.github.com/v3/#user-agent-required
             request.UserAgent = "Skybrud.Social";
-            
+
             // Append the access token to the HTTP headers (if present)
             if (!string.IsNullOrWhiteSpace(AccessToken)) {
                 request.Headers.Authorization = "token " + AccessToken;

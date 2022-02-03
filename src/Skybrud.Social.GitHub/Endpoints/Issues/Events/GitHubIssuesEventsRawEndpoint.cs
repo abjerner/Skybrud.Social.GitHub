@@ -32,7 +32,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues.Events {
         #endregion
 
         #region Methods
-        
+
         /// <summary>
         /// Gets a list of events of the issue matching the specified <paramref name="owner"/>, <paramref name="repository"/> and <paramref name="number"/>.
         /// </summary>

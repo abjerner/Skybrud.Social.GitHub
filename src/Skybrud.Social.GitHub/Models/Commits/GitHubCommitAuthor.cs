@@ -4,7 +4,7 @@ using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Commits {
-    
+
     /// <summary>
     /// Class representing the author of a commit.
     /// </summary>
@@ -16,17 +16,17 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// Gets the name of the author.
         /// </summary>
         public string Name { get; }
-        
+
         /// <summary>
         /// Gets the email address of the author.
         /// </summary>
         public string Email { get; }
-        
+
         /// <summary>
         /// Gets the date of the commit.
         /// </summary>
         public EssentialsTime Date { get; }
-        
+
         #endregion
 
         #region Constructors

@@ -6,7 +6,7 @@ using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Milestones;
 
 namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
-    
+
     /// <summary>
     /// Options for deleting a milestone.
     /// </summary>
@@ -76,12 +76,12 @@ namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
         /// </summary>
         /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
             if (Number == 0) throw new PropertyNotSetException(nameof(Number));
-            
+
             // Initialize the request
             return HttpRequest
                 .Delete($"/repos/{Owner}/{Repository}/milestones/{Number}")

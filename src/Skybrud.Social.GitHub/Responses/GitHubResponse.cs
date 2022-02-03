@@ -34,7 +34,7 @@ namespace Skybrud.Social.GitHub.Responses {
         public GitHubResponse(IHttpResponse response) : base(response) {
 
             if (response.Headers["X-RateLimit-Limit"] != null) RateLimiting = GitHubRateLimiting.GetFromResponse(response);
-  
+
             // If an error occurs during authorization, the error code will still be "OK"
             if (response.ContentType.StartsWith("application/x-www-form-urlencoded") && response.Body.StartsWith("error=")) {
                 IHttpQueryString body = HttpQueryString.ParseQueryString(response.Body, true);

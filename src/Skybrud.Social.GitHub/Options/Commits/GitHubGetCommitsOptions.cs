@@ -66,7 +66,7 @@ namespace Skybrud.Social.GitHub.Options.Commits {
         #endregion
 
         #region Constructors
-        
+
         /// <summary>
         /// Initializes a new instance with default options.
         /// </summary>
@@ -85,10 +85,10 @@ namespace Skybrud.Social.GitHub.Options.Commits {
         #endregion
 
         #region Member methods
-        
+
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
@@ -102,10 +102,10 @@ namespace Skybrud.Social.GitHub.Options.Commits {
             if (Until != null) query.Add("until", Until.Iso8601);
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
-            
+
             // Declare the URL to request
             string url = $"/repos/{Owner}/{Repository}/commits";
-            
+
             // Initialize the request
             return HttpRequest
                 .Get(url, query)

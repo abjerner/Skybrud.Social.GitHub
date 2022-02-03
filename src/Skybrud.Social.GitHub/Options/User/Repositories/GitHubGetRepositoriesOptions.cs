@@ -4,7 +4,7 @@ using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Options.Repositories;
 
 namespace Skybrud.Social.GitHub.Options.User.Repositories {
-    
+
     /// <summary>
     /// Options class for getting the repositories of the authenticated user.
     /// </summary>
@@ -50,7 +50,7 @@ namespace Skybrud.Social.GitHub.Options.User.Repositories {
         public GitHubSortDirection Direction { get; set; }
 
         #endregion
-        
+
         #region Constructors
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Skybrud.Social.GitHub.Options.User.Repositories {
         #endregion
 
         #region Member methods
-        
+
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
 

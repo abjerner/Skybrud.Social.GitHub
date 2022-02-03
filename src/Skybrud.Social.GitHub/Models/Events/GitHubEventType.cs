@@ -7,7 +7,7 @@
     ///     <cref>https://docs.github.com/en/free-pro-team@latest/developers/webhooks-and-events/issue-event-types</cref>
     /// </see>
     public enum GitHubEventType {
-        
+
         /// <summary>
         /// The issue was added to a project board. You only see this event in responses when project boards have been
         /// enabled in the repository.

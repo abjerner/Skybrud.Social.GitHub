@@ -13,7 +13,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
     public class GitHubAddIssueCommentOptions : GitHubHttpRequestOptions {
 
         #region Properties
-        
+
         /// <summary>
         /// Mandatory: Gets or sets the username (login) of the owner of the repository.
         /// </summary>
@@ -83,7 +83,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
         /// </summary>
         /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
@@ -94,7 +94,7 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
             JObject body = new JObject {
                 {"body", Body}
             };
-            
+
             // Initialize the request
             return HttpRequest
                 .Post($"/repos/{Owner}/{Repository}/issues/{Number}/comments", body)

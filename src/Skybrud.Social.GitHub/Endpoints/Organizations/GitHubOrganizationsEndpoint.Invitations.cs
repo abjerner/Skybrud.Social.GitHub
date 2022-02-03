@@ -13,7 +13,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         public GitHubInvitationListResponse GetPendingInvitations(string orgAlias) {
             return new GitHubInvitationListResponse(Raw.GetPendingInvitations(orgAlias));
         }
-        
+
         /// <summary>
         /// Returns a list of pending invitation to the organization with the specified <paramref name="orgAlias"/>.
         /// </summary>
@@ -23,7 +23,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         public GitHubInvitationListResponse GetPendingInvitations(string orgAlias, int perPage) {
             return new GitHubInvitationListResponse(Raw.GetPendingInvitations(orgAlias, perPage));
         }
-        
+
         /// <summary>
         /// Returns a list of pending invitation to the organization matching the specified <paramref name="options"/>.
         /// </summary>
@@ -41,7 +41,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         public GitHubInvitationListResponse GetFailedInvitations(string orgAlias) {
             return new GitHubInvitationListResponse(Raw.GetFailedInvitations(orgAlias));
         }
-        
+
         /// <summary>
         /// Returns a list of failed invitation to the organization with the specified <paramref name="orgAlias"/>.
         /// </summary>
@@ -51,7 +51,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations {
         public GitHubInvitationListResponse GetFailedInvitations(string orgAlias, int perPage) {
             return new GitHubInvitationListResponse(Raw.GetFailedInvitations(orgAlias, perPage));
         }
-        
+
         /// <summary>
         /// Returns a list of failed invitation to the organization matching the specified <paramref name="options"/>.
         /// </summary>

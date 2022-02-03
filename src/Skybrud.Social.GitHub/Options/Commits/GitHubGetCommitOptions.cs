@@ -3,7 +3,7 @@ using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Commits {
-    
+
     /// <summary>
     /// Class representing the options for getting a single commit.
     /// </summary>
@@ -29,7 +29,7 @@ namespace Skybrud.Social.GitHub.Options.Commits {
         #endregion
 
         #region Constructors
-        
+
         /// <summary>
         /// Initializes a new instance with default options.
         /// </summary>
@@ -49,18 +49,18 @@ namespace Skybrud.Social.GitHub.Options.Commits {
         #endregion
 
         #region Member methods
-        
+
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
             if (string.IsNullOrWhiteSpace(Sha)) throw new PropertyNotSetException(nameof(Sha));
-            
+
             // Declare the URL to request
             string url = $"/repos/{Owner}/{Repository}/commits/{Sha}";
-            
+
             // Initialize the request
             return HttpRequest
                 .Get(url)

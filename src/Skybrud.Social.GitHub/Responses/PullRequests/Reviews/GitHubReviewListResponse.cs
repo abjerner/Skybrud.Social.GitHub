@@ -7,7 +7,7 @@ namespace Skybrud.Social.GitHub.Responses.PullRequests.Reviews {
     /// Class representing the response for list of <see cref="GitHubReviewItem"/>.
     /// </summary>
     public class GitHubReviewListResponse : GitHubListResponse<GitHubReviewItem> {
-        
+
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>

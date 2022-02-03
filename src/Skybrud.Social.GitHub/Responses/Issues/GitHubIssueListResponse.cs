@@ -7,7 +7,7 @@ namespace Skybrud.Social.GitHub.Responses.Issues {
     /// Class representing the response for getting a list of <see cref="GitHubIssueItem"/>.
     /// </summary>
     public class GitHubIssueListResponse : GitHubListResponse<GitHubIssueItem> {
-        
+
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>

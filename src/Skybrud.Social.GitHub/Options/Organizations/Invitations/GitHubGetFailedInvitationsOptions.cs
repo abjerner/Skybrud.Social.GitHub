@@ -1,12 +1,12 @@
-﻿using Skybrud.Essentials.Common;
+﻿using System;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Organizations;
-using System;
 
 namespace Skybrud.Social.GitHub.Options.Organizations.Invitations {
-    
+
     /// <summary>
     /// Class with options for getting a list of failed invitations of a GitHub organization.
     /// </summary>
@@ -64,7 +64,7 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Invitations {
             if (organization == null) throw new ArgumentNullException(nameof(organization));
             OrganizationAlias = organization.Login;
         }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="organization"/>.
         /// </summary>
@@ -79,18 +79,18 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Invitations {
         #endregion
 
         #region Member methods
-        
+
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(OrganizationAlias)) throw new PropertyNotSetException(nameof(OrganizationAlias));
-            
+
             // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString();
             if (PerPage > 0) query.Add("per_page", PerPage);
             if (Page > 0) query.Add("page", Page);
-            
+
             // Initialize the request
             return HttpRequest
                 .Get($"/orgs/{OrganizationAlias}/failed_invitations", query)

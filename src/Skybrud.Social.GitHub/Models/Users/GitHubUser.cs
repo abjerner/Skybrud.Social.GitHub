@@ -11,7 +11,7 @@ namespace Skybrud.Social.GitHub.Models.Users {
     public class GitHubUser : GitHubUserItem {
 
         #region Properties
-        
+
         /// <summary>
         /// Gets the name of the user.
         /// </summary>

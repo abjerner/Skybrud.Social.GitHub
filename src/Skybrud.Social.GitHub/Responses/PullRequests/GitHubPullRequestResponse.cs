@@ -7,7 +7,7 @@ namespace Skybrud.Social.GitHub.Responses.PullRequests {
     /// Class representing the response with information about a <see cref="GitHubPullRequest"/>.
     /// </summary>
     public class GitHubPullRequestResponse : GitHubResponse<GitHubPullRequest> {
-        
+
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>

@@ -1,7 +1,7 @@
-﻿using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Http.Options;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Skybrud.Essentials.Http;
+using Skybrud.Essentials.Http.Options;
 
 namespace Skybrud.Social.GitHub.Http {
 
@@ -17,7 +17,7 @@ namespace Skybrud.Social.GitHub.Http {
 
         /// <inheritdoc />
         public abstract IHttpRequest GetRequest();
-        
+
         /// <summary>
         /// Returns a string representation of the specified enum <paramref name="value"/>.
         /// </summary>

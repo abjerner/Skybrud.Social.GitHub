@@ -3,7 +3,7 @@ using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Social.GitHub.Models.Users;
 
 namespace Skybrud.Social.GitHub.Models.Commits {
-    
+
     /// <summary>
     /// Class representing a commit of a repository.
     /// </summary>

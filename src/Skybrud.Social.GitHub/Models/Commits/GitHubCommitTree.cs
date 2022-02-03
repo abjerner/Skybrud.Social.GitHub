@@ -2,7 +2,7 @@
 using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Commits {
-    
+
     /// <summary>
     /// Class representing the tree of a given commit.
     /// </summary>
@@ -14,12 +14,12 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// Gets the SHA hash of the tree.
         /// </summary>
         public string Sha { get; }
-        
+
         /// <summary>
         /// Gets the API URL of the tree.
         /// </summary>
         public string Url { get; }
-        
+
         #endregion
 
         #region Constructors

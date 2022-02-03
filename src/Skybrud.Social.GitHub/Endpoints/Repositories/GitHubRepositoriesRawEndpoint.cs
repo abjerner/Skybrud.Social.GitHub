@@ -1,3 +1,4 @@
+using System;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Repositories;
@@ -7,7 +8,6 @@ using Skybrud.Social.GitHub.Options.Repositories.Labels;
 using Skybrud.Social.GitHub.Options.Repositories.Releases;
 using Skybrud.Social.GitHub.Options.Repositories.Tags;
 using Skybrud.Social.GitHub.Options.Repositories.Teams;
-using System;
 
 namespace Skybrud.Social.GitHub.Endpoints.Repositories {
 
@@ -34,7 +34,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         #endregion
 
         #region Member methods
-        
+
         /// <summary>
         /// Gets information about the repository matching the specified <paramref name="owner"/> and
         /// <paramref name="repository"/>.
@@ -346,7 +346,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
             if (string.IsNullOrWhiteSpace(repo)) throw new ArgumentNullException(nameof(repo));
             return GetLabels(new GitHubGetLabelsOptions(owner, repo));
         }
-        
+
         /// <summary>
         /// Returns a list of labels of the repository matching the specified <paramref name="options"/>.
         /// </summary>
@@ -393,7 +393,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
             if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
             return Client.GetResponse(new GitHubGetCollaboratorsOptions(owner, repositoryAlias));
         }
-        
+
         /// <summary>
         /// Returns a list of teams of the repository matching the specified <paramref name="options"/>.
         /// </summary>
@@ -403,7 +403,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
             if (options == null) throw new ArgumentNullException(nameof(options));
             return Client.GetResponse(options);
         }
-        
+
         /// <summary>
         /// Returns a list of releases of the repository matching the specified <paramref name="ownerAlias"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
@@ -442,7 +442,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
             if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
             return GetReleases(new GitHubGetReleasesOptions(ownerAlias, repositoryAlias, perPage, page));
         }
-        
+
         /// <summary>
         /// Returns a list of releases of the repository matching the specified <paramref name="options"/>.
         /// </summary>
@@ -452,7 +452,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
             if (options == null) throw new ArgumentNullException(nameof(options));
             return Client.GetResponse(options);
         }
-        
+
         /// <summary>
         /// Returns a list of tags of the repository matching the specified <paramref name="ownerAlias"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
@@ -491,7 +491,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
             if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
             return GetTags(new GitHubGetTagsOptions(ownerAlias, repositoryAlias, perPage, page));
         }
-        
+
         /// <summary>
         /// Returns a list of tags of the repository matching the specified <paramref name="options"/>.
         /// </summary>

@@ -3,7 +3,7 @@ using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Time;
 
 namespace Skybrud.Social.GitHub.Models.Common {
-    
+
     /// <summary>
     /// Class with rate-limiting information about a response from the GitHub API.
     /// </summary>

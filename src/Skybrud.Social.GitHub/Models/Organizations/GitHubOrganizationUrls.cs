@@ -9,12 +9,12 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
     public class GitHubOrganizationUrls {
 
         #region Properties
-        
+
         /// <summary>
         /// Gets the API URL of the organization.
         /// </summary>
         public string Url { get; }
-        
+
         /// <summary>
         /// Gets the API URL for getting a list of repositories of the organization.
         /// </summary>
@@ -39,7 +39,7 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         /// Gets the API URL for getting a list of members of the organization.
         /// </summary>
         public string MembersUrl { get; }
-        
+
         /// <summary>
         /// Gets the API URL for getting a list of public members of the organization.
         /// </summary>

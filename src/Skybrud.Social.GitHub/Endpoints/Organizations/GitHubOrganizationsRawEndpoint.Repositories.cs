@@ -5,7 +5,7 @@ using Skybrud.Social.GitHub.Options.Organizations.Repositories;
 namespace Skybrud.Social.GitHub.Endpoints.Organizations {
 
     public partial class GitHubOrganizationsRawEndpoint {
- 
+
         /// <summary>
         /// Returns a list of repositories of the organization matching the specified <paramref name="options"/>.
         /// </summary>

@@ -2,7 +2,7 @@
 using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Commits {
-    
+
     /// <summary>
     /// Class representing statistics about a given commit.
     /// </summary>
@@ -19,12 +19,12 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// Gets the total amount of lines added in the commit.
         /// </summary>
         public int Additions { get; }
-        
+
         /// <summary>
         /// Gets the total amount of lines deleted in the commit.
         /// </summary>
         public int Deletions { get; }
-        
+
         #endregion
 
         #region Constructors

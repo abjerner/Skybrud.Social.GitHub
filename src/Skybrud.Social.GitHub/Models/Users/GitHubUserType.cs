@@ -1,7 +1,7 @@
 ﻿using Skybrud.Social.GitHub.Constants;
 
 namespace Skybrud.Social.GitHub.Models.Users {
-    
+
     /// <summary>
     /// Enum class specifying the type of a GitHub user.
     /// </summary>
@@ -31,7 +31,7 @@ namespace Skybrud.Social.GitHub.Models.Users {
         /// Indicates that the user is a bot.
         /// </summary>
         Bot
-    
+
     }
 
 }

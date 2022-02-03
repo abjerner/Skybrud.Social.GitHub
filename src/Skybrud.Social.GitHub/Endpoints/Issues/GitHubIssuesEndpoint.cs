@@ -90,7 +90,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Issues {
         public GitHubIssueResponse GetIssue(GitHubGetIssueOptions options) {
             return new GitHubIssueResponse(Raw.GetIssue(options));
         }
-        
+
         /// <summary>
         /// Gets a list of issues assigned to the authenticated user.
         /// </summary>

@@ -1,7 +1,7 @@
 ﻿using Skybrud.Social.GitHub.Constants;
 
 namespace Skybrud.Social.GitHub.Models.Common {
-    
+
     /// <summary>
     /// Enum class representing the permission to a organization, team, repository or similar.
     /// </summary>

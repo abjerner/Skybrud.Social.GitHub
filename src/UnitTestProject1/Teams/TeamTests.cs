@@ -6,15 +6,15 @@ using Skybrud.Social.GitHub.Models.Teams;
 // ReSharper disable once InconsistentNaming
 
 namespace UnitTestProject1.Teams {
-    
+
     [TestClass]
     public class TeamTests {
 
         [TestMethod]
         public void PrivacyLevelEnum() {
-            
+
             Assert.AreEqual(4, EnumUtils.GetEnumValues<GitHubTeamPrivacy>().Length);
-            
+
             Assert.AreEqual(-1, (int) GitHubTeamPrivacy.Unrecognized);
             Assert.AreEqual(+0, (int) GitHubTeamPrivacy.Unspecified);
             Assert.AreEqual(+1, (int) GitHubTeamPrivacy.Secret);

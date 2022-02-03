@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 
 namespace Skybrud.Social.GitHub.Models.Releases {
-    
+
     /// <summary>
     /// Class describing a GitHub release.
     /// </summary>
@@ -14,7 +14,7 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         #endregion
 
         #region Constructors
-        
+
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="json"/>.
         /// </summary>
@@ -24,7 +24,7 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         #endregion
 
         #region Static methods
-        
+
         /// <summary>
         /// Parses the specified <paramref name="json"/> into an instance of <see cref="GitHubRelease"/>.
         /// </summary>

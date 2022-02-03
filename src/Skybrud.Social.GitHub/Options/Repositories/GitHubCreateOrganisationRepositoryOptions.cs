@@ -5,7 +5,7 @@ using Skybrud.Essentials.Http.Options;
 using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Repositories {
-    
+
     /// <summary>
     /// Options for a request to create a new organisation repository.
     /// </summary>
@@ -115,7 +115,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
                 {"private", HasIssues ? "true" : "false"},
                 {"has_wiki", HasWiki ? "true" : "false"}
             };
-            
+
             // Append the "has_project" parameter to the request body (if specified)
             if (HasProjects != null) body.Add("has_projects", HasProjects.Value ? "true" : "false");
 

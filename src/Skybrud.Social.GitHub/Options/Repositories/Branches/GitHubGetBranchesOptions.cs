@@ -83,17 +83,17 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
 
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repo)) throw new PropertyNotSetException(nameof(Repo));
-            
+
             // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString();
             if (Protected != GitHubBoolean.Unspecified) query.Add("protected", Protected.ToLower());
             if (PerPage > 0) query.Add("per_page", PerPage);
             if (Page > 0) query.Add("page", Page);
-            
+
             // Initialize the request
             return HttpRequest
                 .Get($"/repos/{Owner}/{Repo}/branches", query)

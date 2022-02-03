@@ -4,7 +4,7 @@ using Skybrud.Social.GitHub;
 // ReSharper disable InconsistentNaming
 
 namespace UnitTestProject1 {
-    
+
     [TestClass]
     public class ServiceTests {
 
