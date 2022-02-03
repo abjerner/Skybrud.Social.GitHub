@@ -1,4 +1,4 @@
-﻿using Skybrud.Essentials.Time;
+﻿using Skybrud.Essentials.Time.Iso8601;
 
 namespace Skybrud.Social.GitHub.Constants {
 
@@ -10,7 +10,7 @@ namespace Skybrud.Social.GitHub.Constants {
         /// <summary>
         /// Gets the datetime format used by the GitHub API.
         /// </summary>
-        public const string DateTimeFormat = TimeUtils.Iso8601DateFormat;
+        public const string DateTimeFormat = Iso8601Constants.DateTimeFormat;
 
         /// <summary>
         /// Enum ordinal value used to indicate an unrecognized value.
