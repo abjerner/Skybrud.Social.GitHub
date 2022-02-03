@@ -1,8 +1,10 @@
-﻿using Skybrud.Essentials.Common;
+﻿using System;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Strings.Extensions;
 using Skybrud.Social.GitHub.Http;
+using Skybrud.Social.GitHub.Models.Organizations;
 
 namespace Skybrud.Social.GitHub.Options.Organizations.Members {
 
@@ -12,6 +14,11 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Members {
     public class GitHubGetOrganizationMembersOptions : GitHubHttpRequestOptions {
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the ID of the organization.
+        /// </summary>
+        public int OrganizationId { get; set; }
 
         /// <summary>
         /// Gets or sets the alias of the organization.
@@ -48,6 +55,36 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Members {
         public GitHubGetOrganizationMembersOptions() { }
 
         /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="organizationId"/>.
+        /// </summary>
+        /// <param name="organizationId">The ID of the organization.</param>
+        public GitHubGetOrganizationMembersOptions(int organizationId) {
+            OrganizationId = organizationId;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="organizationId"/>.
+        /// </summary>
+        /// <param name="organizationId">The ID of the organization.</param>
+        /// <param name="perPage">The maximuim amount of results per page (max is <c>100</c>).</param>
+        public GitHubGetOrganizationMembersOptions(int organizationId, int perPage) {
+            OrganizationId = organizationId;
+            PerPage = perPage;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="organizationId"/>.
+        /// </summary>
+        /// <param name="organizationId">The ID of the organization.</param>
+        /// <param name="perPage">The maximuim amount of results per page (max is <c>100</c>).</param>
+        /// <param name="page">The page to fetch.</param>
+        public GitHubGetOrganizationMembersOptions(int organizationId, int perPage, int page) {
+            OrganizationId = organizationId;
+            PerPage = perPage;
+            Page = page;
+        }
+
+        /// <summary>
         /// Initializes a new instance based on the specified <paramref name="organizationAlias"/>.
         /// </summary>
         /// <param name="organizationAlias">The alias (username) of the organization.</param>
@@ -77,6 +114,39 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Members {
             Page = page;
         }
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="organization"/>.
+        /// </summary>
+        /// <param name="organization">The organization.</param>
+        public GitHubGetOrganizationMembersOptions(GitHubOrganizationItem organization) {
+            if (organization == null) throw new ArgumentNullException(nameof(organization));
+            OrganizationAlias = organization.Login;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="organization"/>.
+        /// </summary>
+        /// <param name="organization">The organization.</param>
+        /// <param name="perPage">The maximuim amount of results per page (max is <c>100</c>).</param>
+        public GitHubGetOrganizationMembersOptions(GitHubOrganizationItem organization, int perPage) {
+            if (organization == null) throw new ArgumentNullException(nameof(organization));
+            OrganizationAlias = organization.Login;
+            PerPage = perPage;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="organization"/>.
+        /// </summary>
+        /// <param name="organization">The organization.</param>
+        /// <param name="perPage">The maximuim amount of results per page (max is <c>100</c>).</param>
+        /// <param name="page">The page to fetch.</param>
+        public GitHubGetOrganizationMembersOptions(GitHubOrganizationItem organization, int perPage, int page) {
+            if (organization == null) throw new ArgumentNullException(nameof(organization));
+            OrganizationAlias = organization.Login;
+            PerPage = perPage;
+            Page = page;
+        }
+
         #endregion
 
         #region Member methods
@@ -84,8 +154,13 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Members {
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
 
-            // Validate required parameters
-            if (string.IsNullOrWhiteSpace(OrganizationAlias)) throw new PropertyNotSetException(nameof(OrganizationAlias));
+            // Make sure we have either a organization ID or a alias/login
+            if (OrganizationId == 0 && string.IsNullOrWhiteSpace(OrganizationAlias)) throw new PropertyNotSetException(nameof(OrganizationAlias));
+
+            // Construct the URL
+            string url = string.IsNullOrWhiteSpace(OrganizationAlias)
+                ? $"/organizations/{OrganizationId}/members"
+                : $"/orgs/{OrganizationAlias}/members";
 
             // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString();
@@ -96,7 +171,7 @@ namespace Skybrud.Social.GitHub.Options.Organizations.Members {
 
             // Initialize the request
             return HttpRequest
-                .Get($"/orgs/{OrganizationAlias}/members", query)
+                .Get(url, query)
                 .SetAcceptHeader(MediaTypes);
 
         }
