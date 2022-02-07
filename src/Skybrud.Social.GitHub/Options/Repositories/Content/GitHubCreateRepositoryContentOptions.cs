@@ -25,7 +25,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
         public string Owner { get; set; }
         
         /// <summary>
-        /// Gets or set alias/slug of the repository.
+        /// Gets or set the alias/slug of the repository.
         /// </summary>
         public string Repository { get; set; }
 
@@ -82,7 +82,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
             if (string.IsNullOrWhiteSpace(Message)) throw new PropertyNotSetException(nameof(Message));
             if (string.IsNullOrWhiteSpace(Content)) throw new PropertyNotSetException(nameof(Content));
 
-            // Initialize the response body
+            // Initialize the request body
             JObject body = new JObject {
                 {"message", Message},
                 {"content", SecurityUtils.Base64Encode(Content)}
