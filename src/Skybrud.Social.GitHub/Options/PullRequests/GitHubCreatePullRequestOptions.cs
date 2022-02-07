@@ -123,7 +123,6 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
         #region Member methods
 
         /// <inheritdoc />
-
         public override IHttpRequest GetRequest() {
 
             // Input validation
