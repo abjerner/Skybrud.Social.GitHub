@@ -44,13 +44,13 @@ namespace Skybrud.Social.GitHub.Models.Repositories {
 
         #region Constructors
 
-        private GitHubRepositoryUrls(JObject obj) {
-            HtmlUrl = obj.GetString("html_url");
-            Url = obj.GetString("url");
-            GitUrl = obj.GetString("git_url");
-            SshUrl = obj.GetString("ssh_url");
-            CloneUrl = obj.GetString("clone_url");
-            SvnUrl = obj.GetString("svn_url");
+        private GitHubRepositoryUrls(JObject json) {
+            HtmlUrl = json.GetString("html_url");
+            Url = json.GetString("url");
+            GitUrl = json.GetString("git_url");
+            SshUrl = json.GetString("ssh_url");
+            CloneUrl = json.GetString("clone_url");
+            SvnUrl = json.GetString("svn_url");
         }
 
         #endregion
@@ -58,12 +58,12 @@ namespace Skybrud.Social.GitHub.Models.Repositories {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubRepositoryUrls"/>.
+        /// Parses the specified <paramref name="json"/> object into an instance of <see cref="GitHubRepositoryUrls"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubRepositoryUrls"/>.</returns>
-        public static GitHubRepositoryUrls Parse(JObject obj) {
-            return obj == null ? null : new GitHubRepositoryUrls(obj);
+        public static GitHubRepositoryUrls Parse(JObject json) {
+            return json == null ? null : new GitHubRepositoryUrls(json);
         }
 
         #endregion
