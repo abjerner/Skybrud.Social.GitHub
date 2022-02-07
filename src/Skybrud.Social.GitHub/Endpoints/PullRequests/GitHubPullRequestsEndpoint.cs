@@ -1,5 +1,6 @@
 using Skybrud.Social.GitHub.Endpoints.PullRequests.Reviews;
 using Skybrud.Social.GitHub.Options.PullRequests;
+using Skybrud.Social.GitHub.Responses;
 using Skybrud.Social.GitHub.Responses.PullRequests;
 
 namespace Skybrud.Social.GitHub.Endpoints.PullRequests {
@@ -41,6 +42,18 @@ namespace Skybrud.Social.GitHub.Endpoints.PullRequests {
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Creates a new pull request with the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="GitHubPullRequestResponse"/> representing the response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/reference/pulls#create-a-pull-request</cref>
+        /// </see>
+        public GitHubPullRequestResponse CreatePullRequest(GitHubCreatePullRequestOptions options) {
+            return new GitHubPullRequestResponse(Raw.CreatePullRequest(options));
+        }
 
         /// <summary>
         /// Gets the pull request matching the specified <paramref name="owner"/>, <paramref name="repository"/> and <paramref name="number"/>.
