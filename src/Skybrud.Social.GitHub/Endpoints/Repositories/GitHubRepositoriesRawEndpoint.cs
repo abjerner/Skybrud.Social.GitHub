@@ -15,7 +15,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
     /// <summary>
     /// Class representing the raw <strong>Repositories</strong> endpoint.
     /// </summary>
-    public class GitHubRepositoriesRawEndpoint {
+    public partial class GitHubRepositoriesRawEndpoint {
 
         #region Properties
 
