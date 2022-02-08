@@ -10,7 +10,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
     /// Options class for returning a list of collaborators of a GitHub repository.
     /// </summary>
     /// <see>
-    ///     <cref>https://docs.github.com/en/rest/reference/repos#collaborators</cref>
+    ///     <cref>https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators</cref>
     /// </see>
     public class GitHubGetCollaboratorsOptions : GitHubHttpRequestOptions {
 
@@ -46,37 +46,37 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
         public GitHubGetCollaboratorsOptions() { }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repository"/> alias.
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/> alias.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
-        /// <param name="repository">The alias/slug of the repository.</param>
-        public GitHubGetCollaboratorsOptions(string owner, string repository) {
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
+        public GitHubGetCollaboratorsOptions(string owner, string repositoryAlias) {
             OwnerAlias = owner;
-            RepositoryAlias = repository;
+            RepositoryAlias = repositoryAlias;
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repository"/> alias.
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/> alias.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
-        /// <param name="repository">The alias/slug of the repository.</param>
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
         /// <param name="perPage">The maximum amount of collaborators to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
-        public GitHubGetCollaboratorsOptions(string owner, string repository, int perPage) {
+        public GitHubGetCollaboratorsOptions(string owner, string repositoryAlias, int perPage) {
             OwnerAlias = owner;
-            RepositoryAlias = repository;
+            RepositoryAlias = repositoryAlias;
             PerPage = perPage;
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repository"/> alias.
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/> alias.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
-        /// <param name="repository">The alias/slug of the repository.</param>
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
         /// <param name="perPage">The maximum amount of collaborators to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
         /// <param name="page">The page to be returned.</param>
-        public GitHubGetCollaboratorsOptions(string owner, string repository, int perPage, int page) {
+        public GitHubGetCollaboratorsOptions(string owner, string repositoryAlias, int perPage, int page) {
             OwnerAlias = owner;
-            RepositoryAlias = repository;
+            RepositoryAlias = repositoryAlias;
             PerPage = perPage;
             Page = page;
         }

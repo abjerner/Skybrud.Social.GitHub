@@ -1,11 +1,11 @@
-﻿using System;
-using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.Collaborators;
+using Skybrud.Social.GitHub.Responses;
+using Skybrud.Social.GitHub.Responses.Users;
 
 namespace Skybrud.Social.GitHub.Endpoints.Repositories {
 
-    public partial class GitHubRepositoriesRawEndpoint {
+    public partial class GitHubRepositoriesEndpoint {
 
         #region AddCollaborator(...)
 
@@ -13,13 +13,12 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// Adda a new collaborator to the repository matching the specified <paramref name="options"/>.
         /// </summary>
         /// <param name="options">The options for the request to the API.</param>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <returns>An instance of <see cref="GitHubResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://docs.github.com/en/rest/reference/collaborators#add-a-repository-collaborator</cref>
         /// </see>
-        public IHttpResponse AddCollaborator(GitHubAddCollaboratorOptions options) {
-            if (options == null) throw new ArgumentNullException(nameof(options));
-            return Client.GetResponse(options);
+        public GitHubResponse AddCollaborator(GitHubAddCollaboratorOptions options) {
+            return new GitHubResponse(Raw.AddCollaborator(options));
         }
 
         #endregion
@@ -31,14 +30,12 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// </summary>
         /// <param name="owner">The username of the parent user or organization.</param>
         /// <param name="repositoryAlias">The alias of the repository.</param>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <returns>An instance of <see cref="GitHubUserListResponse"/> representing the raw response.</returns>
         /// <see>
         ///     <cref>https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators</cref>
         /// </see>
-        public IHttpResponse GetCollaborators(string owner, string repositoryAlias) {
-            if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
-            if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
-            return Client.GetResponse(new GitHubGetCollaboratorsOptions(owner, repositoryAlias));
+        public GitHubUserListResponse GetCollaborators(string owner, string repositoryAlias) {
+            return new GitHubUserListResponse(Raw.GetCollaborators(owner, repositoryAlias));
         }
 
         /// <summary>
@@ -48,27 +45,24 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// <param name="repositoryAlias">The alias of the repository.</param>
         /// <param name="perPage">The maximum amount of collaborators to returned by each page.</param>
         /// <param name="page">The page to be returned.</param>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <returns>An instance of <see cref="GitHubUserListResponse"/> representing the raw response.</returns>
         /// <see>
         ///     <cref>https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators</cref>
         /// </see>
-        public IHttpResponse GetCollaborators(string owner, string repositoryAlias, int perPage, int page) {
-            if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
-            if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
-            return Client.GetResponse(new GitHubGetCollaboratorsOptions(owner, repositoryAlias, perPage, page));
+        public GitHubUserListResponse GetCollaborators(string owner, string repositoryAlias, int perPage, int page) {
+            return new GitHubUserListResponse(Raw.GetCollaborators(owner, repositoryAlias, perPage, page));
         }
 
         /// <summary>
         /// Returns a list of collaborators of the specified <paramref name="repository"/>.
         /// </summary>
         /// <param name="repository">The repository.</param>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <returns>An instance of <see cref="GitHubUserListResponse"/> representing the raw response.</returns>
         /// <see>
         ///     <cref>https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators</cref>
         /// </see>
-        public IHttpResponse GetCollaborators(GitHubRepositoryBase repository) {
-            if (repository == null) throw new ArgumentNullException(nameof(repository));
-            return Client.GetResponse(new GitHubGetCollaboratorsOptions(repository));
+        public GitHubUserListResponse GetCollaborators(GitHubRepositoryBase repository) {
+            return new GitHubUserListResponse(Raw.GetCollaborators(repository));
         }
 
         /// <summary>
@@ -77,26 +71,24 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// <param name="repository">The repository.</param>
         /// <param name="perPage">The maximum amount of collaborators to returned by each page.</param>
         /// <param name="page">The page to be returned.</param>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <returns>An instance of <see cref="GitHubUserListResponse"/> representing the raw response.</returns>
         /// <see>
         ///     <cref>https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators</cref>
         /// </see>
-        public IHttpResponse GetCollaborators(GitHubRepositoryBase repository, int perPage, int page) {
-            if (repository == null) throw new ArgumentNullException(nameof(repository));
-            return Client.GetResponse(new GitHubGetCollaboratorsOptions(repository, perPage, page));
+        public GitHubUserListResponse GetCollaborators(GitHubRepositoryBase repository, int perPage, int page) {
+            return new GitHubUserListResponse(Raw.GetCollaborators(repository, perPage, page));
         }
 
         /// <summary>
         /// Returns a list of teams of the repository matching the specified <paramref name="options"/>.
         /// </summary>
         /// <param name="options">The options for the request to the API.</param>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <returns>An instance of <see cref="GitHubUserListResponse"/> representing the raw response.</returns>
         /// <see>
         ///     <cref>https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators</cref>
         /// </see>
-        public IHttpResponse GetCollaborators(GitHubGetCollaboratorsOptions options) {
-            if (options == null) throw new ArgumentNullException(nameof(options));
-            return Client.GetResponse(options);
+        public GitHubUserListResponse GetCollaborators(GitHubGetCollaboratorsOptions options) {
+            return new GitHubUserListResponse(Raw.GetCollaborators(options));
         }
 
         #endregion
