@@ -24,7 +24,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Teams {
         /// <summary>
         /// Gets or sets the alias of the repository.
         /// </summary>
-        public string RepositoryAliasAlias { get; set; }
+        public string RepositoryAlias { get; set; }
 
         /// <summary>
         /// Gets or sets the maximuim amount of results per page (max is <c>100</c>).
@@ -52,7 +52,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Teams {
         /// <param name="repositoryAlias">The alias/slug of the repository.</param>
         public GitHubGetTeamsOptions(string owner, string repositoryAlias) {
             OwnerAlias = owner;
-            RepositoryAliasAlias = repositoryAlias;
+            RepositoryAlias = repositoryAlias;
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Teams {
         /// <param name="perPage">The maximum amount of teams to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
         public GitHubGetTeamsOptions(string owner, string repositoryAlias, int perPage) {
             OwnerAlias = owner;
-            RepositoryAliasAlias = repositoryAlias;
+            RepositoryAlias = repositoryAlias;
             PerPage = perPage;
         }
 
@@ -76,7 +76,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Teams {
         /// <param name="page">The page to be returned.</param>
         public GitHubGetTeamsOptions(string owner, string repositoryAlias, int perPage, int page) {
             OwnerAlias = owner;
-            RepositoryAliasAlias = repositoryAlias;
+            RepositoryAlias = repositoryAlias;
             PerPage = perPage;
             Page = page;
         }
@@ -88,7 +88,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Teams {
         public GitHubGetTeamsOptions(GitHubRepositoryBase repository) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             OwnerAlias = repository.Owner.Login;
-            RepositoryAliasAlias = repository.Name;
+            RepositoryAlias = repository.Name;
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Teams {
         public GitHubGetTeamsOptions(GitHubRepositoryBase repository, int perPage) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             OwnerAlias = repository.Owner.Login;
-            RepositoryAliasAlias = repository.Name;
+            RepositoryAlias = repository.Name;
             PerPage = perPage;
         }
 
@@ -112,7 +112,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Teams {
         public GitHubGetTeamsOptions(GitHubRepositoryBase repository, int perPage, int page) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             OwnerAlias = repository.Owner.Login;
-            RepositoryAliasAlias = repository.Name;
+            RepositoryAlias = repository.Name;
             PerPage = perPage;
             Page = page;
         }
@@ -126,8 +126,8 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Teams {
 
             // Determine the URL either from the ID or the alias
             if (string.IsNullOrWhiteSpace(OwnerAlias)) throw new ArgumentNullException(nameof(OwnerAlias));
-            if (string.IsNullOrWhiteSpace(RepositoryAliasAlias)) throw new ArgumentNullException(nameof(RepositoryAliasAlias));
-            string url = $"/repos/{OwnerAlias}/{RepositoryAliasAlias}/teams";
+            if (string.IsNullOrWhiteSpace(RepositoryAlias)) throw new ArgumentNullException(nameof(RepositoryAlias));
+            string url = $"/repos/{OwnerAlias}/{RepositoryAlias}/teams";
 
             // Initialize a new query string
             IHttpQueryString query = new HttpQueryString();

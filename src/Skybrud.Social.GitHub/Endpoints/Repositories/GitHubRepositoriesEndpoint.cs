@@ -3,11 +3,9 @@ using Skybrud.Social.GitHub.Options.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.Collaborators;
 using Skybrud.Social.GitHub.Options.Repositories.Releases;
 using Skybrud.Social.GitHub.Options.Repositories.Tags;
-using Skybrud.Social.GitHub.Options.Repositories.Teams;
 using Skybrud.Social.GitHub.Responses.Releases;
 using Skybrud.Social.GitHub.Responses.Repositories;
 using Skybrud.Social.GitHub.Responses.Tags;
-using Skybrud.Social.GitHub.Responses.Teams;
 using Skybrud.Social.GitHub.Responses.Users;
 
 namespace Skybrud.Social.GitHub.Endpoints.Repositories {

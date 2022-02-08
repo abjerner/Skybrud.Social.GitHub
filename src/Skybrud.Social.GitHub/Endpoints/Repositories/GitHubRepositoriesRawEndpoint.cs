@@ -7,7 +7,6 @@ using Skybrud.Social.GitHub.Options.Repositories.Branches;
 using Skybrud.Social.GitHub.Options.Repositories.Labels;
 using Skybrud.Social.GitHub.Options.Repositories.Releases;
 using Skybrud.Social.GitHub.Options.Repositories.Tags;
-using Skybrud.Social.GitHub.Options.Repositories.Teams;
 
 namespace Skybrud.Social.GitHub.Endpoints.Repositories {
 
