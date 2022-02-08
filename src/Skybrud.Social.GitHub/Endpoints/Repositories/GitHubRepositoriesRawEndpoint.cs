@@ -1,10 +1,7 @@
 using System;
 using Skybrud.Essentials.Http;
-using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Repositories;
-using Skybrud.Social.GitHub.Options.Repositories.Branches;
-using Skybrud.Social.GitHub.Options.Repositories.Labels;
 using Skybrud.Social.GitHub.Options.Repositories.Releases;
 using Skybrud.Social.GitHub.Options.Repositories.Tags;
 

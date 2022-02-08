@@ -207,7 +207,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
             if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
             return GetLabels(new GitHubGetLabelsOptions(owner, repository, perPage, page));
         }
-        
+
         /// <summary>
         /// Returns a list of labels of the specified <paramref name="repository"/>.
         /// </summary>
