@@ -46,7 +46,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Teams {
         public GitHubGetTeamsOptions() { }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/> alias.
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
         /// <param name="repositoryAlias">The alias/slug of the repository.</param>
@@ -56,11 +56,11 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Teams {
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/> alias.
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
         /// <param name="repositoryAlias">The alias/slug of the repository.</param>
-        /// <param name="perPage">The maximum amount of teams to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
+        /// <param name="perPage">The maximum amount of teams to returned by each page. Maximum is <c>100</c>.</param>
         public GitHubGetTeamsOptions(string owner, string repositoryAlias, int perPage) {
             OwnerAlias = owner;
             RepositoryAlias = repositoryAlias;
@@ -68,11 +68,11 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Teams {
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/> alias.
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
         /// <param name="repositoryAlias">The alias/slug of the repository.</param>
-        /// <param name="perPage">The maximum amount of teams to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
+        /// <param name="perPage">The maximum amount of teams to returned by each page. Maximum is <c>100</c>.</param>
         /// <param name="page">The page to be returned.</param>
         public GitHubGetTeamsOptions(string owner, string repositoryAlias, int perPage, int page) {
             OwnerAlias = owner;
@@ -95,7 +95,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Teams {
         /// Initializes a new instance based on the specified <paramref name="repository"/>.
         /// </summary>
         /// <param name="repository">The repository.</param>
-        /// <param name="perPage">The maximum amount of teams to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
+        /// <param name="perPage">The maximum amount of teams to returned by each page. Maximum is <c>100</c>.</param>
         public GitHubGetTeamsOptions(GitHubRepositoryBase repository, int perPage) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             OwnerAlias = repository.Owner.Login;
@@ -107,7 +107,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Teams {
         /// Initializes a new instance based on the specified <paramref name="repository"/>.
         /// </summary>
         /// <param name="repository">The repository.</param>
-        /// <param name="perPage">The maximum amount of teams to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
+        /// <param name="perPage">The maximum amount of teams to returned by each page. Maximum is <c>100</c>.</param>
         /// <param name="page">The page to be returned.</param>
         public GitHubGetTeamsOptions(GitHubRepositoryBase repository, int perPage, int page) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));

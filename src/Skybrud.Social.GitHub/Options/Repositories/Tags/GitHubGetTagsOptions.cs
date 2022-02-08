@@ -46,37 +46,37 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Tags {
         public GitHubGetTagsOptions() { }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repository"/> alias.
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
-        /// <param name="repository">The alias/slug of the repository.</param>
-        public GitHubGetTagsOptions(string owner, string repository) {
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
+        public GitHubGetTagsOptions(string owner, string repositoryAlias) {
             OwnerAlias = owner;
-            RepositoryAlias = repository;
+            RepositoryAlias = repositoryAlias;
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repository"/> alias.
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
-        /// <param name="repository">The alias/slug of the repository.</param>
-        /// <param name="perPage">The maximum amount of collaborators to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
-        public GitHubGetTagsOptions(string owner, string repository, int perPage) {
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
+        /// <param name="perPage">The maximum amount of collaborators to returned by each page. Maximum is <c>100</c>.</param>
+        public GitHubGetTagsOptions(string owner, string repositoryAlias, int perPage) {
             OwnerAlias = owner;
-            RepositoryAlias = repository;
+            RepositoryAlias = repositoryAlias;
             PerPage = perPage;
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repository"/> alias.
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
-        /// <param name="repository">The alias/slug of the repository.</param>
-        /// <param name="perPage">The maximum amount of collaborators to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
+        /// <param name="perPage">The maximum amount of collaborators to returned by each page. Maximum is <c>100</c>.</param>
         /// <param name="page">The page to be returned.</param>
-        public GitHubGetTagsOptions(string owner, string repository, int perPage, int page) {
+        public GitHubGetTagsOptions(string owner, string repositoryAlias, int perPage, int page) {
             OwnerAlias = owner;
-            RepositoryAlias = repository;
+            RepositoryAlias = repositoryAlias;
             PerPage = perPage;
             Page = page;
         }

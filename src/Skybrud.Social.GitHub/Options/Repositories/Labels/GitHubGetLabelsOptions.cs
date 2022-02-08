@@ -20,12 +20,12 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
         /// <summary>
         /// Gets or sets the alias of the owner.
         /// </summary>
-        public string Owner { get; set; }
+        public string OwnerAlias { get; set; }
 
         /// <summary>
         /// Gets or sets the alias/slug of the repository.
         /// </summary>
-        public string Repo { get; set; }
+        public string RepositoryAlias { get; set; }
 
         /// <summary>
         /// Gets or sets the maximum amount of labels to returned by each page. Maximum is <c>100</c>.
@@ -47,25 +47,25 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
         public GitHubGetLabelsOptions() { }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repo"/> slug.
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
-        /// <param name="repo">The alias/slug of the repository.</param>
-        public GitHubGetLabelsOptions(string owner, string repo) {
-            Owner = owner;
-            Repo = repo;
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
+        public GitHubGetLabelsOptions(string owner, string repositoryAlias) {
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repo"/> slug.
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
-        /// <param name="repo">The alias/slug of the repository.</param>
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
         /// <param name="perPage">The maximum amount of labels to returned by each page. Maximum is <c>100</c>.</param>
         /// <param name="page">The page to be returned.</param>
-        public GitHubGetLabelsOptions(string owner, string repo, int perPage, int page) {
-            Owner = owner;
-            Repo = repo;
+        public GitHubGetLabelsOptions(string owner, string repositoryAlias, int perPage, int page) {
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
             PerPage = perPage;
             Page = page;
         }
@@ -76,8 +76,8 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
         /// <param name="repository">The repository.</param>
         public GitHubGetLabelsOptions(GitHubRepositoryBase repository) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
-            Owner = repository.Owner.Login;
-            Repo = repository.Name;
+            OwnerAlias = repository.Owner.Login;
+            RepositoryAlias = repository.Name;
         }
 
         /// <summary>
@@ -88,8 +88,8 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
         /// <param name="page">The page to be returned.</param>
         public GitHubGetLabelsOptions(GitHubRepositoryBase repository, int perPage, int page) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
-            Owner = repository.Owner.Login;
-            Repo = repository.Name;
+            OwnerAlias = repository.Owner.Login;
+            RepositoryAlias = repository.Name;
             PerPage = perPage;
             Page = page;
         }
@@ -102,8 +102,8 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
         public override IHttpRequest GetRequest() {
 
             // Validate required parameters
-            if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
-            if (string.IsNullOrWhiteSpace(Repo)) throw new PropertyNotSetException(nameof(Repo));
+            if (string.IsNullOrWhiteSpace(OwnerAlias)) throw new PropertyNotSetException(nameof(OwnerAlias));
+            if (string.IsNullOrWhiteSpace(RepositoryAlias)) throw new PropertyNotSetException(nameof(RepositoryAlias));
 
             // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString();
@@ -112,7 +112,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
 
             // Initialize the request
             return HttpRequest
-                .Get($"/repos/{Owner}/{Repo}/labels", query)
+                .Get($"/repos/{OwnerAlias}/{RepositoryAlias}/labels", query)
                 .SetAcceptHeader(MediaTypes);
 
         }

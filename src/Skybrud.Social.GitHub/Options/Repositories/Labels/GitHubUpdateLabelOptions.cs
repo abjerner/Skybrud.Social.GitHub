@@ -20,12 +20,12 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
         /// <summary>
         /// Gets or sets the alias of the owner.
         /// </summary>
-        public string Owner { get; set; }
+        public string OwnerAlias { get; set; }
 
         /// <summary>
         /// Gets or sets the alias/slug of the repository.
         /// </summary>
-        public string Repo { get; set; }
+        public string RepositoryAlias { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the label.
@@ -57,17 +57,17 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
         public GitHubUpdateLabelOptions() { }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/>, <paramref name="repo"/> slug and label <paramref name="name"/>.
+        /// Initializes a new instance based on the specified <paramref name="owner"/>, <paramref name="repositoryAlias"/> and label <paramref name="name"/>.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
-        /// <param name="repo">The alias/slug of the repository.</param>
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
         /// <param name="name">The name of the label.</param>
         /// <param name="newName">The new name of the label.</param>
         /// <param name="color">The the hexadecimal color code for the label, without the leading <c>#</c>.</param>
         /// <param name="description">A short description of the label.</param>
-        public GitHubUpdateLabelOptions(string owner, string repo, string name, string newName, string color, string description) {
-            Owner = owner;
-            Repo = repo;
+        public GitHubUpdateLabelOptions(string owner, string repositoryAlias, string name, string newName, string color, string description) {
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
             Name = name;
             NewName = newName;
             Color = color;
@@ -77,10 +77,10 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
         /// <summary>
         /// Initializes a new instance with default options.
         /// </summary>
-        public GitHubUpdateLabelOptions(string owner, string repo, GitHubLabel label) {
+        public GitHubUpdateLabelOptions(string owner, string repositoryAlias, GitHubLabel label) {
             if (label == null) throw new ArgumentNullException(nameof(label));
-            Owner = owner;
-            Repo = repo;
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
             Name = label.Name;
             NewName = label.Name;
             Color = label.Color;
@@ -95,8 +95,8 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
         public override IHttpRequest GetRequest() {
 
             // Validate required parameters
-            if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
-            if (string.IsNullOrWhiteSpace(Repo)) throw new PropertyNotSetException(nameof(Repo));
+            if (string.IsNullOrWhiteSpace(OwnerAlias)) throw new PropertyNotSetException(nameof(OwnerAlias));
+            if (string.IsNullOrWhiteSpace(RepositoryAlias)) throw new PropertyNotSetException(nameof(RepositoryAlias));
             if (string.IsNullOrWhiteSpace(Name)) throw new PropertyNotSetException(nameof(Name));
 
             // Initialize the PATCH body
@@ -109,7 +109,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
 
             // Initialize the request
             return HttpRequest
-                .Patch($"/repos/{Owner}/{Repo}/labels/{Name}", body)
+                .Patch($"/repos/{OwnerAlias}/{RepositoryAlias}/labels/{Name}", body)
                 .SetAcceptHeader(MediaTypes);
 
         }

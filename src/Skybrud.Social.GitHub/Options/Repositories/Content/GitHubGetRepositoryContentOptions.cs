@@ -20,12 +20,12 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
         /// <summary>
         /// Gets or sets the alias of the user or organization who own the repository.
         /// </summary>
-        public string Owner { get; set; }
+        public string OwnerAlias { get; set; }
 
         /// <summary>
         /// Gets or set alias/slug of the repository.
         /// </summary>
-        public string Repository { get; set; }
+        public string RepositoryAlias { get; set; }
 
         /// <summary>
         /// Gets or sets the path to the file or directory.
@@ -52,8 +52,8 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
         /// <param name="repository">The repository.</param>
         public GitHubGetRepositoryContentOptions(GitHubRepositoryBase repository) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
-            Owner = repository.Owner.Login;
-            Repository = repository.Name;
+            OwnerAlias = repository.Owner.Login;
+            RepositoryAlias = repository.Name;
         }
 
         #endregion
@@ -63,15 +63,15 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
 
-            if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
-            if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
+            if (string.IsNullOrWhiteSpace(OwnerAlias)) throw new PropertyNotSetException(nameof(OwnerAlias));
+            if (string.IsNullOrWhiteSpace(RepositoryAlias)) throw new PropertyNotSetException(nameof(RepositoryAlias));
             if (string.IsNullOrWhiteSpace(Path)) throw new PropertyNotSetException(nameof(Path));
 
             IHttpQueryString query = new HttpQueryString();
             if (!string.IsNullOrWhiteSpace(Ref)) query.Add("ref", Ref);
 
             return HttpRequest
-                .Get($"/repos/{Owner}/{Repository}/contents/{Path}", query)
+                .Get($"/repos/{OwnerAlias}/{RepositoryAlias}/contents/{Path}", query)
                 .SetAcceptHeader(MediaTypes);
 
         }

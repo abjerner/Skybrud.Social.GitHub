@@ -22,12 +22,12 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
         /// <summary>
         /// Gets or sets the alias of the owner.
         /// </summary>
-        public string Owner { get; set; }
+        public string OwnerAlias { get; set; }
 
         /// <summary>
         /// Gets or sets the alias/slug of the repository.
         /// </summary>
-        public string Repository { get; set; }
+        public string RepositoryAlias { get; set; }
 
         /// <summary>
         /// Setting to <see cref="GitHubBoolean.True"/> returns only protected branches. When set to
@@ -56,25 +56,25 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
         public GitHubGetBranchesOptions() { }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repository"/> slug.
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/> slug.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
-        /// <param name="repository">The alias/slug of the repository.</param>
-        public GitHubGetBranchesOptions(string owner, string repository) {
-            Owner = owner;
-            Repository = repository;
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
+        public GitHubGetBranchesOptions(string owner, string repositoryAlias) {
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repository"/> slug.
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/> slug.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
-        /// <param name="repository">The alias/slug of the repository.</param>
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
         /// <param name="perPage">The maximum amount of branches to returned by each page. Maximum is <c>100</c>.</param>
         /// <param name="page">The page to be returned.</param>
-        public GitHubGetBranchesOptions(string owner, string repository, int perPage, int page) {
-            Owner = owner;
-            Repository = repository;
+        public GitHubGetBranchesOptions(string owner, string repositoryAlias, int perPage, int page) {
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
             PerPage = perPage;
             Page = page;
         }
@@ -85,8 +85,8 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
         /// <param name="repository">The repository.</param>
         public GitHubGetBranchesOptions(GitHubRepositoryBase repository) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
-            Owner = repository.Owner.Login;
-            Repository = repository.Name;
+            OwnerAlias = repository.Owner.Login;
+            RepositoryAlias = repository.Name;
         }
 
         /// <summary>
@@ -97,8 +97,8 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
         /// <param name="page">The page to be returned.</param>
         public GitHubGetBranchesOptions(GitHubRepositoryBase repository, int perPage, int page) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
-            Owner = repository.Owner.Login;
-            Repository = repository.Name;
+            OwnerAlias = repository.Owner.Login;
+            RepositoryAlias = repository.Name;
             PerPage = perPage;
             Page = page;
         }
@@ -111,8 +111,8 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
         public override IHttpRequest GetRequest() {
 
             // Validate required parameters
-            if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
-            if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
+            if (string.IsNullOrWhiteSpace(OwnerAlias)) throw new PropertyNotSetException(nameof(OwnerAlias));
+            if (string.IsNullOrWhiteSpace(RepositoryAlias)) throw new PropertyNotSetException(nameof(RepositoryAlias));
 
             // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString();
@@ -122,7 +122,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
 
             // Initialize the request
             return HttpRequest
-                .Get($"/repos/{Owner}/{Repository}/branches", query)
+                .Get($"/repos/{OwnerAlias}/{RepositoryAlias}/branches", query)
                 .SetAcceptHeader(MediaTypes);
 
         }

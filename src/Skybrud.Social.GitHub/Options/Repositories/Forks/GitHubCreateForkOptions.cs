@@ -20,12 +20,12 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Forks {
         /// <summary>
         /// Gets or sets the alias of the user or organization who owns the repository.
         /// </summary>
-        public string Owner { get; set; }
+        public string OwnerAlias { get; set; }
 
         /// <summary>
         /// Gets or set alias/slug of the repository.
         /// </summary>
-        public string Repository { get; set; }
+        public string RepositoryAlias { get; set; }
 
         /// <summary>
         /// Gets or sets the alias of the organization for which the fork will be created. If not specified, the fork
@@ -43,24 +43,24 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Forks {
         public GitHubCreateForkOptions() { }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repository"/> alias.
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
-        /// <param name="repository">The alias/slug of the repository.</param>
-        public GitHubCreateForkOptions(string owner, string repository) {
-            Owner = owner;
-            Repository = repository;
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
+        public GitHubCreateForkOptions(string owner, string repositoryAlias) {
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
         }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/>, <paramref name="repository"/> and <paramref name="organization"/>.
+        /// Initializes a new instance based on the specified <paramref name="owner"/>, <paramref name="repositoryAlias"/> and <paramref name="organization"/>.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
-        /// <param name="repository">The alias/slug of the repository.</param>
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
         /// <param name="organization">The alias of the organization for which the fork will be created.</param>
-        public GitHubCreateForkOptions(string owner, string repository, string organization) {
-            Owner = owner;
-            Repository = repository;
+        public GitHubCreateForkOptions(string owner, string repositoryAlias, string organization) {
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
             Organization = organization;
         }
 
@@ -70,8 +70,8 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Forks {
         /// <param name="repository">The repository.</param>
         public GitHubCreateForkOptions(GitHubRepositoryBase repository) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
-            Owner = repository.Owner.Login;
-            Repository = repository.Name;
+            OwnerAlias = repository.Owner.Login;
+            RepositoryAlias = repository.Name;
         }
 
         /// <summary>
@@ -81,8 +81,8 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Forks {
         /// <param name="organization">The alias of the organization for which the fork will be created.</param>
         public GitHubCreateForkOptions(GitHubRepositoryBase repository, string organization) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
-            Owner = repository.Owner.Login;
-            Repository = repository.Name;
+            OwnerAlias = repository.Owner.Login;
+            RepositoryAlias = repository.Name;
             Organization = organization;
         }
 
@@ -93,14 +93,14 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Forks {
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
 
-            if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
-            if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
+            if (string.IsNullOrWhiteSpace(OwnerAlias)) throw new PropertyNotSetException(nameof(OwnerAlias));
+            if (string.IsNullOrWhiteSpace(RepositoryAlias)) throw new PropertyNotSetException(nameof(RepositoryAlias));
 
             JObject body = new JObject();
             if (!string.IsNullOrWhiteSpace(Organization)) body.Add("organization", Organization);
 
             return HttpRequest
-                .Post($"/repos/{Owner}/{Repository}/forks", body)
+                .Post($"/repos/{OwnerAlias}/{RepositoryAlias}/forks", body)
                 .SetAcceptHeader(MediaTypes);
 
         }

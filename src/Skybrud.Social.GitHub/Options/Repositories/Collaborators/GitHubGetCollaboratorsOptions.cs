@@ -60,7 +60,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
         /// <param name="repositoryAlias">The alias/slug of the repository.</param>
-        /// <param name="perPage">The maximum amount of collaborators to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
+        /// <param name="perPage">The maximum amount of collaborators to returned by each page. Maximum is <c>100</c>.</param>
         public GitHubGetCollaboratorsOptions(string owner, string repositoryAlias, int perPage) {
             OwnerAlias = owner;
             RepositoryAlias = repositoryAlias;
@@ -72,7 +72,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
         /// <param name="repositoryAlias">The alias/slug of the repository.</param>
-        /// <param name="perPage">The maximum amount of collaborators to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
+        /// <param name="perPage">The maximum amount of collaborators to returned by each page. Maximum is <c>100</c>.</param>
         /// <param name="page">The page to be returned.</param>
         public GitHubGetCollaboratorsOptions(string owner, string repositoryAlias, int perPage, int page) {
             OwnerAlias = owner;
@@ -95,7 +95,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
         /// Initializes a new instance based on the specified <paramref name="repository"/>.
         /// </summary>
         /// <param name="repository">The repository.</param>
-        /// <param name="perPage">The maximum amount of collaborators to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
+        /// <param name="perPage">The maximum amount of collaborators to returned by each page. Maximum is <c>100</c>.</param>
         public GitHubGetCollaboratorsOptions(GitHubRepositoryBase repository, int perPage) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             OwnerAlias = repository.Owner.Login;
@@ -107,7 +107,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
         /// Initializes a new instance based on the specified <paramref name="repository"/>.
         /// </summary>
         /// <param name="repository">The repository.</param>
-        /// <param name="perPage">The maximum amount of collaborators to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
+        /// <param name="perPage">The maximum amount of collaborators to returned by each page. Maximum is <c>100</c>.</param>
         /// <param name="page">The page to be returned.</param>
         public GitHubGetCollaboratorsOptions(GitHubRepositoryBase repository, int perPage, int page) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));

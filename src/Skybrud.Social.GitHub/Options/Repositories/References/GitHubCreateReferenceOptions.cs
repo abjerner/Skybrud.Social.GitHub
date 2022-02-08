@@ -20,12 +20,12 @@ namespace Skybrud.Social.GitHub.Options.Repositories.References {
         /// <summary>
         /// Gets or sets the alias of the user or organization who own the repository.
         /// </summary>
-        public string Owner { get; set; }
+        public string OwnerAlias { get; set; }
 
         /// <summary>
         /// Gets or set alias/slug of the repository.
         /// </summary>
-        public string Repository { get; set; }
+        public string RepositoryAlias { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the fully qualified reference (ie: <c>refs/heads/master</c>). If it doesn't start
@@ -48,16 +48,16 @@ namespace Skybrud.Social.GitHub.Options.Repositories.References {
         public GitHubCreateReferenceOptions() { }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/>, <paramref name="repository"/>,
+        /// Initializes a new instance based on the specified <paramref name="owner"/>, <paramref name="repositoryAlias"/>,
         /// <paramref name="ref"/> and <paramref name="sha"/>.
         /// </summary>
         /// <param name="owner">The alias of the user or organization who own the repository.</param>
-        /// <param name="repository">The alias/slug of the repository.</param>
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
         /// <param name="ref">The name of the fully qualified reference (ie: <c>refs/heads/master</c>). If it doesn't start with 'refs' and have at least two slashes, it will be rejected.</param>
         /// <param name="sha">The SHA1 value for this reference.</param>
-        public GitHubCreateReferenceOptions(string owner, string repository, string @ref, string sha) {
-            Owner = owner;
-            Repository = repository;
+        public GitHubCreateReferenceOptions(string owner, string repositoryAlias, string @ref, string sha) {
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
             Ref = @ref;
             Sha = sha;
         }
@@ -68,8 +68,8 @@ namespace Skybrud.Social.GitHub.Options.Repositories.References {
         /// <param name="repository">The repository.</param>
         public GitHubCreateReferenceOptions(GitHubRepositoryBase repository) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
-            Owner = repository.Owner.Login;
-            Repository = repository.Name;
+            OwnerAlias = repository.Owner.Login;
+            RepositoryAlias = repository.Name;
         }
 
         /// <summary>
@@ -81,8 +81,8 @@ namespace Skybrud.Social.GitHub.Options.Repositories.References {
         /// <param name="sha">The SHA1 value for this reference.</param>
         public GitHubCreateReferenceOptions(GitHubRepositoryBase repository, string @ref, string sha) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
-            Owner = repository.Owner.Login;
-            Repository = repository.Name;
+            OwnerAlias = repository.Owner.Login;
+            RepositoryAlias = repository.Name;
             Ref = @ref;
             Sha = sha;
         }
@@ -95,8 +95,8 @@ namespace Skybrud.Social.GitHub.Options.Repositories.References {
         public override IHttpRequest GetRequest() {
 
             // Input validation
-            if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
-            if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
+            if (string.IsNullOrWhiteSpace(OwnerAlias)) throw new PropertyNotSetException(nameof(OwnerAlias));
+            if (string.IsNullOrWhiteSpace(RepositoryAlias)) throw new PropertyNotSetException(nameof(RepositoryAlias));
             if (string.IsNullOrWhiteSpace(Ref)) throw new PropertyNotSetException(nameof(Ref));
             if (string.IsNullOrWhiteSpace(Sha)) throw new PropertyNotSetException(nameof(Sha));
 
@@ -108,7 +108,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.References {
 
             // Initialize a new POST request
             return HttpRequest
-                .Post($"/repos/{Owner}/{Repository}/git/refs", body)
+                .Post($"/repos/{OwnerAlias}/{RepositoryAlias}/git/refs", body)
                 .SetAcceptHeader(MediaTypes);
 
         }

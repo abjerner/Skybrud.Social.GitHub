@@ -18,12 +18,12 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
         /// <summary>
         /// Gets or sets the alias of the user or organization who owns the repository.
         /// </summary>
-        public string Owner { get; set; }
+        public string OwnerAlias { get; set; }
 
         /// <summary>
         /// Gets or set alias/slug of the repository.
         /// </summary>
-        public string Repository { get; set; }
+        public string RepositoryAlias { get; set; }
 
         /// <summary>
         /// Gets or sets the username of the user to be added as a collaborator.
@@ -42,15 +42,15 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
 
-            if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
-            if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
+            if (string.IsNullOrWhiteSpace(OwnerAlias)) throw new PropertyNotSetException(nameof(OwnerAlias));
+            if (string.IsNullOrWhiteSpace(RepositoryAlias)) throw new PropertyNotSetException(nameof(RepositoryAlias));
             if (string.IsNullOrWhiteSpace(Username)) throw new PropertyNotSetException(nameof(Username));
 
             JObject body = new JObject();
             if (!string.IsNullOrWhiteSpace(Permission)) body.Add("permission", Permission);
 
             return HttpRequest
-                .Put($"/repos/{Owner}/{Repository}/collaborators/{Username}", body)
+                .Put($"/repos/{OwnerAlias}/{RepositoryAlias}/collaborators/{Username}", body)
                 .SetAcceptHeader(MediaTypes);
 
         }
