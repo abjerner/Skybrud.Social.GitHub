@@ -108,7 +108,7 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
         /// branch on the current repository. You cannot submit a pull request to one repository that requests a merge
         /// to a base of another repository.</param>
         /// <param name="body">The content of the pull request.</param>
-        public GitHubCreatePullRequestOptions(GitHubRepositoryItem repository, string title, string head, string @base, string body) {
+        public GitHubCreatePullRequestOptions(GitHubRepositoryBase repository, string title, string head, string @base, string body) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             Owner = repository.Owner.Login;
             Repository = repository.Name;

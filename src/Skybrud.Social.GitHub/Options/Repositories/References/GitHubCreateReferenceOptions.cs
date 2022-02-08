@@ -66,12 +66,12 @@ namespace Skybrud.Social.GitHub.Options.Repositories.References {
         /// Initializes a new instance based on the specified <paramref name="repository"/>.
         /// </summary>
         /// <param name="repository">The repository.</param>
-        public GitHubCreateReferenceOptions(GitHubRepositoryItem repository) {
+        public GitHubCreateReferenceOptions(GitHubRepositoryBase repository) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             Owner = repository.Owner.Login;
             Repository = repository.Name;
         }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="repository"/>, <paramref name="ref"/> and
         /// <paramref name="sha"/>.
@@ -79,7 +79,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.References {
         /// <param name="repository">The the repository.</param>
         /// <param name="ref">The name of the fully qualified reference (ie: <c>refs/heads/master</c>). If it doesn't start with 'refs' and have at least two slashes, it will be rejected.</param>
         /// <param name="sha">The SHA1 value for this reference.</param>
-        public GitHubCreateReferenceOptions(GitHubRepositoryItem repository, string @ref, string sha) { 
+        public GitHubCreateReferenceOptions(GitHubRepositoryBase repository, string @ref, string sha) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             Owner = repository.Owner.Login;
             Repository = repository.Name;

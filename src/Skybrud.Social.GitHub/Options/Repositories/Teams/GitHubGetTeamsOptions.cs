@@ -85,7 +85,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Teams {
         /// Initializes a new instance based on the specified <paramref name="repository"/>.
         /// </summary>
         /// <param name="repository">The repository.</param>
-        public GitHubGetTeamsOptions(GitHubRepositoryItem repository) {
+        public GitHubGetTeamsOptions(GitHubRepositoryBase repository) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             OwnerAlias = repository.Owner.Login;
             RepositoryAlias = repository.Name;
@@ -96,7 +96,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Teams {
         /// </summary>
         /// <param name="repository">The repository.</param>
         /// <param name="perPage">The maximum amount of teams to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
-        public GitHubGetTeamsOptions(GitHubRepositoryItem repository, int perPage) {
+        public GitHubGetTeamsOptions(GitHubRepositoryBase repository, int perPage) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             OwnerAlias = repository.Owner.Login;
             RepositoryAlias = repository.Name;
@@ -109,7 +109,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Teams {
         /// <param name="repository">The repository.</param>
         /// <param name="perPage">The maximum amount of teams to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
         /// <param name="page">The page to be returned.</param>
-        public GitHubGetTeamsOptions(GitHubRepositoryItem repository, int perPage, int page) {
+        public GitHubGetTeamsOptions(GitHubRepositoryBase repository, int perPage, int page) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             OwnerAlias = repository.Owner.Login;
             RepositoryAlias = repository.Name;

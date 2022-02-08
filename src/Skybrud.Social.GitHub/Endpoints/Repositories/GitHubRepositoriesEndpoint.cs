@@ -346,7 +346,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// </summary>
         /// <param name="repository">The repository.</param>
         /// <returns>An instance of <see cref="GitHubLabelListResponse"/> representing the response.</returns>
-        public GitHubLabelListResponse GetLabels(GitHubRepositoryItem repository) {
+        public GitHubLabelListResponse GetLabels(GitHubRepositoryBase repository) {
             return new GitHubLabelListResponse(Raw.GetLabels(repository));
         }
 
@@ -356,7 +356,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// <param name="repository">The repository.</param>
         /// <param name="perPage">The maximum amount of labels to returned by each page. Maximum is <c>100</c>.</param>
         /// <returns>An instance of <see cref="GitHubLabelListResponse"/> representing the response.</returns>
-        public GitHubLabelListResponse GetLabels(GitHubRepositoryItem repository, int perPage) {
+        public GitHubLabelListResponse GetLabels(GitHubRepositoryBase repository, int perPage) {
             return new GitHubLabelListResponse(Raw.GetLabels(repository, perPage));
         }
 
@@ -367,7 +367,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// <param name="perPage">The maximum amount of labels to returned by each page. Maximum is <c>100</c>.</param>
         /// <param name="page">The page to be returned.</param>
         /// <returns>An instance of <see cref="GitHubLabelListResponse"/> representing the response.</returns>
-        public GitHubLabelListResponse GetLabels(GitHubRepositoryItem repository, int perPage, int page) {
+        public GitHubLabelListResponse GetLabels(GitHubRepositoryBase repository, int perPage, int page) {
             return new GitHubLabelListResponse(Raw.GetLabels(repository, perPage, page));
         }
 

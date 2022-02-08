@@ -50,7 +50,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
         /// Initializes a new instance based on the specified <paramref name="repository"/>.
         /// </summary>
         /// <param name="repository">The repository.</param>
-        public GitHubGetRepositoryContentOptions(GitHubRepositoryItem repository) {
+        public GitHubGetRepositoryContentOptions(GitHubRepositoryBase repository) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             Owner = repository.Owner.Login;
             Repository = repository.Name;

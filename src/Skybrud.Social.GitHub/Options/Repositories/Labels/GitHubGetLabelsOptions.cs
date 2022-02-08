@@ -74,7 +74,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
         /// Initializes a new instance based on the specified <paramref name="repository"/>.
         /// </summary>
         /// <param name="repository">The repository.</param>
-        public GitHubGetLabelsOptions(GitHubRepositoryItem repository) {
+        public GitHubGetLabelsOptions(GitHubRepositoryBase repository) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             Owner = repository.Owner.Login;
             Repo = repository.Name;
@@ -86,7 +86,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Labels {
         /// <param name="repository">The repository.</param>
         /// <param name="perPage">The maximum amount of labels to returned by each page. Maximum is <c>100</c>.</param>
         /// <param name="page">The page to be returned.</param>
-        public GitHubGetLabelsOptions(GitHubRepositoryItem repository, int perPage, int page) {
+        public GitHubGetLabelsOptions(GitHubRepositoryBase repository, int perPage, int page) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             Owner = repository.Owner.Login;
             Repo = repository.Name;

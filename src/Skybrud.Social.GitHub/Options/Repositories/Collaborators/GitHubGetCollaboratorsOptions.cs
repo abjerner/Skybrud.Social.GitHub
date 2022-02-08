@@ -85,7 +85,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
         /// Initializes a new instance based on the specified <paramref name="repository"/>.
         /// </summary>
         /// <param name="repository">The repository.</param>
-        public GitHubGetCollaboratorsOptions(GitHubRepositoryItem repository) {
+        public GitHubGetCollaboratorsOptions(GitHubRepositoryBase repository) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             OwnerAlias = repository.Owner.Login;
             RepositoryAlias = repository.Name;
@@ -96,7 +96,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
         /// </summary>
         /// <param name="repository">The repository.</param>
         /// <param name="perPage">The maximum amount of collaborators to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
-        public GitHubGetCollaboratorsOptions(GitHubRepositoryItem repository, int perPage) {
+        public GitHubGetCollaboratorsOptions(GitHubRepositoryBase repository, int perPage) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             OwnerAlias = repository.Owner.Login;
             RepositoryAlias = repository.Name;
@@ -109,7 +109,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
         /// <param name="repository">The repository.</param>
         /// <param name="perPage">The maximum amount of collaborators to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
         /// <param name="page">The page to be returned.</param>
-        public GitHubGetCollaboratorsOptions(GitHubRepositoryItem repository, int perPage, int page) {
+        public GitHubGetCollaboratorsOptions(GitHubRepositoryBase repository, int perPage, int page) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             OwnerAlias = repository.Owner.Login;
             RepositoryAlias = repository.Name;

@@ -380,7 +380,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// </summary>
         /// <param name="repository">The repository.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-        public IHttpResponse GetLabels(GitHubRepositoryItem repository) {
+        public IHttpResponse GetLabels(GitHubRepositoryBase repository) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             return GetLabels(new GitHubGetLabelsOptions(repository));
         }
@@ -391,7 +391,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// <param name="repository">The repository.</param>
         /// <param name="perPage">The maximum amount of labels to returned by each page. Maximum is <c>100</c>.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-        public IHttpResponse GetLabels(GitHubRepositoryItem repository, int perPage) {
+        public IHttpResponse GetLabels(GitHubRepositoryBase repository, int perPage) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             return GetLabels(new GitHubGetLabelsOptions(repository, perPage, default));
         }
@@ -403,7 +403,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// <param name="perPage">The maximum amount of labels to returned by each page. Maximum is <c>100</c>.</param>
         /// <param name="page">The page to be returned.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-        public IHttpResponse GetLabels(GitHubRepositoryItem repository, int perPage, int page) {
+        public IHttpResponse GetLabels(GitHubRepositoryBase repository, int perPage, int page) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             return GetLabels(new GitHubGetLabelsOptions(repository, perPage, page));
         }
