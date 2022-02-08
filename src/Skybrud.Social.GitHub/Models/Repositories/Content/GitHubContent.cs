@@ -41,7 +41,7 @@ namespace Skybrud.Social.GitHub.Models.Repositories.Content {
         #endregion
 
         #region Properties
-        
+
         /// <summary>
         /// Parses the specified <paramref name="json"/> object into an instance of <see cref="GitHubRepository"/>.
         /// </summary>

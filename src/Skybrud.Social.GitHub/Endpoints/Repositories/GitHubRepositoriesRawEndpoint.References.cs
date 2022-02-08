@@ -5,7 +5,7 @@ using Skybrud.Social.GitHub.Options.Repositories.References;
 namespace Skybrud.Social.GitHub.Endpoints.Repositories {
 
     public partial class GitHubRepositoriesRawEndpoint {
-        
+
         /// <summary>
         /// Creates a new Git reference with the specified <paramref name="options"/>.
         /// </summary>

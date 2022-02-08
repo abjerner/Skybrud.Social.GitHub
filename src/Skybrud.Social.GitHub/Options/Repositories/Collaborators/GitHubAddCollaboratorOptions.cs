@@ -4,7 +4,7 @@ using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
-    
+
     /// <summary>
     /// Class with options for adding a new collaborator to a GitHub repository.
     /// </summary>
@@ -14,9 +14,9 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
     public class GitHubAddCollaboratorOptions : GitHubHttpRequestOptions {
 
         #region Properties
-        
+
         /// <summary>
-        /// Gets or sets the alias of the user or organization who own the repository.
+        /// Gets or sets the alias of the user or organization who owns the repository.
         /// </summary>
         public string Owner { get; set; }
 
@@ -39,8 +39,6 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
 
         #region Member methods
 
-        #endregion
-        
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
 
@@ -56,6 +54,8 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
                 .SetAcceptHeader(MediaTypes);
 
         }
+
+        #endregion
 
     }
 

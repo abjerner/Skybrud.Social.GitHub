@@ -6,7 +6,7 @@ using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
 
 namespace Skybrud.Social.GitHub.Options.Repositories.References {
-    
+
     /// <summary>
     /// Class with options for creating a new Git reference.
     /// </summary>
@@ -14,14 +14,14 @@ namespace Skybrud.Social.GitHub.Options.Repositories.References {
     ///     <cref>https://docs.github.com/en/rest/reference/git#create-a-reference</cref>
     /// </see>
     public class GitHubCreateReferenceOptions : GitHubHttpRequestOptions {
-        
+
         #region Properties
-        
+
         /// <summary>
         /// Gets or sets the alias of the user or organization who own the repository.
         /// </summary>
         public string Owner { get; set; }
-        
+
         /// <summary>
         /// Gets or set alias/slug of the repository.
         /// </summary>
@@ -41,7 +41,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.References {
         #endregion
 
         #region Constructors
-        
+
         /// <summary>
         /// Initializes a new instance with default options.
         /// </summary>
@@ -93,19 +93,19 @@ namespace Skybrud.Social.GitHub.Options.Repositories.References {
 
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Input validation
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
             if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
             if (string.IsNullOrWhiteSpace(Ref)) throw new PropertyNotSetException(nameof(Ref));
             if (string.IsNullOrWhiteSpace(Sha)) throw new PropertyNotSetException(nameof(Sha));
-            
+
             // Initialize the request body
             JObject body = new JObject {
                 {"ref", Ref},
                 {"sha", Sha}
             };
-            
+
             // Initialize a new POST request
             return HttpRequest
                 .Post($"/repos/{Owner}/{Repository}/git/refs", body)

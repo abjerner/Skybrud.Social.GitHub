@@ -4,7 +4,7 @@ using Skybrud.Social.GitHub.Responses;
 namespace Skybrud.Social.GitHub.Endpoints.Repositories {
 
     public partial class GitHubRepositoriesEndpoint {
-        
+
         /// <summary>
         /// Adda a new collaborator to the repository matching the specified <paramref name="options"/>.
         /// </summary>

@@ -7,7 +7,7 @@ using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
 
 namespace Skybrud.Social.GitHub.Options.PullRequests {
-    
+
     /// <summary>
     /// Class with options for creating a new pull request.
     /// </summary>
@@ -15,7 +15,7 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
     ///     <cref>https://docs.github.com/en/rest/reference/pulls#create-a-pull-request</cref>
     /// </see>
     public class GitHubCreatePullRequestOptions : GitHubHttpRequestOptions {
-        
+
         #region Properties
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
         /// Initializes a new instance with default options.
         /// </summary>
         public GitHubCreatePullRequestOptions() { }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="owner"/>, <paramref name="repository"/>,
         /// <paramref name="title"/>, <paramref name="head"/>, <paramref name="base"/> and <paramref name="body"/>.
@@ -95,7 +95,7 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
             Base = @base;
             Body = body;
         }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="repository"/>, <paramref name="title"/>,
         /// <paramref name="head"/>, <paramref name="base"/> and <paramref name="body"/>.

@@ -38,7 +38,7 @@ namespace Skybrud.Social.GitHub.Endpoints.PullRequests {
         #endregion
 
         #region Methods
-        
+
         /// <summary>
         /// Creates a new pull request with the specified <paramref name="options"/>.
         /// </summary>

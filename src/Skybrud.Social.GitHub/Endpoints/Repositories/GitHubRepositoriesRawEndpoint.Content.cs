@@ -3,9 +3,9 @@ using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Options.Repositories.Content;
 
 namespace Skybrud.Social.GitHub.Endpoints.Repositories {
-    
+
     public partial class GitHubRepositoriesRawEndpoint {
-        
+
         /// <summary>
         /// Creates a new file in a repository.
         /// </summary>
@@ -31,7 +31,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
             if (options == null) throw new ArgumentNullException(nameof(options));
             return Client.GetResponse(options);
         }
-        
+
         /// <summary>
         /// Updates/replaces an existing file in a repository.
         /// </summary>

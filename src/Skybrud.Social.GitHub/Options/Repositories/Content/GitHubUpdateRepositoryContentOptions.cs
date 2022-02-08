@@ -8,7 +8,7 @@ using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
 
 namespace Skybrud.Social.GitHub.Options.Repositories.Content {
-    
+
     /// <summary>
     /// Class with options for updating an existing file in a repository.
     /// </summary>
@@ -18,27 +18,27 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
     public class GitHubUpdateRepositoryContentOptions : GitHubHttpRequestOptions {
 
         #region Properties
-        
+
         /// <summary>
         /// Gets or sets the alias of the user or organization who own the repository.
         /// </summary>
         public string Owner { get; set; }
-        
+
         /// <summary>
         /// Gets or set alias/slug of the repository.
         /// </summary>
         public string Repository { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the path to the file or directory.
         /// </summary>
         public string Path { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the commit message.
         /// </summary>
         public string Message { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the new file content, using Base64 encoding.
         /// </summary>
@@ -48,7 +48,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
         /// Gets or sets the blob SHA of the file being replaced.
         /// </summary>
         public string Sha { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the name of the branch name. Uses the the default branch if not specified.
         /// </summary>
@@ -57,7 +57,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
         #endregion
 
         #region Constructors
-        
+
         /// <summary>
         /// Initializes a new instance with default options.
         /// </summary>

@@ -2,7 +2,7 @@
 using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Repositories.References {
-    
+
     /// <summary>
     /// Class representing a Git reference object.
     /// </summary>
@@ -38,7 +38,7 @@ namespace Skybrud.Social.GitHub.Models.Repositories.References {
         #endregion
 
         #region Static methods
-        
+
         /// <summary>
         /// Parses the specified <paramref name="json"/> object into an instance of <see cref="GitHubReferenceObject"/>.
         /// </summary>

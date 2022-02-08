@@ -4,7 +4,7 @@ using Skybrud.Social.GitHub.Responses.Repositories.Content;
 namespace Skybrud.Social.GitHub.Endpoints.Repositories {
 
     public partial class GitHubRepositoriesEndpoint {
-        
+
         /// <summary>
         /// Creates a new file in a repository.
         /// </summary>
@@ -16,7 +16,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         public GitHubContentResponse CreateContent(GitHubCreateRepositoryContentOptions options) {
             return new GitHubContentResponse(Raw.CreateContent(options));
         }
-        
+
         /// <summary>
         /// Gets the contents of a file or directory in a repository.
         /// </summary>
@@ -28,7 +28,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         public GitHubContentResponse GetContent(GitHubGetRepositoryContentOptions options) {
             return new GitHubContentResponse(Raw.GetContent(options));
         }
-        
+
         /// <summary>
         /// Updates/replaces an existing file in a repository.
         /// </summary>

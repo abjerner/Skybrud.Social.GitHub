@@ -3,7 +3,7 @@ using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Options.Repositories.Collaborators;
 
 namespace Skybrud.Social.GitHub.Endpoints.Repositories {
-    
+
     public partial class GitHubRepositoriesRawEndpoint {
 
         /// <summary>

@@ -6,7 +6,7 @@ using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
 
 namespace Skybrud.Social.GitHub.Options.Repositories.Content {
-    
+
     /// <summary>
     /// Class with options for getting the contents of a file in a GitHub repository.
     /// </summary>
@@ -16,12 +16,12 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
     public class GitHubGetRepositoryContentOptions : GitHubHttpRequestOptions {
 
         #region Properties
-        
+
         /// <summary>
         /// Gets or sets the alias of the user or organization who own the repository.
         /// </summary>
         public string Owner { get; set; }
-        
+
         /// <summary>
         /// Gets or set alias/slug of the repository.
         /// </summary>
@@ -40,7 +40,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
         #endregion
 
         #region Constructors
-        
+
         /// <summary>
         /// Initializes a new instance with default options.
         /// </summary>
