@@ -1,6 +1,8 @@
-﻿using Skybrud.Essentials.Common;
+﻿using System;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Http;
+using Skybrud.Social.GitHub.Models.Repositories;
 
 namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
 
@@ -22,7 +24,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
         /// <summary>
         /// Gets or sets the alias/slug of the repository.
         /// </summary>
-        public string Repo { get; set; }
+        public string Repository { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the label.
@@ -39,14 +41,26 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
         public GitHubGetBranchOptions() { }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/>, <paramref name="repo"/> slug and branch <paramref name="name"/>.
+        /// Initializes a new instance based on the specified <paramref name="owner"/>, <paramref name="repository"/> slug and branch <paramref name="name"/>.
         /// </summary>
         /// <param name="owner">The alias of the repository owner.</param>
-        /// <param name="repo">The alias/slug of the repository.</param>
+        /// <param name="repository">The alias/slug of the repository.</param>
         /// <param name="name">The name of the branch.</param>
-        public GitHubGetBranchOptions(string owner, string repo, string name) {
+        public GitHubGetBranchOptions(string owner, string repository, string name) {
             Owner = owner;
-            Repo = repo;
+            Repository = repository;
+            Name = name;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="repository"/> and branch <paramref name="name"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="name">The name of the branch.</param>
+        public GitHubGetBranchOptions(GitHubRepositoryBase repository, string name) {
+            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            Owner = repository.Owner.Login;
+            Repository = repository.Name;
             Name = name;
         }
 
@@ -59,12 +73,12 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Branches {
 
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
-            if (string.IsNullOrWhiteSpace(Repo)) throw new PropertyNotSetException(nameof(Repo));
+            if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
             if (string.IsNullOrWhiteSpace(Name)) throw new PropertyNotSetException(nameof(Name));
 
             // Initialize the request
             return HttpRequest
-                .Get($"/repos/{Owner}/{Repo}/branches/{Name}")
+                .Get($"/repos/{Owner}/{Repository}/branches/{Name}")
                 .SetAcceptHeader(MediaTypes);
 
         }
