@@ -1,8 +1,5 @@
-using System;
 using Skybrud.Social.GitHub.Options.Repositories;
-using Skybrud.Social.GitHub.Options.Repositories.Tags;
 using Skybrud.Social.GitHub.Responses.Repositories;
-using Skybrud.Social.GitHub.Responses.Tags;
 
 namespace Skybrud.Social.GitHub.Endpoints.Repositories {
 
@@ -161,48 +158,6 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         /// </see>
         public GitHubRepositoryResponse CreateOrganisationRepository(GitHubCreateOrganisationRepositoryOptions options) {
             return new GitHubRepositoryResponse(Raw.CreateOrganisationRepository(options));
-        }
-
-        /// <summary>
-        /// Returns a list of tags of the repository matching the specified <paramref name="ownerAlias"/> and <paramref name="repositoryAlias"/>.
-        /// </summary>
-        /// <param name="ownerAlias">The username of the parent user or organization.</param>
-        /// <param name="repositoryAlias">The alias of the repository.</param>
-        /// <returns>An instance of <see cref="GitHubTagListResponse"/> representing the response.</returns>
-        public GitHubTagListResponse GetTags(string ownerAlias, string repositoryAlias) {
-            return new GitHubTagListResponse(Raw.GetTags(ownerAlias, repositoryAlias));
-        }
-
-        /// <summary>
-        /// Returns a list of tags of the repository matching the specified <paramref name="ownerAlias"/> and <paramref name="repositoryAlias"/>.
-        /// </summary>
-        /// <param name="ownerAlias">The username of the parent user or organization.</param>
-        /// <param name="repositoryAlias">The alias of the repository.</param>
-        /// <param name="perPage">The maximum amount of collaborators to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
-        /// <returns>An instance of <see cref="GitHubTagListResponse"/> representing the response.</returns>
-        public GitHubTagListResponse GetTags(string ownerAlias, string repositoryAlias, int perPage) {
-            return new GitHubTagListResponse(Raw.GetTags(ownerAlias, repositoryAlias, perPage));
-        }
-
-        /// <summary>
-        /// Returns a list of tags of the repository matching the specified <paramref name="ownerAlias"/> and <paramref name="repositoryAlias"/>.
-        /// </summary>
-        /// <param name="ownerAlias">The username of the parent user or organization.</param>
-        /// <param name="repositoryAlias">The alias of the repository.</param>
-        /// <param name="perPage">The maximum amount of collaborators to returned by each page. Default is <c>30</c>. Maximum is <c>100</c>.</param>
-        /// <param name="page">The page to be returned.</param>
-        /// <returns>An instance of <see cref="GitHubTagListResponse"/> representing the response.</returns>
-        public GitHubTagListResponse GetTags(string ownerAlias, string repositoryAlias, int perPage, int page) {
-            return new GitHubTagListResponse(Raw.GetTags(ownerAlias, repositoryAlias, perPage, page));
-        }
-
-        /// <summary>
-        /// Returns a list of tags of the repository matching the specified <paramref name="options"/>.
-        /// </summary>
-        /// <param name="options">The options for the request to the API.</param>
-        /// <returns>An instance of <see cref="GitHubTagListResponse"/> representing the response.</returns>
-        public GitHubTagListResponse GetTags(GitHubGetTagsOptions options) {
-            return new GitHubTagListResponse(Raw.GetTags(options));
         }
 
         #endregion
