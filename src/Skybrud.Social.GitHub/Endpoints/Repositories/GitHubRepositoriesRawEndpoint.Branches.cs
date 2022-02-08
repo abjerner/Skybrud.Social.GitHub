@@ -7,6 +7,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
 
     public partial class GitHubRepositoriesRawEndpoint {
 
+        #region GetBranch(...)
+
         /// <summary>
         /// Returns the branch matching the specified <paramref name="owner"/>, <paramref name="repo"/> slug and branch <paramref name="name"/>.
         /// </summary>
@@ -50,6 +52,10 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
             if (options == null) throw new ArgumentNullException(nameof(options));
             return Client.GetResponse(options);
         }
+
+        #endregion
+
+        #region GetBranches(...)
 
         /// <summary>
         /// Returns a list of branches of the repository matching the specified <paramref name="owner"/> and <paramref name="repo"/> slug.
@@ -123,6 +129,8 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
             if (options == null) throw new ArgumentNullException(nameof(options));
             return Client.GetResponse(options);
         }
+
+        #endregion
 
     }
 
