@@ -170,25 +170,6 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         }
 
         /// <summary>
-        /// Returns a list of teams of the repository matching the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
-        /// </summary>
-        /// <param name="owner">The username of the parent user or organization.</param>
-        /// <param name="repositoryAlias">The alias of the repository.</param>
-        /// <returns>An instance of <see cref="GitHubTeamListResponse"/> representing the response.</returns>
-        public GitHubTeamListResponse GetTeams(string owner, string repositoryAlias) {
-            return new GitHubTeamListResponse(Raw.GetTeams(owner, repositoryAlias));
-        }
-
-        /// <summary>
-        /// Returns a list of teams of the repository matching the specified <paramref name="options"/>.
-        /// </summary>
-        /// <param name="options">The options for the request to the API.</param>
-        /// <returns>An instance of <see cref="GitHubTeamListResponse"/> representing the response.</returns>
-        public GitHubTeamListResponse GetTeams(GitHubGetTeamsOptions options) {
-            return new GitHubTeamListResponse(Raw.GetTeams(options));
-        }
-
-        /// <summary>
         /// Returns a list of collaborators of the repository matching the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
         /// <param name="owner">The username of the parent user or organization.</param>
