@@ -69,18 +69,18 @@ namespace Skybrud.Social.GitHub.Models.Users {
 
         #region Constructors
 
-        private GitHubUserUrls(JObject obj) {
-            Url = obj.GetString("url");
-            HtmlUrl = obj.GetString("html_url");
-            FollowersUrl = obj.GetString("followers_url");
-            FollowingUrl = obj.GetString("following_url");
-            GistsUrl = obj.GetString("gists_url");
-            StarredUrl = obj.GetString("starred_url");
-            SubscriptionsUrl = obj.GetString("subscriptions_url");
-            OrganizationsUrl = obj.GetString("organizations_url");
-            ReposUrl = obj.GetString("repos_url");
-            EventsUrl = obj.GetString("events_url");
-            ReceivedEventsUrl = obj.GetString("received_events_url");
+        private GitHubUserUrls(JObject json) {
+            Url = json.GetString("url");
+            HtmlUrl = json.GetString("html_url");
+            FollowersUrl = json.GetString("followers_url");
+            FollowingUrl = json.GetString("following_url");
+            GistsUrl = json.GetString("gists_url");
+            StarredUrl = json.GetString("starred_url");
+            SubscriptionsUrl = json.GetString("subscriptions_url");
+            OrganizationsUrl = json.GetString("organizations_url");
+            ReposUrl = json.GetString("repos_url");
+            EventsUrl = json.GetString("events_url");
+            ReceivedEventsUrl = json.GetString("received_events_url");
         }
 
         #endregion
@@ -88,12 +88,12 @@ namespace Skybrud.Social.GitHub.Models.Users {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubUserUrls"/>.
+        /// Parses the specified <paramref name="json"/> object into an instance of <see cref="GitHubUserUrls"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubUserUrls"/>.</returns>
-        public static GitHubUserUrls Parse(JObject obj) {
-            return obj == null ? null : new GitHubUserUrls(obj);
+        public static GitHubUserUrls Parse(JObject json) {
+            return json == null ? null : new GitHubUserUrls(json);
         }
 
         #endregion

@@ -9,7 +9,7 @@ namespace Skybrud.Social.GitHub.Models.Teams {
     /// <summary>
     /// Class representing a GitHub team.
     /// </summary>
-    public class GitHubTeam : GitHubTeamItem {
+    public class GitHubTeam : GitHubTeamBase {
 
         #region Properties
 
