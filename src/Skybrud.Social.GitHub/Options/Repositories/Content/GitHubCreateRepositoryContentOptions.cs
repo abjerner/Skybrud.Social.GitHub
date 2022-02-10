@@ -85,7 +85,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
             // Initialize the request body
             JObject body = new JObject {
                 {"message", Message},
-                {"content", SecurityUtils.Base64Encode(Content)}
+                {"content", Content}
             };
 
             // Append any optional parameters
