@@ -8,7 +8,7 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
     /// <summary>
     /// Class representing a GitHub organization.
     /// </summary>
-    public class GitHubOrganization : GitHubOrganizationItem {
+    public class GitHubOrganization : GitHubOrganizationBase {
 
         #region Properties
 
