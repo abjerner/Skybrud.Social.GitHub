@@ -1,9 +1,11 @@
+using System;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Strings;
 using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Http;
+using Skybrud.Social.GitHub.Models.Repositories;
 
 namespace Skybrud.Social.GitHub.Options.Issues {
 
@@ -17,12 +19,12 @@ namespace Skybrud.Social.GitHub.Options.Issues {
         /// <summary>
         /// Mandatory: Gets or sets the username (login) of the owner of the repository.
         /// </summary>
-        public string Owner { get; set; }
+        public string OwnerAlias { get; set; }
 
         /// <summary>
         /// Mandatory: Gets or sets the slug of the repository.
         /// </summary>
-        public string Repository { get; set; }
+        public string RepositoryAlias { get; set; }
 
         /// <summary>
         /// Gets or sets the milestone. If an integer is passed, it should refer to a milestone by its number field. If
@@ -91,13 +93,23 @@ namespace Skybrud.Social.GitHub.Options.Issues {
         public GitHubGetRepositoryIssuesOptions() { }
 
         /// <summary>
-        /// Initializes a new instance with the specified <paramref name="owner"/> and <paramref name="repository"/>.
+        /// Initializes a new instance with the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
         /// <param name="owner">The username (login) of the owner of the repository.</param>
-        /// <param name="repository">The slug of the repository.</param>
-        public GitHubGetRepositoryIssuesOptions(string owner, string repository) {
-            Owner = owner;
-            Repository = repository;
+        /// <param name="repositoryAlias">The slug of the repository.</param>
+        public GitHubGetRepositoryIssuesOptions(string owner, string repositoryAlias) {
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
+        }
+
+        /// <summary>
+        /// Initializes a new instance with the specified <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        public GitHubGetRepositoryIssuesOptions(GitHubRepositoryBase repository) {
+            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            OwnerAlias = repository.Owner.Login;
+            RepositoryAlias = repository.Name;
         }
 
         #endregion
@@ -106,9 +118,10 @@ namespace Skybrud.Social.GitHub.Options.Issues {
 
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-
-            if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
-            if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
+            
+            // Validate required parameters
+            if (string.IsNullOrWhiteSpace(OwnerAlias)) throw new PropertyNotSetException(nameof(OwnerAlias));
+            if (string.IsNullOrWhiteSpace(RepositoryAlias)) throw new PropertyNotSetException(nameof(RepositoryAlias));
 
             // Initialzie the query string
             IHttpQueryString query = new HttpQueryString {
@@ -127,10 +140,9 @@ namespace Skybrud.Social.GitHub.Options.Issues {
             if (Page > 0) query.Add("page", Page);
             if (PerPage > 0) query.Add("per_page", PerPage);
 
-
-            // Initialize the request
+            // Initialize a new GET request
             return HttpRequest
-                .Get($"/repos/{Owner}/{Repository}/issues", query)
+                .Get($"/repos/{OwnerAlias}/{RepositoryAlias}/issues", query)
                 .SetAcceptHeader(MediaTypes);
 
         }
