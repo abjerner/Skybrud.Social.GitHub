@@ -8,7 +8,7 @@ namespace Skybrud.Social.GitHub.Models.Users {
     /// <summary>
     /// Class representing a GitHub user.
     /// </summary>
-    public class GitHubUser : GitHubUserItem {
+    public class GitHubUser : GitHubUserBase {
 
         #region Properties
 
