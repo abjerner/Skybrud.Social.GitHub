@@ -14,6 +14,21 @@ namespace Skybrud.Social.GitHub.Models.Repositories.Content {
         #region Properties
 
         /// <summary>
+        /// Gets the name of the file.
+        /// </summary>
+        public string Name { get; }
+
+        /// <summary>
+        /// Gets the path of the file.
+        /// </summary>
+        public string Path { get; }
+
+        /// <summary>
+        /// Gets the SHA of the file.
+        /// </summary>
+        public string Sha { get; }
+
+        /// <summary>
         /// Gets the type of the of the content - eg. <c>file</c>.
         /// </summary>
         public string Type { get; }
@@ -30,9 +45,12 @@ namespace Skybrud.Social.GitHub.Models.Repositories.Content {
 
         #endregion
 
-        #region Properties
+        #region Constructors
 
         private GitHubContent(JObject json) : base(json) {
+            Name = json.GetString("name");
+            Path = json.GetString("path");
+            Sha = json.GetString("sha");
             Type = json.GetString("type");
             Encoding = json.GetString("encoding");
             Content = json.GetString("content");
@@ -40,7 +58,7 @@ namespace Skybrud.Social.GitHub.Models.Repositories.Content {
 
         #endregion
 
-        #region Properties
+        #region Static methods
 
         /// <summary>
         /// Parses the specified <paramref name="json"/> object into an instance of <see cref="GitHubRepository"/>.
