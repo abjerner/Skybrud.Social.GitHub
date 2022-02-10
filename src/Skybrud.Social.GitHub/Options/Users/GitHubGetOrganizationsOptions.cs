@@ -1,7 +1,9 @@
-﻿using Skybrud.Essentials.Common;
+﻿using System;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Http;
+using Skybrud.Social.GitHub.Models.Users;
 
 namespace Skybrud.Social.GitHub.Options.Users {
 
@@ -80,6 +82,28 @@ namespace Skybrud.Social.GitHub.Options.Users {
         /// <param name="page">The page to be returned.</param>
         public GitHubGetOrganizationsOptions(string username, int perPage, int page) {
             Username = username;
+            PerPage = perPage;
+            Page = page;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="user"/>.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        public GitHubGetOrganizationsOptions(GitHubUserBase user) {
+            if (user == null) throw new ArgumentNullException(nameof(user));
+            UserId = user.Id;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="user"/>.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="perPage">The maximum amount of organizations to returned by each page. Maximum is <c>100</c>.</param>
+        /// <param name="page">The page to be returned.</param>
+        public GitHubGetOrganizationsOptions(GitHubUserBase user, int perPage, int page) {
+            if (user == null) throw new ArgumentNullException(nameof(user));
+            UserId = user.Id;
             PerPage = perPage;
             Page = page;
         }

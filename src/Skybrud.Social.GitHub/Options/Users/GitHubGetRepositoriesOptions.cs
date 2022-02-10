@@ -1,8 +1,10 @@
-﻿using Skybrud.Essentials.Common;
+﻿using System;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Extensions;
 using Skybrud.Social.GitHub.Http;
+using Skybrud.Social.GitHub.Models.Users;
 using Skybrud.Social.GitHub.Options.Repositories;
 
 namespace Skybrud.Social.GitHub.Options.Users {
@@ -70,7 +72,7 @@ namespace Skybrud.Social.GitHub.Options.Users {
         /// Initializes a new instance based on the specified <paramref name="userId"/>.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
-        /// <param name="perPage">The maximum amount of branches to returned by each page. Maximum is <c>100</c>.</param>
+        /// <param name="perPage">The maximum amount of repositories to returned by each page. Maximum is <c>100</c>.</param>
         /// <param name="page">The page to be returned.</param>
         public GitHubGetRepositoriesOptions(int userId, int perPage, int page) {
             UserId = userId;
@@ -90,10 +92,32 @@ namespace Skybrud.Social.GitHub.Options.Users {
         /// Initializes a new instance based on the specified <paramref name="username"/>.
         /// </summary>
         /// <param name="username">The username of the user.</param>
-        /// <param name="perPage">The maximum amount of branches to returned by each page. Maximum is <c>100</c>.</param>
+        /// <param name="perPage">The maximum amount of repositories to returned by each page. Maximum is <c>100</c>.</param>
         /// <param name="page">The page to be returned.</param>
         public GitHubGetRepositoriesOptions(string username, int perPage, int page) {
             Username = username;
+            PerPage = perPage;
+            Page = page;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="user"/>.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        public GitHubGetRepositoriesOptions(GitHubUserBase user) {
+            if (user == null) throw new ArgumentNullException(nameof(user));
+            UserId = user.Id;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="user"/>.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="perPage">The maximum amount of repositories to returned by each page. Maximum is <c>100</c>.</param>
+        /// <param name="page">The page to be returned.</param>
+        public GitHubGetRepositoriesOptions(GitHubUserBase user, int perPage, int page) {
+            if (user == null) throw new ArgumentNullException(nameof(user));
+            UserId = user.Id;
             PerPage = perPage;
             Page = page;
         }
