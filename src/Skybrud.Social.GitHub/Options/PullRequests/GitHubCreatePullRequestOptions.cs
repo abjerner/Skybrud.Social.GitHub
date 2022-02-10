@@ -21,12 +21,12 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
         /// <summary>
         /// Gets or sets the alias of the user or organization who own the repository.
         /// </summary>
-        public string Owner { get; set; }
+        public string OwnerAlias { get; set; }
 
         /// <summary>
         /// Gets or set alias/slug of the repository.
         /// </summary>
-        public string Repository { get; set; }
+        public string RepositoryAlias { get; set; }
 
         /// <summary>
         /// Gets or sets the title of the new pull request.
@@ -75,11 +75,11 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
         public GitHubCreatePullRequestOptions() { }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/>, <paramref name="repository"/>,
+        /// Initializes a new instance based on the specified <paramref name="owner"/>, <paramref name="repositoryAlias"/>,
         /// <paramref name="title"/>, <paramref name="head"/>, <paramref name="base"/> and <paramref name="body"/>.
         /// </summary>
         /// <param name="owner">The alias of the user or organization who own the repository.</param>
-        /// <param name="repository">The alias/slug of the repository.</param>
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
         /// <param name="title">The title of the repository.</param>
         /// <param name="head">The name of the branch where your changes are implemented. For cross-repository pull
         /// requests in the same network, namespace <c>head</c> with a user like this: <c>username:branch</c>.</param>
@@ -87,9 +87,9 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
         /// branch on the current repository. You cannot submit a pull request to one repository that requests a merge
         /// to a base of another repository.</param>
         /// <param name="body">The content of the pull request.</param>
-        public GitHubCreatePullRequestOptions(string owner, string repository, string title, string head, string @base, string body) {
-            Owner = owner;
-            Repository = repository;
+        public GitHubCreatePullRequestOptions(string owner, string repositoryAlias, string title, string head, string @base, string body) {
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
             Title = title;
             Head = head;
             Base = @base;
@@ -110,8 +110,8 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
         /// <param name="body">The content of the pull request.</param>
         public GitHubCreatePullRequestOptions(GitHubRepositoryBase repository, string title, string head, string @base, string body) {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
-            Owner = repository.Owner.Login;
-            Repository = repository.Name;
+            OwnerAlias = repository.Owner.Login;
+            RepositoryAlias = repository.Name;
             Title = title;
             Head = head;
             Base = @base;
@@ -126,8 +126,8 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
         public override IHttpRequest GetRequest() {
 
             // Input validation
-            if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
-            if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
+            if (string.IsNullOrWhiteSpace(OwnerAlias)) throw new PropertyNotSetException(nameof(OwnerAlias));
+            if (string.IsNullOrWhiteSpace(RepositoryAlias)) throw new PropertyNotSetException(nameof(RepositoryAlias));
             if (string.IsNullOrWhiteSpace(Title)) throw new PropertyNotSetException(nameof(Title));
             if (string.IsNullOrWhiteSpace(Head)) throw new PropertyNotSetException(nameof(Head));
             if (string.IsNullOrWhiteSpace(Base)) throw new PropertyNotSetException(nameof(Base));
@@ -147,7 +147,7 @@ namespace Skybrud.Social.GitHub.Options.PullRequests {
 
             // Initialize a new PUT request
             return HttpRequest
-                .Post($"/repos/{Owner}/{Repository}/pulls", body)
+                .Post($"/repos/{OwnerAlias}/{RepositoryAlias}/pulls", body)
                 .SetAcceptHeader(MediaTypes);
 
         }

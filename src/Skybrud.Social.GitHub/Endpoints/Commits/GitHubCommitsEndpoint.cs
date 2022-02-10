@@ -1,8 +1,7 @@
-using Skybrud.Social.GitHub.Endpoints.Raw;
 using Skybrud.Social.GitHub.Options.Commits;
 using Skybrud.Social.GitHub.Responses.Commits;
 
-namespace Skybrud.Social.GitHub.Endpoints {
+namespace Skybrud.Social.GitHub.Endpoints.Commits {
 
     /// <summary>
     /// Class representing the <strong>Commits</strong> endpoint.

@@ -1,8 +1,10 @@
+using System;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Http;
+using Skybrud.Social.GitHub.Models.Repositories;
 
 namespace Skybrud.Social.GitHub.Options.Commits {
 
@@ -19,12 +21,12 @@ namespace Skybrud.Social.GitHub.Options.Commits {
         /// <summary>
         /// Mandatory: Gets or sets the username (login) of the owner of the repository.
         /// </summary>
-        public string Owner { get; set; }
+        public string OwnerAlias { get; set; }
 
         /// <summary>
         /// Mandatory: Gets or sets the slug of the repository.
         /// </summary>
-        public string Repository { get; set; }
+        public string RepositoryAlias { get; set; }
 
         /// <summary>
         /// Optional: Gets or sets the SHA or branch to start listing commits from.
@@ -73,13 +75,23 @@ namespace Skybrud.Social.GitHub.Options.Commits {
         public GitHubGetCommitsOptions() { }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repository"/>.
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
         /// </summary>
         /// <param name="owner">The alias (login) of the owner.</param>
-        /// <param name="repository">The slug of the repository.</param>
-        public GitHubGetCommitsOptions(string owner, string repository) {
-            Owner = owner;
-            Repository = repository;
+        /// <param name="repositoryAlias">The slug of the repository.</param>
+        public GitHubGetCommitsOptions(string owner, string repositoryAlias) {
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        public GitHubGetCommitsOptions(GitHubRepositoryBase repository) {
+            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            OwnerAlias = repository.Owner.Login;
+            RepositoryAlias = repository.Name;
         }
 
         #endregion
@@ -90,8 +102,8 @@ namespace Skybrud.Social.GitHub.Options.Commits {
         public override IHttpRequest GetRequest() {
 
             // Validate required parameters
-            if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
-            if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
+            if (string.IsNullOrWhiteSpace(OwnerAlias)) throw new PropertyNotSetException(nameof(OwnerAlias));
+            if (string.IsNullOrWhiteSpace(RepositoryAlias)) throw new PropertyNotSetException(nameof(RepositoryAlias));
 
             // Initialize and construct the query string
             IHttpQueryString query = new HttpQueryString();
@@ -104,7 +116,7 @@ namespace Skybrud.Social.GitHub.Options.Commits {
             if (PerPage > 0) query.Add("per_page", PerPage);
 
             // Declare the URL to request
-            string url = $"/repos/{Owner}/{Repository}/commits";
+            string url = $"/repos/{OwnerAlias}/{RepositoryAlias}/commits";
 
             // Initialize the request
             return HttpRequest

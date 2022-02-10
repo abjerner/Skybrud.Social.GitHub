@@ -1,6 +1,7 @@
 ﻿using System;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
+using Skybrud.Social.GitHub.Models.Users;
 using Skybrud.Social.GitHub.Options.Repositories.Collaborators;
 
 namespace Skybrud.Social.GitHub.Endpoints.Repositories {
@@ -8,6 +9,54 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
     public partial class GitHubRepositoriesRawEndpoint {
 
         #region AddCollaborator(...)
+
+        /// <summary>
+        /// Adds the user with <paramref name="username"/> as a collaborator to the repository matching the specified
+        /// <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
+        /// </summary>
+        /// <param name="owner">The alias of the repository owner.</param>
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
+        /// <param name="username">The the username of the user to be added as a collaborator.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/reference/collaborators#add-a-repository-collaborator</cref>
+        /// </see>
+        public IHttpResponse AddCollaborator(string owner, string repositoryAlias, string username) {
+            if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
+            if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
+            if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
+            return AddCollaborator(new GitHubAddCollaboratorOptions(owner, repositoryAlias, username));
+        }
+
+        /// <summary>
+        /// Adds the user with <paramref name="username"/> as a collaborator to <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="username">The username of the user to be added as a collaborator.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/reference/collaborators#add-a-repository-collaborator</cref>
+        /// </see>
+        public IHttpResponse AddCollaborator(GitHubRepositoryBase repository, string username) {
+            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
+            return AddCollaborator(new GitHubAddCollaboratorOptions(repository, username));
+        }
+
+        /// <summary>
+        /// Adda <paramref name="user"/> as a collaborator to the specified <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="user">The user to be added as a collaborator.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/reference/collaborators#add-a-repository-collaborator</cref>
+        /// </see>
+        public IHttpResponse AddCollaborator(GitHubRepositoryBase repository, GitHubUserBase user) {
+            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            if (user == null) throw new ArgumentNullException(nameof(user));
+            return AddCollaborator(new GitHubAddCollaboratorOptions(repository, user));
+        }
 
         /// <summary>
         /// Adda a new collaborator to the repository matching the specified <paramref name="options"/>.

@@ -1,4 +1,5 @@
 using Skybrud.Social.GitHub.Models.Repositories;
+using Skybrud.Social.GitHub.Models.Users;
 using Skybrud.Social.GitHub.Options.Repositories.Collaborators;
 using Skybrud.Social.GitHub.Responses;
 using Skybrud.Social.GitHub.Responses.Users;
@@ -8,6 +9,47 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
     public partial class GitHubRepositoriesEndpoint {
 
         #region AddCollaborator(...)
+
+        /// <summary>
+        /// Adds the user with <paramref name="username"/> as a collaborator to the repository matching the specified
+        /// <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
+        /// </summary>
+        /// <param name="owner">The alias of the repository owner.</param>
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
+        /// <param name="username">The the username of the user to be added as a collaborator.</param>
+        /// <returns>An instance of <see cref="GitHubResponse"/> representing the response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/reference/collaborators#add-a-repository-collaborator</cref>
+        /// </see>
+        public GitHubResponse AddCollaborator(string owner, string repositoryAlias, string username) {
+            return new GitHubResponse(Raw.AddCollaborator(owner, repositoryAlias, username));
+        }
+
+        /// <summary>
+        /// Adds the user with <paramref name="username"/> as a collaborator to <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="username">The username of the user to be added as a collaborator.</param>
+        /// <returns>An instance of <see cref="GitHubResponse"/> representing the response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/reference/collaborators#add-a-repository-collaborator</cref>
+        /// </see>
+        public GitHubResponse AddCollaborator(GitHubRepositoryBase repository, string username) {
+            return new GitHubResponse(Raw.AddCollaborator(repository, username));
+        }
+
+        /// <summary>
+        /// Adda <paramref name="user"/> as a collaborator to the specified <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="user">The user to be added as a collaborator.</param>
+        /// <returns>An instance of <see cref="GitHubResponse"/> representing the response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/reference/collaborators#add-a-repository-collaborator</cref>
+        /// </see>
+        public GitHubResponse AddCollaborator(GitHubRepositoryBase repository, GitHubUserBase user) {
+            return new GitHubResponse(Raw.AddCollaborator(repository, user));
+        }
 
         /// <summary>
         /// Adda a new collaborator to the repository matching the specified <paramref name="options"/>.

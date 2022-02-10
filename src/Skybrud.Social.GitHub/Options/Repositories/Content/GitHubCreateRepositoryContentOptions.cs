@@ -2,7 +2,6 @@
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Security;
 using Skybrud.Essentials.Strings.Extensions;
 using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
@@ -59,6 +58,50 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
         public GitHubCreateRepositoryContentOptions() { }
 
         /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
+        /// </summary>
+        /// <param name="owner">The alias of the repository owner.</param>
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
+        public GitHubCreateRepositoryContentOptions(string owner, string repositoryAlias) {
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
+        /// </summary>
+        /// <param name="owner">The alias of the repository owner.</param>
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
+        /// <param name="path">The path to the file or directory.</param>
+        /// <param name="message">The commit message.</param>
+        /// <param name="content">The new file content, using Base64 encoding.</param>
+        public GitHubCreateRepositoryContentOptions(string owner, string repositoryAlias, string path, string message, string content) {
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
+            Path = path;
+            Message = message;
+            Content = content;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
+        /// </summary>
+        /// <param name="owner">The alias of the repository owner.</param>
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
+        /// <param name="path">The path to the file or directory.</param>
+        /// <param name="message">The commit message.</param>
+        /// <param name="content">The new file content, using Base64 encoding.</param>
+        /// <param name="branch">The name of the branch name.</param>
+        public GitHubCreateRepositoryContentOptions(string owner, string repositoryAlias, string path, string message, string content, string branch) {
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
+            Path = path;
+            Message = message;
+            Content = content;
+            Branch = branch;
+        }
+
+        /// <summary>
         /// Initializes a new instance based on the specified <paramref name="repository"/>.
         /// </summary>
         /// <param name="repository">The repository.</param>
@@ -66,6 +109,40 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             OwnerAlias = repository.Owner.Login;
             RepositoryAlias = repository.Name;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="path">The path to the file or directory.</param>
+        /// <param name="message">The commit message.</param>
+        /// <param name="content">The new file content, using Base64 encoding.</param>
+        public GitHubCreateRepositoryContentOptions(GitHubRepositoryBase repository, string path, string message, string content) {
+            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            OwnerAlias = repository.Owner.Login;
+            RepositoryAlias = repository.Name;
+            Path = path;
+            Message = message;
+            Content = content;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="path">The path to the file or directory.</param>
+        /// <param name="message">The commit message.</param>
+        /// <param name="content">The new file content, using Base64 encoding.</param>
+        /// <param name="branch">The name of the branch name.</param>
+        public GitHubCreateRepositoryContentOptions(GitHubRepositoryBase repository, string path, string message, string content, string branch) {
+            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            OwnerAlias = repository.Owner.Login;
+            RepositoryAlias = repository.Name;
+            Path = path;
+            Message = message;
+            Content = content;
+            Branch = branch;
         }
 
         #endregion

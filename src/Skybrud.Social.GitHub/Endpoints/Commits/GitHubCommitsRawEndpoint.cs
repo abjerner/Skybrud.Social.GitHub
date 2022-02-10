@@ -1,9 +1,10 @@
 ﻿using System;
 using Skybrud.Essentials.Http;
+using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Commits;
 
-namespace Skybrud.Social.GitHub.Endpoints.Raw {
+namespace Skybrud.Social.GitHub.Endpoints.Commits {
 
     /// <summary>
     /// Class representing the raw <strong>Commits</strong> endpoint.
@@ -45,6 +46,18 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
         }
 
         /// <summary>
+        /// Gets information about the commit matching the specified <paramref name="repository"/> and <paramref name="sha"/> hash.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="sha">The SHA hash of the commit.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetCommit(GitHubRepositoryBase repository, string sha) {
+            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            if (string.IsNullOrWhiteSpace(sha)) throw new ArgumentNullException(nameof(sha));
+            return GetCommit(new GitHubGetCommitOptions(repository, sha));
+        }
+
+        /// <summary>
         /// Gets information about the commit matching the specified <paramref name="options"/>.
         /// </summary>
         /// <param name="options">The options for the request to the API.</param>
@@ -65,6 +78,16 @@ namespace Skybrud.Social.GitHub.Endpoints.Raw {
             if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
             if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
             return GetCommits(new GitHubGetCommitsOptions(owner, repository));
+        }
+
+        /// <summary>
+        /// Gets a list of commits of the specified <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        public IHttpResponse GetCommits(GitHubRepositoryBase repository) {
+            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            return GetCommits(new GitHubGetCommitsOptions(repository));
         }
 
         /// <summary>

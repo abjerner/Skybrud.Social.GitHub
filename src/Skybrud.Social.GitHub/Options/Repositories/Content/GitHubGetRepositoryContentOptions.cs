@@ -23,7 +23,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
         public string OwnerAlias { get; set; }
 
         /// <summary>
-        /// Gets or set alias/slug of the repository.
+        /// Gets or set the alias/slug of the repository.
         /// </summary>
         public string RepositoryAlias { get; set; }
 
@@ -47,6 +47,30 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
         public GitHubGetRepositoryContentOptions() { }
 
         /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/> alias.
+        /// </summary>
+        /// <param name="owner">The alias of the repository owner.</param>
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
+        public GitHubGetRepositoryContentOptions(string owner, string repositoryAlias) {
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/> alias.
+        /// </summary>
+        /// <param name="owner">The alias of the repository owner.</param>
+        /// <param name="repositoryAlias">The alias/slug of the repository.</param>
+        /// <param name="path">The path to the file or directory.</param>
+        /// <param name="ref">The name of the commit/branch/tag. Uses the the default branch if not specified.</param>
+        public GitHubGetRepositoryContentOptions(string owner, string repositoryAlias, string path, string @ref) {
+            OwnerAlias = owner;
+            RepositoryAlias = repositoryAlias;
+            Path = path;
+            Ref = @ref;
+        }
+
+        /// <summary>
         /// Initializes a new instance based on the specified <paramref name="repository"/>.
         /// </summary>
         /// <param name="repository">The repository.</param>
@@ -54,6 +78,20 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Content {
             if (repository == null) throw new ArgumentNullException(nameof(repository));
             OwnerAlias = repository.Owner.Login;
             RepositoryAlias = repository.Name;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="repository"/>.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="path">The path to the file or directory.</param>
+        /// <param name="ref">The name of the commit/branch/tag. Uses the the default branch if not specified.</param>
+        public GitHubGetRepositoryContentOptions(GitHubRepositoryBase repository, string path, string @ref) {
+            if (repository == null) throw new ArgumentNullException(nameof(repository));
+            OwnerAlias = repository.Owner.Login;
+            RepositoryAlias = repository.Name;
+            Path = path;
+            Ref = @ref;
         }
 
         #endregion
