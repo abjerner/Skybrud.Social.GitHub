@@ -66,7 +66,7 @@ namespace Skybrud.Social.GitHub.Options.Issues {
             OwnerAlias = owner;
             RepositoryAlias = repositoryAlias;
         }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="owner"/>, <paramref name="repositoryAlias"/>, <paramref name="title"/> and <paramref name="body"/>.
         /// </summary>
@@ -90,7 +90,7 @@ namespace Skybrud.Social.GitHub.Options.Issues {
             OwnerAlias = repository.Owner.Login;
             RepositoryAlias = repository.Name;
         }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="repository"/>, <paramref name="title"/> and <paramref name="body"/>.
         /// </summary>
@@ -111,7 +111,7 @@ namespace Skybrud.Social.GitHub.Options.Issues {
 
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(Title)) throw new PropertyNotSetException(nameof(Title));
 

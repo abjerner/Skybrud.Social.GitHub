@@ -29,7 +29,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
             if (string.IsNullOrWhiteSpace(content)) throw new ArgumentNullException(nameof(content));
             return CreateContent(new GitHubCreateRepositoryContentOptions(owner, repositoryAlias, path, message, content));
         }
-        
+
         /// <summary>
         /// Creates a new file in a repository.
         /// </summary>
@@ -70,7 +70,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
             if (string.IsNullOrWhiteSpace(content)) throw new ArgumentNullException(nameof(content));
             return CreateContent(new GitHubCreateRepositoryContentOptions(repository, path, message, content));
         }
-        
+
         /// <summary>
         /// Creates a new file in a repository.
         /// </summary>

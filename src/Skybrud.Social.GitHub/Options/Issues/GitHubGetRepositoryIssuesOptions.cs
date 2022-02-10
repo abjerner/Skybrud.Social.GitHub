@@ -118,7 +118,7 @@ namespace Skybrud.Social.GitHub.Options.Issues {
 
         /// <inheritdoc />
         public override IHttpRequest GetRequest() {
-            
+
             // Validate required parameters
             if (string.IsNullOrWhiteSpace(OwnerAlias)) throw new PropertyNotSetException(nameof(OwnerAlias));
             if (string.IsNullOrWhiteSpace(RepositoryAlias)) throw new PropertyNotSetException(nameof(RepositoryAlias));

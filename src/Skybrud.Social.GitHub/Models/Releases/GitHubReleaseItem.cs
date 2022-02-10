@@ -6,7 +6,7 @@ namespace Skybrud.Social.GitHub.Models.Releases {
     /// Class describing a GitHub release.
     /// </summary>
     public class GitHubReleaseItem : GitHubReleaseBase {
-        
+
         #region Constructors
 
         /// <summary>

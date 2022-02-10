@@ -4,7 +4,7 @@ using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Search {
-    
+
     /// <summary>
     /// Class with options for doing a code based search of GitHub.
     /// </summary>
@@ -38,7 +38,7 @@ namespace Skybrud.Social.GitHub.Options.Search {
         }
 
         #endregion
-        
+
         #region Member methods
 
         /// <inheritdoc />
@@ -48,7 +48,7 @@ namespace Skybrud.Social.GitHub.Options.Search {
             if (string.IsNullOrWhiteSpace(Query)) throw new PropertyNotSetException(nameof(Query));
 
             // Initialize the query string
-            IHttpQueryString query = new HttpQueryString {{"q", Query}};
+            IHttpQueryString query = new HttpQueryString { { "q", Query } };
 
             // Initialize a new PUT request
             return HttpRequest

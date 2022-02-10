@@ -58,7 +58,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
             RepositoryAlias = repositoryAlias;
             Username = username;
         }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="repository"/> and <paramref name="username"/>.
         /// </summary>
@@ -70,7 +70,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories.Collaborators {
             RepositoryAlias = repository.Name;
             Username = username;
         }
-        
+
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="repository"/> and <paramref name="user"/>.
         /// </summary>

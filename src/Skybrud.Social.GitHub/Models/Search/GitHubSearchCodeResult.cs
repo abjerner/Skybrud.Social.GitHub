@@ -2,14 +2,14 @@
 using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Search {
-    
+
     /// <summary>
     /// Class representing the result of a code search.
     /// </summary>
     public class GitHubSearchCodeResult : GitHubObject {
 
         #region Properties
-        
+
         #endregion
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace Skybrud.Social.GitHub.Models.Search {
         /// <summary>
         /// Gets the items of the returned page.
         /// </summary>
-        public GitHubSearchCodeItem[] Items { get; } 
+        public GitHubSearchCodeItem[] Items { get; }
 
         #region Constructors
 

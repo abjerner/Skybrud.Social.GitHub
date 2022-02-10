@@ -23,7 +23,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         public GitHubContentResponse CreateContent(string owner, string repositoryAlias, string path, string message, string content) {
             return new GitHubContentResponse(Raw.CreateContent(owner, repositoryAlias, path, message, content));
         }
-        
+
         /// <summary>
         /// Creates a new file in a repository.
         /// </summary>
@@ -55,7 +55,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories {
         public GitHubContentResponse CreateContent(GitHubRepositoryBase repository, string path, string message, string content) {
             return new GitHubContentResponse(Raw.CreateContent(repository, path, message, content));
         }
-        
+
         /// <summary>
         /// Creates a new file in a repository.
         /// </summary>

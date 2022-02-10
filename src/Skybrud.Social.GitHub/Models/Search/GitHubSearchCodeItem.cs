@@ -3,7 +3,7 @@ using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Social.GitHub.Models.Repositories;
 
 namespace Skybrud.Social.GitHub.Models.Search {
-    
+
     /// <summary>
     /// Class representing an item of a code search.
     /// </summary>
@@ -15,7 +15,7 @@ namespace Skybrud.Social.GitHub.Models.Search {
         /// Gets the name of the file.
         /// </summary>
         public string Name { get; }
-        
+
         /// <summary>
         /// Gets the path of the file.
         /// </summary>
@@ -30,22 +30,22 @@ namespace Skybrud.Social.GitHub.Models.Search {
         /// Gets the API URL of the file.
         /// </summary>
         public string Url { get; }
-        
+
         /// <summary>
         /// Gets the Git URL of the file.
         /// </summary>
         public string GitUrl { get; }
-        
+
         /// <summary>
         /// Gets the HTML URL of the file.
         /// </summary>
         public string HtmlUrl { get; }
-        
+
         /// <summary>
         /// Gets a reference to the parent repository.
         /// </summary>
         public GitHubRepositoryItem Repository { get; }
-        
+
         #endregion
 
         #region Constructors

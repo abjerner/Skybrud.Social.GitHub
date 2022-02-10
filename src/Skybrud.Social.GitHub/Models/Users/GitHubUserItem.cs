@@ -6,7 +6,7 @@ namespace Skybrud.Social.GitHub.Models.Users {
     /// Class representing a GitHub user.
     /// </summary>
     public class GitHubUserItem : GitHubUserBase {
-        
+
         #region Constructors
 
         /// <summary>
