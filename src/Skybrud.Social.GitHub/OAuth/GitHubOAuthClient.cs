@@ -9,6 +9,7 @@ using Skybrud.Social.GitHub.Endpoints.Issues;
 using Skybrud.Social.GitHub.Endpoints.Organizations;
 using Skybrud.Social.GitHub.Endpoints.PullRequests;
 using Skybrud.Social.GitHub.Endpoints.Repositories;
+using Skybrud.Social.GitHub.Endpoints.Search;
 using Skybrud.Social.GitHub.Endpoints.Teams;
 using Skybrud.Social.GitHub.Endpoints.User;
 using Skybrud.Social.GitHub.Endpoints.Users;
@@ -77,6 +78,11 @@ namespace Skybrud.Social.GitHub.OAuth {
         public GitHubRepositoriesRawEndpoint Repositories { get; }
 
         /// <summary>
+        /// Gets a reference to the raw <strong>Search</strong> endpoint.
+        /// </summary>
+        public GitHubSearchRawEndpoint Search { get; }
+
+        /// <summary>
         /// Gets a reference to the raw <strong>Teams</strong> endpoint.
         /// </summary>
         public GitHubTeamsRawEndpoint Teams { get; }
@@ -104,6 +110,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             Organizations = new GitHubOrganizationsRawEndpoint(this);
             PullRequests = new GitHubPullRequestsRawEndpoint(this);
             Repositories = new GitHubRepositoriesRawEndpoint(this);
+            Search = new GitHubSearchRawEndpoint(this);
             Teams = new GitHubTeamsRawEndpoint(this);
             User = new GitHubUserRawEndpoint(this);
             Users = new GitHubUsersRawEndpoint(this);
