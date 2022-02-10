@@ -16,6 +16,11 @@ namespace Skybrud.Social.GitHub.Models.Branches {
         public string Name { get; }
 
         /// <summary>
+        /// Gets a reference to the commit of the branch.
+        /// </summary>
+        public GitHubBranchCommit Commit { get; }
+
+        /// <summary>
         /// Gets whether the branch is protected.
         /// </summary>
         public bool IsProtected { get; }
@@ -30,6 +35,7 @@ namespace Skybrud.Social.GitHub.Models.Branches {
         /// <param name="json">The instance of <see cref="JObject"/> representing the object.</param>
         protected GitHubBranchBase(JObject json) : base(json) {
             Name = json.GetString("name");
+            Commit = json.GetObject("commit", GitHubBranchCommit.Parse);
             IsProtected = json.GetBoolean("protected");
         }
 
