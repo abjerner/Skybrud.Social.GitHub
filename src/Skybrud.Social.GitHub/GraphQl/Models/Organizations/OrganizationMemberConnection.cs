@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Social.GitHub.GraphQl.Models.Users;
@@ -22,7 +23,7 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Organizations {
         /// Gets a list of nodes.
         /// </summary>
         [JsonProperty("nodes")]
-        public User[] Nodes { get; }
+        public IReadOnlyList<User> Nodes { get; }
 
         /// <summary>
         /// Gets nformation to aid in pagination.

@@ -2,18 +2,18 @@
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Essentials.Time;
-using Skybrud.Social.GitHub.GraphQl.Models.Releases;
+using Skybrud.Social.GitHub.GraphQl.Models.Users;
 using Skybrud.Social.GitHub.Models;
 
-namespace Skybrud.Social.GitHub.GraphQl.Models.Repositories {
+namespace Skybrud.Social.GitHub.GraphQl.Models.Releases {
 
     /// <summary>
-    /// A repository contains the content for a project.
+    /// Represents a Git reference.
     /// </summary>
     /// <see>
-    ///     <cref>https://docs.github.com/en/graphql/reference/objects#repository</cref>
+    ///     <cref>https://docs.github.com/en/graphql/reference/objects#release</cref>
     /// </see>
-    public class Repository : GitHubObject, INode {
+    public class Release : GitHubObject, INode {
 
         #region Properties
 
@@ -24,10 +24,10 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Repositories {
         public string Id { get; }
 
         /// <summary>
-        /// Gets a list of collaborators associated with the repository.
+        /// Gets the author of the release.
         /// </summary>
-        [JsonProperty("collaborators")]
-        public RepositoryCollaboratorConnection Collaborators { get; }
+        [JsonProperty("author")]
+        public User Author { get; }
 
         /// <summary>
         /// Gets the date and time when the object was created.
@@ -42,52 +42,34 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Repositories {
         public int DatabaseId { get; }
 
         /// <summary>
-        /// Gets the description of the repository.
+        /// Gets the description of the release.
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; }
 
         /// <summary>
-        /// Gets the HTML description of the repository.
+        /// Gets the HTML description of the release.
         /// </summary>
         [JsonProperty("descriptionHTML")]
         public string DescriptionHtml { get; }
 
         /// <summary>
-        /// Gets how many forks there are of this repository in the whole network.
-        /// </summary>
-        [JsonProperty("forkCount")]
-        public int ForkCount { get; }
-
-        /// <summary>
-        /// Gets the repository's URL.
-        /// </summary>
-        [JsonProperty("homepageUrl")]
-        public string HomepageUrl { get; }
-
-        /// <summary>
-        /// Gets the latest release for the repository if one exists.
-        /// </summary>
-        [JsonProperty("latestRelease")]
-        public Release LatestRelease { get; }
-
-        /// <summary>
-        /// Gets the name of the repository.
+        /// Gets the title of the release.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
-        /// Gets the name of the repository.
+        /// Gets thhe date and time when the release was published.
         /// </summary>
-        [JsonProperty("nameWithOwner")]
-        public string NameWithOwner { get; }
+        [JsonProperty("publishedAt")]
+        public EssentialsTime PublishedAt { get; }
 
         /// <summary>
-        /// Gets the date and time for when the repository was last pushed to.
+        /// Gets the name of the release's Git tag.
         /// </summary>
-        [JsonProperty("pushedAt")]
-        public EssentialsTime PushedAt { get; }
+        [JsonProperty("tagName")]
+        public string TagName { get; }
 
         /// <summary>
         /// Gets the date and time when the object was last updated.
@@ -96,7 +78,7 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Repositories {
         public EssentialsTime UpdatedAt { get; }
 
         /// <summary>
-        /// Gets the HTTP URL for this repository.
+        /// Gets the HTTP URL for this release.
         /// </summary>
         [JsonProperty("url")]
         public string Url { get; }
@@ -109,18 +91,16 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Repositories {
         /// Initializes a new instance from the specified <paramref name="json"/> object.
         /// </summary>
         /// <param name="json">The instance of <see cref="JObject"/> representing the user.</param>
-        protected Repository(JObject json) : base(json) {
+        protected Release(JObject json) : base(json) {
             Id = json.GetString("id");
-            Collaborators = json.GetObject("collaborators", RepositoryCollaboratorConnection.Parse);
+            Author = json.GetObject("author", User.Parse);
             CreatedAt = json.GetString("createdAt", EssentialsTime.FromIso8601);
             DatabaseId = json.GetInt32("databaseId");
             Description = json.GetString("description");
             DescriptionHtml = json.GetString("descriptionHTML");
-            ForkCount = json.GetInt32("forkCount");
-            HomepageUrl = json.GetString("homepageUrl");
-            LatestRelease = json.GetObject("latestRelease", Release.Parse);
             Name = json.GetString("name");
-            PushedAt = json.GetString("PushedAt", EssentialsTime.FromIso8601);
+            PublishedAt = json.GetString("publishedAt", EssentialsTime.FromIso8601);
+            TagName = json.GetString("tagName");
             UpdatedAt = json.GetString("updatedAt", EssentialsTime.FromIso8601);
             Url = json.GetString("url");
         }
@@ -130,12 +110,12 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Repositories {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="json"/> object into an instance of <see cref="Repository"/>.
+        /// Parses the specified <paramref name="json"/> object into an instance of <see cref="Release"/>.
         /// </summary>
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="Repository"/>.</returns>
-        public static Repository Parse(JObject json) {
-            return json == null ? null : new Repository(json);
+        /// <returns>An instance of <see cref="Release"/>.</returns>
+        public static Release Parse(JObject json) {
+            return json == null ? null : new Release(json);
         }
 
         #endregion
