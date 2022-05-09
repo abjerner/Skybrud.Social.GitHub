@@ -10,7 +10,7 @@ namespace Skybrud.Social.GitHub.Constants {
         /// <summary>
         /// Gets the datetime format used by the GitHub API.
         /// </summary>
-        public const string DateTimeFormat = Iso8601Constants.DateTimeFormat;
+        public const string DateTimeFormat = Iso8601Constants.DateTimeSeconds;
 
         /// <summary>
         /// Enum ordinal value used to indicate an unrecognized value.

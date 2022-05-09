@@ -36,8 +36,8 @@ namespace Skybrud.Social.GitHub.Responses {
             if (response.Headers["X-RateLimit-Limit"] != null) RateLimiting = GitHubRateLimiting.GetFromResponse(response);
 
             // If an error occurs during authorization, the error code will still be "OK"
-            if (response.ContentType.StartsWith("application/x-www-form-urlencoded") && response.Body.StartsWith("error=")) {
-                IHttpQueryString body = HttpQueryString.ParseQueryString(response.Body, true);
+            if (response.ContentType.StartsWith(HttpConstants.ApplicationFormEncoded) && response.Body.StartsWith("error=")) {
+                IHttpQueryString body = HttpQueryString.Parse(response.Body, true);
                 throw new GitHubException(body.GetString("error_description"));
             }
 

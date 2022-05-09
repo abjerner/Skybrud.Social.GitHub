@@ -14,7 +14,7 @@ namespace Skybrud.Social.GitHub.Responses.Authentication {
         /// </summary>
         /// <param name="response">The raw response the instance should be based on.</param>
         public GitHubTokenResponse(IHttpResponse response) : base(response) {
-            Body = GitHubToken.Parse(HttpQueryString.ParseQueryString(response.Body));
+            Body = GitHubToken.Parse(HttpQueryString.Parse(response.Body));
         }
 
     }

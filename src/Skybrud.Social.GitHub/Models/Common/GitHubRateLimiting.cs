@@ -38,7 +38,7 @@ namespace Skybrud.Social.GitHub.Models.Common {
 
             Limit = limit;
             Remaining = remaining;
-            Reset = double.TryParse(response.Headers["X-RateLimit-Reset"], out double reset) ? EssentialsTime.FromUnixTimestamp(reset) : null;
+            Reset = double.TryParse(response.Headers["X-RateLimit-Reset"], out double reset) ? EssentialsTime.FromUnixTimeSeconds(reset) : null;
 
         }
 
