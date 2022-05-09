@@ -3,11 +3,20 @@ using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Social.GitHub.Models;
 
 namespace Skybrud.Social.GitHub.GraphQl.Models.Organizations {
-
+    
+    /// <summary>
+    /// Class representing the result of an <strong>Organization</strong> query.
+    /// </summary>
+    /// <see>
+    ///     <cref>https://docs.github.com/en/graphql/reference/queries#organization</cref>
+    /// </see>
     public class OrganizationResult : GitHubObject {
 
         #region Properties
         
+        /// <summary>
+        /// Gets the data of the result.
+        /// </summary>
         public OrganizationData Data { get; }
 
         #endregion

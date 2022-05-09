@@ -13,6 +13,7 @@ using Skybrud.Social.GitHub.Endpoints.Search;
 using Skybrud.Social.GitHub.Endpoints.Teams;
 using Skybrud.Social.GitHub.Endpoints.User;
 using Skybrud.Social.GitHub.Endpoints.Users;
+using Skybrud.Social.GitHub.GraphQl;
 using Skybrud.Social.GitHub.Responses.Authentication;
 using Skybrud.Social.GitHub.Scopes;
 
@@ -97,6 +98,11 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// </summary>
         public GitHubUsersRawEndpoint Users { get; }
 
+        /// <summary>
+        /// Gets a reference to the raw <strong>GraphQL</strong> endpoint.
+        /// </summary>
+        public GraphQlRawEndpoint GraphQl { get; set; }
+
         #endregion
 
         #region Constructors
@@ -114,6 +120,7 @@ namespace Skybrud.Social.GitHub.OAuth {
             Teams = new GitHubTeamsRawEndpoint(this);
             User = new GitHubUserRawEndpoint(this);
             Users = new GitHubUsersRawEndpoint(this);
+            GraphQl = new GraphQlRawEndpoint(this);
         }
 
         /// <summary>

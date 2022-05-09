@@ -4,10 +4,19 @@ using Skybrud.Social.GitHub.Models;
 
 namespace Skybrud.Social.GitHub.GraphQl.Models.Organizations {
 
+    /// <summary>
+    /// Class representing the data object an <strong>Organization</strong> query result.
+    /// </summary>
+    /// <see>
+    ///     <cref>https://docs.github.com/en/graphql/reference/queries#organization</cref>
+    /// </see>
     public class OrganizationData : GitHubObject {
 
         #region Properties
         
+        /// <summary>
+        /// Gets a reference to the organization.
+        /// </summary>
         public Organization Organization { get; }
 
         #endregion

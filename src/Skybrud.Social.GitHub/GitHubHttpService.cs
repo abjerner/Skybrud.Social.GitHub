@@ -10,6 +10,7 @@ using Skybrud.Social.GitHub.Endpoints.Search;
 using Skybrud.Social.GitHub.Endpoints.Teams;
 using Skybrud.Social.GitHub.Endpoints.User;
 using Skybrud.Social.GitHub.Endpoints.Users;
+using Skybrud.Social.GitHub.GraphQl;
 using Skybrud.Social.GitHub.OAuth;
 
 namespace Skybrud.Social.GitHub {
@@ -71,6 +72,11 @@ namespace Skybrud.Social.GitHub {
         /// </summary>
         public GitHubUsersEndpoint Users { get; }
 
+        /// <summary>
+        /// Gets a reference to the <strong>GraphQL</strong> endpoint.
+        /// </summary>
+        public GraphQlEndpoint GraphQl { get; }
+
         #endregion
 
         #region Constructors
@@ -95,6 +101,7 @@ namespace Skybrud.Social.GitHub {
             Teams = new GitHubTeamsEndpoint(this);
             User = new GitHubUserEndpoint(this);
             Users = new GitHubUsersEndpoint(this);
+            GraphQl = new GraphQlEndpoint(this);
         }
 
         #endregion
