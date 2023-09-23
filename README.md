@@ -1,22 +1,48 @@
-# Skybrud.Social.GitHub [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md) [![NuGet](https://img.shields.io/nuget/v/Skybrud.Social.GitHub.svg)](https://www.nuget.org/packages/Skybrud.Social.GitHub) [![NuGet](https://img.shields.io/nuget/dt/Skybrud.Social.GitHub.svg)](https://www.nuget.org/packages/Skybrud.Social.GitHub)
+# Skybrud.Social.GitHub
+
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/abjerner/Skybrud.Social.GitHub/blob/v1/main/LICENSE.md)
+[![NuGet](https://img.shields.io/nuget/v/Skybrud.Social.GitHub.svg)](https://www.nuget.org/packages/Skybrud.Social.GitHub)
+[![NuGet](https://img.shields.io/nuget/dt/Skybrud.Social.GitHub.svg)](https://www.nuget.org/packages/Skybrud.Social.GitHub)
+
+**Skybrud.Social.GitHub** is an API wrapper for the [**GitHub REST API**](https://docs.github.com/en/rest) and [**GitHub GraphQL API**](https://docs.github.com/en/graphql). It helps you with both authentication as well as raw and object-oriented communication with the APIs.
 
 
 
-**Skybrud.Social.GitHub** is an API wrapper for the GitHub API and helps you with both authentication as well as raw and object-oriented communication with the API.
 
-### Installation
 
-You can download this package from either NuGet (recommended) or download a ZIP file with the neccessary files from here on GitHub:
+<br /><br />
 
-1. [**NuGet Package**][NuGetPackage]  
-Install this NuGet package in your Visual Studio project. Makes updating easy.
+## Target Frameworks
 
-2. [**ZIP file**][GitHubRelease]  
-Grab a ZIP file of the latest release; unzip and move the files to the bin directory of your project.
+.NET 4.5, .NET 4.6, .NET 4.7 and .NET Standard 1.3 ([read more](https://www.nuget.org/packages/Skybrud.Social.GitHub#supportedframeworks-body-tab)).
 
 
 
-### Dependencies
+
+<br /><br />
+
+## Installation
+
+Install the package via [**NuGet**](https://www.nuget.org/packages/Skybrud.Social.GitHub) - either via the .NET CLI:
+
+```
+dotnet add package Skybrud.Social.GitHub --version 1.0.0-beta010
+```
+
+or the NuGet Package Manager:
+
+```
+Install-Package Skybrud.Social.GitHub -Version 1.0.0-beta010
+```
+
+
+
+
+
+
+<br /><br />
+
+## Dependencies
 
 - [**Skybrud.Essentials.Http**](https://github.com/abjerner/Skybrud.Social)<br />A package for handling the underlying HTTP and OAuth communication with the GitHub API.
 
@@ -26,21 +52,25 @@ Grab a ZIP file of the latest release; unzip and move the files to the bin direc
 
 
 
-### Found a bug? Have a question?
 
+
+<br /><br />
+### Getting started?
+You can find documentation and examples on how to use this package at the [**Skybrud.Social website**][Website].
+
+
+
+<br /><br />
+### Found a bug? Have a question?
 * Please feel free to [**create an issue**][Issues], and I will get back to you ;)
 
 
 
+<br /><br />
 ### Changelog
-
 The [**releases page**][Releases] lists all releases, and each there will be some information for each release on the most significant changes.
 
 
-
-### Documentation
-
-You can find documentation and examples on how to use this package at the [**Skybrud.Social website**][Website].
 
 
 
