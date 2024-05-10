@@ -1,7 +1,6 @@
 ## Getting Started
 
 - [**Installation**](./installation.md)
-<!--- [**Getting Started**](./getting-started.md)-->
 - [**Authentication**](./authentication/)
 
 ## Endpoints
