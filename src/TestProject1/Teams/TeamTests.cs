@@ -1,11 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Enums;
 using Skybrud.Social.GitHub.Models.Teams;
 
 // ReSharper disable once InconsistentNaming
 
-namespace UnitTestProject1.Teams {
+namespace TestProject1.Teams {
 
     [TestClass]
     public class TeamTests {

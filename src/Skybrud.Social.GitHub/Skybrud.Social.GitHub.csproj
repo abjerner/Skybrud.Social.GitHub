@@ -4,7 +4,7 @@
 
   <PropertyGroup>
     <LangVersion>12.0</LangVersion>
-    <TargetFrameworks>netstandard1.3;net45;net46;net47</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <BuildInParallel>false</BuildInParallel>
   </PropertyGroup>

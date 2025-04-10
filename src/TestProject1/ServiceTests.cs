@@ -1,9 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Skybrud.Social.GitHub;
+﻿using Skybrud.Social.GitHub;
 
 // ReSharper disable InconsistentNaming
 
-namespace UnitTestProject1 {
+namespace TestProject1 {
 
     [TestClass]
     public class ServiceTests {

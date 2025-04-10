@@ -1,10 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Skybrud.Essentials.Enums;
+﻿using Skybrud.Essentials.Enums;
 using Skybrud.Social.GitHub.Models.Events;
 
 // ReSharper disable InconsistentNaming
 
-namespace UnitTestProject1.Enums {
+namespace TestProject1.Enums {
 
     [TestClass]
     public class UnitTest1 {
