@@ -3,6 +3,7 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/abjerner/Skybrud.Social.GitHub/blob/v1/main/LICENSE.md)
 [![NuGet](https://img.shields.io/nuget/v/Skybrud.Social.GitHub.svg)](https://www.nuget.org/packages/Skybrud.Social.GitHub)
 [![NuGet](https://img.shields.io/nuget/dt/Skybrud.Social.GitHub.svg)](https://www.nuget.org/packages/Skybrud.Social.GitHub)
+[![Skybrud.Social.GitHub at packages.limbo.works](https://img.shields.io/badge/limbo-packages-blue)](https://packages.limbo.works/skybrud.social.github/)
 
 **Skybrud.Social.GitHub** is an API wrapper for the [**GitHub REST API**](https://docs.github.com/en/rest) and [**GitHub GraphQL API**](https://docs.github.com/en/graphql). It helps you with both authentication as well as raw and object-oriented communication with the APIs.
 
@@ -75,7 +76,7 @@ The [**releases page**][Releases] lists all releases, and each there will be som
 
 
 
-[Website]: http://social.skybrud.dk/github/
+[Website]: https://packages.limbo.works/skybrud.social.github/
 [NuGetPackage]: https://www.nuget.org/packages/Skybrud.Social.GitHub
 [GitHubRelease]: https://github.com/abjerner/Skybrud.Social.GitHub/releases/latest
 [Releases]: https://github.com/abjerner/Skybrud.Social.GitHub/releases
