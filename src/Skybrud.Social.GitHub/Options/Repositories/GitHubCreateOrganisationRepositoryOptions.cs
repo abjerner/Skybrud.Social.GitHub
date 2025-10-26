@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Http.Options;
 using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Options.Repositories {
@@ -19,17 +18,25 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
         /// <summary>
         /// Gets or sets the organization who will own the new repository. To create a new repository in an organization, the authenticated user must be a member of the specified organization.
         /// </summary>
-        public string Organisation { get; set; }
+#if NET8_0_OR_GREATER
+        public required string Organisation { get; set;}
+#else
+        public string? Organisation { get; set; }
+#endif
 
         /// <summary>
         /// Gets or sets the name of the new repository.
         /// </summary>
-        public string Name { get; set; }
+#if NET8_0_OR_GREATER
+        public required string Name { get; set; }
+#else
+        public string? Name { get; set; }
+#endif
 
         /// <summary>
         /// Gets or sets a short description of the new repository.
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// Gets or sets whether to create a new private repository.
@@ -69,7 +76,6 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
         /// </summary>
         public GitHubCreateOrganisationRepositoryOptions() {
             HasIssues = true;
-            HasIssues = true;
         }
 
         /// <summary>
@@ -77,6 +83,9 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
         /// </summary>
         /// <param name="organisation">The organization who will own the new repository.</param>
         /// <param name="name">The name of the repository.</param>
+#if NET8_0_OR_GREATER
+        [System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public GitHubCreateOrganisationRepositoryOptions(string organisation, string name) : this() {
             Organisation = organisation;
             Name = name;
@@ -88,6 +97,9 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
         /// <param name="organisation">The organization who will own the new repository.</param>
         /// <param name="name">The name of the repository.</param>
         /// <param name="isPrivate">Whether to create a new private repository.</param>
+#if NET8_0_OR_GREATER
+        [System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+#endif
         public GitHubCreateOrganisationRepositoryOptions(string organisation, string name, bool isPrivate) : this() {
             Organisation = organisation;
             Name = name;
@@ -112,7 +124,7 @@ namespace Skybrud.Social.GitHub.Options.Repositories {
                 {"name", Name},
                 {"description", Description ?? string.Empty},
                 {"private", IsPrivate ? "true" : "false"},
-                {"private", HasIssues ? "true" : "false"},
+                {"has_issues", HasIssues ? "true" : "false"},
                 {"has_wiki", HasWiki ? "true" : "false"}
             };
 
