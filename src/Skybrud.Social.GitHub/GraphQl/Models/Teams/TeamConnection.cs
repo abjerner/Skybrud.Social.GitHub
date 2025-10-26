@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Social.GitHub.Models;
 
 namespace Skybrud.Social.GitHub.GraphQl.Models.Teams {
-    
+
     /// <summary>
     /// The connection type for a <strong>Team</strong>.
     /// </summary>

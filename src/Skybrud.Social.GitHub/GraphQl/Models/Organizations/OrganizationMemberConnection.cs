@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Social.GitHub.GraphQl.Models.Users;
 using Skybrud.Social.GitHub.Models;
 
 namespace Skybrud.Social.GitHub.GraphQl.Models.Organizations {
-    
+
     /// <summary>
     /// The connection type for User.
     /// </summary>
