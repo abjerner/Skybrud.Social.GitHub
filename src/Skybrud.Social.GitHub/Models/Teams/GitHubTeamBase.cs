@@ -67,7 +67,7 @@ namespace Skybrud.Social.GitHub.Models.Teams {
             // TODO: Add support for the "members_url" property
             // TODO: Add support for the "repositories_url" property
             // TODO: Add support for the "url" property
-            Permission = json.GetEnumWithFallbacks<GitHubPermissionLevel>("permission");
+            Permission = json.GetEnum<GitHubPermissionLevel>("permission");
             // TODO: Add support for the "parent" property
         }
 
@@ -81,7 +81,7 @@ namespace Skybrud.Social.GitHub.Models.Teams {
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubTeamBase"/>.</returns>
         public static GitHubTeamBase Parse(JObject json) {
-            return json == null ? null : new GitHubTeamBase(json);
+            return new GitHubTeamBase(json);
         }
 
         #endregion

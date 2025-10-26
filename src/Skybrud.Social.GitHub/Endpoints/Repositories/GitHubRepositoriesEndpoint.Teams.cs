@@ -1,10 +1,99 @@
-﻿using Skybrud.Social.GitHub.Models.Repositories;
+﻿using System.Threading.Tasks;
+using Skybrud.Social.GitHub.Models.Repositories;
+using Skybrud.Social.GitHub.Models.Teams;
 using Skybrud.Social.GitHub.Options.Repositories.Teams;
+using Skybrud.Social.GitHub.Responses;
 using Skybrud.Social.GitHub.Responses.Teams;
 
 namespace Skybrud.Social.GitHub.Endpoints.Repositories {
 
     public partial class GitHubRepositoriesEndpoint {
+
+        #region Add team(...)
+
+        /// <summary>
+        /// Adds a team to a repository.
+        /// </summary>
+        /// <param name="repositoryOwner">The alias of the repository owner.</param>
+        /// <param name="repositoryAlias">The alias of the repository.</param>
+        /// <param name="teamAlias">The alias of the team.</param>
+        /// <param name="permission">The permission to set for the team.</param>
+        /// <returns>An instance of <see cref="GitHubResponse"/> representing the response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
+        /// </see>
+        public GitHubResponse AddTeam(string repositoryOwner, string repositoryAlias, string teamAlias, GitHubTeamPermission permission) {
+            return new GitHubResponse(Raw.AddTeam(repositoryOwner, repositoryAlias, teamAlias, permission));
+        }
+
+        /// <summary>
+        /// Adds a team to a repository.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="team">The team.</param>
+        /// <param name="permission">The permission to set for the team.</param>
+        /// <returns>An instance of <see cref="GitHubResponse"/> representing the response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
+        /// </see>
+        public GitHubResponse AddTeam(GitHubRepositoryBase repository, GitHubTeamBase team, GitHubTeamPermission permission) {
+            return new GitHubResponse(Raw.AddTeam(repository, team, permission));
+        }
+
+        /// <summary>
+        /// Adds a team to a repository.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="GitHubResponse"/> representing the response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
+        /// </see>
+        public GitHubResponse AddTeam(GitHubAddTeamsOptions options) {
+            return new GitHubResponse(Raw.AddTeam(options));
+        }
+
+        /// <summary>
+        /// Adds a team to a repository.
+        /// </summary>
+        /// <param name="repositoryOwner">The alias of the repository owner.</param>
+        /// <param name="repositoryAlias">The alias of the repository.</param>
+        /// <param name="teamAlias">The alias of the team.</param>
+        /// <param name="permission">The permission to set for the team.</param>
+        /// <returns>An instance of <see cref="GitHubResponse"/> representing the response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
+        /// </see>
+        public async Task<GitHubResponse> AddTeamAsync(string repositoryOwner, string repositoryAlias, string teamAlias, GitHubTeamPermission permission) {
+            return new GitHubResponse(await Raw.AddTeamAsync(repositoryOwner, repositoryAlias, teamAlias, permission));
+        }
+
+        /// <summary>
+        /// Adds a team to a repository.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="team">The team.</param>
+        /// <param name="permission">The permission to set for the team.</param>
+        /// <returns>An instance of <see cref="GitHubResponse"/> representing the response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
+        /// </see>
+        public async Task<GitHubResponse> AddTeamAsync(GitHubRepositoryBase repository, GitHubTeamBase team, GitHubTeamPermission permission) {
+            return new GitHubResponse(await Raw.AddTeamAsync(repository, team, permission));
+        }
+
+        /// <summary>
+        /// Adds a team to a repository.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="GitHubResponse"/> representing the response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
+        /// </see>
+        public async Task<GitHubResponse> AddTeamAsync(GitHubAddTeamsOptions options) {
+            return new GitHubResponse(await Raw.AddTeamAsync(options));
+        }
+
+        #endregion
 
         #region GetTeams(...)
 

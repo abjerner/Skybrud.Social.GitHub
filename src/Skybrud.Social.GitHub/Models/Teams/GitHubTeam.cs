@@ -64,7 +64,7 @@ namespace Skybrud.Social.GitHub.Models.Teams {
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubTeam"/>.</returns>
         public static new GitHubTeam Parse(JObject json) {
-            return json == null ? null : new GitHubTeam(json);
+            return new GitHubTeam(json);
         }
 
         #endregion

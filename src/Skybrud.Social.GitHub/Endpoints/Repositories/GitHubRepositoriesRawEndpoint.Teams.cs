@@ -1,11 +1,109 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
+using Skybrud.Social.GitHub.Models.Teams;
 using Skybrud.Social.GitHub.Options.Repositories.Teams;
+
+#pragma warning disable CA1510
 
 namespace Skybrud.Social.GitHub.Endpoints.Repositories {
 
     public partial class GitHubRepositoriesRawEndpoint {
+
+        #region Add team(...)
+
+        /// <summary>
+        /// Adds a team to a repository.
+        /// </summary>
+        /// <param name="repositoryOwner">The alias of the repository owner.</param>
+        /// <param name="repositoryAlias">The alias of the repository.</param>
+        /// <param name="teamAlias">The alias of the team.</param>
+        /// <param name="permission">The permission to set for the team.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
+        /// </see>
+        public IHttpResponse AddTeam(string repositoryOwner, string repositoryAlias, string teamAlias, GitHubTeamPermission permission) {
+            if (string.IsNullOrWhiteSpace(repositoryOwner)) throw new ArgumentNullException(nameof(repositoryOwner));
+            if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
+            if (string.IsNullOrWhiteSpace(teamAlias)) throw new ArgumentNullException(nameof(teamAlias));
+            return Client.GetResponse(new GitHubAddTeamsOptions(repositoryOwner, repositoryAlias, teamAlias, permission));
+        }
+
+        /// <summary>
+        /// Adds a team to a repository.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="team">The team.</param>
+        /// <param name="permission">The permission to set for the team.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
+        /// </see>
+        public IHttpResponse AddTeam(GitHubRepositoryBase repository, GitHubTeamBase team, GitHubTeamPermission permission) {
+            return Client.GetResponse(new GitHubAddTeamsOptions(repository, team, permission));
+        }
+
+        /// <summary>
+        /// Adds a team to a repository.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
+        /// </see>
+        public IHttpResponse AddTeam(GitHubAddTeamsOptions options) {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            return Client.GetResponse(options);
+        }
+
+        /// <summary>
+        /// Adds a team to a repository.
+        /// </summary>
+        /// <param name="repositoryOwner">The alias of the repository owner.</param>
+        /// <param name="repositoryAlias">The alias of the repository.</param>
+        /// <param name="teamAlias">The alias of the team.</param>
+        /// <param name="permission">The permission to set for the team.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
+        /// </see>
+        public async Task<IHttpResponse> AddTeamAsync(string repositoryOwner, string repositoryAlias, string teamAlias, GitHubTeamPermission permission) {
+            if (string.IsNullOrWhiteSpace(repositoryOwner)) throw new ArgumentNullException(nameof(repositoryOwner));
+            if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
+            if (string.IsNullOrWhiteSpace(teamAlias)) throw new ArgumentNullException(nameof(teamAlias));
+            return await Client.GetResponseAsync(new GitHubAddTeamsOptions(repositoryOwner, repositoryAlias, teamAlias, permission));
+        }
+
+        /// <summary>
+        /// Adds a team to a repository.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        /// <param name="team">The team.</param>
+        /// <param name="permission">The permission to set for the team.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
+        /// </see>
+        public async Task<IHttpResponse> AddTeamAsync(GitHubRepositoryBase repository, GitHubTeamBase team, GitHubTeamPermission permission) {
+            return await Client.GetResponseAsync(new GitHubAddTeamsOptions(repository, team, permission));
+        }
+
+        /// <summary>
+        /// Adds a team to a repository.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+        /// <see>
+        ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
+        /// </see>
+        public async Task<IHttpResponse> AddTeamAsync(GitHubAddTeamsOptions options) {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            return await Client.GetResponseAsync(options);
+        }
+
+        #endregion
 
         #region GetTeams(...)
 
