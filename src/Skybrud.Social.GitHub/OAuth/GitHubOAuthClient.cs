@@ -30,28 +30,28 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// <summary>
         /// Gets or sets the ID of the client.
         /// </summary>
-        public string ClientId { get; set; }
+        public string? ClientId { get; set; }
 
         /// <summary>
         /// Gets or sets the secret of the client.
         /// </summary>
-        public string ClientSecret { get; set; }
+        public string? ClientSecret { get; set; }
 
         /// <summary>
         /// Gets or sets the redirect URI of your application.
         /// </summary>
-        public string RedirectUri { get; set; }
+        public string? RedirectUri { get; set; }
 
         /// <summary>
         /// Gets or sets the access token.
         /// </summary>
-        public string AccessToken { get; set; }
+        public string? AccessToken { get; set; }
 
         /// <summary>
         /// The GitHub API supports basic authentication, so even though this is not a part of OAuth, the
         /// <see cref="GitHubOAuthClient"/> class will handle basic authentication as well.
         /// </summary>
-        public NetworkCredential Credentials { get; set; }
+        public NetworkCredential? Credentials { get; set; }
 
         /// <summary>
         /// Gets a reference to the raw commits endpoint.
@@ -185,7 +185,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// <param name="state">A unique state for the request.</param>
         /// <param name="scope">The scope of your application.</param>
         /// <returns>A <see cref="String"/> with the authorization URL.</returns>
-        public string GetAuthorizationUrl(string state, GitHubScope scope) {
+        public string GetAuthorizationUrl(string state, GitHubScope? scope) {
             return GetAuthorizationUrl(state, scope == null ? null : new GitHubScopeList(scope));
         }
 
@@ -196,7 +196,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// <param name="state">A unique state for the request.</param>
         /// <param name="scope">The scope of your application.</param>
         /// <returns>A <see cref="String"/> with the authorization URL.</returns>
-        public string GetAuthorizationUrl(string state, params GitHubScope[] scope) {
+        public string GetAuthorizationUrl(string state, params GitHubScope[]? scope) {
             return GetAuthorizationUrl(state, scope == null ? null : new GitHubScopeList(scope));
         }
 
@@ -207,7 +207,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// <param name="state">A unique state for the request.</param>
         /// <param name="scope">The scope of your application.</param>
         /// <returns>A <see cref="String"/> with the authorization URL.</returns>
-        public string GetAuthorizationUrl(string state, GitHubScopeList scope) {
+        public string GetAuthorizationUrl(string state, GitHubScopeList? scope) {
             return GetAuthorizationUrl(state, scope == null ? "" : scope.ToString());
         }
 
@@ -218,7 +218,7 @@ namespace Skybrud.Social.GitHub.OAuth {
         /// <param name="state">A unique state for the request.</param>
         /// <param name="scope">The scope of your application.</param>
         /// <returns>A <see cref="String"/> with the authorization URL.</returns>
-        public string GetAuthorizationUrl(string state, params string[] scope) {
+        public string GetAuthorizationUrl(string state, params string[]? scope) {
 
             // Some input validation
             if (string.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException(nameof(ClientId));
@@ -286,14 +286,10 @@ namespace Skybrud.Social.GitHub.OAuth {
             request.UserAgent = "Skybrud.Social";
 
             // Append the access token to the HTTP headers (if present)
-            if (!string.IsNullOrWhiteSpace(AccessToken)) {
-                request.Headers.Authorization = "token " + AccessToken;
-            }
+            if (!string.IsNullOrWhiteSpace(AccessToken)) request.Headers.Authorization = $"token {AccessToken}";
 
             // Set the credentials for basic authentication (if present)
-            if (Credentials != null) {
-                request.Credentials = Credentials;
-            }
+            if (Credentials != null) request.Credentials = Credentials;
 
         }
 

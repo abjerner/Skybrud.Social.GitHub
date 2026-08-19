@@ -78,8 +78,10 @@ namespace Skybrud.Social.GitHub.Options.Issues.Comments {
         /// <param name="issue">The issue for which to get comments.</param>
         public GitHubGetIssueCommentsOptions(GitHubIssueBase issue) {
             if (issue == null) throw new ArgumentNullException(nameof(issue));
-            Owner = issue.Repository.Owner.Login;
-            Repository = issue.Repository.Name;
+            // TODO: fix me
+            throw new Exception("BAAAAAAAAAAAAAH\r\n\r\n" + issue.JObject);
+            //Owner = issue..Repository.Owner.Login;;
+            //Repository = issue.Repository.Name;
             Number = issue.Number;
         }
 

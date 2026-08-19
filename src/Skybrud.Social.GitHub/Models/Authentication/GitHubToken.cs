@@ -1,4 +1,6 @@
 ﻿using Skybrud.Essentials.Http.Collections;
+using Skybrud.Social.GitHub.Exceptions;
+using Skybrud.Social.GitHub.Extensions;
 using Skybrud.Social.GitHub.Scopes;
 
 namespace Skybrud.Social.GitHub.Models.Authentication {
@@ -30,9 +32,9 @@ namespace Skybrud.Social.GitHub.Models.Authentication {
         #region Constructors
 
         private GitHubToken(IHttpQueryString query) {
-            AccessToken = query["access_token"];
-            Scope = GitHubScopeList.Parse(query["scope"]);
-            TokenType = query["token_type"];
+            AccessToken = query.GetRequiredString("access_token");
+            Scope = query.GetRequiredString("scope", GitHubScopeList.Parse);
+            TokenType = query.GetRequiredString("token_type");
         }
 
         #endregion
@@ -45,7 +47,7 @@ namespace Skybrud.Social.GitHub.Models.Authentication {
         /// <param name="query">The instance of <see cref="IHttpQueryString"/> to be parsed.</param>
         /// <returns>Returns an instance of <see cref="GitHubToken"/>.</returns>
         public static GitHubToken Parse(IHttpQueryString query) {
-            return query == null ? null : new GitHubToken(query);
+            return new GitHubToken(query);
         }
 
         #endregion

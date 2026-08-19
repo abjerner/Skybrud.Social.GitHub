@@ -24,16 +24,16 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.References {
         public string Id { get; }
 
         /// <summary>
-        /// Gets the the ref name.
+        /// Gets the ref name.
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; }
+        public string? Name { get; }
 
         /// <summary>
         /// Gets the ref's prefix, such as <c>refs/heads/</c> or <c>refs/tags/</c>.
         /// </summary>
         [JsonProperty("prefix")]
-        public string Prefix { get; }
+        public string? Prefix { get; }
 
         #endregion
 
@@ -44,7 +44,7 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.References {
         /// </summary>
         /// <param name="json">The instance of <see cref="JObject"/> representing the user.</param>
         protected Ref(JObject json) : base(json) {
-            Id = json.GetString("id");
+            Id = json.GetRequiredString("id");
             Name = json.GetString("name");
             Prefix = json.GetString("prefix");
         }
@@ -59,7 +59,7 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.References {
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="Ref"/>.</returns>
         public static Ref Parse(JObject json) {
-            return json == null ? null : new Ref(json);
+            return new Ref(json);
         }
 
         #endregion

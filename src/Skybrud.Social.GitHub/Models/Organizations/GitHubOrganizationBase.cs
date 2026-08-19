@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Organizations {
@@ -21,9 +22,44 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         public int Id { get; }
 
         /// <summary>
-        /// Gets a collection of URLs related to the organization.
+        /// Gets the node ID of the organization.
         /// </summary>
-        public GitHubOrganizationUrls Urls { get; }
+        public string NodeId { get; }
+
+        /// <summary>
+        /// Gets the API URL of the organization.
+        /// </summary>
+        public string Url { get; }
+
+        /// <summary>
+        /// Gets the API URL for getting a list of repositories of the organization.
+        /// </summary>
+        public string ReposUrl { get; }
+
+        /// <summary>
+        /// Gets the API URL for getting a list of events made by members of the organization.
+        /// </summary>
+        public string EventsUrl { get; }
+
+        /// <summary>
+        /// Gets the API URL for getting a list of hooks of the organization.
+        /// </summary>
+        public string HooksUrl { get; }
+
+        /// <summary>
+        /// Gets the API URL for getting a list of issues of the organization.
+        /// </summary>
+        public string IssuesUrl { get; }
+
+        /// <summary>
+        /// Gets the API URL for getting a list of members of the organization.
+        /// </summary>
+        public string MembersUrl { get; }
+
+        /// <summary>
+        /// Gets the API URL for getting a list of public members of the organization.
+        /// </summary>
+        public string PublicMembersUrl { get; }
 
         /// <summary>
         /// Gets the avatar URL of the organization.
@@ -33,12 +69,15 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         /// <summary>
         /// Gets the description of the organization.
         /// </summary>
-        public string Description { get; }
+        public string? Description { get; }
 
         /// <summary>
         /// Gets whether the organization has a description.
         /// </summary>
+        [MemberNotNullWhen(true, nameof(Description))]
         public bool HasDescription => !string.IsNullOrWhiteSpace(Description);
+
+        // TODO: no "html_url" property???
 
         #endregion
 
@@ -47,12 +86,19 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="json"/> object.
         /// </summary>
-        /// <param name="json">The instance of <see cref="JObject"/> representing the organizationt.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> representing the organization.</param>
         protected GitHubOrganizationBase(JObject json) : base(json) {
-            Login = json.GetString("login");
-            Id = json.GetInt32("id");
-            Urls = GitHubOrganizationUrls.Parse(json);
-            AvatarUrl = json.GetString("avatar_url");
+            Login = json.GetRequiredString("login");
+            Id = json.GetRequiredInt32("id");
+            NodeId = json.GetRequiredString("node_id");
+            Url = json.GetRequiredString("url");
+            ReposUrl = json.GetRequiredString("repos_url");
+            EventsUrl = json.GetRequiredString("events_url");
+            HooksUrl = json.GetRequiredString("hooks_url");
+            IssuesUrl = json.GetRequiredString("issues_url");
+            MembersUrl = json.GetRequiredString("members_url");
+            PublicMembersUrl = json.GetRequiredString("public_members_url");
+            AvatarUrl = json.GetRequiredString("avatar_url");
             Description = json.GetString("description");
         }
 
@@ -66,7 +112,7 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubOrganizationBase"/>.</returns>
         public static GitHubOrganizationBase Parse(JObject json) {
-            return json == null ? null : new GitHubOrganizationBase(json);
+            return new GitHubOrganizationBase(json);
         }
 
         #endregion

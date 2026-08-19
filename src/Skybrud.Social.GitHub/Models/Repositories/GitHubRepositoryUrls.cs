@@ -45,12 +45,12 @@ namespace Skybrud.Social.GitHub.Models.Repositories {
         #region Constructors
 
         private GitHubRepositoryUrls(JObject json) {
-            HtmlUrl = json.GetString("html_url");
-            Url = json.GetString("url");
-            GitUrl = json.GetString("git_url");
-            SshUrl = json.GetString("ssh_url");
-            CloneUrl = json.GetString("clone_url");
-            SvnUrl = json.GetString("svn_url");
+            HtmlUrl = json.GetRequiredString("html_url");
+            Url = json.GetRequiredString("url");
+            GitUrl = json.GetRequiredString("git_url");
+            SshUrl = json.GetRequiredString("ssh_url");
+            CloneUrl = json.GetRequiredString("clone_url");
+            SvnUrl = json.GetRequiredString("svn_url");
         }
 
         #endregion
@@ -63,7 +63,7 @@ namespace Skybrud.Social.GitHub.Models.Repositories {
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubRepositoryUrls"/>.</returns>
         public static GitHubRepositoryUrls Parse(JObject json) {
-            return json == null ? null : new GitHubRepositoryUrls(json);
+            return new GitHubRepositoryUrls(json);
         }
 
         #endregion

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 
 namespace Skybrud.Social.GitHub.Models.Common {
@@ -18,15 +19,15 @@ namespace Skybrud.Social.GitHub.Models.Common {
         /// <summary>
         /// Gets an array of errors.
         /// </summary>
-        public GitHubErrorItem[] Errors { get; }
+        public IReadOnlyList<GitHubErrorItem> Errors { get; }
 
         /// <summary>
         /// Gets whether the <see cref="Errors"/> property has any items.
         /// </summary>
-        public bool HasErrors => Errors.Length > 0;
+        public bool HasErrors => Errors.Count > 0;
 
         /// <summary>
-        /// Gets an URL with information about the error.
+        /// Gets a URL with information about the error.
         /// </summary>
         public string DocumentationUrl { get; }
 
@@ -37,7 +38,7 @@ namespace Skybrud.Social.GitHub.Models.Common {
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="obj"/>.
         /// </summary>
-        /// <param name="obj">The an instance of <see cref="JObject"/> representing the error.</param>
+        /// <param name="obj">The instance of <see cref="JObject"/> representing the error.</param>
         protected GitHubError(JObject obj) : base(obj) {
             Message = obj.GetString("message");
             Errors = obj.GetArrayItems("errors", GitHubErrorItem.Parse);
@@ -54,7 +55,7 @@ namespace Skybrud.Social.GitHub.Models.Common {
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubError"/>.</returns>
         public static GitHubError Parse(JObject obj) {
-            return obj == null ? null : new GitHubError(obj);
+            return new GitHubError(obj);
         }
 
         #endregion

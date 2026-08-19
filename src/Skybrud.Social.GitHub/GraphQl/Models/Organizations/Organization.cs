@@ -27,97 +27,97 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Organizations {
         /// Gets a URL pointing to the organization's public avatar.
         /// </summary>
         [JsonProperty("avatarUrl")]
-        public string AvatarUrl { get; }
+        public string? AvatarUrl { get; }
 
         /// <summary>
         /// Gets the date and time when the object was created.
         /// </summary>
         [JsonProperty("createdAt")]
-        public EssentialsTime CreatedAt { get; }
+        public EssentialsTime? CreatedAt { get; }
 
         /// <summary>
         /// Gets the primary key from the database.
         /// </summary>
         [JsonProperty("databaseId")]
-        public int DatabaseId { get; }
+        public int? DatabaseId { get; }
 
         /// <summary>
         /// Gets the organization's public profile description.
         /// </summary>
         [JsonProperty("description")]
-        public string Description { get; }
+        public string? Description { get; }
 
         /// <summary>
         /// Gets the organization's public profile description rendered to HTML.
         /// </summary>
         [JsonProperty("descriptionHTML")]
-        public string DescriptionHtml { get; }
+        public string? DescriptionHtml { get; }
 
         /// <summary>
         /// Gets the organization's public email.
         /// </summary>
         [JsonProperty("email")]
-        public string Email { get; }
+        public string? Email { get; }
 
         /// <summary>
         /// Gets whether the organization has verified its profile email and website.
         /// </summary>
         [JsonProperty("isVerified")]
-        public bool IsVerified { get; }
+        public bool? IsVerified { get; }
 
         /// <summary>
         /// Gets the organization's public profile location.
         /// </summary>
         [JsonProperty("location")]
-        public string Location { get; }
+        public string? Location { get; }
 
         /// <summary>
         /// Gets the organization's login name.
         /// </summary>
         [JsonProperty("login")]
-        public string Login { get; }
+        public string? Login { get; }
 
         /// <summary>
         /// Gets a list of users who are members of this organization.
         /// </summary>
         [JsonProperty("membersWithRole")]
-        public OrganizationMemberConnection MembersWithRole { get; }
+        public OrganizationMemberConnection? MembersWithRole { get; }
 
         /// <summary>
         /// Gets the organization's public profile name.
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; }
+        public string? Name { get; }
 
         /// <summary>
         /// Gets a list of teams in this organization.
         /// </summary>
         [JsonProperty("teams")]
-        public TeamConnection Teams { get; }
+        public TeamConnection? Teams { get; }
 
         /// <summary>
         /// Gets the organization's Twitter username.
         /// </summary>
         [JsonProperty("twitterUsername")]
-        public string TwitterUsername { get; }
+        public string? TwitterUsername { get; }
 
         /// <summary>
         /// Gets the date and time when the object was last updated.
         /// </summary>
         [JsonProperty("updatedAt")]
-        public EssentialsTime UpdatedAt { get; }
+        public EssentialsTime? UpdatedAt { get; }
 
         /// <summary>
         /// Gets the HTTP URL for this organization.
         /// </summary>
         [JsonProperty("url")]
-        public string Url { get; }
+        public string? Url { get; }
 
         /// <summary>
         /// Gets the organization's public profile URL.
         /// </summary>
         [JsonProperty("websiteUrl")]
-        public string WebsiteUrl { get; }
+        public string? WebsiteUrl { get; }
 
         #endregion
 
@@ -128,7 +128,7 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Organizations {
         /// </summary>
         /// <param name="json">The instance of <see cref="JObject"/> representing the user.</param>
         protected Organization(JObject json) : base(json) {
-            Id = json.GetString("id");
+            Id = json.GetRequiredString("id");
             AvatarUrl = json.GetString("avatarUrl");
             CreatedAt = json.GetString("createdAt", EssentialsTime.FromIso8601);
             DatabaseId = json.GetInt32("databaseId");
@@ -157,7 +157,7 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Organizations {
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="Organization"/>.</returns>
         public static Organization Parse(JObject json) {
-            return json == null ? null : new Organization(json);
+            return new Organization(json);
         }
 
         #endregion

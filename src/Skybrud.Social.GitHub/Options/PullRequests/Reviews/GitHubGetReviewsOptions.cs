@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
@@ -21,27 +22,39 @@ namespace Skybrud.Social.GitHub.Options.PullRequests.Reviews {
         /// <summary>
         /// Gets or sets the username (login) of the owner of the repository.
         /// </summary>
-        public string Owner { get; set; }
+#if NET8_0_OR_GREATER
+        public required string Owner { get; set; }
+#else
+        public string? Owner { get; set; }
+#endif
 
         /// <summary>
         /// Gets or sets the slug of the repository.
         /// </summary>
-        public string Repository { get; set; }
+#if NET8_0_OR_GREATER
+        public required string Repository { get; set; }
+#else
+        public string? Repository { get; set; }
+#endif
 
         /// <summary>
         /// Gets or sets the number of the pull request.
         /// </summary>
+#if NET8_0_OR_GREATER
+        public required int Number { get; set; }
+#else
         public int Number { get; set; }
+#endif
 
         /// <summary>
         /// Gets or sets the page to be returned. Default is <c>0</c>, indicating the first page.
         /// </summary>
-        public int Page { get; set; }
+        public int? Page { get; set; }
 
         /// <summary>
         /// Gets or sets the maximum amount of reviews to be returned by each page.
         /// </summary>
-        public int PerPage { get; set; }
+        public int? PerPage { get; set; }
 
         #endregion
 
@@ -59,6 +72,9 @@ namespace Skybrud.Social.GitHub.Options.PullRequests.Reviews {
         /// <param name="owner">The username (login) of the owner of the repository.</param>
         /// <param name="repository">The slug of the repository.</param>
         /// <param name="number">The number of the pull request.</param>
+#if NET8_0_OR_GREATER
+        [SetsRequiredMembers]
+#endif
         public GitHubGetReviewsOptions(string owner, string repository, int number) {
             Owner = owner;
             Repository = repository;
@@ -69,10 +85,15 @@ namespace Skybrud.Social.GitHub.Options.PullRequests.Reviews {
         /// Initializes a new instance based on the specified <paramref name="issue"/>.
         /// </summary>
         /// <param name="issue">The issue for which to get comments.</param>
+#if NET8_0_OR_GREATER
+        [SetsRequiredMembers]
+#endif
         public GitHubGetReviewsOptions(GitHubIssueBase issue) {
             if (issue == null) throw new ArgumentNullException(nameof(issue));
-            Owner = issue.Repository.Owner.Login;
-            Repository = issue.Repository.Name;
+            // TODO: fix me
+            throw new Exception("BAAAAAAAAAAAAAH\r\n\r\n" + issue.JObject);
+            //Owner = issue..Repository.Owner.Login;;
+            //Repository = issue.Repository.Name;
             Number = issue.Number;
         }
 
@@ -80,6 +101,9 @@ namespace Skybrud.Social.GitHub.Options.PullRequests.Reviews {
         /// Initializes a new instance based on the specified <paramref name="pullRequest"/>.
         /// </summary>
         /// <param name="pullRequest">The pull request for which to get comments.</param>
+#if NET8_0_OR_GREATER
+        [SetsRequiredMembers]
+#endif
         public GitHubGetReviewsOptions(GitHubPullRequestBase pullRequest) {
             if (pullRequest == null) throw new ArgumentNullException(nameof(pullRequest));
             Owner = pullRequest.RepositoryOwner;

@@ -26,91 +26,91 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Users {
         /// Gets a URL pointing to the user's public avatar.
         /// </summary>
         [JsonProperty("avatarUrl")]
-        public string AvatarUrl { get; }
+        public string? AvatarUrl { get; }
 
         /// <summary>
         /// Gets the user's public profile bio.
         /// </summary>
         [JsonProperty("bio")]
-        public string Bio { get; }
+        public string? Bio { get; }
 
         /// <summary>
         /// Gets the user's public profile bio as HTML.
         /// </summary>
         [JsonProperty("bioHTML")]
-        public string BioHtml { get; }
+        public string? BioHtml { get; }
 
         /// <summary>
         /// Gets the user's public profile company.
         /// </summary>
         [JsonProperty("company")]
-        public string Company { get; }
+        public string? Company { get; }
 
         /// <summary>
         /// Gets the user's public profile company as HTML.
         /// </summary>
         [JsonProperty("companyHTML")]
-        public string CompanyHtml { get; }
+        public string? CompanyHtml { get; }
 
         /// <summary>
         /// Gets the date and time when the object was created.
         /// </summary>
         [JsonProperty("createdAt")]
-        public EssentialsTime CreatedAt { get; }
+        public EssentialsTime? CreatedAt { get; }
 
         /// <summary>
         /// Gets the primary key from the database.
         /// </summary>
         [JsonProperty("databaseId")]
-        public int DatabaseId { get; }
+        public int? DatabaseId { get; }
 
         /// <summary>
         /// Gets the user's publicly visible profile email.
         /// </summary>
         [JsonProperty("email")]
-        public string Email { get; }
+        public string? Email { get; }
 
         /// <summary>
         /// Gets the user's public profile location.
         /// </summary>
         [JsonProperty("location")]
-        public string Location { get; }
+        public string? Location { get; }
 
         /// <summary>
-        /// Gets the username used to login.
+        /// Gets the username used to log in.
         /// </summary>
         [JsonProperty("login")]
-        public string Login { get; }
+        public string? Login { get; }
 
         /// <summary>
         /// Gets the user's public profile name.
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; }
+        public string? Name { get; }
 
         /// <summary>
         /// Gets the user's Twitter username.
         /// </summary>
         [JsonProperty("twitterUsername")]
-        public string TwitterUsername { get; }
+        public string? TwitterUsername { get; }
 
         /// <summary>
         /// Gets the date and time when the object was last updated.
         /// </summary>
         [JsonProperty("updatedAt")]
-        public EssentialsTime UpdatedAt { get; }
+        public EssentialsTime? UpdatedAt { get; }
 
         /// <summary>
         /// Gets the HTTP URL for this user.
         /// </summary>
         [JsonProperty("url")]
-        public string Url { get; }
+        public string? Url { get; }
 
         /// <summary>
         /// Gets a URL pointing to the user's public website/blog.
         /// </summary>
         [JsonProperty("websiteUrl")]
-        public string WebsiteUrl { get; }
+        public string? WebsiteUrl { get; }
 
         #endregion
 
@@ -121,7 +121,7 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Users {
         /// </summary>
         /// <param name="json">The instance of <see cref="JObject"/> representing the user.</param>
         protected User(JObject json) : base(json) {
-            Id = json.GetString("id");
+            Id = json.GetRequiredString("id");
             AvatarUrl = json.GetString("avatarUrl");
             Bio = json.GetString("bio");
             BioHtml = json.GetString("bioHTML");
@@ -149,7 +149,7 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Users {
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="User"/>.</returns>
         public static User Parse(JObject json) {
-            return json == null ? null : new User(json);
+            return new User(json);
         }
 
         #endregion

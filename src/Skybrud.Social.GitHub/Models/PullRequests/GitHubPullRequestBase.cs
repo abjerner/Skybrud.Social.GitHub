@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Extensions;
@@ -17,14 +19,9 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         #region Properties
 
         /// <summary>
-        /// Gets the ID of the pull request.
+        /// Gets the API URL of the user.
         /// </summary>
-        public long Id { get; }
-
-        /// <summary>
-        /// Gets the node ID of the pull request.
-        /// </summary>
-        public string NodeId { get; }
+        public string Url { get; }
 
         /// <summary>
         /// Gets the owner of the repository the pull request belongs to.
@@ -35,6 +32,61 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         /// Gets the slug of the repository the pull request belongs to.
         /// </summary>
         public string RepositorySlug { get; }
+
+        /// <summary>
+        /// Gets the ID of the pull request.
+        /// </summary>
+        public long Id { get; }
+
+        /// <summary>
+        /// Gets the node ID of the pull request.
+        /// </summary>
+        public string NodeId { get; }
+
+        /// <summary>
+        /// Gets the website URL of the issue.
+        /// </summary>
+        public string HtmlUrl { get; }
+
+        /// <summary>
+        /// Gets the diff URL of the pull request.
+        /// </summary>
+        public string DiffUrl { get; }
+
+        /// <summary>
+        /// Gets the patch URL of the pull request.
+        /// </summary>
+        public string PatchUrl { get; }
+
+        /// <summary>
+        /// Gets the API URL of the underlying issue.
+        /// </summary>
+        public string IssueUrl { get; }
+
+        /// <summary>
+        /// Gets for API URL for getting the commits made to this pull request.
+        /// </summary>
+        public string CommitsUrl { get; }
+
+        /// <summary>
+        /// Gets the review comments URL of the pull request.
+        /// </summary>
+        public string ReviewCommentsUrl { get; }
+
+        /// <summary>
+        /// Gets the review comment URL of the pull request.
+        /// </summary>
+        public string ReviewCommentUrl { get; }
+
+        /// <summary>
+        /// Gets the comments URL of the pull request.
+        /// </summary>
+        public string CommentsUrl { get; }
+
+        /// <summary>
+        /// Gets the statuses URL of the pull request.
+        /// </summary>
+        public string StatusesUrl { get; }
 
         /// <summary>
         /// Gets the pull request number.
@@ -51,8 +103,6 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         /// </summary>
         public bool IsLocked { get; }
 
-        // TODO: Add support for the "active_lock_reason"
-
         /// <summary>
         /// Gets the title of the pull request.
         /// </summary>
@@ -61,17 +111,36 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         /// <summary>
         /// Gets a reference to the user who created the pull request.
         /// </summary>
-        public GitHubUserItem User { get; }
+        public GitHubUserItem? User { get; }
 
         /// <summary>
         /// Gets the body of the pull request.
         /// </summary>
-        public string Body { get; }
+        public string? Body { get; }
 
         /// <summary>
         /// Gets whether a body has been specified for the pull request.
         /// </summary>
+        [MemberNotNullWhen(true, nameof(Body))]
         public bool HasBody => !string.IsNullOrWhiteSpace(Body);
+
+        /// <summary>
+        /// Gets an array of the labels associated with the pull request.
+        /// </summary>
+        public IReadOnlyList<GitHubLabel> Labels { get; }
+
+        /// <summary>
+        /// Gets the milestone of the pull request, or <see langword="null"/> if the pull request is not part of any milestones.
+        /// </summary>
+        public GitHubMilestone? Milestone { get; }
+
+        /// <summary>
+        /// Gets whether pull request has been added to a milestone.
+        /// </summary>
+        [MemberNotNullWhen(true, nameof(Milestone))]
+        public bool HasMilestone => Milestone is not null;
+
+        // TODO: Add support for the "active_lock_reason" property (string) (nullable)
 
         /// <summary>
         /// Gets a timestamp for when the pull request was created.
@@ -84,123 +153,118 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         public EssentialsTime UpdatedAt { get; }
 
         /// <summary>
-        /// Gets a timestamp for when the pull request was closed, or <c>null</c> if the pull request hasn't yet been closed.
+        /// Gets a timestamp for when the pull request was closed, or <see langword="null"/> if the pull request hasn't yet been closed.
         /// </summary>
-        public EssentialsTime ClosedAt { get; }
+        public EssentialsTime? ClosedAt { get; }
 
         /// <summary>
-        /// Gets whether the pull requsts has been closed.
+        /// Gets whether the pull request has been closed.
         /// </summary>
+        [MemberNotNullWhen(true, nameof(ClosedAt))]
         public bool IsClosed => ClosedAt != null;
 
         /// <summary>
-        /// Gets a timestamp for when the pull request was merged, or <c>null</c> if the pull request hasn't yet been merged.
+        /// Gets a timestamp for when the pull request was merged, or <see langword="null"/> if the pull request hasn't yet been merged.
         /// </summary>
-        public EssentialsTime MergedAt { get; }
+        public EssentialsTime? MergedAt { get; }
 
         /// <summary>
-        /// Gets whether the pull requsts has been merged.
+        /// Gets whether the pull request has been merged.
         /// </summary>
+        [MemberNotNullWhen(true, nameof(MergedAt))]
         public bool IsMerged => MergedAt != null;
 
         /// <summary>
         /// Gets the SHA hash of the last commit of the pull request.
         /// </summary>
-        public string MergeCommitSha { get; }
+        public string? MergeCommitSha { get; }
 
         /// <summary>
-        /// Gets the user assigned to the pull requests, or <c>null</c> if no user is assigned to the pull request.
-        /// 
+        /// Gets the user assigned to the pull requests, or <see langword="null"/> if no user is assigned to the pull request.
+        ///
         /// Notice that more than one user can be assigned to a pull request, so it's recommended to use the
         /// <see cref="Assignees"/> property instead, as it returns an array of the assigned users.
         /// </summary>
-        public GitHubUserItem Assignee { get; }
+        public GitHubUserItem? Assignee { get; }
 
         /// <summary>
         /// Gets an array of users assigned to the pull request.
         /// </summary>
-        public GitHubUserItem[] Assignees { get; }
+        public IReadOnlyList<GitHubUserItem> Assignees { get; }
 
         /// <summary>
         /// Gets whether any users are assigned to the pull request.
         /// </summary>
-        public bool HasAssignees => Assignees.Length > 0;
+        public bool HasAssignees => Assignees.Count > 0;
 
-        // TODO: Add support for the "requested_reviewers" property
+        // TODO: Add support for the "requested_reviewers" property (array of SimpleUser) (nullable)
 
-        // TODO: Add support for the "requested_teams" property
+        // TODO: Add support for the "requested_teams" property (array of Team) (nullable)
 
-        /// <summary>
-        /// Gets an array of the labels associated with the pull request.
-        /// </summary>
-        public GitHubLabel[] Labels { get; }
+        // TODO: Add support for the "head" property (object)
 
-        /// <summary>
-        /// Gets the milestone of the pull request, or <c>null</c> if the pull request is not part of any milestones.
-        /// </summary>
-        public GitHubMilestone Milestone { get; }
+        // TODO: Add support for the "base" property (object)
 
-        // TODO: Add support for the "requested_teams" property
+        // TODO: Add support for the "_links" property (object)
 
-        // TODO: Add support for the "head" property
+        // TODO: Add support for the "author_association" property (string/enum)
 
-        // TODO: Add support for the "base" property
-
-        // TODO: Add support for the "author_association" property
-
-        /// <summary>
-        /// Gets a collection of URLs related to the pull request.
-        /// </summary>
-        public GitHubPullRequestUrls Urls { get; }
+        // TODO: Add support for the "auto_merge" property (boolean) (nullable)
 
         /// <summary>
         /// Gets whether the pull request is a draft.
         /// </summary>
-        /// <remarks>Draft pull requests are currently in preview, meaning the <c>draft</c> property is only part of
-        /// the returned JSON when the <c>application/vnd.github.shadow-cat-preview+json</c> media type is expclicitly
-        /// specified in the request.</remarks>
-        /// <see>
-        ///     <cref>https://social.skybrud.dk/github/media-types/</cref>
-        /// </see>
-        public GitHubBoolean IsDraft { get; }
+        public bool IsDraft { get; }
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance from the specified <paramref name="obj"/>.
+        /// Initializes a new instance from the specified <paramref name="json"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> representing the pull request.</param>
-        protected GitHubPullRequestBase(JObject obj) : base(obj) {
-
-            Id = obj.GetInt64("id");
-            NodeId = obj.GetString("node_id");
-
-            string[] url = obj.GetString("url").Split('/');
+        /// <param name="json">The instance of <see cref="JObject"/> representing the pull request.</param>
+        protected GitHubPullRequestBase(JObject json) : base(json) {
+            Url = json.GetRequiredString("url");
+            string[] url = Url.Split('/');
             RepositoryOwner = url[4];
             RepositorySlug = url[5];
-
-            Number = obj.GetInt32("number");
-            State = obj.GetEnum<GitHubIssueState>("state");
-            IsLocked = obj.GetBoolean("locked");
-            Title = obj.GetString("title");
-            User = obj.GetObject("user", GitHubUserItem.Parse);
-            Body = obj.GetString("body");
-            CreatedAt = obj.GetEssentialsTime("created_at");
-            UpdatedAt = obj.GetEssentialsTime("updated_at");
-            ClosedAt = obj.GetEssentialsTime("closed_at");
-            MergedAt = obj.GetEssentialsTime("merged_at");
-            MergeCommitSha = obj.GetString("merge_commit_sha");
-            Assignee = obj.GetObject("assignee", GitHubUserItem.Parse);
-            Assignees = obj.GetArrayItems("assignees", GitHubUserItem.Parse);
-            Labels = obj.GetArrayItems("labels", GitHubLabel.Parse);
-            Milestone = obj.GetObject("milestone", GitHubMilestone.Parse);
-
-            IsDraft = obj.GetEnum("draft", GitHubBoolean.Unspecified);
-
-            Urls = GitHubPullRequestUrls.Parse(obj);
-
+            Id = json.GetRequiredInt64("id");
+            NodeId = json.GetRequiredString("node_id");
+            HtmlUrl = json.GetRequiredString("html_url");
+            DiffUrl = json.GetRequiredString("diff_url");
+            PatchUrl = json.GetRequiredString("patch_url");
+            IssueUrl = json.GetRequiredString("issue_url");
+            CommitsUrl = json.GetRequiredString("commits_url");
+            ReviewCommentsUrl = json.GetRequiredString("review_comments_url");
+            ReviewCommentUrl = json.GetRequiredString("review_comment_url");
+            CommentsUrl = json.GetRequiredString("comments_url");
+            StatusesUrl = json.GetRequiredString("statuses_url");
+            Number = json.GetRequiredInt32("number");
+            State = json.GetRequiredEnum<GitHubIssueState>("state");
+            IsLocked = json.GetRequiredBoolean("locked");
+            Title = json.GetRequiredString("title");
+            User = json.GetObject("user", GitHubUserItem.Parse);
+            Body = json.GetString("body");
+            Labels = json.GetArrayItems("labels", GitHubLabel.Parse);
+            Milestone = json.GetObject("milestone", GitHubMilestone.Parse);
+            // TODO: Add support for the "active_lock_reason" property (string) (nullable)
+            CreatedAt = json.GetRequiredEssentialsTime("created_at");
+            UpdatedAt = json.GetRequiredEssentialsTime("updated_at");
+            ClosedAt = json.GetEssentialsTime("closed_at");
+            MergedAt = json.GetEssentialsTime("merged_at");
+            MergeCommitSha = json.GetString("merge_commit_sha");
+            Assignee = json.GetObject("assignee", GitHubUserItem.Parse);
+            Assignees = json.GetArrayItems("assignees", GitHubUserItem.Parse);
+            // TODO: Add support for the "requested_reviewers" property (array of SimpleUser) (nullable)
+            // TODO: Add support for the "requested_teams" property (array of Team) (nullable)
+            // TODO: Add support for the "head" property (object)
+            // TODO: Add support for the "base" property (object)
+            // TODO: Add support for the "_links" property (object)
+            // TODO: Add support for the "author_association" property (string/enum)
+            // TODO: Add support for the "auto_merge" property (boolean) (nullable)
+            // TODO: Add support for the "draft" property (boolean)
+            IsDraft = json.GetBoolean("draft");
         }
 
         #endregion
@@ -213,7 +277,7 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubPullRequestBase"/>.</returns>
         public static GitHubPullRequestBase Parse(JObject obj) {
-            return obj == null ? null : new GitHubPullRequestBase(obj);
+            return new GitHubPullRequestBase(obj);
         }
 
         #endregion

@@ -10,22 +10,22 @@ namespace Skybrud.Social.GitHub.Models.Organizations {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance from the specified <paramref name="obj"/>.
+        /// Initializes a new instance from the specified <paramref name="json"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> representing the organizationt.</param>
-        protected GitHubOrganizationItem(JObject obj) : base(obj) { }
+        /// <param name="json">The instance of <see cref="JObject"/> representing the organization.</param>
+        protected GitHubOrganizationItem(JObject json) : base(json) { }
 
         #endregion
 
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubOrganizationItem"/>.
+        /// Parses the specified <paramref name="json"/> into an instance of <see cref="GitHubOrganizationItem"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubOrganizationItem"/>.</returns>
-        public static new GitHubOrganizationItem Parse(JObject obj) {
-            return obj == null ? null : new GitHubOrganizationItem(obj);
+        public static new GitHubOrganizationItem Parse(JObject json) {
+            return new GitHubOrganizationItem(json);
         }
 
         #endregion

@@ -30,7 +30,7 @@ namespace Skybrud.Social.GitHub.Models.Emails {
         #region Constructors
 
         private GitHubEmail(JObject obj) : base(obj) {
-            Email = obj.GetString("email");
+            Email = obj.GetRequiredString("email");
             IsVerified = obj.GetBoolean("verified");
             IsPrimary = obj.GetBoolean("primary");
         }
@@ -45,7 +45,7 @@ namespace Skybrud.Social.GitHub.Models.Emails {
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubEmail"/>.</returns>
         public static GitHubEmail Parse(JObject obj) {
-            return obj == null ? null : new GitHubEmail(obj);
+            return new GitHubEmail(obj);
         }
 
         #endregion

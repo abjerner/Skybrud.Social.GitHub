@@ -8,6 +8,15 @@ namespace Skybrud.Social.GitHub.Models {
     /// </summary>
     public class GitHubObject : JsonObjectBase {
 
+        #region Properties
+
+        /// <summary>
+        /// Gets the internal <see cref="T:Newtonsoft.Json.Linq.JObject" /> the object was created from.
+        /// </summary>
+        public new JObject JObject => base.JObject!;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>

@@ -11,6 +11,8 @@ namespace Skybrud.Social.GitHub.Models.Commits {
 
         #region Properties
 
+        // TODO: add support for "sha" (string?)
+
         /// <summary>
         /// Gets the filename (path) of the file.
         /// </summary>
@@ -56,33 +58,22 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// </summary>
         public string Patch { get; }
 
+        // TODO: add support for "previous_filename" (string) (not sure if this is nullable)
+
         #endregion
 
         #region Constructors
 
         private GitHubCommitFile(JObject obj) : base(obj) {
-
-            // Parse the file status
-            GitHubCommitFileStatus status;
-            string strStatus = obj.GetString("status");
-            switch (strStatus) {
-                case "added": status = GitHubCommitFileStatus.Added; break;
-                case "modified": status = GitHubCommitFileStatus.Modified; break;
-                case "renamed": status = GitHubCommitFileStatus.Renamed; break;
-                case "removed": status = GitHubCommitFileStatus.Removed; break;
-                default: throw new Exception("Unknown status \"" + strStatus + "\" - please create an issue it can be fixed https://github.com/abjerner/Skybrud.Social.GitHub/issues/new");
-            }
-
-            Filename = obj.GetString("filename");
-            Additions = obj.GetInt32("additions");
-            Deletions = obj.GetInt32("deletions");
-            Changes = obj.GetInt32("changes");
-            Status = status;
-            BlobUrl = obj.GetString("blob_url");
-            RawUrl = obj.GetString("raw_url");
-            ContentsUrl = obj.GetString("contents_url");
-            Patch = obj.GetString("patch");
-
+            Filename = obj.GetRequiredString("filename");
+            Status = obj.GetRequiredString("status", ParseFileStatus);
+            Additions = obj.GetRequiredInt32("additions");
+            Deletions = obj.GetRequiredInt32("deletions");
+            Changes = obj.GetRequiredInt32("changes");
+            BlobUrl = obj.GetRequiredString("blob_url");
+            RawUrl = obj.GetRequiredString("raw_url");
+            ContentsUrl = obj.GetRequiredString("contents_url");
+            Patch = obj.GetRequiredString("patch");
         }
 
         #endregion
@@ -95,7 +86,20 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubCommitFile"/>.</returns>
         public static GitHubCommitFile Parse(JObject obj) {
-            return obj == null ? null : new GitHubCommitFile(obj);
+            return new GitHubCommitFile(obj);
+        }
+
+        private static GitHubCommitFileStatus ParseFileStatus(string value) {
+            return value switch {
+                "added" => GitHubCommitFileStatus.Added,
+                "removed" => GitHubCommitFileStatus.Removed,
+                "modified" => GitHubCommitFileStatus.Modified,
+                "renamed" => GitHubCommitFileStatus.Renamed,
+                "copied" => GitHubCommitFileStatus.Copied,
+                "changed" => GitHubCommitFileStatus.Changed,
+                "unchanged" => GitHubCommitFileStatus.Unchanged,
+                _ => throw new Exception($"Unknown status '{value}' - please create an issue it can be fixed https://github.com/abjerner/Skybrud.Social.GitHub/issues/new")
+            };
         }
 
         #endregion

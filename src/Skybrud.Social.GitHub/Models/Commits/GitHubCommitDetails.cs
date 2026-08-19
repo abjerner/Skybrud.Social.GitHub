@@ -4,7 +4,7 @@ using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 namespace Skybrud.Social.GitHub.Models.Commits {
 
     /// <summary>
-    /// Class representing the details of a commit.
+    /// Class representing the details of a commit. Nested object of <see cref="GitHubCommit"/>.
     /// </summary>
     public class GitHubCommitDetails : GitHubObject {
 
@@ -13,12 +13,12 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// <summary>
         /// Gets information about the author of the commit.
         /// </summary>
-        public GitHubCommitAuthor Author { get; }
+        public GitHubCommitAuthor? Author { get; }
 
         /// <summary>
         /// Gets information about the user who committed the commit.
         /// </summary>
-        public GitHubCommitAuthor Committer { get; }
+        public GitHubCommitAuthor? Committer { get; }
 
         /// <summary>
         /// Gets the message of the commit.
@@ -26,7 +26,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         public string Message { get; }
 
         /// <summary>
-        /// Gets information about the tree begind the commit.
+        /// Gets information about the tree behind the commit.
         /// </summary>
         public GitHubCommitTree Tree { get; }
 
@@ -47,10 +47,10 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         private GitHubCommitDetails(JObject obj) : base(obj) {
             Author = obj.GetObject("author", GitHubCommitAuthor.Parse);
             Committer = obj.GetObject("committer", GitHubCommitAuthor.Parse);
-            Message = obj.GetString("message");
-            Tree = obj.GetObject("tree", GitHubCommitTree.Parse);
-            Url = obj.GetString("url");
-            CommentCount = obj.GetInt32("comment_count");
+            Message = obj.GetRequiredString("message");
+            Tree = obj.GetRequiredObject("tree", GitHubCommitTree.Parse);
+            Url = obj.GetRequiredString("url");
+            CommentCount = obj.GetRequiredInt32("comment_count");
         }
 
         #endregion
@@ -63,7 +63,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubCommitDetails"/>.</returns>
         public static GitHubCommitDetails Parse(JObject obj) {
-            return obj == null ? null : new GitHubCommitDetails(obj);
+            return new GitHubCommitDetails(obj);
         }
 
         #endregion

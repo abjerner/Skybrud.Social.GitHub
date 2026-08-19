@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Http;
 
@@ -10,6 +9,18 @@ namespace Skybrud.Social.GitHub.Extensions {
     /// </summary>
     public static class GitHubExtensions {
 
+        internal static string GetRequiredString(this IHttpQueryString query, string key) {
+            string? value = query[key];
+            if (string.IsNullOrWhiteSpace(value)) throw new Exception($"Required parameter '{key}' not found in query string.");
+            return value!;
+        }
+
+        internal static TResult GetRequiredString<TResult>(this IHttpQueryString query, string key, Func<string, TResult> callback) {
+            string? value = query[key];
+            if (string.IsNullOrWhiteSpace(value)) throw new Exception($"Required parameter '{key}' not found in query string.");
+            return callback(value!);
+        }
+
         /// <summary>
         /// Adds a new item to <paramref name="query"/> with the specified <paramref name="key"/> and enum <paramref name="value"/>.
         /// </summary>
@@ -17,7 +28,7 @@ namespace Skybrud.Social.GitHub.Extensions {
         /// <param name="key">The key.</param>
         /// <param name="value">The enum value.</param>
         public static void AddEnumValue(this IHttpQueryString query, string key, Enum value) {
-            query?.Add(key, GitHubUtils.ToString(value));
+            query.Add(key, GitHubUtils.ToString(value));
         }
 
         /// <summary>
@@ -31,7 +42,7 @@ namespace Skybrud.Social.GitHub.Extensions {
         }
 
         /// <summary>
-        /// Returns wether the specified integer has a value (not equal to <c>0</c>). 
+        /// Returns whether the specified integer has a value (not equal to <c>0</c>).
         /// </summary>
         /// <param name="value">The integer value to check.</param>
         /// <returns><c>true</c> if the integer has a value; otherwise <c>false</c>.</returns>
@@ -46,10 +57,7 @@ namespace Skybrud.Social.GitHub.Extensions {
         /// <param name="mediaType">The media type to be added.</param>
         public static T AddMediaType<T>(this T options, string mediaType) where T : GitHubHttpRequestOptions {
             if (string.IsNullOrWhiteSpace(mediaType)) throw new ArgumentNullException(nameof(mediaType));
-            if (options != null) {
-                if (options.MediaTypes == null) options.MediaTypes = new List<string>();
-                options.MediaTypes.Add(mediaType);
-            }
+            options.MediaTypes.Add(mediaType);
             return options;
         }
 
@@ -60,7 +68,7 @@ namespace Skybrud.Social.GitHub.Extensions {
         /// <param name="mediaType">The media type to be removed.</param>
         public static T RemoveMediaType<T>(this T options, string mediaType) where T : GitHubHttpRequestOptions {
             if (string.IsNullOrWhiteSpace(mediaType)) throw new ArgumentNullException(nameof(mediaType));
-            options?.MediaTypes?.Remove(mediaType);
+            options.MediaTypes.Remove(mediaType);
             return options;
         }
 

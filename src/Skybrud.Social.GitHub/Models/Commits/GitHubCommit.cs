@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Social.GitHub.Models.Users;
 
@@ -29,17 +30,17 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// <summary>
         /// Gets information about the author of the commit.
         /// </summary>
-        public GitHubUserItem Author { get; }
+        public GitHubUserItem? Author { get; }
 
         /// <summary>
         /// Gets information about the user who committed the commit.
         /// </summary>
-        public GitHubUserItem Committer { get; }
+        public GitHubUserItem? Committer { get; }
 
         /// <summary>
         /// Gets information about the parent commits.
         /// </summary>
-        public GitHubCommitParent[] Parents { get; }
+        public IReadOnlyList<GitHubCommitParent> Parents { get; }
 
         /// <summary>
         /// Gets statistics about the commit.
@@ -47,33 +48,28 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         public GitHubCommitStats Stats { get; }
 
         /// <summary>
-        /// Gets whether the <see cref="Stats"/> property has a value.
-        /// </summary>
-        public bool HasStats => Files.Length > 0;
-
-        /// <summary>
         /// Gets an array of files added, modified, renamed or removed in the commit.
         /// </summary>
-        public GitHubCommitFile[] Files { get; }
+        public IReadOnlyList<GitHubCommitFile> Files { get; }
 
         /// <summary>
         /// Gets whether the <see cref="Files"/> property has a value.
         /// </summary>
-        public bool HasFiles => Files.Length > 0;
+        public bool HasFiles => Files.Count > 0;
 
         #endregion
 
         #region Constructors
 
         private GitHubCommit(JObject obj) : base(obj) {
-            Sha = obj.GetString("sha");
-            Commit = obj.GetObject("commit", GitHubCommitDetails.Parse);
+            Sha = obj.GetRequiredString("sha");
+            Commit = obj.GetRequiredObject("commit", GitHubCommitDetails.Parse);
             Urls = GitHubCommitUrls.Parse(obj);
             Author = obj.GetObject("author", GitHubUserItem.Parse);
             Committer = obj.GetObject("committer", GitHubUserItem.Parse);
-            Parents = obj.GetArray("parents", GitHubCommitParent.Parse);
-            Stats = obj.GetObject("stats", GitHubCommitStats.Parse);
-            Files = obj.GetArray("files", GitHubCommitFile.Parse);
+            Parents = obj.GetRequiredArray("parents", GitHubCommitParent.Parse);
+            Stats = obj.GetRequiredObject("stats", GitHubCommitStats.Parse);
+            Files = obj.GetRequiredArray("files", GitHubCommitFile.Parse);
         }
 
         #endregion
@@ -86,7 +82,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubCommit"/>.</returns>
         public static GitHubCommit Parse(JObject obj) {
-            return obj == null ? null : new GitHubCommit(obj);
+            return new GitHubCommit(obj);
         }
 
         #endregion

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 
@@ -34,11 +34,12 @@ namespace Skybrud.Social.GitHub.Models.Labels {
         /// <summary>
         /// Gets the description of the label.
         /// </summary>
-        public string Description { get; }
+        public string? Description { get; }
 
         /// <summary>
         /// Gets whether the label has a description.
         /// </summary>
+        [MemberNotNullWhen(true, nameof(Description))]
         public bool HasDescription => !string.IsNullOrWhiteSpace(Description);
 
         /// <summary>
@@ -55,14 +56,14 @@ namespace Skybrud.Social.GitHub.Models.Labels {
 
         #region Constructors
 
-        private GitHubLabel(JObject obj) : base(obj) {
-            Id = obj.GetInt64("id");
-            NodeId = obj.GetString("node_id");
-            Url = obj.GetString("url");
-            Name = obj.GetString("name");
-            Description = obj.GetString("description");
-            Color = obj.GetString("color");
-            IsDefault = obj.GetBoolean("default");
+        private GitHubLabel(JObject json) : base(json) {
+            Id = json.GetRequiredInt64("id");
+            NodeId = json.GetRequiredString("node_id");
+            Url = json.GetRequiredString("url");
+            Name = json.GetRequiredString("name");
+            Description = json.GetString("description");
+            Color = json.GetRequiredString("color");
+            IsDefault = json.GetRequiredBoolean("default");
         }
 
         #endregion
@@ -70,12 +71,12 @@ namespace Skybrud.Social.GitHub.Models.Labels {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubLabel"/>.
+        /// Parses the specified <paramref name="json"/> into an instance of <see cref="GitHubLabel"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubLabel"/>.</returns>
-        public static GitHubLabel Parse(JObject obj) {
-            return obj == null ? null : new GitHubLabel(obj);
+        public static GitHubLabel Parse(JObject json) {
+            return new GitHubLabel(json);
         }
 
         #endregion

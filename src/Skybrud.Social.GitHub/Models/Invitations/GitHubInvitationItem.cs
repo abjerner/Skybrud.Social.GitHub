@@ -43,7 +43,7 @@ namespace Skybrud.Social.GitHub.Models.Invitations {
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubInvitationItem"/>.</returns>
         public static GitHubInvitationItem Parse(JObject json) {
-            return json == null ? null : new GitHubInvitationItem(json);
+            return new GitHubInvitationItem(json);
         }
 
         #endregion

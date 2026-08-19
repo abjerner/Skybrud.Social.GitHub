@@ -18,7 +18,7 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="json"/>.
         /// </summary>
-        /// <param name="json">The instance of <see cref="JObject"/> representing the organizationt.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> representing the organization.</param>
         protected GitHubRelease(JObject json) : base(json) { }
 
         #endregion
@@ -31,7 +31,7 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubRelease"/>.</returns>
         public static new GitHubRelease Parse(JObject json) {
-            return json == null ? null : new GitHubRelease(json);
+            return new GitHubRelease(json);
         }
 
         #endregion

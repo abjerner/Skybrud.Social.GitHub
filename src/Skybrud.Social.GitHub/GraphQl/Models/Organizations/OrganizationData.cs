@@ -41,7 +41,7 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Organizations {
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="OrganizationData"/>.</returns>
         public static OrganizationData Parse(JObject json) {
-            return json == null ? null : new OrganizationData(json);
+            return new OrganizationData(json);
         }
 
         #endregion

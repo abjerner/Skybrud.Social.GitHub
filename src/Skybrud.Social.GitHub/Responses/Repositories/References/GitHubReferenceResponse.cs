@@ -1,5 +1,5 @@
 ﻿using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Json;
+using Skybrud.Essentials.Json.Newtonsoft;
 using Skybrud.Social.GitHub.Models.Repositories.References;
 
 namespace Skybrud.Social.GitHub.Responses.Repositories.References {

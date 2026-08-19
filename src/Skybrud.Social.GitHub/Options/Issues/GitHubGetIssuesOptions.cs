@@ -42,7 +42,7 @@ namespace Skybrud.Social.GitHub.Options.Issues {
         public GitHubSortDirection Direction { get; set; }
 
         /// <summary>
-        /// Only issues updated at or after this time are returned. Default is <code>null</code>.
+        /// Only issues updated at or after this time are returned. Default is <see langword="null"/>.
         /// </summary>
         public EssentialsTime Since { get; set; }
 

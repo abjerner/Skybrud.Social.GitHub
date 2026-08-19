@@ -10,22 +10,22 @@ namespace Skybrud.Social.GitHub.Models.PullRequests {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance from the specified <paramref name="obj"/>.
+        /// Initializes a new instance from the specified <paramref name="json"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> representing the pull request.</param>
-        protected GitHubPullRequestItem(JObject obj) : base(obj) { }
+        /// <param name="json">The instance of <see cref="JObject"/> representing the pull request.</param>
+        protected GitHubPullRequestItem(JObject json) : base(json) { }
 
         #endregion
 
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubPullRequestItem"/>.
+        /// Parses the specified <paramref name="json"/> into an instance of <see cref="GitHubPullRequestItem"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubPullRequestItem"/>.</returns>
-        public new static GitHubPullRequestItem Parse(JObject obj) {
-            return obj == null ? null : new GitHubPullRequestItem(obj);
+        public static new GitHubPullRequestItem Parse(JObject json) {
+            return new GitHubPullRequestItem(json);
         }
 
         #endregion

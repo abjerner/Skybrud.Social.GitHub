@@ -10,10 +10,10 @@ public class GitHubIssueItem : GitHubIssueBase {
     #region Constructors
 
     /// <summary>
-    /// Initializes a new instance from the specified <paramref name="obj"/>.
+    /// Initializes a new instance from the specified <paramref name="json"/>.
     /// </summary>
-    /// <param name="obj">The instance of <see cref="JObject"/> representing the issue.</param>
-    protected GitHubIssueItem(JObject obj) : base(obj) { }
+    /// <param name="json">The instance of <see cref="JObject"/> representing the issue.</param>
+    protected GitHubIssueItem(JObject json) : base(json) { }
 
     #endregion
 

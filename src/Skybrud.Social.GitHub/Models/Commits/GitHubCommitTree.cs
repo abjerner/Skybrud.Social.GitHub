@@ -4,7 +4,7 @@ using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 namespace Skybrud.Social.GitHub.Models.Commits {
 
     /// <summary>
-    /// Class representing the tree of a given commit.
+    /// Class representing the tree of a given commit. Nested object of <see cref="GitHubCommitDetails"/>.
     /// </summary>
     public class GitHubCommitTree : GitHubObject {
 
@@ -25,8 +25,8 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         #region Constructors
 
         private GitHubCommitTree(JObject obj) : base(obj) {
-            Sha = obj.GetString("sha");
-            Url = obj.GetString("url");
+            Sha = obj.GetRequiredString("sha");
+            Url = obj.GetRequiredString("url");
         }
 
         #endregion
@@ -39,7 +39,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubCommitTree"/>.</returns>
         public static GitHubCommitTree Parse(JObject obj) {
-            return obj == null ? null : new GitHubCommitTree(obj);
+            return new GitHubCommitTree(obj);
         }
 
         #endregion

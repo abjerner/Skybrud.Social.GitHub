@@ -21,7 +21,7 @@ namespace Skybrud.Social.GitHub.Models.Branches {
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubBranch"/>.</returns>
         public static new GitHubBranch Parse(JObject obj) {
-            return obj == null ? null : new GitHubBranch(obj);
+            return new GitHubBranch(obj);
         }
 
         #endregion

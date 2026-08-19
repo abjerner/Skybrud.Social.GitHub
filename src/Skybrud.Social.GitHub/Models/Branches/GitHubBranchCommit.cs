@@ -29,8 +29,8 @@ namespace Skybrud.Social.GitHub.Models.Branches {
         /// </summary>
         /// <param name="json">The instance of <see cref="JObject"/> representing the object.</param>
         protected GitHubBranchCommit(JObject json) : base(json) {
-            Sha = json.GetString("sha");
-            Url = json.GetString("url");
+            Sha = json.GetRequiredString("sha");
+            Url = json.GetRequiredString("url");
         }
 
         #endregion
@@ -43,7 +43,7 @@ namespace Skybrud.Social.GitHub.Models.Branches {
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubBranchCommit"/>.</returns>
         public static GitHubBranchCommit Parse(JObject json) {
-            return json == null ? null : new GitHubBranchCommit(json);
+            return new GitHubBranchCommit(json);
         }
 
         #endregion

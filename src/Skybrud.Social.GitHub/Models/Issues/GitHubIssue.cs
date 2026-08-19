@@ -22,9 +22,8 @@ namespace Skybrud.Social.GitHub.Models.Issues {
 
         #region Constructors
 
-        private GitHubIssue(JObject obj) : base(obj) {
-            // TODO: Add support for the "closed_by" property
-            Repository = obj.GetObject("repository", GitHubRepositoryItem.Parse);
+        private GitHubIssue(JObject json) : base(json) {
+            Repository = json.GetRequiredObject("repository", GitHubRepositoryItem.Parse);
         }
 
         #endregion

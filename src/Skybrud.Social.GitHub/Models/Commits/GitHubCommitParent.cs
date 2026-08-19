@@ -45,7 +45,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubCommitParent"/>.</returns>
         public static GitHubCommitParent Parse(JObject obj) {
-            return obj == null ? null : new GitHubCommitParent(obj);
+            return new GitHubCommitParent(obj);
         }
 
         #endregion

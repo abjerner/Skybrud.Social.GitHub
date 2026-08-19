@@ -7,7 +7,7 @@ using Skybrud.Social.GitHub.Models.Users;
 namespace Skybrud.Social.GitHub.Models.PullRequests.Reviews {
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class GitHubReviewItem : GitHubObject {
 
@@ -91,7 +91,7 @@ namespace Skybrud.Social.GitHub.Models.PullRequests.Reviews {
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubReviewItem"/>.</returns>
         public static GitHubReviewItem Parse(JObject obj) {
-            return obj == null ? null : new GitHubReviewItem(obj);
+            return new GitHubReviewItem(obj);
         }
 
         #endregion

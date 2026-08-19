@@ -20,7 +20,7 @@ namespace Skybrud.Social.GitHub.Models.Milestones {
         #region Constructors
 
         private GitHubMilestoneReference(JObject obj) : base(obj) {
-            Title = obj.GetString("title");
+            Title = obj.GetRequiredString("title");
         }
 
         #endregion
@@ -33,7 +33,7 @@ namespace Skybrud.Social.GitHub.Models.Milestones {
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubMilestoneReference"/>.</returns>
         public static GitHubMilestoneReference Parse(JObject obj) {
-            return obj == null ? null : new GitHubMilestoneReference(obj);
+            return new GitHubMilestoneReference(obj);
         }
 
         #endregion

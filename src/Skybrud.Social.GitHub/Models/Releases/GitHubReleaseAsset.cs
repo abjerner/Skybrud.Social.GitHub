@@ -1,14 +1,32 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Extensions;
 using Skybrud.Social.GitHub.Models.Users;
 
 namespace Skybrud.Social.GitHub.Models.Releases {
 
     /// <summary>
-    /// Class describing an asset of a GitHub release.
+    /// Class describing an asset of a GitHub release. Nested object of <see cref="GitHubRelease"/>.
     /// </summary>
     public class GitHubReleaseAsset : GitHubObject {
+
+        /*
+         * SCHEMA:
+         *
+         * url                      string (uri)
+         * browser_download_url     string (uri)
+         * id                       integer
+         * node_id                  string
+         * name                     string
+         * label                    string?
+         * state                    string (enum: uploaded|open)
+         * content_type             string
+         * size                     integer
+         * created_at               string (date-time)
+         * updated_at               string (date-time)
+         * uploader                 SimpleUser?
+         */
 
         #region Properties
 
@@ -16,6 +34,11 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         /// Gets the API URL of the asset.
         /// </summary>
         public string Url { get; }
+
+        /// <summary>
+        /// Gets the browser download URL of the asset.
+        /// </summary>
+        public string BrowserDownloadUrl { get; }
 
         /// <summary>
         /// Gets the numeric ID of the asset.
@@ -35,12 +58,12 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         /// <summary>
         /// Gets the label of the asset.
         /// </summary>
-        public string Label { get; }
+        public string? Label { get; }
 
         /// <summary>
-        /// Gets a reference to the user who uploaded the asset.
+        /// Gets the state of the asset.
         /// </summary>
-        public GitHubUserItem Uploader { get; }
+        public string State { get; } // TODO: enum (uploaded|open)
 
         /// <summary>
         /// Gets the content type of the asset.
@@ -48,19 +71,9 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         public string ContentType { get; }
 
         /// <summary>
-        /// Gets the state of the asset.
-        /// </summary>
-        public string State { get; }
-
-        /// <summary>
         /// Gets the file size of the asset.
         /// </summary>
         public long Size { get; }
-
-        /// <summary>
-        /// Gets the download count of the asset.
-        /// </summary>
-        public long DownloadCount { get; }
 
         /// <summary>
         /// Gets the time asset was created.
@@ -73,9 +86,14 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         public EssentialsTime UpdatedAt { get; }
 
         /// <summary>
-        /// Gets the browser download URL of the asset.
+        /// Gets a reference to the user who uploaded the asset.
         /// </summary>
-        public string BrowserDownloadUrl { get; }
+        public GitHubUserItem Uploader { get; }
+
+        /// <summary>
+        /// Gets the download count of the asset.
+        /// </summary>
+        public long DownloadCount { get; }
 
         #endregion
 
@@ -84,21 +102,21 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="json"/>.
         /// </summary>
-        /// <param name="json">The instance of <see cref="JObject"/> representing the organizationt.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> representing the organization.</param>
         protected GitHubReleaseAsset(JObject json) : base(json) {
-            Url = json.GetString("url");
-            Id = json.GetInt64("id");
-            NodeId = json.GetString("node_id");
-            Name = json.GetString("name");
+            Url = json.GetRequiredString("url");
+            BrowserDownloadUrl = json.GetRequiredString("browser_download_url");
+            Id = json.GetRequiredInt64("id");
+            NodeId = json.GetRequiredString("node_id");
+            Name = json.GetRequiredString("name");
             Label = json.GetString("label");
-            Uploader = json.GetObject("uploader", GitHubUserItem.Parse);
-            ContentType = json.GetString("content_type");
-            State = json.GetString("state");
-            Size = json.GetInt64("size");
-            DownloadCount = json.GetInt64("download_count");
-            CreatedAt = json.GetString("created_at", EssentialsTime.Parse);
-            UpdatedAt = json.GetString("updated_at", EssentialsTime.Parse);
-            BrowserDownloadUrl = json.GetString("browser_download_url");
+            State = json.GetRequiredString("state"); // TODO: enum (uploaded|open)
+            ContentType = json.GetRequiredString("content_type");
+            Size = json.GetRequiredInt64("size");
+            CreatedAt = json.GetRequiredEssentialsTime("created_at");
+            UpdatedAt = json.GetRequiredEssentialsTime("updated_at");
+            Uploader = json.GetRequiredObject("uploader", GitHubUserItem.Parse);
+            DownloadCount = json.GetInt64("download_count"); // TODO: not documented??????
         }
 
         #endregion
@@ -111,7 +129,7 @@ namespace Skybrud.Social.GitHub.Models.Releases {
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubReleaseAsset"/>.</returns>
         public static GitHubReleaseAsset Parse(JObject json) {
-            return json == null ? null : new GitHubReleaseAsset(json);
+            return new GitHubReleaseAsset(json);
         }
 
         #endregion

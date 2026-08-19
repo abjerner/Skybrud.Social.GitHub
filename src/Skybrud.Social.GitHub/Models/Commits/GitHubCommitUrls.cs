@@ -30,9 +30,9 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         #region Constructors
 
         private GitHubCommitUrls(JObject obj) {
-            Url = obj.GetString("url");
-            HtmlUrl = obj.GetString("html_url");
-            CommentsUrl = obj.GetString("comments_url");
+            Url = obj.GetRequiredString("url");
+            HtmlUrl = obj.GetRequiredString("html_url");
+            CommentsUrl = obj.GetRequiredString("comments_url");
         }
 
         #endregion
@@ -45,7 +45,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubCommitUrls"/>.</returns>
         public static GitHubCommitUrls Parse(JObject obj) {
-            return obj == null ? null : new GitHubCommitUrls(obj);
+            return new GitHubCommitUrls(obj);
         }
 
         #endregion

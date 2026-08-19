@@ -23,19 +23,19 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Organizations {
         /// Gets a list of nodes.
         /// </summary>
         [JsonProperty("nodes")]
-        public IReadOnlyList<User> Nodes { get; }
+        public IReadOnlyList<User>? Nodes { get; }
 
         /// <summary>
-        /// Gets nformation to aid in pagination.
+        /// Gets information to aid in pagination.
         /// </summary>
         [JsonProperty("pageInfo")]
-        public PageInfo PageInfo { get; }
+        public PageInfo? PageInfo { get; }
 
         /// <summary>
         /// Gets the total count of items in the connection.
         /// </summary>
         [JsonProperty("totalCount")]
-        public int TotalCount { get; }
+        public int? TotalCount { get; }
 
         #endregion
 
@@ -61,7 +61,7 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Organizations {
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="OrganizationMemberConnection"/>.</returns>
         public static OrganizationMemberConnection Parse(JObject json) {
-            return json == null ? null : new OrganizationMemberConnection(json);
+            return new OrganizationMemberConnection(json);
         }
 
         #endregion

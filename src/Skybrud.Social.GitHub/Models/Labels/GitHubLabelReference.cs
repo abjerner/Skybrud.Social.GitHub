@@ -24,9 +24,9 @@ namespace Skybrud.Social.GitHub.Models.Labels {
 
         #region Constructors
 
-        private GitHubLabelReference(JObject obj) : base(obj) {
-            Name = obj.GetString("name");
-            Color = obj.GetString("color");
+        private GitHubLabelReference(JObject json) : base(json) {
+            Name = json.GetRequiredString("name");
+            Color = json.GetRequiredString("color");
         }
 
         #endregion
@@ -34,12 +34,12 @@ namespace Skybrud.Social.GitHub.Models.Labels {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubLabelReference"/>.
+        /// Parses the specified <paramref name="json"/> into an instance of <see cref="GitHubLabelReference"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubLabelReference"/>.</returns>
-        public static GitHubLabelReference Parse(JObject obj) {
-            return obj == null ? null : new GitHubLabelReference(obj);
+        public static GitHubLabelReference Parse(JObject json) {
+            return new GitHubLabelReference(json);
         }
 
         #endregion

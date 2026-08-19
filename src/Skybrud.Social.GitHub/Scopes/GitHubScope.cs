@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+
+// ReSharper disable CanSimplifyDictionaryTryGetValueWithGetValueOrDefault
 
 namespace Skybrud.Social.GitHub.Scopes {
 
@@ -9,7 +12,7 @@ namespace Skybrud.Social.GitHub.Scopes {
 
         #region Private fields
 
-        private static readonly Dictionary<string, GitHubScope> Scopes = new Dictionary<string, GitHubScope>();
+        private static readonly Dictionary<string, GitHubScope> _scopes = [];
 
         #endregion
 
@@ -23,12 +26,12 @@ namespace Skybrud.Social.GitHub.Scopes {
         /// <summary>
         /// Gets the name of the scope.
         /// </summary>
-        public string Name { get; }
+        public string? Name { get; }
 
         /// <summary>
         /// Gets the description of the scope.
         /// </summary>
-        public string Description { get; }
+        public string? Description { get; }
 
         #endregion
 
@@ -48,7 +51,7 @@ namespace Skybrud.Social.GitHub.Scopes {
         /// <param name="alias">The alias of the scope.</param>
         /// <param name="name">The name of the scope.</param>
         /// <param name="description">The description of the scope.</param>
-        internal GitHubScope(string alias, string name, string description) {
+        internal GitHubScope(string alias, string? name, string? description) {
             Alias = alias;
             Name = name;
             Description = description;
@@ -76,9 +79,9 @@ namespace Skybrud.Social.GitHub.Scopes {
         /// <param name="alias">The alias of the scope.</param>
         /// <param name="name">The name of the scope.</param>
         /// <param name="description">The description of the scope.</param>
-        internal static GitHubScope RegisterScope(string alias, string name, string description) {
-            GitHubScope scope = new GitHubScope(alias, name, description);
-            Scopes.Add(scope.Alias, scope);
+        internal static GitHubScope RegisterScope(string alias, string? name, string? description) {
+            GitHubScope scope = new(alias, name, description);
+            _scopes.Add(scope.Alias, scope);
             return scope;
         }
 
@@ -86,9 +89,9 @@ namespace Skybrud.Social.GitHub.Scopes {
         /// Attempts to get a scope with the specified <paramref name="alias"/>.
         /// </summary>
         /// <param name="alias">The name of the alias.</param>
-        /// <returns>A scope matching the specified <paramref name="alias"/>, or <c>null</c> if not found.</returns>
-        public static GitHubScope GetScope(string alias) {
-            return Scopes.TryGetValue(alias, out var scope) ? scope : null;
+        /// <returns>A scope matching the specified <paramref name="alias"/>, or <see langword="null"/> if not found.</returns>
+        public static GitHubScope? GetScope(string alias) {
+            return _scopes.TryGetValue(alias, out GitHubScope? scope) ? scope : null;
         }
 
         /// <summary>
@@ -97,17 +100,17 @@ namespace Skybrud.Social.GitHub.Scopes {
         /// <param name="alias">The name of the scope.</param>
         /// <returns><c>true</c> if the specified <paramref name="alias"/> matches a known scope, otherwise <c>false</c>.</returns>
         public static bool ScopeExists(string alias) {
-            return Scopes.ContainsKey(alias);
+            return _scopes.ContainsKey(alias);
         }
 
         /// <summary>
         /// Gets the scope with the specified <paramref name="alias"/>.
         /// </summary>
         /// <param name="alias">The alias of the scope.</param>
-        /// <param name="result">When this method returns, contains the scope with specified <paramref name="alias"/>, if the scope is found; otherwise, <c>null</c>. This parameter is passed uninitialized.</param>
-        /// <returns><c>true</c> if the a scope with the specified <paramref name="alias"/> exists; otherwise, false.</returns>
-        public static bool TryGetScope(string alias, out GitHubScope result) {
-            return Scopes.TryGetValue(alias, out result);
+        /// <param name="result">When this method returns, contains the scope with specified <paramref name="alias"/>, if the scope is found; otherwise, <see langword="null"/>. This parameter is passed uninitialized.</param>
+        /// <returns><c>true</c> if a scope with the specified <paramref name="alias"/> exists; otherwise, false.</returns>
+        public static bool TryGetScope(string alias, [NotNullWhen(true)] out GitHubScope? result) {
+            return _scopes.TryGetValue(alias, out result);
         }
 
         #endregion

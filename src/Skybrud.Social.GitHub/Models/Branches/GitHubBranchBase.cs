@@ -49,7 +49,7 @@ namespace Skybrud.Social.GitHub.Models.Branches {
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubBranch"/>.</returns>
         public static GitHubBranchBase Parse(JObject json) {
-            return json == null ? null : new GitHubBranchBase(json);
+            return new GitHubBranchBase(json);
         }
 
         #endregion

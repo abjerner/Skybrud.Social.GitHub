@@ -37,7 +37,7 @@ namespace Skybrud.Social.GitHub.Models.Common {
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="obj"/>.
         /// </summary>
-        /// <param name="obj">The an instance of <see cref="JObject"/> representing the error.</param>
+        /// <param name="obj">The instance of <see cref="JObject"/> representing the error.</param>
         protected GitHubErrorItem(JObject obj) : base(obj) {
             Message = obj.GetString("message");
             Resource = obj.GetString("resource");
@@ -55,7 +55,7 @@ namespace Skybrud.Social.GitHub.Models.Common {
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubErrorItem"/>.</returns>
         public static GitHubErrorItem Parse(JObject obj) {
-            return obj == null ? null : new GitHubErrorItem(obj);
+            return new GitHubErrorItem(obj);
         }
 
         #endregion

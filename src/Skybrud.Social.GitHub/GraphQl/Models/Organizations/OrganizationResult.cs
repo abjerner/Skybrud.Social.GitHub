@@ -3,7 +3,7 @@ using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Social.GitHub.Models;
 
 namespace Skybrud.Social.GitHub.GraphQl.Models.Organizations {
-    
+
     /// <summary>
     /// Class representing the result of an <strong>Organization</strong> query.
     /// </summary>
@@ -13,7 +13,7 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Organizations {
     public class OrganizationResult : GitHubObject {
 
         #region Properties
-        
+
         /// <summary>
         /// Gets the data of the result.
         /// </summary>
@@ -41,7 +41,7 @@ namespace Skybrud.Social.GitHub.GraphQl.Models.Organizations {
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="OrganizationResult"/>.</returns>
         public static OrganizationResult Parse(JObject json) {
-            return json == null ? null : new OrganizationResult(json);
+            return new OrganizationResult(json);
         }
 
         #endregion

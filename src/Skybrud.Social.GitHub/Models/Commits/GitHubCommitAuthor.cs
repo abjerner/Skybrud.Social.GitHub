@@ -32,9 +32,9 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         #region Constructors
 
         private GitHubCommitAuthor(JObject obj) : base(obj) {
-            Name = obj.GetString("name");
-            Email = obj.GetString("email");
-            Date = obj.GetEssentialsTime("date");
+            Name = obj.GetRequiredString("name");
+            Email = obj.GetRequiredString("email");
+            Date = obj.GetRequiredEssentialsTime("date");
         }
 
         #endregion
@@ -47,7 +47,7 @@ namespace Skybrud.Social.GitHub.Models.Commits {
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GitHubCommitAuthor"/>.</returns>
         public static GitHubCommitAuthor Parse(JObject obj) {
-            return obj == null ? null : new GitHubCommitAuthor(obj);
+            return new GitHubCommitAuthor(obj);
         }
 
         #endregion
