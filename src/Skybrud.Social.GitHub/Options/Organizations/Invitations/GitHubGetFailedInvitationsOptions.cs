@@ -70,7 +70,7 @@ public class GitHubGetFailedInvitationsOptions : GitHubHttpRequestOptions {
     /// </summary>
     /// <param name="organization">The organization.</param>
     [SetsRequiredMembers]
-    public GitHubGetFailedInvitationsOptions(GitHubOrganizationItem organization) {
+    public GitHubGetFailedInvitationsOptions(GitHubOrganizationBase organization) {
         if (organization == null) throw new ArgumentNullException(nameof(organization));
         OrganizationAlias = organization.Login;
     }
@@ -82,7 +82,7 @@ public class GitHubGetFailedInvitationsOptions : GitHubHttpRequestOptions {
     /// <param name="perPage">The amount of invites to be returned on each page.</param>
     /// <param name="page">The page to be returned.</param>
     [SetsRequiredMembers]
-    public GitHubGetFailedInvitationsOptions(GitHubOrganizationItem organization, int? perPage = null, int? page = null) {
+    public GitHubGetFailedInvitationsOptions(GitHubOrganizationBase organization, int? perPage = null, int? page = null) {
         if (organization == null) throw new ArgumentNullException(nameof(organization));
         OrganizationAlias = organization.Login;
         PerPage = perPage;

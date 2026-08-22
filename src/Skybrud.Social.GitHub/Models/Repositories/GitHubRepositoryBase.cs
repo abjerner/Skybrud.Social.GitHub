@@ -1,8 +1,5 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
-using Skybrud.Essentials.Time;
-using Skybrud.Social.GitHub.Extensions;
 using Skybrud.Social.GitHub.Models.Users;
 
 namespace Skybrud.Social.GitHub.Models.Repositories;

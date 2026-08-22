@@ -9,7 +9,7 @@ using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
 
-namespace Skybrud.Social.GitHub.Options.Issues; 
+namespace Skybrud.Social.GitHub.Options.Issues;
 
 /// <summary>
 /// Class representing the options for getting the issues of a GitHub repository.

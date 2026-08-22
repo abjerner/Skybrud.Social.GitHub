@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
@@ -108,7 +109,7 @@ public class GitHubCreatePullRequestOptions : GitHubHttpRequestOptions {
     /// to a base of another repository.</param>
     /// <param name="body">The content of the pull request.</param>
 #if NET8_0_OR_GREATER
-    [System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+    [SetsRequiredMembers]
 #endif
     public GitHubCreatePullRequestOptions(string owner, string repositoryAlias, string title, string head, string @base, string? body) {
         OwnerAlias = owner;
@@ -132,7 +133,7 @@ public class GitHubCreatePullRequestOptions : GitHubHttpRequestOptions {
     /// to a base of another repository.</param>
     /// <param name="body">The content of the pull request.</param>
 #if NET8_0_OR_GREATER
-    [System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+    [SetsRequiredMembers]
 #endif
     public GitHubCreatePullRequestOptions(GitHubRepositoryBase repository, string title, string head, string @base, string? body) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));

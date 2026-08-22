@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
@@ -72,7 +73,7 @@ public class GitHubGetReviewsOptions : GitHubHttpRequestOptions {
     /// <param name="repository">The slug of the repository.</param>
     /// <param name="number">The number of the pull request.</param>
 #if NET8_0_OR_GREATER
-    [System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+    [SetsRequiredMembers]
 #endif
     public GitHubGetReviewsOptions(string owner, string repository, int number) {
         Owner = owner;
@@ -85,7 +86,7 @@ public class GitHubGetReviewsOptions : GitHubHttpRequestOptions {
     /// </summary>
     /// <param name="issue">The issue for which to get comments.</param>
 #if NET8_0_OR_GREATER
-    [System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+    [SetsRequiredMembers]
 #endif
     public GitHubGetReviewsOptions(GitHubIssueBase issue) {
         if (issue == null) throw new ArgumentNullException(nameof(issue));
@@ -101,7 +102,7 @@ public class GitHubGetReviewsOptions : GitHubHttpRequestOptions {
     /// </summary>
     /// <param name="pullRequest">The pull request for which to get comments.</param>
 #if NET8_0_OR_GREATER
-    [System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+    [SetsRequiredMembers]
 #endif
     public GitHubGetReviewsOptions(GitHubPullRequestBase pullRequest) {
         if (pullRequest == null) throw new ArgumentNullException(nameof(pullRequest));
