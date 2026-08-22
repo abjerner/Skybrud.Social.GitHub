@@ -1,62 +1,59 @@
-﻿using System;
-using Skybrud.Essentials.Http;
+﻿using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Time;
 
-namespace Skybrud.Social.GitHub.Models.Common {
+namespace Skybrud.Social.GitHub.Models.Common;
+
+/// <summary>
+/// Class with rate-limiting information about a response from the GitHub API.
+/// </summary>
+public class GitHubRateLimiting {
+
+    #region Properties
 
     /// <summary>
-    /// Class with rate-limiting information about a response from the GitHub API.
+    /// Gets the total amount of calls that can be made to the API in the current timeframe.
     /// </summary>
-    public class GitHubRateLimiting {
+    public int Limit { get; }
 
-        #region Properties
+    /// <summary>
+    /// Gets the remaining amount of calls that can be made to the API in the current
+    /// timeframe.
+    /// </summary>
+    public int Remaining { get; }
 
-        /// <summary>
-        /// Gets the total amount of calls that can be made to the API in the current timeframe.
-        /// </summary>
-        public int Limit { get; }
+    /// <summary>
+    /// Gets the timestamp of the next rate limit timeframe.
+    /// </summary>
+    public EssentialsTime? Reset { get; }
 
-        /// <summary>
-        /// Gets the remaining amount of calls that can be made to the API in the current
-        /// timeframe.
-        /// </summary>
-        public int Remaining { get; }
+    #endregion
 
-        /// <summary>
-        /// Gets the timestamp of the next rate limit timeframe.
-        /// </summary>
-        public EssentialsTime Reset { get; }
+    #region Constructors
 
-        #endregion
+    private GitHubRateLimiting(IHttpResponse response) {
 
-        #region Constructors
+        _ = int.TryParse(response.Headers["X-RateLimit-Limit"], out int limit);
+        _ = int.TryParse(response.Headers["X-RateLimit-Remaining"], out int remaining);
 
-        private GitHubRateLimiting(IHttpResponse response) {
-
-            int.TryParse(response.Headers["X-RateLimit-Limit"], out int limit);
-            int.TryParse(response.Headers["X-RateLimit-Remaining"], out int remaining);
-
-            Limit = limit;
-            Remaining = remaining;
-            Reset = double.TryParse(response.Headers["X-RateLimit-Reset"], out double reset) ? EssentialsTime.FromUnixTimeSeconds(reset) : null;
-
-        }
-
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Parses rate-limiting information from the specified <paramref name="response"/>.
-        /// </summary>
-        /// <param name="response">The response that holds the rate-limiting information.</param>
-        /// <returns>An instance of <see cref="GitHubRateLimiting"/>.</returns>
-        public static GitHubRateLimiting GetFromResponse(IHttpResponse response) {
-            return new GitHubRateLimiting(response);
-        }
-
-        #endregion
+        Limit = limit;
+        Remaining = remaining;
+        Reset = double.TryParse(response.Headers["X-RateLimit-Reset"], out double reset) ? EssentialsTime.FromUnixTimeSeconds(reset) : null;
 
     }
+
+    #endregion
+
+    #region Static methods
+
+    /// <summary>
+    /// Parses rate-limiting information from the specified <paramref name="response"/>.
+    /// </summary>
+    /// <param name="response">The response that holds the rate-limiting information.</param>
+    /// <returns>An instance of <see cref="GitHubRateLimiting"/>.</returns>
+    public static GitHubRateLimiting GetFromResponse(IHttpResponse response) {
+        return new GitHubRateLimiting(response);
+    }
+
+    #endregion
 
 }

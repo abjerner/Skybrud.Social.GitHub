@@ -1,35 +1,33 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace Skybrud.Social.GitHub.Models.Organizations {
+namespace Skybrud.Social.GitHub.Models.Organizations;
+
+/// <summary>
+/// Class representing a GitHub organization.
+/// </summary>
+public class GitHubOrganizationItem : GitHubOrganizationBase {
+
+    #region Constructors
 
     /// <summary>
-    /// Class representing a GitHub organization.
+    /// Initializes a new instance from the specified <paramref name="json"/>.
     /// </summary>
-    public class GitHubOrganizationItem : GitHubOrganizationBase {
+    /// <param name="json">The instance of <see cref="JObject"/> representing the organization.</param>
+    protected GitHubOrganizationItem(JObject json) : base(json) { }
 
-        #region Constructors
+    #endregion
 
-        /// <summary>
-        /// Initializes a new instance from the specified <paramref name="obj"/>.
-        /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> representing the organizationt.</param>
-        protected GitHubOrganizationItem(JObject obj) : base(obj) { }
+    #region Static methods
 
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubOrganizationItem"/>.
-        /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="GitHubOrganizationItem"/>.</returns>
-        public static new GitHubOrganizationItem Parse(JObject obj) {
-            return obj == null ? null : new GitHubOrganizationItem(obj);
-        }
-
-        #endregion
-
+    /// <summary>
+    /// Parses the specified <paramref name="json"/> object into an instance of <see cref="GitHubOrganizationItem"/>.
+    /// </summary>
+    /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
+    /// <returns>An instance of <see cref="GitHubOrganizationItem"/>.</returns>
+    public static new GitHubOrganizationItem Parse(JObject json) {
+        return new GitHubOrganizationItem(json);
     }
+
+    #endregion
 
 }

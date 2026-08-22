@@ -1,43 +1,41 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 
-namespace Skybrud.Social.GitHub.Models.Milestones {
+namespace Skybrud.Social.GitHub.Models.Milestones;
+
+/// <summary>
+/// Class representing a GitHub milestone.
+/// </summary>
+public class GitHubMilestoneReference : GitHubObject {
+
+    #region Properties
 
     /// <summary>
-    /// Class representing a GitHub milestone.
+    /// Gets the title of the milestone.
     /// </summary>
-    public class GitHubMilestoneReference : GitHubObject {
+    public string Title { get; }
 
-        #region Properties
+    #endregion
 
-        /// <summary>
-        /// Gets the title of the milestone.
-        /// </summary>
-        public string Title { get; }
+    #region Constructors
 
-        #endregion
-
-        #region Constructors
-
-        private GitHubMilestoneReference(JObject obj) : base(obj) {
-            Title = obj.GetString("title");
-        }
-
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubMilestoneReference"/>.
-        /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="GitHubMilestoneReference"/>.</returns>
-        public static GitHubMilestoneReference Parse(JObject obj) {
-            return obj == null ? null : new GitHubMilestoneReference(obj);
-        }
-
-        #endregion
-
+    private GitHubMilestoneReference(JObject json) : base(json) {
+        Title = json.GetRequiredString("title");
     }
+
+    #endregion
+
+    #region Static methods
+
+    /// <summary>
+    /// Parses the specified <paramref name="json"/> object into an instance of <see cref="GitHubMilestoneReference"/>.
+    /// </summary>
+    /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
+    /// <returns>An instance of <see cref="GitHubMilestoneReference"/>.</returns>
+    public static GitHubMilestoneReference Parse(JObject json) {
+        return new GitHubMilestoneReference(json);
+    }
+
+    #endregion
 
 }

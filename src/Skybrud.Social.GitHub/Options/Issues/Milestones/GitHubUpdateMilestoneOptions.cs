@@ -7,107 +7,121 @@ using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Http;
 using Skybrud.Social.GitHub.Models.Milestones;
 
-namespace Skybrud.Social.GitHub.Options.Issues.Milestones {
+namespace Skybrud.Social.GitHub.Options.Issues.Milestones;
+
+/// <summary>
+/// Options for a request to update a new milestone.
+/// </summary>
+/// <see>
+///     <cref>https://developer.github.com/v3/issues/milestones/#update-a-milestone</cref>
+/// </see>
+public class GitHubUpdateMilestoneOptions : GitHubHttpRequestOptions {
+
+    #region Properties
 
     /// <summary>
-    /// Options for a request to update a new milestone.
+    /// Gets or sets the username (login) of the owner of the repository.
     /// </summary>
-    /// <see>
-    ///     <cref>https://developer.github.com/v3/issues/milestones/#update-a-milestone</cref>
-    /// </see>
-    public class GitHubUpdateMilestoneOptions : GitHubHttpRequestOptions {
+    [JsonIgnore]
+#if NET8_0_OR_GREATER
+    public required string Owner { get; set; }
+#else
+    public string? Owner { get; set; }
+#endif
 
-        #region Properties
+    /// <summary>
+    /// Gets or sets the slug of the repository.
+    /// </summary>
+    [JsonIgnore]
+#if NET8_0_OR_GREATER
+    public required string Repository { get; set; }
+#else
+    public string? Repository { get; set; }
+#endif
 
-        /// <summary>
-        /// Gets or sets the username (login) of the owner of the repository.
-        /// </summary>
-        [JsonIgnore]
-        public string Owner { get; set; }
+    /// <summary>
+    /// Gets or sets the number of the milestone.
+    /// </summary>
+    [JsonIgnore]
+#if NET8_0_OR_GREATER
+    public required int Number { get; set; }
+#else
+    public int Number { get; set; }
+#endif
 
-        /// <summary>
-        /// Gets or sets the slug of the repository.
-        /// </summary>
-        [JsonIgnore]
-        public string Repository { get; set; }
+    /// <summary>
+    /// Gets or sets the title of the milestone.
+    /// </summary>
+    [JsonProperty("title")]
+#if NET8_0_OR_GREATER
+    public required string Title { get; set; }
+#else
+    public string? Title { get; set; }
+#endif
 
-        /// <summary>
-        /// Gets or sets the number of the milestone.
-        /// </summary>
-        [JsonIgnore]
-        public int Number { get; set; }
+    /// <summary>
+    /// Gets or sets the state of the milestone. Default is <see cref="GitHubMilestoneState.Open"/>.
+    /// </summary>
+    [JsonProperty("state")]
+    public GitHubMilestoneState State { get; set; }
 
-        /// <summary>
-        /// Gets or sets the title of the milestone.
-        /// </summary>
-        [JsonProperty("title")]
-        public string Title { get; set; }
+    /// <summary>
+    /// Gets or sets the description of the milestone.
+    /// </summary>
+    [JsonProperty("description")]
+    public string? Description { get; set; }
 
-        /// <summary>
-        /// Gets or sets the state of the milestone. Default is <see cref="GitHubMilestoneState.Open"/>.
-        /// </summary>
-        [JsonProperty("state")]
-        public GitHubMilestoneState State { get; set; }
+    /// <summary>
+    /// Gets or sets the due date of the milestone.
+    /// </summary>
+    [JsonProperty("due_on")]
+    public EssentialsTime? DueOn { get; set; }
 
-        /// <summary>
-        /// Gets or sets the description of the milestone.
-        /// </summary>
-        [JsonProperty("description")]
-        public string Description { get; set; }
+    #endregion
 
-        /// <summary>
-        /// Gets or sets the due date of the milestone.
-        /// </summary>
-        [JsonProperty("due_on")]
-        public EssentialsTime DueOn { get; set; }
+    #region Constructors
 
-        #endregion
+    /// <summary>
+    /// Initializes a new instance based on the specified <paramref name="milestone"/>.
+    /// </summary>
+    /// <param name="milestone">The milestone to be updated.</param>
+    public GitHubUpdateMilestoneOptions(GitHubMilestone milestone) {
+        if (milestone == null) throw new ArgumentNullException(nameof(milestone));
+        string[] url = milestone.Url.Split('/');
+        Owner = url[4];
+        Repository = url[5];
+        Number = milestone.Number;
+        Title = milestone.Title;
+        State = (GitHubMilestoneState) (int) milestone.State;
+        Description = milestone.Description;
+        DueOn = milestone.DueOn;
+    }
 
-        #region Constructors
+    #endregion
 
-        /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="milestone"/>.
-        /// </summary>
-        /// <param name="milestone">The milestone to be updated.</param>
-        public GitHubUpdateMilestoneOptions(GitHubMilestone milestone) {
-            if (milestone == null) throw new ArgumentNullException(nameof(milestone));
-            string[] url = milestone.Url.Split('/');
-            Owner = url[4];
-            Repository = url[5];
-            Number = milestone.Number;
-            Title = milestone.Title;
-            State = (GitHubMilestoneState) (int) milestone.State;
-            Description = milestone.Description;
-            DueOn = milestone.DueOn;
-        }
+    #region Member methods
 
-        #endregion
+    /// <summary>
+    /// Returns a new <see cref="IHttpRequest"/> instance for this options instance.
+    /// </summary>
+    /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
+    public override IHttpRequest GetRequest() {
 
-        #region Member methods
+        // Validate required parameters
+        if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
+        if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
+        if (string.IsNullOrWhiteSpace(Title)) throw new PropertyNotSetException(nameof(Title));
 
-        /// <summary>
-        /// Returns a new <see cref="IHttpRequest"/> instance for this options instance.
-        /// </summary>
-        /// <returns>An instance of <see cref="IHttpRequest"/>.</returns>
-        public override IHttpRequest GetRequest() {
+        // Generate the payload for the request body
+        JObject body = JObject.FromObject(this);
 
-            // Validate required parameters
-            if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
-            if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
-            if (string.IsNullOrWhiteSpace(Title)) throw new PropertyNotSetException(nameof(Title));
-
-            // Generate the payload for the request body
-            JObject body = JObject.FromObject(this);
-
-            // Initialize the request
-            return HttpRequest
-                .Patch($"/repos/{Owner}/{Repository}/milestones/{Number}", body)
-                .SetAcceptHeader(MediaTypes);
-
-        }
-
-        #endregion
+        // Initialize the request
+        return HttpRequest
+            .Patch($"/repos/{Owner}/{Repository}/milestones/{Number}", body)
+            .SetAcceptHeader(MediaTypes);
 
     }
+
+    #endregion
 
 }

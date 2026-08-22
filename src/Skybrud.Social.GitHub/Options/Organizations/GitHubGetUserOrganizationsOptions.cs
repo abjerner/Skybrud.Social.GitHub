@@ -79,7 +79,7 @@
 //        /// <returns>An instance of <see cref="IHttpQueryString"/>.</returns>
 //        public IHttpQueryString GetQueryString() {
 
-//            IHttpQueryString query = new HttpQueryString();
+//            HttpQueryString query = new();
 //            if (Page > 0) query.Add("page", Page);
 //            if (PerPage > 0) query.Add("per_page", PerPage);
 
@@ -97,7 +97,7 @@
 //            if (string.IsNullOrWhiteSpace(Username)) throw new PropertyNotSetException(nameof(Username));
 
 //            // Initialize and construct the query string
-//            IHttpQueryString query = new HttpQueryString();
+//            HttpQueryString query = new();
 //            if (Page > 0) query.Add("page", Page);
 //            if (PerPage > 0) query.Add("per_page", PerPage);
 

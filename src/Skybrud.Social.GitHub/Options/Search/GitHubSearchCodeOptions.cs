@@ -1,64 +1,68 @@
-﻿using Skybrud.Essentials.Common;
+﻿using System.Diagnostics.CodeAnalysis;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Http;
 
-namespace Skybrud.Social.GitHub.Options.Search {
+namespace Skybrud.Social.GitHub.Options.Search;
+
+/// <summary>
+/// Class with options for doing a code based search of GitHub.
+/// </summary>
+/// <see>
+///     <cref>https://docs.github.com/en/rest/reference/search#search-code</cref>
+/// </see>
+public class GitHubSearchCodeOptions : GitHubHttpRequestOptions {
+
+    #region Properties
 
     /// <summary>
-    /// Class with options for doing a code based search of GitHub.
+    /// Gets or sets the search query.
     /// </summary>
-    /// <see>
-    ///     <cref>https://docs.github.com/en/rest/reference/search#search-code</cref>
-    /// </see>
-    public class GitHubSearchCodeOptions : GitHubHttpRequestOptions {
+#if NET8_0_OR_GREATER
+    public required string Query { get; set; }
+#else
+    public string? Query { get; set; }
+#endif
 
-        #region Properties
+    #endregion
 
-        /// <summary>
-        /// Gets or sets the search query.
-        /// </summary>
-        public string Query { get; set; }
+    #region Constructors
 
-        #endregion
+    /// <summary>
+    /// Initializes a new instance with default options.
+    /// </summary>
+    public GitHubSearchCodeOptions() { }
 
-        #region Constructors
+    /// <summary>
+    /// Initializes a new instance based on the specified <paramref name="query"/>.
+    /// </summary>
+    /// <param name="query">The search query.</param>
+    [SetsRequiredMembers]
+    public GitHubSearchCodeOptions(string query) {
+        Query = query;
+    }
 
-        /// <summary>
-        /// Initializes a new instance with default options.
-        /// </summary>
-        public GitHubSearchCodeOptions() { }
+    #endregion
 
-        /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="query"/>.
-        /// </summary>
-        /// <param name="query">The search query.</param>
-        public GitHubSearchCodeOptions(string query) {
-            Query = query;
-        }
+    #region Member methods
 
-        #endregion
+    /// <inheritdoc />
+    public override IHttpRequest GetRequest() {
 
-        #region Member methods
+        // Input validation
+        if (string.IsNullOrWhiteSpace(Query)) throw new PropertyNotSetException(nameof(Query));
 
-        /// <inheritdoc />
-        public override IHttpRequest GetRequest() {
+        // Initialize the query string
+        IHttpQueryString query = new HttpQueryString { { "q", Query } };
 
-            // Input validation
-            if (string.IsNullOrWhiteSpace(Query)) throw new PropertyNotSetException(nameof(Query));
-
-            // Initialize the query string
-            IHttpQueryString query = new HttpQueryString { { "q", Query } };
-
-            // Initialize a new PUT request
-            return HttpRequest
-                .Get("/search/code", query)
-                .SetAcceptHeader(MediaTypes);
-
-        }
-
-        #endregion
+        // Initialize a new PUT request
+        return HttpRequest
+            .Get("/search/code", query)
+            .SetAcceptHeader(MediaTypes);
 
     }
+
+    #endregion
 
 }

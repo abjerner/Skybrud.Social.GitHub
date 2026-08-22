@@ -1,53 +1,51 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 
-namespace Skybrud.Social.GitHub.Models.Tags {
+namespace Skybrud.Social.GitHub.Models.Tags;
+
+/// <summary>
+/// Class describing the commit a GitHub tag is based on.
+/// </summary>
+public class GitHubTagCommit : GitHubObject {
+
+    #region Properties
 
     /// <summary>
-    /// Class describing the commit a GitHub tag is based on.
+    /// Gets SHA hash of the commit.
     /// </summary>
-    public class GitHubTagCommit : GitHubObject {
+    public string Sha { get; }
 
-        #region Properties
+    /// <summary>
+    /// Gets the API URL of the commit.
+    /// </summary>
+    public string Url { get; }
 
-        /// <summary>
-        /// Gets SHA hash of the commit.
-        /// </summary>
-        public string Sha { get; }
+    #endregion
 
-        /// <summary>
-        /// Gets the API URL of the commit.
-        /// </summary>
-        public string Url { get; }
+    #region Constructors
 
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance from the specified <paramref name="json"/>.
-        /// </summary>
-        /// <param name="json">The instance of <see cref="JObject"/> representing the organizationt.</param>
-        protected GitHubTagCommit(JObject json) : base(json) {
-            Sha = json.GetString("sha");
-            Url = json.GetString("url");
-        }
-
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Parses the specified <paramref name="json"/> into an instance of <see cref="GitHubTagCommit"/>.
-        /// </summary>
-        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="GitHubTagCommit"/>.</returns>
-        public static GitHubTagCommit Parse(JObject json) {
-            return json == null ? null : new GitHubTagCommit(json);
-        }
-
-        #endregion
-
+    /// <summary>
+    /// Initializes a new instance from the specified <paramref name="json"/>.
+    /// </summary>
+    /// <param name="json">The instance of <see cref="JObject"/> representing the commit.</param>
+    protected GitHubTagCommit(JObject json) : base(json) {
+        Sha = json.GetRequiredString("sha");
+        Url = json.GetRequiredString("url");
     }
+
+    #endregion
+
+    #region Static methods
+
+    /// <summary>
+    /// Parses the specified <paramref name="json"/> into an instance of <see cref="GitHubTagCommit"/>.
+    /// </summary>
+    /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
+    /// <returns>An instance of <see cref="GitHubTagCommit"/>.</returns>
+    public static GitHubTagCommit Parse(JObject json) {
+        return new GitHubTagCommit(json);
+    }
+
+    #endregion
 
 }

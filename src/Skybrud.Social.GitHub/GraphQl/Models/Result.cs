@@ -1,27 +1,27 @@
-﻿namespace Skybrud.Social.GitHub.GraphQl.Models {
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-    public class Result {
+namespace Skybrud.Social.GitHub.GraphQl.Models;
 
-        public object Data { get; }
+public class Result {
 
-        public Result(object data) {
-            Data = data;
-        }
+    public object Data { get; }
 
-        public static Result<T> Create<T>(T data) {
-            return new (data);
-        }
-
+    public Result(object data) {
+        Data = data;
     }
 
-    public class Result<T> : Result {
+    public static Result<T> Create<T>(T data) where T : notnull {
+        return new Result<T>(data);
+    }
 
-        public new T Data { get; }
-        
-        public Result(T data) : base(data) {
-            Data = data;
-        }
+}
 
+public class Result<T> : Result where T : notnull {
+
+    public new T Data { get; }
+
+    public Result(T data) : base(data) {
+        Data = data;
     }
 
 }

@@ -5,68 +5,66 @@ using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Client;
 using Skybrud.Social.GitHub.OAuth;
 
-namespace Skybrud.Social.GitHub.GraphQl {
+namespace Skybrud.Social.GitHub.GraphQl; 
+
+/// <summary>
+/// Class representing the raw <strong>GraphQL</strong> endpoint.
+/// </summary>
+public class GraphQlRawEndpoint {
+
+    #region Properties
 
     /// <summary>
-    /// Class representing the raw <strong>GraphQL</strong> endpoint.
+    /// Gets a reference to the parent OAuth client.
     /// </summary>
-    public class GraphQlRawEndpoint {
+    public GitHubOAuthClient Client { get; }
 
-        #region Properties
+    #endregion
 
-        /// <summary>
-        /// Gets a reference to the parent OAuth client.
-        /// </summary>
-        public GitHubOAuthClient Client { get; }
+    #region Constructors
 
-        #endregion
+    internal GraphQlRawEndpoint(GitHubOAuthClient client) {
+        Client = client;
+    }
 
-        #region Constructors
+    #endregion
 
-        internal GraphQlRawEndpoint(GitHubOAuthClient client) {
-            Client = client;
-        }
+    #region Methods
 
-        #endregion
+    /// <summary>
+    /// Returns a response based on the specified GraphQL <paramref name="query"/>.
+    /// </summary>
+    /// <param name="query">The GraphQL query.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+    public IHttpResponse GetResponse(string query) {
 
-        #region Methods
+        if (string.IsNullOrWhiteSpace(query)) throw new ArgumentNullException(nameof(query));
 
-        /// <summary>
-        /// Returns a response based on the specified GraphQL <paramref name="query"/>.
-        /// </summary>
-        /// <param name="query">The GraphQL query.</param>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-        public IHttpResponse GetResponse(string query) {
+        JObject body = new() {
+            { "query", query }
+        };
 
-            if (string.IsNullOrWhiteSpace(query)) throw new ArgumentNullException(nameof(query));
-
-            JObject body = new() {
-                { "query", query }
-            };
-
-            return Client.Post("/graphql", body);
-
-        }
-
-        /// <summary>
-        /// Returns a response based on the specified GraphQL <paramref name="query"/>.
-        /// </summary>
-        /// <param name="query">The GraphQL query.</param>
-        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-        public async Task<IHttpResponse> GetResponseAsync(string query) {
-
-            if (string.IsNullOrWhiteSpace(query)) throw new ArgumentNullException(nameof(query));
-
-            JObject body = new() {
-                { "query", query }
-            };
-
-            return await Client.PostAsync("/graphql", body);
-
-        }
-
-        #endregion
+        return Client.Post("/graphql", body);
 
     }
+
+    /// <summary>
+    /// Returns a response based on the specified GraphQL <paramref name="query"/>.
+    /// </summary>
+    /// <param name="query">The GraphQL query.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+    public async Task<IHttpResponse> GetResponseAsync(string query) {
+
+        if (string.IsNullOrWhiteSpace(query)) throw new ArgumentNullException(nameof(query));
+
+        JObject body = new() {
+            { "query", query }
+        };
+
+        return await Client.PostAsync("/graphql", body);
+
+    }
+
+    #endregion
 
 }

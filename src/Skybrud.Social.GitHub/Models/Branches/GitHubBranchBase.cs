@@ -1,59 +1,57 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 
-namespace Skybrud.Social.GitHub.Models.Branches {
+namespace Skybrud.Social.GitHub.Models.Branches;
+
+/// <summary>
+/// Class representing a GitHub branch.
+/// </summary>
+public class GitHubBranchBase : GitHubObject {
+
+    #region Properties
 
     /// <summary>
-    /// Class representing a GitHub branch.
+    /// Gets the name of the branch.
     /// </summary>
-    public class GitHubBranchBase : GitHubObject {
+    public string Name { get; }
 
-        #region Properties
+    /// <summary>
+    /// Gets a reference to the commit of the branch.
+    /// </summary>
+    public GitHubBranchCommit Commit { get; }
 
-        /// <summary>
-        /// Gets the name of the branch.
-        /// </summary>
-        public string Name { get; }
+    /// <summary>
+    /// Gets whether the branch is protected.
+    /// </summary>
+    public bool IsProtected { get; }
 
-        /// <summary>
-        /// Gets a reference to the commit of the branch.
-        /// </summary>
-        public GitHubBranchCommit Commit { get; }
+    #endregion
 
-        /// <summary>
-        /// Gets whether the branch is protected.
-        /// </summary>
-        public bool IsProtected { get; }
+    #region Constructors
 
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance from the specified <paramref name="json"/> object.
-        /// </summary>
-        /// <param name="json">The instance of <see cref="JObject"/> representing the object.</param>
-        protected GitHubBranchBase(JObject json) : base(json) {
-            Name = json.GetString("name");
-            Commit = json.GetObject("commit", GitHubBranchCommit.Parse);
-            IsProtected = json.GetBoolean("protected");
-        }
-
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Parses the specified <paramref name="json"/> object into an instance of <see cref="GitHubBranchBase"/>.
-        /// </summary>
-        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="GitHubBranch"/>.</returns>
-        public static GitHubBranchBase Parse(JObject json) {
-            return json == null ? null : new GitHubBranchBase(json);
-        }
-
-        #endregion
-
+    /// <summary>
+    /// Initializes a new instance from the specified <paramref name="json"/> object.
+    /// </summary>
+    /// <param name="json">The instance of <see cref="JObject"/> representing the object.</param>
+    protected GitHubBranchBase(JObject json) : base(json) {
+        Name = json.GetRequiredString("name");
+        Commit = json.GetRequiredObject("commit", GitHubBranchCommit.Parse);
+        IsProtected = json.GetBoolean("protected");
     }
+
+    #endregion
+
+    #region Static methods
+
+    /// <summary>
+    /// Parses the specified <paramref name="json"/> object into an instance of <see cref="GitHubBranchBase"/>.
+    /// </summary>
+    /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
+    /// <returns>An instance of <see cref="GitHubBranchBase"/>.</returns>
+    public static GitHubBranchBase Parse(JObject json) {
+        return new GitHubBranchBase(json);
+    }
+
+    #endregion
 
 }

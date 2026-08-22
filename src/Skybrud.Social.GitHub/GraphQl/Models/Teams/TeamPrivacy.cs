@@ -1,23 +1,21 @@
-﻿namespace Skybrud.Social.GitHub.GraphQl.Models.Teams {
-    
+﻿namespace Skybrud.Social.GitHub.GraphQl.Models.Teams;
+
+/// <summary>
+/// The possible team privacy values.
+/// </summary>
+/// <see>
+///     <cref>https://docs.github.com/en/graphql/reference/enums#teamprivacy</cref>
+/// </see>
+public enum TeamPrivacy {
+
     /// <summary>
-    /// The possible team privacy values.
+    /// A secret team can only be seen by its members.
     /// </summary>
-    /// <see>
-    ///     <cref>https://docs.github.com/en/graphql/reference/enums#teamprivacy</cref>
-    /// </see>
-    public enum TeamPrivacy {
+    Secret,
 
-        /// <summary>
-        /// A secret team can only be seen by its members.
-        /// </summary>
-        Secret,
-
-        /// <summary>
-        /// A visible team can be seen and @mentioned by every member of the organization.
-        /// </summary>
-        Visible
-
-    }
+    /// <summary>
+    /// A visible team can be seen and @mentioned by every member of the organization.
+    /// </summary>
+    Visible
 
 }

@@ -1,20 +1,18 @@
-﻿namespace Skybrud.Social.GitHub.Models.Issues {
+﻿namespace Skybrud.Social.GitHub.Models.Issues;
+
+/// <summary>
+/// Enum class describing whether an issue is either <see cref="Open"/> or <see cref="Closed"/>.
+/// </summary>
+public enum GitHubIssueState {
 
     /// <summary>
-    /// Enum class describing whether an issue is either <see cref="Open"/> or <see cref="Closed"/>.
+    /// Indicates that the issue is open.
     /// </summary>
-    public enum GitHubIssueState {
+    Open,
 
-        /// <summary>
-        /// Indicates that the issue is open.
-        /// </summary>
-        Open,
-
-        /// <summary>
-        /// Indicates that the issue is closed.
-        /// </summary>
-        Closed
-
-    }
+    /// <summary>
+    /// Indicates that the issue is closed.
+    /// </summary>
+    Closed
 
 }

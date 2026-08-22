@@ -2,75 +2,73 @@
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Http;
 
-namespace Skybrud.Social.GitHub.Options.Users {
+namespace Skybrud.Social.GitHub.Options.Users; 
+
+/// <summary>
+/// Class representing the options for getting information about a GitHub user.
+/// </summary>
+/// <see>
+///     <cref>https://docs.github.com/en/rest/reference/users#get-a-user</cref>
+/// </see>
+public class GitHubGetUserOptions : GitHubHttpRequestOptions {
+
+    #region Properties
 
     /// <summary>
-    /// Class reprensting the options for getting information about a GitHub user.
+    /// Gets or sets the ID of the user.
     /// </summary>
-    /// <see>
-    ///     <cref>https://docs.github.com/en/rest/reference/users#get-a-user</cref>
-    /// </see>
-    public class GitHubGetUserOptions : GitHubHttpRequestOptions {
+    public int? UserId { get; set; }
 
-        #region Properties
+    /// <summary>
+    /// Gets or sets the username of the user.
+    /// </summary>
+    public string? Username { get; set; }
 
-        /// <summary>
-        /// Gets or sets the ID of the user.
-        /// </summary>
-        public int UserId { get; set; }
+    #endregion
 
-        /// <summary>
-        /// Gets or sets the username of the user.
-        /// </summary>
-        public string Username { get; set; }
+    #region Constructors
 
-        #endregion
+    /// <summary>
+    /// Initialize a new instance with default options.
+    /// </summary>
+    public GitHubGetUserOptions() { }
 
-        #region Constructors
+    /// <summary>
+    /// Initializes a new instance based on the specified <paramref name="userId"/>.
+    /// </summary>
+    /// <param name="userId">The ID of the user.</param>
+    public GitHubGetUserOptions(int userId) {
+        UserId = userId;
+    }
 
-        /// <summary>
-        /// Initialize a new instance with default options.
-        /// </summary>
-        public GitHubGetUserOptions() { }
+    /// <summary>
+    /// Initializes a new instance based on the specified <paramref name="username"/>.
+    /// </summary>
+    /// <param name="username">The username of the user.</param>
+    public GitHubGetUserOptions(string username) {
+        Username = username;
+    }
 
-        /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="userId"/>.
-        /// </summary>
-        /// <param name="userId">The ID of the user.</param>
-        public GitHubGetUserOptions(int userId) {
-            UserId = userId;
-        }
+    #endregion
 
-        /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="username"/>.
-        /// </summary>
-        /// <param name="username">The username of the user.</param>
-        public GitHubGetUserOptions(string username) {
-            Username = username;
-        }
+    #region Member methods
 
-        #endregion
+    /// <inheritdoc />
+    public override IHttpRequest GetRequest() {
 
-        #region Member methods
+        // Make sure we have either a user ID or a username
+        if (UserId == 0 && string.IsNullOrWhiteSpace(Username)) throw new PropertyNotSetException(nameof(Username));
 
-        /// <inheritdoc />
-        public override IHttpRequest GetRequest() {
+        // Construct the URL
+        string url = string.IsNullOrWhiteSpace(Username) ? $"/user/{UserId}" : $"/users/{Username}";
 
-            // Make sure we have either a user ID or a username
-            if (UserId == 0 && string.IsNullOrWhiteSpace(Username)) throw new PropertyNotSetException(nameof(Username));
-
-            // Construct the URL
-            string url = string.IsNullOrWhiteSpace(Username) ? $"/user/{UserId}" : $"/users/{Username}";
-
-            // Initialize and configure the request
-            return HttpRequest
-                .Get(url)
-                .SetAcceptHeader(MediaTypes);
-
-        }
-
-        #endregion
+        // Initialize and configure the request
+        return HttpRequest
+            .Get(url)
+            .SetAcceptHeader(MediaTypes);
 
     }
+
+    #endregion
 
 }

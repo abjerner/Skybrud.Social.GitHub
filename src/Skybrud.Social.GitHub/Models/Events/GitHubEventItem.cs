@@ -1,35 +1,33 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace Skybrud.Social.GitHub.Models.Events {
+namespace Skybrud.Social.GitHub.Models.Events;
+
+/// <summary>
+/// Class representing a GitHub event.
+/// </summary>
+public class GitHubEventItem : GitHubEventBase {
+
+    #region Constructors
 
     /// <summary>
-    /// Class representing a GitHub event.
+    /// Initializes a new instance from the specified <paramref name="json"/> object.
     /// </summary>
-    public class GitHubEventItem : GitHubEventBase {
+    /// <param name="json">The instance of <see cref="JObject"/> representing the event.</param>
+    protected GitHubEventItem(JObject json) : base(json) { }
 
-        #region Constructors
+    #endregion
 
-        /// <summary>
-        /// Initializes a new instance from the specified <paramref name="obj"/>.
-        /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> representing the event.</param>
-        protected GitHubEventItem(JObject obj) : base(obj) { }
+    #region Static methods
 
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubEventItem"/>.
-        /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="GitHubEventItem"/>.</returns>
-        public static GitHubEventItem Parse(JObject obj) {
-            return obj == null ? null : new GitHubEventItem(obj);
-        }
-
-        #endregion
-
+    /// <summary>
+    /// Parses the specified <paramref name="obj"/> object into an instance of <see cref="GitHubEventItem"/>.
+    /// </summary>
+    /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+    /// <returns>An instance of <see cref="GitHubEventItem"/>.</returns>
+    public static GitHubEventItem Parse(JObject obj) {
+        return new GitHubEventItem(obj);
     }
+
+    #endregion
 
 }

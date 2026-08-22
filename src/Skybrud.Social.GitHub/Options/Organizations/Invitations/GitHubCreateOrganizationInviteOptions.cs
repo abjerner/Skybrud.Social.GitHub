@@ -51,7 +51,7 @@
 
 //            if (string.IsNullOrWhiteSpace(OrgAlias)) throw new PropertyNotSetException(nameof(OrgAlias));
 
-//            IHttpQueryString query = new HttpQueryString();
+//            HttpQueryString query = new();
 
 //            if (PerPage > 0) query.Add("per_page", PerPage);
 //            if (Page > 0) query.Add("page", Page);

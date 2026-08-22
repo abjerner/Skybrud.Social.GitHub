@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Http;
@@ -19,22 +20,30 @@ public class GitHubGetTeamsOptions : GitHubHttpRequestOptions {
     /// <summary>
     /// Gets or sets the alias of the repository owner.
     /// </summary>
-    public string OwnerAlias { get; set; }
+#if NET8_0_OR_GREATER
+    public required string OwnerAlias { get; set; }
+#else
+    public string? OwnerAlias { get; set; }
+#endif
 
     /// <summary>
     /// Gets or sets the alias of the repository.
     /// </summary>
-    public string RepositoryAlias { get; set; }
+#if NET8_0_OR_GREATER
+    public required string RepositoryAlias { get; set; }
+#else
+    public string? RepositoryAlias { get; set; }
+#endif
 
     /// <summary>
     /// Gets or sets the maximum amount of results per page (max is <c>100</c>).
     /// </summary>
-    public int PerPage { get; set; }
+    public int? PerPage { get; set; }
 
     /// <summary>
     /// Gets or sets the page to fetch.
     /// </summary>
-    public int Page { get; set; }
+    public int? Page { get; set; }
 
     #endregion
 
@@ -50,6 +59,7 @@ public class GitHubGetTeamsOptions : GitHubHttpRequestOptions {
     /// </summary>
     /// <param name="owner">The alias of the repository owner.</param>
     /// <param name="repositoryAlias">The alias/slug of the repository.</param>
+    [SetsRequiredMembers]
     public GitHubGetTeamsOptions(string owner, string repositoryAlias) {
         OwnerAlias = owner;
         RepositoryAlias = repositoryAlias;
@@ -61,20 +71,9 @@ public class GitHubGetTeamsOptions : GitHubHttpRequestOptions {
     /// <param name="owner">The alias of the repository owner.</param>
     /// <param name="repositoryAlias">The alias/slug of the repository.</param>
     /// <param name="perPage">The maximum amount of teams to returned by each page. Maximum is <c>100</c>.</param>
-    public GitHubGetTeamsOptions(string owner, string repositoryAlias, int perPage) {
-        OwnerAlias = owner;
-        RepositoryAlias = repositoryAlias;
-        PerPage = perPage;
-    }
-
-    /// <summary>
-    /// Initializes a new instance based on the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
-    /// </summary>
-    /// <param name="owner">The alias of the repository owner.</param>
-    /// <param name="repositoryAlias">The alias/slug of the repository.</param>
-    /// <param name="perPage">The maximum amount of teams to returned by each page. Maximum is <c>100</c>.</param>
     /// <param name="page">The page to be returned.</param>
-    public GitHubGetTeamsOptions(string owner, string repositoryAlias, int perPage, int page) {
+    [SetsRequiredMembers]
+    public GitHubGetTeamsOptions(string owner, string repositoryAlias, int? perPage = null, int? page = null) {
         OwnerAlias = owner;
         RepositoryAlias = repositoryAlias;
         PerPage = perPage;
@@ -85,6 +84,7 @@ public class GitHubGetTeamsOptions : GitHubHttpRequestOptions {
     /// Initializes a new instance based on the specified <paramref name="repository"/>.
     /// </summary>
     /// <param name="repository">The repository.</param>
+    [SetsRequiredMembers]
     public GitHubGetTeamsOptions(GitHubRepositoryBase repository) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
         OwnerAlias = repository.Owner.Login;
@@ -96,20 +96,9 @@ public class GitHubGetTeamsOptions : GitHubHttpRequestOptions {
     /// </summary>
     /// <param name="repository">The repository.</param>
     /// <param name="perPage">The maximum amount of teams to returned by each page. Maximum is <c>100</c>.</param>
-    public GitHubGetTeamsOptions(GitHubRepositoryBase repository, int perPage) {
-        if (repository == null) throw new ArgumentNullException(nameof(repository));
-        OwnerAlias = repository.Owner.Login;
-        RepositoryAlias = repository.Name;
-        PerPage = perPage;
-    }
-
-    /// <summary>
-    /// Initializes a new instance based on the specified <paramref name="repository"/>.
-    /// </summary>
-    /// <param name="repository">The repository.</param>
-    /// <param name="perPage">The maximum amount of teams to returned by each page. Maximum is <c>100</c>.</param>
     /// <param name="page">The page to be returned.</param>
-    public GitHubGetTeamsOptions(GitHubRepositoryBase repository, int perPage, int page) {
+    [SetsRequiredMembers]
+    public GitHubGetTeamsOptions(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
         OwnerAlias = repository.Owner.Login;
         RepositoryAlias = repository.Name;
@@ -130,7 +119,7 @@ public class GitHubGetTeamsOptions : GitHubHttpRequestOptions {
         string url = $"/repos/{OwnerAlias}/{RepositoryAlias}/teams";
 
         // Initialize a new query string
-        IHttpQueryString query = new HttpQueryString();
+        HttpQueryString query = new();
 
         // Append optional parameters
         if (PerPage > 0) query.Add("per_page", PerPage);

@@ -1,91 +1,90 @@
+using System.Collections.Generic;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Strings;
 using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Http;
 
-namespace Skybrud.Social.GitHub.Options.Issues {
+namespace Skybrud.Social.GitHub.Options.Issues;
+
+/// <summary>
+/// Class representing the options for getting a list of issues.
+/// </summary>
+/// <see>
+///     <cref>https://developer.github.com/v3/issues/#list-issues</cref>
+/// </see>
+public class GitHubGetIssuesOptions : GitHubHttpRequestOptions {
+
+    #region Properties
 
     /// <summary>
-    /// Class representing the options for getting a list of issues.
+    /// Indicates which sorts of issues to return. Default is <see cref="GitHubIssueFilter.Assigned"/>.
     /// </summary>
-    /// <see>
-    ///     <cref>https://developer.github.com/v3/issues/#list-issues</cref>
-    /// </see>
-    public class GitHubGetIssuesOptions : GitHubHttpRequestOptions {
+    public GitHubIssueFilter Filter { get; set; }
 
-        #region Properties
+    /// <summary>
+    /// Indicates the state of the issues to return. Default is <see cref="GitHubIssueState.Open"/>.
+    /// </summary>
+    public GitHubIssueState State { get; set; }
 
-        /// <summary>
-        /// Indicates which sorts of issues to return. Default is <see cref="GitHubIssueFilter.Assigned"/>.
-        /// </summary>
-        public GitHubIssueFilter Filter { get; set; }
+    /// <summary>
+    /// A list of label names the returned issues should match.
+    /// </summary>
+    public List<string> Labels { get; set; } = [];
 
-        /// <summary>
-        /// Indicates the state of the issues to return. Default is <see cref="GitHubIssueState.Open"/>.
-        /// </summary>
-        public GitHubIssueState State { get; set; }
+    /// <summary>
+    /// What to sort results by. Default is <see cref="GitHubIssueSortField.Created"/>.
+    /// </summary>
+    public GitHubIssueSortField Sort { get; set; }
 
-        /// <summary>
-        /// A list of label names the returned issues should match.
-        /// </summary>
-        public string[] Labels { get; set; }
+    /// <summary>
+    /// The direction of the sort. Default is <see cref="GitHubSortDirection.Descending"/>.
+    /// </summary>
+    public GitHubSortDirection Direction { get; set; }
 
-        /// <summary>
-        /// What to sort results by. Default is <see cref="GitHubIssueSortField.Created"/>.
-        /// </summary>
-        public GitHubIssueSortField Sort { get; set; }
+    /// <summary>
+    /// Only issues updated at or after this time are returned. Default is <code>null</code>.
+    /// </summary>
+    public EssentialsTime? Since { get; set; }
 
-        /// <summary>
-        /// The direction of the sort. Default is <see cref="GitHubSortDirection.Descending"/>.
-        /// </summary>
-        public GitHubSortDirection Direction { get; set; }
+    /// <summary>
+    /// Gets or sets the page to be returned.
+    /// </summary>
+    public int? Page { get; set; }
 
-        /// <summary>
-        /// Only issues updated at or after this time are returned. Default is <code>null</code>.
-        /// </summary>
-        public EssentialsTime Since { get; set; }
+    /// <summary>
+    /// Gets or sets the maximum amount of issues to be returned by each page.
+    /// </summary>
+    public int? PerPage { get; set; }
 
-        /// <summary>
-        /// Gets or sets the page to be returned.
-        /// </summary>
-        public int Page { get; set; }
+    #endregion
 
-        /// <summary>
-        /// Gets or sets the maximum amount of issues to be returned by each page.
-        /// </summary>
-        public int PerPage { get; set; }
+    #region Member methods
 
-        #endregion
+    /// <inheritdoc />
+    public override IHttpRequest GetRequest() {
 
-        #region Member methods
+        // Initialize the query string
+        HttpQueryString query = new() {
+            {"filter", StringUtils.ToLower(Filter)},
+            {"state", StringUtils.ToLower(State)}
+        };
 
-        /// <inheritdoc />
-        public override IHttpRequest GetRequest() {
+        // Update the query string with additional parameters
+        if (Labels is { Count: > 0 }) query.Add("labels", string.Join(",", Labels));
+        query.Add("sort", StringUtils.ToLower(Sort));
+        query.Add("direction", StringUtils.ToLower(Direction));
+        if (Since != null) query.Add("since", Since.Iso8601);
+        if (Page > 0) query.Add("page", Page);
+        if (PerPage > 0) query.Add("per_page", PerPage);
 
-            // Initialzie the query string
-            IHttpQueryString query = new HttpQueryString {
-                {"filter", StringUtils.ToLower(Filter)},
-                {"state", StringUtils.ToLower(State)}
-            };
-
-            // Update the query string with additional parameters
-            if (Labels != null && Labels.Length > 0) query.Add("labels", string.Join(",", Labels));
-            query.Add("sort", StringUtils.ToLower(Sort));
-            query.Add("direction", StringUtils.ToLower(Direction));
-            if (Since != null) query.Add("since", Since.Iso8601);
-            if (Page > 0) query.Add("page", Page);
-            if (PerPage > 0) query.Add("per_page", PerPage);
-
-            // Initialize the request
-            return HttpRequest
-                .Get("/issues", query)
-                .SetAcceptHeader(MediaTypes);
-
-        }
-
-        #endregion
+        // Initialize the request
+        return HttpRequest
+            .Get("/issues", query)
+            .SetAcceptHeader(MediaTypes);
 
     }
+
+    #endregion
 
 }

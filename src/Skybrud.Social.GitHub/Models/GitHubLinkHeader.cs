@@ -1,149 +1,150 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using Skybrud.Essentials.Http;
 
-namespace Skybrud.Social.GitHub.Models {
+namespace Skybrud.Social.GitHub.Models;
+
+/// <summary>
+/// Class representing the <c>Link</c> header of an HTTP response from the GitHub API.
+/// </summary>
+public class GitHubLinkHeader {
+
+    #region Properties
 
     /// <summary>
-    /// Class representing the <c>Link</c> header of a HTTP response from the GitHub API.
+    /// Gets number of the next page.
     /// </summary>
-    public class GitHubLinkHeader {
+    public int? Next { get; }
 
-        #region Properties
+    /// <summary>
+    /// Gets the URL of the next page.
+    /// </summary>
+    public string? NextUrl { get; }
 
-        /// <summary>
-        /// Gets number of the next page.
-        /// </summary>
-        public int Next { get; }
+    /// <summary>
+    /// Gets whether the list has a next page.
+    /// </summary>
+    [MemberNotNullWhen(true, nameof(Next), nameof(NextUrl))]
+    public bool HasNextPage => Next > Current;
 
-        /// <summary>
-        /// Gets the URL of the next page.
-        /// </summary>
-        public string NextUrl { get; }
+    /// <summary>
+    /// Gets number of the last page.
+    /// </summary>
+    public int? Last { get; }
 
-        /// <summary>
-        /// Gets whether the list has a next page.
-        /// </summary>
-        public bool HasNextPage => Next > Current;
+    /// <summary>
+    /// Gets the URL of the last page.
+    /// </summary>
+    public string? LastUrl { get; }
 
-        /// <summary>
-        /// Gets number of the last page.
-        /// </summary>
-        public int Last { get; }
+    /// <summary>
+    /// Gets number of the first page.
+    /// </summary>
+    public int? First { get; }
 
-        /// <summary>
-        /// Gets the URL of the last page.
-        /// </summary>
-        public string LastUrl { get; }
+    /// <summary>
+    /// Gets the URL of the first page.
+    /// </summary>
+    public string? FirstUrl { get; }
 
-        /// <summary>
-        /// Gets number of the first page.
-        /// </summary>
-        public int First { get; }
+    /// <summary>
+    /// Gets the number of the previous page.
+    /// </summary>
+    public int? Previous { get; }
 
-        /// <summary>
-        /// Gets the URL of the first page.
-        /// </summary>
-        public string FirstUrl { get; }
+    /// <summary>
+    /// Gets whether the list has a previous page.
+    /// </summary>
+    [MemberNotNullWhen(true, nameof(Previous), nameof(PreviousUrl))]
+    public bool HasPreviousPage => Previous > 1;
 
-        /// <summary>
-        /// Gets the number of the previous page.
-        /// </summary>
-        public int Previous { get; }
+    /// <summary>
+    /// Gets the URL of the previous page.
+    /// </summary>
+    public string? PreviousUrl { get; }
 
-        /// <summary>
-        /// Gets whether the list has a previous page.
-        /// </summary>
-        public bool HasPreviousPage => Previous > 1;
+    /// <summary>
+    /// Gets the current page number.
+    /// </summary>
+    public int Current { get; }
 
-        /// <summary>
-        /// Gets the URL of the previous page.
-        /// </summary>
-        public string PreviousUrl { get; }
+    /// <summary>
+    /// Gets the total amount of pages.
+    /// </summary>
+    public int TotalPages { get; }
 
-        /// <summary>
-        /// Gets the current page number.
-        /// </summary>
-        public int Current { get; }
+    #endregion
 
-        /// <summary>
-        /// Gets the total amount of pages.
-        /// </summary>
-        public int TotalPages { get; }
+    #region Constructors
 
-        #endregion
+    private GitHubLinkHeader(string value) {
 
-        #region Constructors
+        First = 1;
+        Current = 1;
+        TotalPages = 1;
+        Last = 1;
 
-        private GitHubLinkHeader(string value) {
+        if (string.IsNullOrWhiteSpace(value)) return;
 
-            First = 1;
-            Current = 1;
-            TotalPages = 1;
-            Last = 1;
+        // Match the different URLs using REGEX
+        foreach (Match match in Regex.Matches(value, "\\<(.+?)\\>; rel=\"([a-z]+)\"")) {
 
-            if (string.IsNullOrWhiteSpace(value)) return;
+            string url = match.Groups[1].Value;
+            string rel = match.Groups[2].Value;
 
-            // Match the different URLs using REGEX
-            foreach (Match match in Regex.Matches(value, "\\<(.+?)\\>; rel=\"([a-z]+)\"")) {
+            // Match the page parameter from the query string
+            Match m2 = Regex.Match(url, "page=([0-9]+)");
 
-                string url = match.Groups[1].Value;
-                string rel = match.Groups[2].Value;
+            // Skip the URL if a page number wasn't part of the URL
+            if (!m2.Success) continue;
 
-                // Match the page parameter from the query string
-                Match m2 = Regex.Match(url, "page=([0-9]+)");
+            // Parse the page number
+            int page = int.Parse(m2.Groups[1].Value);
 
-                // Skip the URL if a page number wasn't part of the URL
-                if (!m2.Success) continue;
+            switch (rel) {
 
-                // Parse the page number
-                int page = int.Parse(m2.Groups[1].Value);
+                case "first":
+                    FirstUrl = url;
+                    break;
 
-                switch (rel) {
+                case "prev":
+                    Previous = page;
+                    PreviousUrl = url;
+                    Current = page + 1;
+                    break;
 
-                    case "first":
-                        FirstUrl = url;
-                        break;
+                case "next":
+                    Next = page;
+                    NextUrl = url;
+                    Current = page - 1;
+                    break;
 
-                    case "prev":
-                        Previous = page;
-                        PreviousUrl = url;
-                        Current = page + 1;
-                        break;
-
-                    case "next":
-                        Next = page;
-                        NextUrl = url;
-                        Current = page - 1;
-                        break;
-
-                    case "last":
-                        Last = page;
-                        LastUrl = url;
-                        TotalPages = page;
-                        break;
-
-                }
+                case "last":
+                    Last = page;
+                    LastUrl = url;
+                    TotalPages = page;
+                    break;
 
             }
 
-            // If we're at the last page, the "last" link is not included
-            if (TotalPages == 1) TotalPages = Math.Max(TotalPages, Current);
-
         }
 
-        #endregion
+        // If we're at the last page, the "last" link is not included
+        if (TotalPages == 1) TotalPages = Math.Max(TotalPages, Current);
 
-        /// <summary>
-        /// Parses the <c>Link</c> header from the specified <paramref name="response"/>.
-        /// </summary>
-        /// <param name="response">The response.</param>
-        /// <returns>An instance of <see cref="GitHubLinkHeader"/>.</returns>
-        public static GitHubLinkHeader Parse(IHttpResponse response) {
-            if (response == null) throw new ArgumentNullException(nameof(response));
-            return new GitHubLinkHeader(response.Headers["Link"]);
-        }
+    }
 
+    #endregion
+
+    /// <summary>
+    /// Parses the <c>Link</c> header from the specified <paramref name="response"/>.
+    /// </summary>
+    /// <param name="response">The response.</param>
+    /// <returns>An instance of <see cref="GitHubLinkHeader"/>.</returns>
+    public static GitHubLinkHeader? Parse(IHttpResponse? response) {
+        string? link = response?.Headers["Link"];
+        return string.IsNullOrWhiteSpace(link) ? null : new GitHubLinkHeader(link!);
     }
 
 }

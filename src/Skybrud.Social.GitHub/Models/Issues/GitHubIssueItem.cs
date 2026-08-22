@@ -10,22 +10,22 @@ public class GitHubIssueItem : GitHubIssueBase {
     #region Constructors
 
     /// <summary>
-    /// Initializes a new instance from the specified <paramref name="obj"/>.
+    /// Initializes a new instance from the specified <paramref name="json"/>.
     /// </summary>
-    /// <param name="obj">The instance of <see cref="JObject"/> representing the issue.</param>
-    protected GitHubIssueItem(JObject obj) : base(obj) { }
+    /// <param name="json">The instance of <see cref="JObject"/> representing the issue.</param>
+    protected GitHubIssueItem(JObject json) : base(json) { }
 
     #endregion
 
     #region Static methods
 
     /// <summary>
-    /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GitHubIssueItem"/>.
+    /// Parses the specified <paramref name="json"/> object into an instance of <see cref="GitHubIssueItem"/>.
     /// </summary>
-    /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+    /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
     /// <returns>An instance of <see cref="GitHubIssueItem"/>.</returns>
-    public static GitHubIssueItem Parse(JObject obj) {
-        return new GitHubIssueItem(obj);
+    public static GitHubIssueItem Parse(JObject json) {
+        return new GitHubIssueItem(json);
     }
 
     #endregion

@@ -1,106 +1,133 @@
-﻿using Skybrud.Essentials.Common;
+﻿using System.Diagnostics.CodeAnalysis;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Strings.Extensions;
 using Skybrud.Social.GitHub.Http;
+using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Options.Issues;
 using Skybrud.Social.GitHub.Options.Repositories;
 
-namespace Skybrud.Social.GitHub.Options.PullRequests {
+namespace Skybrud.Social.GitHub.Options.PullRequests;
+
+/// <summary>
+/// Class representing the options for getting a list of pull requests of a given repository.
+/// </summary>
+/// <see>
+///     <cref>https://developer.github.com/v3/pulls/#list-pull-requests</cref>
+/// </see>
+public class GitHubGetPullRequestsOptions : GitHubHttpRequestOptions {
+
+    #region Properties
 
     /// <summary>
-    /// Class representing the options for getting a list of pull requests of a given repository.
+    /// Mandatory: Gets or sets the username (login) of the owner of the repository.
     /// </summary>
-    /// <see>
-    ///     <cref>https://developer.github.com/v3/pulls/#list-pull-requests</cref>
-    /// </see>
-    public class GitHubGetPullRequestsOptions : GitHubHttpRequestOptions {
+#if NET8_0_OR_GREATER
+    public required string Owner { get; set; }
+#else
+    public string? Owner { get; set; }
+#endif
 
-        #region Properties
+    /// <summary>
+    /// Mandatory: Gets or sets the slug of the repository.
+    /// </summary>
+#if NET8_0_OR_GREATER
+    public required string Repository { get; set; }
+#else
+    public string? Repository { get; set; }
+#endif
 
-        /// <summary>
-        /// Mandatory: Gets or sets the username (login) of the owner of the repository.
-        /// </summary>
-        public string Owner { get; set; }
+    /// <summary>
+    /// Gets or sets the state of the pull requests that should be returned. Default is <see cref="GitHubIssueState.Open"/>.
+    /// </summary>
+    public GitHubIssueState State { get; set; }
 
-        /// <summary>
-        /// Mandatory: Gets or sets the slug of the repository.
-        /// </summary>
-        public string Repository { get; set; }
+    /// <summary>
+    /// What to sort results by. Default is <see cref="GitHubPullRequestSortField.Created"/>.
+    /// </summary>
+    public GitHubPullRequestSortField Sort { get; set; }
 
-        /// <summary>
-        /// Gets or sets the state of the pull requests that should be returned. Default is <see cref="GitHubIssueState.Open"/>.
-        /// </summary>
-        public GitHubIssueState State { get; set; }
+    /// <summary>
+    /// The direction of the sort. Default is <see cref="GitHubSortDirection.Descending"/>.
+    /// </summary>
+    public GitHubSortDirection Direction { get; set; }
 
-        /// <summary>
-        /// What to sort results by. Default is <see cref="GitHubPullRequestSortField.Created"/>.
-        /// </summary>
-        public GitHubPullRequestSortField Sort { get; set; }
+    /// <summary>
+    /// Gets or sets the page to be returned. Default is <code>0</code>, indicating the first page.
+    /// </summary>
+    public int? Page { get; set; }
 
-        /// <summary>
-        /// The direction of the sort. Default is <see cref="GitHubSortDirection.Descending"/>.
-        /// </summary>
-        public GitHubSortDirection Direction { get; set; }
+    /// <summary>
+    /// Gets or sets the maximum amount of pull requests to be returned by each page.
+    /// </summary>
+    public int? PerPage { get; set; }
 
-        /// <summary>
-        /// Gets or sets the page to be returned. Default is <code>0</code>, indicating the first page.
-        /// </summary>
-        public int Page { get; set; }
+    #endregion
 
-        /// <summary>
-        /// Gets or sets the maximum amount of pull requests to be returned by each page.
-        /// </summary>
-        public int PerPage { get; set; }
+    #region Constructors
 
-        #endregion
+    /// <summary>
+    /// Initializes a new instance with default options.
+    /// </summary>
+    public GitHubGetPullRequestsOptions() { }
 
-        #region Constructors
+    /// <summary>
+    /// Initializes a new instance with the specified <paramref name="owner"/> and <paramref name="repository"/>.
+    /// </summary>
+    /// <param name="owner">The username (login) of the owner of the repository.</param>
+    /// <param name="repository">The slug of the repository.</param>
+    /// <param name="perPage">The maximum amount of pull requests to be returned on each page.</param>
+    /// <param name="page">The number of the page to be returned.</param>
+    [SetsRequiredMembers]
+    public GitHubGetPullRequestsOptions(string owner, string repository, int? perPage = null, int? page = null) {
+        Owner = owner;
+        Repository = repository;
+        PerPage = perPage;
+        Page = page;
+    }
 
-        /// <summary>
-        /// Initializes a new instance with default options.
-        /// </summary>
-        public GitHubGetPullRequestsOptions() { }
+    /// <summary>
+    /// Initializes a new instance with the specified <paramref name="repository"/>.
+    /// </summary>
+    /// <param name="repository">The repository.</param>
+    /// <param name="perPage">The maximum amount of pull requests to be returned on each page.</param>
+    /// <param name="page">The number of the page to be returned.</param>
+    [SetsRequiredMembers]
+    public GitHubGetPullRequestsOptions(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
+        Owner = repository.Owner.Login;
+        Repository = repository.Name;
+        PerPage = perPage;
+        Page = page;
+    }
 
-        /// <summary>
-        /// Initializes a new instance with the specified <paramref name="owner"/> and <paramref name="repository"/>.
-        /// </summary>
-        /// <param name="owner">The username (login) of the owner of the repository.</param>
-        /// <param name="repository">The slug of the repository.</param>
-        public GitHubGetPullRequestsOptions(string owner, string repository) {
-            Owner = owner;
-            Repository = repository;
-        }
+    #endregion
 
-        #endregion
+    #region Member methods
 
-        #region Member methods
+    /// <inheritdoc />
+    public override IHttpRequest GetRequest() {
 
-        /// <inheritdoc />
-        public override IHttpRequest GetRequest() {
+        // Validate required parameters
+        if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
+        if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
 
-            // Validate required parameters
-            if (string.IsNullOrWhiteSpace(Owner)) throw new PropertyNotSetException(nameof(Owner));
-            if (string.IsNullOrWhiteSpace(Repository)) throw new PropertyNotSetException(nameof(Repository));
+        // Initialize and construct the query string
+        IHttpQueryString query = new HttpQueryString {
+            {"state", State.ToKebabCase()}
+        };
+        query.Add("sort", Sort.ToKebabCase());
+        query.Add("direction", Direction == GitHubSortDirection.Descending ? "desc" : "asc");
+        if (Page > 0) query.Add("page", Page);
+        if (PerPage > 0) query.Add("per_page", PerPage);
 
-            // Initialize and construct the query string
-            IHttpQueryString query = new HttpQueryString {
-                {"state", State.ToKebabCase()}
-            };
-            query.Add("sort", Sort.ToKebabCase());
-            query.Add("direction", Direction == GitHubSortDirection.Descending ? "desc" : "asc");
-            if (Page > 0) query.Add("page", Page);
-            if (PerPage > 0) query.Add("per_page", PerPage);
-
-            // Initialize the request
-            return HttpRequest
-                .Get($"/repos/{Owner}/{Repository}/pulls", query)
-                .SetAcceptHeader(MediaTypes);
-
-        }
-
-        #endregion
+        // Initialize the request
+        return HttpRequest
+            .Get($"/repos/{Owner}/{Repository}/pulls", query)
+            .SetAcceptHeader(MediaTypes);
 
     }
+
+    #endregion
 
 }

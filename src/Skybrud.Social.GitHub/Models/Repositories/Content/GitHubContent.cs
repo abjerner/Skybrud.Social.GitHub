@@ -1,76 +1,74 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 
-namespace Skybrud.Social.GitHub.Models.Repositories.Content {
+namespace Skybrud.Social.GitHub.Models.Repositories.Content;
+
+/// <summary>
+/// Class representing the content of a file in a GitHub repository.
+/// </summary>
+/// <see>
+///     <cref>https://docs.github.com/en/rest/reference/repos#get-repository-content</cref>
+/// </see>
+public class GitHubContent : GitHubObject {
+
+    #region Properties
 
     /// <summary>
-    /// Class representing the content of a file in a GitHub repository.
+    /// Gets the name of the file.
     /// </summary>
-    /// <see>
-    ///     <cref>https://docs.github.com/en/rest/reference/repos#get-repository-content</cref>
-    /// </see>
-    public class GitHubContent : GitHubObject {
+    public string Name { get; }
 
-        #region Properties
+    /// <summary>
+    /// Gets the path of the file.
+    /// </summary>
+    public string Path { get; }
 
-        /// <summary>
-        /// Gets the name of the file.
-        /// </summary>
-        public string Name { get; }
+    /// <summary>
+    /// Gets the SHA of the file.
+    /// </summary>
+    public string Sha { get; }
 
-        /// <summary>
-        /// Gets the path of the file.
-        /// </summary>
-        public string Path { get; }
+    /// <summary>
+    /// Gets the type of the content - e.g. <c>file</c>.
+    /// </summary>
+    public string Type { get; }
 
-        /// <summary>
-        /// Gets the SHA of the file.
-        /// </summary>
-        public string Sha { get; }
+    /// <summary>
+    /// Gets the encoding of the file - e.g. <c>base64</c>.
+    /// </summary>
+    public string Encoding { get; }
 
-        /// <summary>
-        /// Gets the type of the of the content - eg. <c>file</c>.
-        /// </summary>
-        public string Type { get; }
+    /// <summary>
+    /// Gets the content of the file.
+    /// </summary>
+    public string Content { get; }
 
-        /// <summary>
-        /// Gets the encoding of the file - eg. <c>base64</c>.
-        /// </summary>
-        public string Encoding { get; }
+    #endregion
 
-        /// <summary>
-        /// Gets the content of the file.
-        /// </summary>
-        public string Content { get; }
+    #region Constructors
 
-        #endregion
-
-        #region Constructors
-
-        private GitHubContent(JObject json) : base(json) {
-            Name = json.GetString("name");
-            Path = json.GetString("path");
-            Sha = json.GetString("sha");
-            Type = json.GetString("type");
-            Encoding = json.GetString("encoding");
-            Content = json.GetString("content");
-        }
-
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Parses the specified <paramref name="json"/> object into an instance of <see cref="GitHubRepository"/>.
-        /// </summary>
-        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="GitHubRepository"/>.</returns>
-        public static GitHubContent Parse(JObject json) {
-            return json == null ? null : new GitHubContent(json);
-        }
-
-        #endregion
-
+    private GitHubContent(JObject json) : base(json) {
+        Name = json.GetRequiredString("name");
+        Path = json.GetRequiredString("path");
+        Sha = json.GetRequiredString("sha");
+        Type = json.GetRequiredString("type");
+        Encoding = json.GetRequiredString("encoding");
+        Content = json.GetRequiredString("content");
     }
+
+    #endregion
+
+    #region Static methods
+
+    /// <summary>
+    /// Parses the specified <paramref name="json"/> object into an instance of <see cref="GitHubRepository"/>.
+    /// </summary>
+    /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
+    /// <returns>An instance of <see cref="GitHubRepository"/>.</returns>
+    public static GitHubContent Parse(JObject json) {
+        return new GitHubContent(json);
+    }
+
+    #endregion
 
 }

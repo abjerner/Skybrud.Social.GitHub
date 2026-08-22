@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Strings.Extensions;
@@ -21,11 +22,10 @@ public class GitHubAddTeamsOptions : GitHubHttpRequestOptions {
     /// <summary>
     /// Gets or sets the alias/slug of the organization name. The alias is not case-sensitive.
     /// </summary>
-
 #if NET8_0_OR_GREATER
     public required string OrganizationAlias { get; set; }
 #else
-        public string? OrganizationAlias { get; set; }
+    public string? OrganizationAlias { get; set; }
 #endif
 
     /// <summary>
@@ -34,7 +34,7 @@ public class GitHubAddTeamsOptions : GitHubHttpRequestOptions {
 #if NET8_0_OR_GREATER
     public required string RepositoryOwner { get; set; }
 #else
-        public string? RepositoryOwner { get; set; }
+    public string? RepositoryOwner { get; set; }
 #endif
 
     /// <summary>
@@ -43,7 +43,7 @@ public class GitHubAddTeamsOptions : GitHubHttpRequestOptions {
 #if NET8_0_OR_GREATER
     public required string RepositoryAlias { get; set; }
 #else
-        public string? RepositoryAlias { get; set; }
+    public string? RepositoryAlias { get; set; }
 #endif
 
     /// <summary>
@@ -52,7 +52,7 @@ public class GitHubAddTeamsOptions : GitHubHttpRequestOptions {
 #if NET8_0_OR_GREATER
     public required string TeamAlias { get; set; }
 #else
-        public string? TeamAlias { get; set; }
+    public string? TeamAlias { get; set; }
 #endif
 
     /// <summary>
@@ -61,7 +61,7 @@ public class GitHubAddTeamsOptions : GitHubHttpRequestOptions {
 #if NET8_0_OR_GREATER
     public required GitHubTeamPermission Permission { get; set; }
 #else
-        public GitHubTeamPermission Permission { get; set; }
+    public GitHubTeamPermission Permission { get; set; }
 #endif
 
     #endregion
@@ -72,7 +72,7 @@ public class GitHubAddTeamsOptions : GitHubHttpRequestOptions {
     /// Initialize a new instance with default options.
     /// </summary>
     public GitHubAddTeamsOptions() { }
-    
+
     /// <summary>
     /// Initializes a new instance based on the specified <paramref name="repositoryOwner"/>,
     /// <paramref name="repositoryAlias"/>, <paramref name="teamAlias"/> and <paramref name="permission"/>.
@@ -81,9 +81,7 @@ public class GitHubAddTeamsOptions : GitHubHttpRequestOptions {
     /// <param name="repositoryAlias">The alias of the repository.</param>
     /// <param name="teamAlias">The alias of the team.</param>
     /// <param name="permission">The permission to set for the team.</param>
-#if NET8_0_OR_GREATER
-    [System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-#endif
+    [SetsRequiredMembers]
     public GitHubAddTeamsOptions(string repositoryOwner, string repositoryAlias, string teamAlias, GitHubTeamPermission permission) {
         OrganizationAlias = repositoryOwner;
         RepositoryOwner = repositoryOwner;
@@ -98,9 +96,7 @@ public class GitHubAddTeamsOptions : GitHubHttpRequestOptions {
     /// <param name="repository">The repository.</param>
     /// <param name="team">The team.</param>
     /// <param name="permission">The permission.</param>
-#if NET8_0_OR_GREATER
-    [System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-#endif
+    [SetsRequiredMembers]
     public GitHubAddTeamsOptions(GitHubRepositoryBase repository, GitHubTeamBase team, GitHubTeamPermission permission) {
         OrganizationAlias = repository.Owner.Login;
         RepositoryOwner = repository.Owner.Login;

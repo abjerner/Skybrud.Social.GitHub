@@ -1,87 +1,99 @@
-﻿using System.Net;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.GitHub.Exceptions;
+using Skybrud.Social.GitHub.Extensions;
 using Skybrud.Social.GitHub.Models.Common;
 
-namespace Skybrud.Social.GitHub.Responses {
+namespace Skybrud.Social.GitHub.Responses;
+
+/// <summary>
+/// Class representing a response from the GitHub API.
+/// </summary>
+public class GitHubResponse : HttpResponseBase {
+
+    #region Properties
 
     /// <summary>
-    /// Class representing a response from the GitHub API.
+    /// Gets information about rate limiting.
     /// </summary>
-    public class GitHubResponse : HttpResponseBase {
+    public GitHubRateLimiting? RateLimiting { get; }
 
-        #region Properties
+    /// <summary>
+    /// Gets whether rate limiting information is available for this response.
+    /// </summary>
+    [MemberNotNullWhen(true, nameof(RateLimiting))]
+    public bool HasRateLimit => RateLimiting != null;
 
-        /// <summary>
-        /// Gets information about rate limiting.
-        /// </summary>
-        public GitHubRateLimiting RateLimiting { get; }
+    #endregion
 
-        /// <summary>
-        /// Gets whether rate limiting informatyion is available for this response. 
-        /// </summary>
-        public bool HasRateLimit => RateLimiting != null;
+    #region Constructors
 
-        #endregion
+    /// <summary>
+    /// Initializes a new instance from the specified <paramref name="response"/>.
+    /// </summary>
+    /// <param name="response">The raw response the instance should be based on.</param>
+    public GitHubResponse(IHttpResponse response) : base(response) {
 
-        #region Constructors
+        if (response.Headers["X-RateLimit-Limit"] != null) RateLimiting = GitHubRateLimiting.GetFromResponse(response);
 
-        /// <summary>
-        /// Initializes a new instance from the specified <paramref name="response"/>.
-        /// </summary>
-        /// <param name="response">The raw response the instance should be based on.</param>
-        public GitHubResponse(IHttpResponse response) : base(response) {
-
-            if (response.Headers["X-RateLimit-Limit"] != null) RateLimiting = GitHubRateLimiting.GetFromResponse(response);
-
-            // If an error occurs during authorization, the error code will still be "OK"
-            if (response.ContentType.StartsWith(HttpConstants.ApplicationFormEncoded) && response.Body.StartsWith("error=")) {
-                IHttpQueryString body = HttpQueryString.Parse(response.Body, true);
-                throw new GitHubException(body.GetString("error_description"));
-            }
-
-            // Skip error checking if the server responds with an OK status code
-            if (response.StatusCode == HttpStatusCode.OK) return;
-            if (response.StatusCode == HttpStatusCode.Created) return;
-            if (response.StatusCode == HttpStatusCode.NoContent) return;
-
-            // Parse the error message from the response body
-            GitHubError error = ParseJsonObject(response.Body, GitHubError.Parse);
-
-            // Now throw some exceptions
-            throw new GitHubHttpException(response, error);
-
+        // If an error occurs during authorization, the error code will still be "OK"
+        if (response.ContentType.StartsWith(HttpConstants.ApplicationFormEncoded) && response.Body.StartsWith("error=")) {
+            IHttpQueryString body = HttpQueryString.Parse(response.Body, true);
+            throw new GitHubException(body.GetRequiredString("error_description"));
         }
 
-        #endregion
+        // Skip error checking if the server responds with an OK status code
+        if (response.StatusCode == HttpStatusCode.OK) return;
+        if (response.StatusCode == HttpStatusCode.Created) return;
+        if (response.StatusCode == HttpStatusCode.NoContent) return;
 
+        // Parse the error message from the response body
+        GitHubError error = ParseJsonObject(response.Body, GitHubError.Parse);
+
+        // Now throw some exceptions
+        throw new GitHubHttpException(response, error);
+
+    }
+
+    #endregion
+
+}
+
+/// <summary>
+/// Class representing a response from the GitHub API.
+/// </summary>
+public class GitHubResponse<T> : GitHubResponse {
+
+    #region Properties
+
+    /// <summary>
+    /// Gets the body of the response.
+    /// </summary>
+    public T Body { get; protected set; }
+
+    #endregion
+
+    #region Constructors
+
+    /// <summary>
+    /// Initializes a new instance from the specified <paramref name="response"/>.
+    /// </summary>
+    /// <param name="response">The raw response the instance should be based on.</param>
+    protected GitHubResponse(IHttpResponse response) : base(response) {
+        Body = default!; // TODO: can we do this in a better way?
     }
 
     /// <summary>
-    /// Class representing a response from the GitHub API.
+    /// Initializes a new instance from the specified <paramref name="response"/>.
     /// </summary>
-    public class GitHubResponse<T> : GitHubResponse {
-
-        #region Properties
-
-        /// <summary>
-        /// Gets the body of the response.
-        /// </summary>
-        public T Body { get; protected set; }
-
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance from the specified <paramref name="response"/>.
-        /// </summary>
-        /// <param name="response">The raw response the instance should be based on.</param>
-        protected GitHubResponse(IHttpResponse response) : base(response) { }
-
-        #endregion
-
+    /// <param name="response">The raw response the instance should be based on.</param>
+    /// <param name="body">The body of the response.</param>
+    protected GitHubResponse(IHttpResponse response, T body) : base(response) {
+        Body = body;
     }
+
+    #endregion
 
 }

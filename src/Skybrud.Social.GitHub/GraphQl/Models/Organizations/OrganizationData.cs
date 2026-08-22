@@ -2,50 +2,48 @@
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Social.GitHub.Models;
 
-namespace Skybrud.Social.GitHub.GraphQl.Models.Organizations {
+namespace Skybrud.Social.GitHub.GraphQl.Models.Organizations;
+
+/// <summary>
+/// Class representing the data object an <strong>Organization</strong> query result.
+/// </summary>
+/// <see>
+///     <cref>https://docs.github.com/en/graphql/reference/queries#organization</cref>
+/// </see>
+public class OrganizationData : GitHubObject {
+
+    #region Properties
 
     /// <summary>
-    /// Class representing the data object an <strong>Organization</strong> query result.
+    /// Gets a reference to the organization.
     /// </summary>
-    /// <see>
-    ///     <cref>https://docs.github.com/en/graphql/reference/queries#organization</cref>
-    /// </see>
-    public class OrganizationData : GitHubObject {
+    public Organization? Organization { get; } // TODO: is this nullable?
 
-        #region Properties
-        
-        /// <summary>
-        /// Gets a reference to the organization.
-        /// </summary>
-        public Organization Organization { get; }
+    #endregion
 
-        #endregion
+    #region Constructors
 
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance from the specified <paramref name="json"/> object.
-        /// </summary>
-        /// <param name="json">The instance of <see cref="JObject"/> representing the user.</param>
-        protected OrganizationData(JObject json) : base(json) {
-            Organization = json.GetObject("organization", Organization.Parse);
-        }
-
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Parses the specified <paramref name="json"/> object into an instance of <see cref="OrganizationData"/>.
-        /// </summary>
-        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="OrganizationData"/>.</returns>
-        public static OrganizationData Parse(JObject json) {
-            return json == null ? null : new OrganizationData(json);
-        }
-
-        #endregion
-
+    /// <summary>
+    /// Initializes a new instance from the specified <paramref name="json"/> object.
+    /// </summary>
+    /// <param name="json">The instance of <see cref="JObject"/> representing the user.</param>
+    protected OrganizationData(JObject json) : base(json) {
+        Organization = json.GetObject("organization", Organization.Parse);
     }
+
+    #endregion
+
+    #region Static methods
+
+    /// <summary>
+    /// Parses the specified <paramref name="json"/> object into an instance of <see cref="OrganizationData"/>.
+    /// </summary>
+    /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
+    /// <returns>An instance of <see cref="OrganizationData"/>.</returns>
+    public static OrganizationData Parse(JObject json) {
+        return new OrganizationData(json);
+    }
+
+    #endregion
 
 }

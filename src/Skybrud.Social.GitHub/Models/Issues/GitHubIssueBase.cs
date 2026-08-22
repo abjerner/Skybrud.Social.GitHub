@@ -23,9 +23,21 @@ public abstract class GitHubIssueBase : GitHubObject {
     public long Id { get; }
 
     /// <summary>
-    /// Gets the issue number.
+    /// Gets the node ID of the issue.
+    /// </summary>
+    public string NodeId { get; }
+
+    /// <summary>
+    /// Gets the umber uniquely identifying the issue within its repository.
     /// </summary>
     public int Number { get; }
+
+    /// <summary>
+    /// Gets the state of the issue, indicating whether the issue is open or closed.
+    /// </summary>
+    public GitHubIssueState State { get; }
+
+    // TODO: add support for the "state_reason" property (string/enum) (nullable)
 
     /// <summary>
     /// Gets the title of the issue.
@@ -33,9 +45,20 @@ public abstract class GitHubIssueBase : GitHubObject {
     public string Title { get; }
 
     /// <summary>
+    /// Gets the body of the issue.
+    /// </summary>
+    public string? Body { get; }
+
+    /// <summary>
+    /// Gets whether a body has been specified for the issue.
+    /// </summary>
+    [MemberNotNullWhen(true, nameof(Body))]
+    public bool HasBody => !string.IsNullOrWhiteSpace(Body);
+
+    /// <summary>
     /// Gets a reference to the user who created the issue.
     /// </summary>
-    public GitHubUserItem User { get; }
+    public GitHubUserItem? User { get; }
 
     /// <summary>
     /// Gets an array of the labels of the issue.
@@ -43,17 +66,7 @@ public abstract class GitHubIssueBase : GitHubObject {
     public IReadOnlyList<GitHubLabel> Labels { get; }
 
     /// <summary>
-    /// Gets the state of the issue, indicating whether the issue is open or closed.
-    /// </summary>
-    public GitHubIssueState State { get; }
-
-    /// <summary>
-    /// Gets whether the issue has been locked.
-    /// </summary>
-    public bool IsLocked { get; }
-
-    /// <summary>
-    /// Gets a reference to the (first) user the issue is assigned to, or <code>null</code> if the issue is not
+    /// Gets a reference to the (first) user the issue is assigned to, or <see langword="null"/> if the issue is not
     /// assigned to any users.
     /// </summary>
     public GitHubUserItem? Assignee { get; }
@@ -64,7 +77,7 @@ public abstract class GitHubIssueBase : GitHubObject {
     public IReadOnlyList<GitHubUserItem> Assignees { get; }
 
     /// <summary>
-    /// Gets a reference to the milestone of the issue, or <code>null</code> if the issue is not part of a milestone.
+    /// Gets a reference to the milestone of the issue, or <see langword="null"/> if the issue is not part of a milestone.
     /// </summary>
     public GitHubMilestone? Milestone { get; }
 
@@ -75,9 +88,24 @@ public abstract class GitHubIssueBase : GitHubObject {
     public bool HasMilestone => Milestone != null;
 
     /// <summary>
+    /// Gets whether the issue has been locked.
+    /// </summary>
+    public bool IsLocked { get; }
+
+    // TODO: add support for the "active_lock_reason" property (string) (nullable)
+
+    /// <summary>
     /// Gets the number of comment.
     /// </summary>
     public int Comments { get; }
+
+    // TODO: add support for the "pull_request" property (object)
+
+    /// <summary>
+    /// Gets a timestamp for when the issue was closed. If <see cref="State"/> is
+    /// <see cref="GitHubIssueState.Open"/>, this property will return <see langword="null"/>.
+    /// </summary>
+    public EssentialsTime? ClosedAt { get; }
 
     /// <summary>
     /// Gets a timestamp for when the issue was created.
@@ -89,24 +117,34 @@ public abstract class GitHubIssueBase : GitHubObject {
     /// </summary>
     public EssentialsTime UpdatedAt { get; }
 
-    /// <summary>
-    /// Gets a timestamp for when the issue was closed. If <see cref="State"/> is
-    /// <see cref="GitHubIssueState.Open"/>, this property will return <code>null</code>.
-    /// </summary>
-    public EssentialsTime? ClosedAt { get; }
+    // TODO: add support for the "draft" property (boolean)
+
+    // TODO: add support for the "closed_by" property (SimpleUser) (nullable)
+
+    // TODO: add support for the "body_html" property (string)
+
+    // TODO: add support for the "body_text" property (string)
+
+    // TODO: add support for the "timeline_url" property (string)
+
+    // TODO: add support for the "type" property (object) (nullable)
+
+    // TODO: add support for the "repository" property (Repository) (is this always included? schema says so ¯\_(ツ)_/¯)
+
+    // TODO: add support for the "performed_via_github_app" property (object) (nullable)
+
+    // TODO: add support for the "reactions" property (ReactionRollup)
+
+    // TODO: add support for the "sub_issues_summary" property (SubIssuesSummary)
+
+    // TODO: add support for the "parent_issue_url" property (string) (nullable)
+
+    // TODO: add support for the "issue_dependencies_summary" property (IssueDependenciesSummary)
+
+    // TODO: add support for the "issue_field_values" property (array of IssueFieldValue)
 
     /// <summary>
-    /// Gets the body of the issue.
-    /// </summary>
-    public string Body { get; }
-
-    /// <summary>
-    /// Gets whether a body has been specified for the issue.
-    /// </summary>
-    public bool HasBody => !string.IsNullOrWhiteSpace(Body);
-
-    /// <summary>
-    /// Gets a collection/map of URLs related to the issue.
+    /// Gets a list/map of URLs related to the issue.
     /// </summary>
     public GitHubIssueUrls Urls { get; }
 
@@ -115,26 +153,43 @@ public abstract class GitHubIssueBase : GitHubObject {
     #region Constructors
 
     /// <summary>
-    /// Initializes a new instance from the specified <paramref name="obj"/>.
+    /// Initializes a new instance from the specified <paramref name="json"/> object.
     /// </summary>
-    /// <param name="obj">The instance of <see cref="JObject"/> representing the issue.</param>
-    protected GitHubIssueBase(JObject obj) : base(obj) {
-        Id = obj.GetInt64("id");
-        Number = obj.GetInt32("number");
-        Title = obj.GetString("title");
-        User = obj.GetObject("user", GitHubUserItem.Parse);
-        Labels = obj.GetArrayItems("labels", GitHubLabel.Parse);
-        State = obj.GetEnum<GitHubIssueState>("state");
-        IsLocked = obj.GetBoolean("locked");
-        Assignee = obj.GetObject("assignee", GitHubUserItem.Parse);
-        Assignees = obj.GetArrayItems("assignees", GitHubUserItem.Parse);
-        Milestone = obj.GetObject("milestone", GitHubMilestone.Parse);
-        Comments = obj.GetInt32("comments");
-        CreatedAt = obj.GetEssentialsTime("created_at");
-        UpdatedAt = obj.GetEssentialsTime("updated_at");
-        ClosedAt = obj.GetEssentialsTime("closed_at");
-        Body = obj.GetString("body");
-        Urls = GitHubIssueUrls.Parse(obj);
+    /// <param name="json">The instance of <see cref="JObject"/> representing the issue.</param>
+    protected GitHubIssueBase(JObject json) : base(json) {
+        Id = json.GetRequiredInt64("id");
+        NodeId = json.GetRequiredString("node_id");
+        Number = json.GetRequiredInt32("number");
+        State = json.GetRequiredEnum<GitHubIssueState>("state");
+        // TODO: add support for the "state_reason" property (string/enum) (nullable)
+        Title = json.GetRequiredString("title");
+        Body = json.GetString("body");
+        User = json.GetObject("user", GitHubUserItem.Parse);
+        Labels = json.GetArrayItems("labels", GitHubLabel.Parse);
+        Assignee = json.GetObject("assignee", GitHubUserItem.Parse);
+        Assignees = json.GetArrayItems("assignees", GitHubUserItem.Parse);
+        Milestone = json.GetObject("milestone", GitHubMilestone.Parse);
+        IsLocked = json.GetRequiredBoolean("locked");
+        // TODO: add support for the "active_lock_reason" property (string) (nullable)
+        Comments = json.GetRequiredInt32("comments");
+        // TODO: add support for the "pull_request" property (object)
+        ClosedAt = json.GetEssentialsTime("closed_at");
+        CreatedAt = json.GetRequiredEssentialsTime("created_at");
+        UpdatedAt = json.GetRequiredEssentialsTime("updated_at");
+        // TODO: add support for the "draft" property (boolean)
+        // TODO: add support for the "closed_by" property (SimpleUser) (nullable)
+        // TODO: add support for the "body_html" property (string)
+        // TODO: add support for the "body_text" property (string)
+        // TODO: add support for the "timeline_url" property (string)
+        // TODO: add support for the "type" property (object) (nullable)
+        // TODO: add support for the "repository" property (Repository) (is this always included? schema says so ¯\_(ツ)_/¯)
+        // TODO: add support for the "performed_via_github_app" property (object) (nullable)
+        // TODO: add support for the "reactions" property (ReactionRollup)
+        // TODO: add support for the "sub_issues_summary" property (SubIssuesSummary)
+        // TODO: add support for the "parent_issue_url" property (string) (nullable)
+        // TODO: add support for the "issue_dependencies_summary" property (IssueDependenciesSummary)
+        // TODO: add support for the "issue_field_values" property (array of IssueFieldValue)
+        Urls = GitHubIssueUrls.Parse(json);
     }
 
     #endregion

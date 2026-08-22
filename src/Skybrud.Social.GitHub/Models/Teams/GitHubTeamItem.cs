@@ -1,35 +1,33 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace Skybrud.Social.GitHub.Models.Teams {
+namespace Skybrud.Social.GitHub.Models.Teams;
+
+/// <summary>
+/// Class representing a GitHub team.
+/// </summary>
+public class GitHubTeamItem : GitHubTeamBase {
+
+    #region Constructors
 
     /// <summary>
-    /// Class representing a GitHub team.
+    /// Initializes a new instance from the specified <paramref name="json"/>.
     /// </summary>
-    public class GitHubTeamItem : GitHubTeamBase {
+    /// <param name="json">The instance of <see cref="JObject"/> representing the team.</param>
+    protected GitHubTeamItem(JObject json) : base(json) { }
 
-        #region Constructors
+    #endregion
 
-        /// <summary>
-        /// Initializes a new instance from the specified <paramref name="json"/>.
-        /// </summary>
-        /// <param name="json">The instance of <see cref="JObject"/> representing the team.</param>
-        protected GitHubTeamItem(JObject json) : base(json) { }
+    #region Static methods
 
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Parses the specified <paramref name="json"/> into an instance of <see cref="GitHubTeamItem"/>.
-        /// </summary>
-        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>An instance of <see cref="GitHubTeamItem"/>.</returns>
-        public static new GitHubTeamItem Parse(JObject json) {
-            return new GitHubTeamItem(json);
-        }
-
-        #endregion
-
+    /// <summary>
+    /// Parses the specified <paramref name="json"/> into an instance of <see cref="GitHubTeamItem"/>.
+    /// </summary>
+    /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
+    /// <returns>An instance of <see cref="GitHubTeamItem"/>.</returns>
+    public static new GitHubTeamItem Parse(JObject json) {
+        return new GitHubTeamItem(json);
     }
+
+    #endregion
 
 }
