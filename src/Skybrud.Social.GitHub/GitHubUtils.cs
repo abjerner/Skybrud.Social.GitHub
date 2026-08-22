@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Skybrud.Essentials.Enums;
 using Skybrud.Essentials.Strings.Extensions;
 using Skybrud.Social.GitHub.Options;
@@ -59,6 +60,29 @@ public static class GitHubUtils {
             GitHubRepositoryAffiliation affiliation => ToString(affiliation),
             _ => value.ToUnderscore()
         };
+    }
+
+    /// <summary>
+    /// Attempts to parse the specified <paramref name="value"/> as a GitHub repository URL and extract the owner and repository aliases.
+    /// </summary>
+    /// <param name="value">The value to parse.</param>
+    /// <param name="ownerAlias">The owner alias.</param>
+    /// <param name="repositoryAlias">The repository alias.</param>
+    /// <returns><see langword="true"/> if the value was successfully parsed; otherwise, <see langword="false"/>.</returns>
+    public static bool TryParseRepositoryUrl(string? value, [NotNullWhen(true)] out string? ownerAlias, [NotNullWhen(true)] out string? repositoryAlias) {
+
+        ownerAlias = null;
+        repositoryAlias = null;
+
+        if (!Uri.TryCreate(value, UriKind.Absolute, out Uri? uri)) return false;
+
+        string[] segments = uri.AbsolutePath.Trim('/').Split('/');
+        if (segments.Length < 2) return false;
+
+        ownerAlias = segments[0];
+        repositoryAlias = segments[1];
+        return true;
+
     }
 
 }

@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Exceptions;
 using Skybrud.Social.GitHub.Extensions;
 using Skybrud.Social.GitHub.Models.Issues;
 using Skybrud.Social.GitHub.Models.Labels;
@@ -26,12 +27,12 @@ public class GitHubPullRequestBase : GitHubObject {
     /// <summary>
     /// Gets the owner of the repository the pull request belongs to.
     /// </summary>
-    public string RepositoryOwner { get; }
+    public string OwnerAlias { get; }
 
     /// <summary>
     /// Gets the slug of the repository the pull request belongs to.
     /// </summary>
-    public string RepositorySlug { get; }
+    public string RepositoryAlias { get; }
 
     /// <summary>
     /// Gets the ID of the pull request.
@@ -187,9 +188,9 @@ public class GitHubPullRequestBase : GitHubObject {
     protected GitHubPullRequestBase(JObject json) : base(json) {
 
         Url = json.GetRequiredString("url");
-        string[] url = Url.Split('/');
-        RepositoryOwner = url[4];
-        RepositorySlug = url[5];
+        if (!GitHubUtils.TryParseRepositoryUrl(Url, out string? ownerAlias, out string? repositoryAlias)) throw new GitHubParseException("Failed parsing 'url' property from pull request.");
+        OwnerAlias = ownerAlias!;
+        RepositoryAlias = repositoryAlias!;
         Id = json.GetRequiredInt64("id");
         NodeId = json.GetRequiredString("node_id");
         Number = json.GetRequiredInt32("number");

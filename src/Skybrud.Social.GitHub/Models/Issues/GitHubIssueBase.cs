@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.GitHub.Exceptions;
 using Skybrud.Social.GitHub.Extensions;
 using Skybrud.Social.GitHub.Models.Labels;
 using Skybrud.Social.GitHub.Models.Milestones;
@@ -16,6 +17,46 @@ namespace Skybrud.Social.GitHub.Models.Issues;
 public abstract class GitHubIssueBase : GitHubObject {
 
     #region Properties
+
+    /// <summary>
+    /// Gets the API URL of the user.
+    /// </summary>
+    public string Url { get; }
+
+    /// <summary>
+    /// Gets the alias (login) of the owner of the repository of the issue.
+    /// </summary>
+    public string OwnerAlias { get; }
+
+    /// <summary>
+    /// Gets the alias (name/slug) of the repository of the issue.
+    /// </summary>
+    public string RepositoryAlias { get; }
+
+    /// <summary>
+    /// Gets the API URL for getting the repository of the issue.
+    /// </summary>
+    public string RepositoryUrl { get; }
+
+    /// <summary>
+    /// Gets the API URL for getting a list of labels of the issue.
+    /// </summary>
+    public string LabelsUrl { get; }
+
+    /// <summary>
+    /// Gets the API URL for getting a list of comments of the issue.
+    /// </summary>
+    public string CommentsUrl { get; }
+
+    /// <summary>
+    /// Gets the API URL for getting a list of events of the issue.
+    /// </summary>
+    public string EventsUrl { get; }
+
+    /// <summary>
+    /// Gets the website URL of the issue.
+    /// </summary>
+    public string HtmlUrl { get; }
 
     /// <summary>
     /// Gets the ID of the issue.
@@ -143,11 +184,6 @@ public abstract class GitHubIssueBase : GitHubObject {
 
     // TODO: add support for the "issue_field_values" property (array of IssueFieldValue)
 
-    /// <summary>
-    /// Gets a list/map of URLs related to the issue.
-    /// </summary>
-    public GitHubIssueUrls Urls { get; }
-
     #endregion
 
     #region Constructors
@@ -157,6 +193,15 @@ public abstract class GitHubIssueBase : GitHubObject {
     /// </summary>
     /// <param name="json">The instance of <see cref="JObject"/> representing the issue.</param>
     protected GitHubIssueBase(JObject json) : base(json) {
+        Url = json.GetRequiredString("url");
+        HtmlUrl = json.GetRequiredString("html_url");
+        RepositoryUrl = json.GetRequiredString("repository_url");
+        if (!GitHubUtils.TryParseRepositoryUrl(RepositoryUrl, out string? ownerAlias, out string? repositoryAlias)) throw new GitHubParseException("Failed parsing 'repository_url' from issue.");
+        OwnerAlias = ownerAlias;
+        RepositoryAlias = repositoryAlias;
+        LabelsUrl = json.GetRequiredString("labels_url");
+        CommentsUrl = json.GetRequiredString("comments_url");
+        EventsUrl = json.GetRequiredString("events_url");
         Id = json.GetRequiredInt64("id");
         NodeId = json.GetRequiredString("node_id");
         Number = json.GetRequiredInt32("number");
@@ -189,7 +234,6 @@ public abstract class GitHubIssueBase : GitHubObject {
         // TODO: add support for the "parent_issue_url" property (string) (nullable)
         // TODO: add support for the "issue_dependencies_summary" property (IssueDependenciesSummary)
         // TODO: add support for the "issue_field_values" property (array of IssueFieldValue)
-        Urls = GitHubIssueUrls.Parse(json);
     }
 
     #endregion

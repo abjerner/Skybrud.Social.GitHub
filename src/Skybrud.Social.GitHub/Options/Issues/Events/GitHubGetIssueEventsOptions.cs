@@ -85,10 +85,8 @@ public class GitHubGetIssueEventsOptions : GitHubHttpRequestOptions {
     [SetsRequiredMembers]
     public GitHubGetIssueEventsOptions(GitHubIssueBase issue) {
         if (issue == null) throw new ArgumentNullException(nameof(issue));
-        // TODO: fix me
-        throw new Exception("BAAAAAAAAAAAAAH\r\n\r\n" + issue.JObject);
-        //Owner = issue..Repository.Owner.Login;;
-        //Repository = issue.Repository.Name;
+        Owner = issue.OwnerAlias;
+        Repository = issue.RepositoryAlias;
         Number = issue.Number;
     }
 

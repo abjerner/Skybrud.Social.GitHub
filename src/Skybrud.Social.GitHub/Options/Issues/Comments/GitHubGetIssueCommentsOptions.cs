@@ -92,10 +92,8 @@ public class GitHubGetIssueCommentsOptions : GitHubHttpRequestOptions {
     [SetsRequiredMembers]
     public GitHubGetIssueCommentsOptions(GitHubIssueBase issue) {
         if (issue == null) throw new ArgumentNullException(nameof(issue));
-        // TODO: fix me ("GitHubIssueBase" no longer has a reference to the repository)
-        throw new Exception("BAAAAAAAAAAAAAH\r\n\r\n" + issue.JObject);
-        //Owner = issue..Repository.Owner.Login;;
-        //Repository = issue.Repository.Name;
+        Owner = issue.OwnerAlias;
+        Repository = issue.RepositoryAlias;
         Number = issue.Number;
     }
 
@@ -106,10 +104,8 @@ public class GitHubGetIssueCommentsOptions : GitHubHttpRequestOptions {
     [SetsRequiredMembers]
     public GitHubGetIssueCommentsOptions(GitHubPullRequestBase pullRequest) {
         if (pullRequest == null) throw new ArgumentNullException(nameof(pullRequest));
-        // TODO: fix me ("GitHubPullRequestBase" no longer has a reference to the repository)
-        throw new Exception("BAAAAAAAAAAAAAH\r\n\r\n" + pullRequest.JObject);
-        //Owner = issue..Repository.Owner.Login;;
-        //Repository = issue.Repository.Name;
+        Owner = pullRequest.OwnerAlias;
+        Repository = pullRequest.RepositoryAlias;
         Number = pullRequest.Number;
     }
 

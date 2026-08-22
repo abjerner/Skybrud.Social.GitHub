@@ -21,20 +21,6 @@ public class GitHubRepositoryBase : GitHubObject {
     /// </summary>
     public string NodeId { get; }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /// <summary>
     /// Gets the name of the repository - e.g. <code>Skybrud.Social</code>.
     /// </summary>
@@ -64,7 +50,7 @@ public class GitHubRepositoryBase : GitHubObject {
     /// Gets whether the repository is a fork.
     /// </summary>
     public bool IsFork { get; }
-    
+
     /// <summary>
     /// Gets a reference to a collection of URLs related to the repository.
     /// </summary>

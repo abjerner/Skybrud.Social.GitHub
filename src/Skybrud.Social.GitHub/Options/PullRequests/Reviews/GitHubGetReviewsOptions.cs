@@ -90,10 +90,8 @@ public class GitHubGetReviewsOptions : GitHubHttpRequestOptions {
 #endif
     public GitHubGetReviewsOptions(GitHubIssueBase issue) {
         if (issue == null) throw new ArgumentNullException(nameof(issue));
-        // TODO: fix me
-        throw new Exception("BAAAAAAAAAAAAAH\r\n\r\n" + issue.JObject);
-        //Owner = issue..Repository.Owner.Login;;
-        //Repository = issue.Repository.Name;
+        Owner = issue.OwnerAlias;
+        Repository = issue.RepositoryAlias;
         Number = issue.Number;
     }
 
@@ -106,8 +104,8 @@ public class GitHubGetReviewsOptions : GitHubHttpRequestOptions {
 #endif
     public GitHubGetReviewsOptions(GitHubPullRequestBase pullRequest) {
         if (pullRequest == null) throw new ArgumentNullException(nameof(pullRequest));
-        Owner = pullRequest.RepositoryOwner;
-        Repository = pullRequest.RepositorySlug;
+        Owner = pullRequest.OwnerAlias;
+        Repository = pullRequest.RepositoryAlias;
         Number = pullRequest.Number;
     }
 
