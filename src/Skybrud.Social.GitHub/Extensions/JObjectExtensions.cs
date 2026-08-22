@@ -23,7 +23,7 @@ public static class JObjectExtensions {
     /// <param name="empty">A fallback value to be used instead if the property isn't present, or it's value is empty.</param>
     /// <param name="unrecognized">A fallback value to be used instead if the property value could not be parsed.</param>
     /// <returns>An instance of <typeparamref name="T"/>.</returns>
-    public static T GetEnum<T>(this JObject json, string path, T empty, T unrecognized) where T : struct {
+    public static T GetEnum<T>(this JObject json, string path, T empty, T unrecognized) where T : struct, Enum {
         string? value = json.GetString(path);
         return string.IsNullOrWhiteSpace(value) ? empty : EnumUtils.ParseEnum(value, unrecognized);
     }
@@ -35,7 +35,7 @@ public static class JObjectExtensions {
     /// <param name="json">The instance of <see cref="JObject"/>.</param>
     /// <param name="path">A <see cref="string"/> that contains a JPath expression.</param>
     /// <returns>An instance of <typeparamref name="T"/>.</returns>
-    public static T GetEnumWithFallbacks<T>(this JObject json, string path) where T : struct {
+    public static T GetEnumWithFallbacks<T>(this JObject json, string path) where T : struct, Enum {
         string? value = json.GetString(path);
         return string.IsNullOrWhiteSpace(value) ? (T) (object) GitHubConstants.Unspecified : EnumUtils.ParseEnum(value, (T) (object) GitHubConstants.Unrecognized);
     }
