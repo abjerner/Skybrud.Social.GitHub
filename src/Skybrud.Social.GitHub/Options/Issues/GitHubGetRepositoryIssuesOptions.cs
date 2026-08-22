@@ -84,14 +84,14 @@ public class GitHubGetRepositoryIssuesOptions : GitHubHttpRequestOptions {
     public EssentialsTime? Since { get; set; }
 
     /// <summary>
-    /// Gets or sets the page to be returned.
-    /// </summary>
-    public int? Page { get; set; }
-
-    /// <summary>
     /// Gets or sets the maximum amount of issues to be returned by each page.
     /// </summary>
     public int? PerPage { get; set; }
+
+    /// <summary>
+    /// Gets or sets the page to be returned.
+    /// </summary>
+    public int? Page { get; set; }
 
     #endregion
 
@@ -114,6 +114,21 @@ public class GitHubGetRepositoryIssuesOptions : GitHubHttpRequestOptions {
     }
 
     /// <summary>
+    /// Initializes a new instance with the specified <paramref name="owner"/> and <paramref name="repositoryAlias"/>.
+    /// </summary>
+    /// <param name="owner">The username (login) of the owner of the repository.</param>
+    /// <param name="repositoryAlias">The slug of the repository.</param>
+    /// <param name="perPage">The maximum amount of issues to be returned by each page.</param>
+    /// <param name="page">The page to be returned.</param>
+    [SetsRequiredMembers]
+    public GitHubGetRepositoryIssuesOptions(string owner, string repositoryAlias, int? perPage = null, int? page = null) {
+        OwnerAlias = owner;
+        RepositoryAlias = repositoryAlias;
+        PerPage = perPage;
+        Page = page;
+    }
+
+    /// <summary>
     /// Initializes a new instance with the specified <paramref name="repository"/>.
     /// </summary>
     /// <param name="repository">The repository.</param>
@@ -122,6 +137,21 @@ public class GitHubGetRepositoryIssuesOptions : GitHubHttpRequestOptions {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
         OwnerAlias = repository.Owner.Login;
         RepositoryAlias = repository.Name;
+    }
+
+    /// <summary>
+    /// Initializes a new instance with the specified <paramref name="repository"/>.
+    /// </summary>
+    /// <param name="repository">The repository.</param>
+    /// <param name="perPage">The maximum amount of issues to be returned by each page.</param>
+    /// <param name="page">The page to be returned.</param>
+    [SetsRequiredMembers]
+    public GitHubGetRepositoryIssuesOptions(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
+        if (repository == null) throw new ArgumentNullException(nameof(repository));
+        OwnerAlias = repository.Owner.Login;
+        RepositoryAlias = repository.Name;
+        PerPage = perPage;
+        Page = page;
     }
 
     #endregion

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Skybrud.Social.GitHub.Endpoints.Repositories.Issues;
 using Skybrud.Social.GitHub.Options.Repositories;
 using Skybrud.Social.GitHub.Responses.Repositories;
 
@@ -21,12 +22,18 @@ public partial class GitHubRepositoriesEndpoint {
     /// </summary>
     public GitHubRepositoriesRawEndpoint Raw => Service.Client.Repositories;
 
+    /// <summary>
+    /// Gets a reference to the <strong>Issues</strong> endpoint.
+    /// </summary>
+    public GitHubRepositoryIssuesEndpoint Issues { get; }
+
     #endregion
 
     #region Constructors
 
     internal GitHubRepositoriesEndpoint(GitHubHttpService service) {
         Service = service;
+        Issues = new GitHubRepositoryIssuesEndpoint(service);
     }
 
     #endregion

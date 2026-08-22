@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
+using Skybrud.Social.GitHub.Endpoints.Repositories.Issues;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Repositories;
 
@@ -18,12 +19,18 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// </summary>
     public GitHubOAuthClient Client { get; }
 
+    /// <summary>
+    /// Gets a reference to the <strong>Issues</strong> endpoint.
+    /// </summary>
+    public GitHubRepositoryIssuesRawEndpoint Issues { get; }
+
     #endregion
 
     #region Constructors
 
     internal GitHubRepositoriesRawEndpoint(GitHubOAuthClient client) {
         Client = client;
+        Issues = new GitHubRepositoryIssuesRawEndpoint(client);
     }
 
     #endregion
