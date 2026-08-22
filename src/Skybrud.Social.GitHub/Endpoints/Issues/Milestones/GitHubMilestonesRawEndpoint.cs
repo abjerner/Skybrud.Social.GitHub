@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Milestones;
 using Skybrud.Social.GitHub.OAuth;
@@ -44,11 +45,11 @@ public class GitHubMilestonesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#create-a-milestone</cref>
     /// </see>
-    public IHttpResponse CreateMilestone(string owner, string repository, string title) {
+    public async Task<IHttpResponse> CreateMilestone(string owner, string repository, string title) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
         if (string.IsNullOrWhiteSpace(title)) throw new ArgumentNullException(nameof(title));
-        return CreateMilestone(new GitHubCreateMilestoneOptions(owner, repository, title));
+        return await CreateMilestone(new GitHubCreateMilestoneOptions(owner, repository, title));
     }
 
     /// <summary>
@@ -59,9 +60,9 @@ public class GitHubMilestonesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#create-a-milestone</cref>
     /// </see>
-    public IHttpResponse CreateMilestone(GitHubCreateMilestoneOptions options) {
+    public async Task<IHttpResponse> CreateMilestone(GitHubCreateMilestoneOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     /// <summary>
@@ -74,10 +75,10 @@ public class GitHubMilestonesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#get-a-single-milestone</cref>
     /// </see>
-    public IHttpResponse GetMilestone(string owner, string repository, int number) {
+    public async Task<IHttpResponse> GetMilestone(string owner, string repository, int number) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-        return Client.GetResponse(new GitHubGetMilestoneOptions(owner, repository, number));
+        return await Client.GetResponseAsync(new GitHubGetMilestoneOptions(owner, repository, number));
     }
 
     /// <summary>
@@ -88,9 +89,9 @@ public class GitHubMilestonesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#get-a-single-milestone</cref>
     /// </see>
-    public IHttpResponse GetMilestone(GitHubGetMilestoneOptions options) {
+    public async Task<IHttpResponse> GetMilestone(GitHubGetMilestoneOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     /// <summary>
@@ -101,9 +102,9 @@ public class GitHubMilestonesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#update-a-milestone</cref>
     /// </see>
-    public IHttpResponse UpdateMilestone(GitHubUpdateMilestoneOptions options) {
+    public async Task<IHttpResponse> UpdateMilestone(GitHubUpdateMilestoneOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     /// <summary>
@@ -116,10 +117,10 @@ public class GitHubMilestonesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#delete-a-milestone</cref>
     /// </see>
-    public IHttpResponse DeleteMilestone(string owner, string repository, int number) {
+    public async Task<IHttpResponse> DeleteMilestone(string owner, string repository, int number) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-        return Client.GetResponse(new GitHubDeleteMilestoneOptions(owner, repository, number));
+        return await Client.GetResponseAsync(new GitHubDeleteMilestoneOptions(owner, repository, number));
     }
 
     /// <summary>
@@ -130,9 +131,9 @@ public class GitHubMilestonesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#delete-a-milestone</cref>
     /// </see>
-    public IHttpResponse DeleteMilestone(GitHubMilestone milestone) {
+    public async Task<IHttpResponse> DeleteMilestone(GitHubMilestone milestone) {
         if (milestone == null) throw new ArgumentNullException(nameof(milestone));
-        return Client.GetResponse(new GitHubDeleteMilestoneOptions(milestone));
+        return await Client.GetResponseAsync(new GitHubDeleteMilestoneOptions(milestone));
     }
 
     /// <summary>
@@ -143,9 +144,9 @@ public class GitHubMilestonesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#delete-a-milestone</cref>
     /// </see>
-    public IHttpResponse DeleteMilestone(GitHubDeleteMilestoneOptions options) {
+    public async Task<IHttpResponse> DeleteMilestone(GitHubDeleteMilestoneOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     /// <summary>
@@ -156,9 +157,9 @@ public class GitHubMilestonesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#list-milestones-for-a-repository</cref>
     /// </see>
-    public IHttpResponse GetMilestones(GitHubGetMilestonesOptions options) {
+    public async Task<IHttpResponse> GetMilestones(GitHubGetMilestonesOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion

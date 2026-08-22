@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Search;
@@ -40,7 +41,7 @@ public class GitHubSearchRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/search#search-code</cref>
     /// </see>
-    public IHttpResponse SearchCode(string query) {
+    public Task<IHttpResponse> SearchCode(string query) {
         if (string.IsNullOrWhiteSpace(query)) throw new ArgumentNullException(nameof(query));
         return SearchCode(new GitHubSearchCodeOptions(query));
     }
@@ -53,9 +54,9 @@ public class GitHubSearchRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/search#search-code</cref>
     /// </see>
-    public IHttpResponse SearchCode(GitHubSearchCodeOptions options) {
+    public async Task<IHttpResponse> SearchCode(GitHubSearchCodeOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion

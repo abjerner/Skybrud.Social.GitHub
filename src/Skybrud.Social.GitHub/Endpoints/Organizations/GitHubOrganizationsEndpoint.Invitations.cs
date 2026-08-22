@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Options.Organizations.Invitations;
 using Skybrud.Social.GitHub.Responses.Invites;
 
@@ -12,8 +13,8 @@ public partial class GitHubOrganizationsEndpoint {
     /// </summary>
     /// <param name="orgAlias">The alias of the organization.</param>
     /// <returns>An instance of <see cref="GitHubInvitationListResponse"/> representing the response.</returns>
-    public GitHubInvitationListResponse GetPendingInvitations(string orgAlias) {
-        return new GitHubInvitationListResponse(Raw.GetPendingInvitations(orgAlias));
+    public async Task<GitHubInvitationListResponse> GetPendingInvitations(string orgAlias) {
+        return new GitHubInvitationListResponse(await Raw.GetPendingInvitations(orgAlias));
     }
 
     /// <summary>
@@ -23,8 +24,8 @@ public partial class GitHubOrganizationsEndpoint {
     /// <param name="perPage">The maximum amount of invites to be returned by each page.</param>
     /// <param name="page">The page to be returned.</param>
     /// <returns>An instance of <see cref="GitHubInvitationListResponse"/> representing the response.</returns>
-    public GitHubInvitationListResponse GetPendingInvitations(string orgAlias, int? perPage = null, int? page = null) {
-        return new GitHubInvitationListResponse(Raw.GetPendingInvitations(orgAlias, perPage, page));
+    public async Task<GitHubInvitationListResponse> GetPendingInvitations(string orgAlias, int? perPage = null, int? page = null) {
+        return new GitHubInvitationListResponse(await Raw.GetPendingInvitations(orgAlias, perPage, page));
     }
 
     /// <summary>
@@ -32,8 +33,8 @@ public partial class GitHubOrganizationsEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="GitHubInvitationListResponse"/> representing the response.</returns>
-    public GitHubInvitationListResponse GetPendingInvitations(GitHubGetPendingInvitationsOptions options) {
-        return new GitHubInvitationListResponse(Raw.GetPendingInvitations(options));
+    public async Task<GitHubInvitationListResponse> GetPendingInvitations(GitHubGetPendingInvitationsOptions options) {
+        return new GitHubInvitationListResponse(await Raw.GetPendingInvitations(options));
     }
 
     /// <summary>
@@ -41,8 +42,8 @@ public partial class GitHubOrganizationsEndpoint {
     /// </summary>
     /// <param name="orgAlias">The alias of the organization.</param>
     /// <returns>An instance of <see cref="GitHubInvitationListResponse"/> representing the response.</returns>
-    public GitHubInvitationListResponse GetFailedInvitations(string orgAlias) {
-        return new GitHubInvitationListResponse(Raw.GetFailedInvitations(orgAlias));
+    public async Task<GitHubInvitationListResponse> GetFailedInvitations(string orgAlias) {
+        return new GitHubInvitationListResponse(await Raw.GetFailedInvitations(orgAlias));
     }
 
     /// <summary>
@@ -52,8 +53,8 @@ public partial class GitHubOrganizationsEndpoint {
     /// <param name="perPage">The maximum amount of invites to be returned by each page.</param>
     /// <param name="page">The page to be returned.</param>
     /// <returns>An instance of <see cref="GitHubInvitationListResponse"/> representing the response.</returns>
-    public GitHubInvitationListResponse GetFailedInvitations(string orgAlias, int? perPage = null, int? page = null) {
-        return new GitHubInvitationListResponse(Raw.GetFailedInvitations(orgAlias, perPage, page));
+    public async Task<GitHubInvitationListResponse> GetFailedInvitations(string orgAlias, int? perPage = null, int? page = null) {
+        return new GitHubInvitationListResponse(await Raw.GetFailedInvitations(orgAlias, perPage, page));
     }
 
     /// <summary>
@@ -61,8 +62,8 @@ public partial class GitHubOrganizationsEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="GitHubInvitationListResponse"/> representing the response.</returns>
-    public GitHubInvitationListResponse GetFailedInvitations(GitHubGetFailedInvitationsOptions options) {
-        return new GitHubInvitationListResponse(Raw.GetFailedInvitations(options));
+    public async Task<GitHubInvitationListResponse> GetFailedInvitations(GitHubGetFailedInvitationsOptions options) {
+        return new GitHubInvitationListResponse(await Raw.GetFailedInvitations(options));
     }
 
 }

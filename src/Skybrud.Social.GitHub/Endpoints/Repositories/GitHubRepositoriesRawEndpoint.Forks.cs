@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.Forks;
@@ -16,10 +17,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#create-a-fork</cref>
     /// </see>
-    public IHttpResponse CreateFork(string owner, string repository) {
+    public async Task<IHttpResponse> CreateFork(string owner, string repository) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-        return CreateFork(new GitHubCreateForkOptions(owner, repository));
+        return await CreateFork(new GitHubCreateForkOptions(owner, repository));
     }
 
     /// <summary>
@@ -32,10 +33,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#create-a-fork</cref>
     /// </see>
-    public IHttpResponse CreateFork(string owner, string repository, string organization) {
+    public async Task<IHttpResponse> CreateFork(string owner, string repository, string organization) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-        return CreateFork(new GitHubCreateForkOptions(owner, repository, organization));
+        return await CreateFork(new GitHubCreateForkOptions(owner, repository, organization));
     }
 
     /// <summary>
@@ -46,9 +47,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#create-a-fork</cref>
     /// </see>
-    public IHttpResponse CreateFork(GitHubRepositoryBase repository) {
+    public async Task<IHttpResponse> CreateFork(GitHubRepositoryBase repository) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return CreateFork(new GitHubCreateForkOptions(repository));
+        return await CreateFork(new GitHubCreateForkOptions(repository));
     }
 
     /// <summary>
@@ -60,9 +61,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#create-a-fork</cref>
     /// </see>
-    public IHttpResponse CreateFork(GitHubRepositoryBase repository, string organization) {
+    public async Task<IHttpResponse> CreateFork(GitHubRepositoryBase repository, string organization) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return CreateFork(new GitHubCreateForkOptions(repository, organization));
+        return await CreateFork(new GitHubCreateForkOptions(repository, organization));
     }
 
     /// <summary>
@@ -73,9 +74,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#create-a-fork</cref>
     /// </see>
-    public IHttpResponse CreateFork(GitHubCreateForkOptions options) {
+    public async Task<IHttpResponse> CreateFork(GitHubCreateForkOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Client;
@@ -249,7 +250,7 @@ public class GitHubOAuthClient : HttpClient {
     /// Exchanges the specified <paramref name="authorizationCode"/> for a user access token.
     /// </summary>
     /// <param name="authorizationCode">The authorization code received from the GitHub OAuth dialog.</param>
-    public GitHubTokenResponse GetAccessTokenFromAuthorizationCode(string authorizationCode) {
+    public async Task<GitHubTokenResponse> GetAccessTokenFromAuthorizationCode(string authorizationCode) {
 
         // Some validation
         if (string.IsNullOrWhiteSpace(ClientId)) throw new PropertyNotSetException(nameof(ClientId));
@@ -267,6 +268,9 @@ public class GitHubOAuthClient : HttpClient {
 
         // Get the response from the server
         IHttpResponse response = HttpUtils.Requests.Post("https://github.com/login/oauth/access_token", null!, parameters);
+        // TODO: make request async
+
+        await Task.CompletedTask;
 
         // Return the response
         return new GitHubTokenResponse(response);

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Users;
@@ -34,8 +35,8 @@ public partial class GitHubUsersRawEndpoint {
     /// </summary>
     /// <param name="userId">The ID of the user.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetUser(int userId) {
-        return GetUser(new GitHubGetUserOptions(userId));
+    public async Task<IHttpResponse> GetUser(int userId) {
+        return await GetUser(new GitHubGetUserOptions(userId));
     }
 
     /// <summary>
@@ -43,9 +44,9 @@ public partial class GitHubUsersRawEndpoint {
     /// </summary>
     /// <param name="username">The username (login) of the user.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetUser(string username) {
+    public async Task<IHttpResponse> GetUser(string username) {
         if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
-        return GetUser(new GitHubGetUserOptions(username));
+        return await GetUser(new GitHubGetUserOptions(username));
     }
 
     /// <summary>
@@ -53,9 +54,9 @@ public partial class GitHubUsersRawEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetUser(GitHubGetUserOptions options) {
+    public async Task<IHttpResponse> GetUser(GitHubGetUserOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion

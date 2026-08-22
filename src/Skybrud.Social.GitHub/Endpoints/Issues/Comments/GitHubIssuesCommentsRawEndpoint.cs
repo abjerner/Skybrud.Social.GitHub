@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Issues;
 using Skybrud.Social.GitHub.OAuth;
@@ -41,11 +42,11 @@ public class GitHubIssuesCommentsRawEndpoint {
     /// <param name="number">The number of the issue to which the comment should be added.</param>
     /// <param name="body">The Markdown-based body of the comment.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse AddComment(string owner, string repository, int number, string body) {
+    public async Task<IHttpResponse> AddComment(string owner, string repository, int number, string body) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
         if (string.IsNullOrWhiteSpace(body)) throw new ArgumentNullException(nameof(body));
-        return AddComment(new GitHubAddIssueCommentOptions(owner, repository, number, body));
+        return await AddComment(new GitHubAddIssueCommentOptions(owner, repository, number, body));
     }
 
     /// <summary>
@@ -54,10 +55,10 @@ public class GitHubIssuesCommentsRawEndpoint {
     /// <param name="issue">The issue to which the comment will be added.</param>
     /// <param name="body">The Markdown-based body of the comment.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse AddComment(GitHubIssue issue, string body) {
+    public async Task<IHttpResponse> AddComment(GitHubIssue issue, string body) {
         if (issue == null) throw new ArgumentNullException(nameof(issue));
         if (string.IsNullOrWhiteSpace(body)) throw new ArgumentNullException(nameof(body));
-        return AddComment(new GitHubAddIssueCommentOptions(issue, body));
+        return await AddComment(new GitHubAddIssueCommentOptions(issue, body));
     }
 
     /// <summary>
@@ -65,9 +66,9 @@ public class GitHubIssuesCommentsRawEndpoint {
     /// </summary>
     /// <param name="options">The options for the request.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse AddComment(GitHubAddIssueCommentOptions options) {
+    public async Task<IHttpResponse> AddComment(GitHubAddIssueCommentOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     /// <summary>
@@ -80,10 +81,10 @@ public class GitHubIssuesCommentsRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue</cref>
     /// </see>
-    public IHttpResponse GetComments(string owner, string repository, int number) {
+    public async Task<IHttpResponse> GetComments(string owner, string repository, int number) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-        return GetComments(new GitHubGetIssueCommentsOptions(owner, repository, number));
+        return await GetComments(new GitHubGetIssueCommentsOptions(owner, repository, number));
     }
 
     /// <summary>
@@ -94,9 +95,9 @@ public class GitHubIssuesCommentsRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue</cref>
     /// </see>
-    public IHttpResponse GetComments(GitHubGetIssueCommentsOptions options) {
+    public async Task<IHttpResponse> GetComments(GitHubGetIssueCommentsOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion

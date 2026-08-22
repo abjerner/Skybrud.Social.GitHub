@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.Labels;
@@ -21,11 +22,11 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#create-a-label</cref>
     /// </see>
-    public IHttpResponse CreateLabel(string owner, string repository, string name) {
+    public async Task<IHttpResponse> CreateLabel(string owner, string repository, string name) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-        return CreateLabel(new GitHubCreateLabelOptions(owner, repository, name));
+        return await CreateLabel(new GitHubCreateLabelOptions(owner, repository, name));
     }
 
     /// <summary>
@@ -40,11 +41,11 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#create-a-label</cref>
     /// </see>
-    public IHttpResponse CreateLabel(string owner, string repository, string name, string? color, string? description) {
+    public async Task<IHttpResponse> CreateLabel(string owner, string repository, string name, string? color, string? description) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-        return CreateLabel(new GitHubCreateLabelOptions(owner, repository, name, color, description));
+        return await CreateLabel(new GitHubCreateLabelOptions(owner, repository, name, color, description));
     }
 
     /// <summary>
@@ -56,10 +57,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#create-a-label</cref>
     /// </see>
-    public IHttpResponse CreateLabel(GitHubRepositoryBase repository, string name) {
+    public async Task<IHttpResponse> CreateLabel(GitHubRepositoryBase repository, string name) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-        return CreateLabel(new GitHubCreateLabelOptions(repository, name));
+        return await CreateLabel(new GitHubCreateLabelOptions(repository, name));
     }
 
     /// <summary>
@@ -73,10 +74,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#create-a-label</cref>
     /// </see>
-    public IHttpResponse CreateLabel(GitHubRepositoryBase repository, string name, string? color, string? description) {
+    public async Task<IHttpResponse> CreateLabel(GitHubRepositoryBase repository, string name, string? color, string? description) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-        return CreateLabel(new GitHubCreateLabelOptions(repository, name, color, description));
+        return await CreateLabel(new GitHubCreateLabelOptions(repository, name, color, description));
     }
 
     /// <summary>
@@ -87,9 +88,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#create-a-label</cref>
     /// </see>
-    public IHttpResponse CreateLabel(GitHubCreateLabelOptions options) {
+    public async Task<IHttpResponse> CreateLabel(GitHubCreateLabelOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion
@@ -106,11 +107,11 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#get-a-label</cref>
     /// </see>
-    public IHttpResponse GetLabel(string owner, string repository, string name) {
+    public async Task<IHttpResponse> GetLabel(string owner, string repository, string name) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-        return GetLabel(new GitHubGetLabelOptions(owner, repository, name));
+        return await GetLabel(new GitHubGetLabelOptions(owner, repository, name));
     }
 
     /// <summary>
@@ -122,10 +123,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#get-a-label</cref>
     /// </see>
-    public IHttpResponse GetLabel(GitHubRepositoryBase repository, string name) {
+    public async Task<IHttpResponse> GetLabel(GitHubRepositoryBase repository, string name) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-        return GetLabel(new GitHubGetLabelOptions(repository, name));
+        return await GetLabel(new GitHubGetLabelOptions(repository, name));
     }
 
     /// <summary>
@@ -136,9 +137,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#get-a-label</cref>
     /// </see>
-    public IHttpResponse GetLabel(GitHubGetLabelOptions options) {
+    public async Task<IHttpResponse> GetLabel(GitHubGetLabelOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion
@@ -153,9 +154,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#update-a-label</cref>
     /// </see>
-    public IHttpResponse UpdateLabel(GitHubUpdateLabelOptions options) {
+    public async Task<IHttpResponse> UpdateLabel(GitHubUpdateLabelOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion
@@ -171,10 +172,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#list-labels-for-a-repository</cref>
     /// </see>
-    public IHttpResponse GetLabels(string owner, string repository) {
+    public async Task<IHttpResponse> GetLabels(string owner, string repository) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-        return GetLabels(new GitHubGetLabelsOptions(owner, repository));
+        return await GetLabels(new GitHubGetLabelsOptions(owner, repository));
     }
 
     /// <summary>
@@ -188,10 +189,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#list-labels-for-a-repository</cref>
     /// </see>
-    public IHttpResponse GetLabels(string owner, string repository, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetLabels(string owner, string repository, int? perPage = null, int? page = null) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-        return GetLabels(new GitHubGetLabelsOptions(owner, repository, perPage, page));
+        return await GetLabels(new GitHubGetLabelsOptions(owner, repository, perPage, page));
     }
 
     /// <summary>
@@ -202,9 +203,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#list-labels-for-a-repository</cref>
     /// </see>
-    public IHttpResponse GetLabels(GitHubRepositoryBase repository) {
+    public async Task<IHttpResponse> GetLabels(GitHubRepositoryBase repository) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return GetLabels(new GitHubGetLabelsOptions(repository));
+        return await GetLabels(new GitHubGetLabelsOptions(repository));
     }
 
     /// <summary>
@@ -217,9 +218,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#list-labels-for-a-repository</cref>
     /// </see>
-    public IHttpResponse GetLabels(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetLabels(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return GetLabels(new GitHubGetLabelsOptions(repository, perPage, page));
+        return await GetLabels(new GitHubGetLabelsOptions(repository, perPage, page));
     }
 
     /// <summary>
@@ -230,9 +231,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#list-labels-for-a-repository</cref>
     /// </see>
-    public IHttpResponse GetLabels(GitHubGetLabelsOptions options) {
+    public async Task<IHttpResponse> GetLabels(GitHubGetLabelsOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Models.Issues;
 using Skybrud.Social.GitHub.Models.PullRequests;
 using Skybrud.Social.GitHub.Options.Issues.Comments;
@@ -40,8 +41,8 @@ public class GitHubIssuesCommentsEndpoint {
     /// </summary>
     /// <param name="options">The options for the request.</param>
     /// <returns>An instance of <see cref="GitHubCommentResponse"/> representing the response.</returns>
-    public GitHubCommentResponse AddComment(GitHubAddIssueCommentOptions options) {
-        return new GitHubCommentResponse(Raw.AddComment(options));
+    public async Task<GitHubCommentResponse> AddComment(GitHubAddIssueCommentOptions options) {
+        return new GitHubCommentResponse(await Raw.AddComment(options));
     }
 
     /// <summary>
@@ -51,8 +52,8 @@ public class GitHubIssuesCommentsEndpoint {
     /// <param name="repository">The slug of the repository.</param>
     /// <param name="number">The number of the issue to which the comment should be added.</param>
     /// <returns>An instance of <see cref="GitHubCommentListResponse"/> representing the response.</returns>
-    public GitHubCommentListResponse GetComments(string owner, string repository, int number) {
-        return new GitHubCommentListResponse(Raw.GetComments(owner, repository, number));
+    public async Task<GitHubCommentListResponse> GetComments(string owner, string repository, int number) {
+        return new GitHubCommentListResponse(await Raw.GetComments(owner, repository, number));
     }
 
     /// <summary>
@@ -60,8 +61,8 @@ public class GitHubIssuesCommentsEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="GitHubCommentListResponse"/> representing the response.</returns>
-    public GitHubCommentListResponse GetComments(GitHubGetIssueCommentsOptions options) {
-        return new GitHubCommentListResponse(Raw.GetComments(options));
+    public async Task<GitHubCommentListResponse> GetComments(GitHubGetIssueCommentsOptions options) {
+        return new GitHubCommentListResponse(await Raw.GetComments(options));
     }
 
     /// <summary>
@@ -69,9 +70,9 @@ public class GitHubIssuesCommentsEndpoint {
     /// </summary>
     /// <param name="issue">The issue to get comments for.</param>
     /// <returns>An instance of <see cref="GitHubCommentListResponse"/> representing the response.</returns>
-    public GitHubCommentListResponse GetComments(GitHubIssueBase issue) {
+    public async Task<GitHubCommentListResponse> GetComments(GitHubIssueBase issue) {
         if (issue == null) throw new ArgumentNullException(nameof(issue));
-        return new GitHubCommentListResponse(Raw.GetComments(new GitHubGetIssueCommentsOptions(issue)));
+        return new GitHubCommentListResponse(await Raw.GetComments(new GitHubGetIssueCommentsOptions(issue)));
     }
 
     /// <summary>
@@ -79,9 +80,9 @@ public class GitHubIssuesCommentsEndpoint {
     /// </summary>
     /// <param name="pullRequest">The pull request to get comments for.</param>
     /// <returns>An instance of <see cref="GitHubCommentListResponse"/> representing the response.</returns>
-    public GitHubCommentListResponse GetComments(GitHubPullRequestBase pullRequest) {
+    public async Task<GitHubCommentListResponse> GetComments(GitHubPullRequestBase pullRequest) {
         if (pullRequest == null) throw new ArgumentNullException(nameof(pullRequest));
-        return new GitHubCommentListResponse(Raw.GetComments(new GitHubGetIssueCommentsOptions(pullRequest)));
+        return new GitHubCommentListResponse(await Raw.GetComments(new GitHubGetIssueCommentsOptions(pullRequest)));
     }
 
     #endregion

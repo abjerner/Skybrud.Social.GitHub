@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Options.Search;
 using Skybrud.Social.GitHub.Responses.Search;
 
@@ -43,8 +44,8 @@ public class GitHubSearchEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/search#search-code</cref>
     /// </see>
-    public GitHubSearchCodeResponse SearchCode(string query) {
-        return new GitHubSearchCodeResponse(Raw.SearchCode(query));
+    public async Task<GitHubSearchCodeResponse> SearchCode(string query) {
+        return new GitHubSearchCodeResponse(await Raw.SearchCode(query));
     }
 
     /// <summary>
@@ -55,8 +56,8 @@ public class GitHubSearchEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/search#search-code</cref>
     /// </see>
-    public GitHubSearchCodeResponse SearchCode(GitHubSearchCodeOptions options) {
-        return new GitHubSearchCodeResponse(Raw.SearchCode(options));
+    public async Task<GitHubSearchCodeResponse> SearchCode(GitHubSearchCodeOptions options) {
+        return new GitHubSearchCodeResponse(await Raw.SearchCode(options));
     }
 
     #endregion

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.References;
@@ -20,12 +21,12 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/git#create-a-reference</cref>
     /// </see>
-    public IHttpResponse CreateReference(string owner, string repositoryAlias, string @ref, string sha) {
+    public async Task<IHttpResponse> CreateReference(string owner, string repositoryAlias, string @ref, string sha) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
         if (string.IsNullOrWhiteSpace(@ref)) throw new ArgumentNullException(nameof(@ref));
         if (string.IsNullOrWhiteSpace(sha)) throw new ArgumentNullException(nameof(sha));
-        return CreateReference(new GitHubCreateReferenceOptions(owner, repositoryAlias, @ref, sha));
+        return await CreateReference(new GitHubCreateReferenceOptions(owner, repositoryAlias, @ref, sha));
     }
 
     /// <summary>
@@ -38,11 +39,11 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/git#create-a-reference</cref>
     /// </see>
-    public IHttpResponse CreateReference(GitHubRepositoryBase repository, string @ref, string sha) {
+    public async Task<IHttpResponse> CreateReference(GitHubRepositoryBase repository, string @ref, string sha) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
         if (string.IsNullOrWhiteSpace(@ref)) throw new ArgumentNullException(nameof(@ref));
         if (string.IsNullOrWhiteSpace(sha)) throw new ArgumentNullException(nameof(sha));
-        return CreateReference(new GitHubCreateReferenceOptions(repository, @ref, sha));
+        return await CreateReference(new GitHubCreateReferenceOptions(repository, @ref, sha));
     }
 
     /// <summary>
@@ -53,9 +54,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/git#create-a-reference</cref>
     /// </see>
-    public IHttpResponse CreateReference(GitHubCreateReferenceOptions options) {
+    public async Task<IHttpResponse> CreateReference(GitHubCreateReferenceOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion

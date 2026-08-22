@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.Tags;
@@ -18,10 +19,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-tags</cref>
     /// </see>
-    public IHttpResponse GetTags(string ownerAlias, string repositoryAlias) {
+    public async Task<IHttpResponse> GetTags(string ownerAlias, string repositoryAlias) {
         if (string.IsNullOrWhiteSpace(ownerAlias)) throw new ArgumentNullException(nameof(ownerAlias));
         if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
-        return GetTags(new GitHubGetTagsOptions(ownerAlias, repositoryAlias));
+        return await GetTags(new GitHubGetTagsOptions(ownerAlias, repositoryAlias));
     }
 
     /// <summary>
@@ -35,10 +36,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-tags</cref>
     /// </see>
-    public IHttpResponse GetTags(string ownerAlias, string repositoryAlias, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetTags(string ownerAlias, string repositoryAlias, int? perPage = null, int? page = null) {
         if (string.IsNullOrWhiteSpace(ownerAlias)) throw new ArgumentNullException(nameof(ownerAlias));
         if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
-        return GetTags(new GitHubGetTagsOptions(ownerAlias, repositoryAlias, perPage, page));
+        return await GetTags(new GitHubGetTagsOptions(ownerAlias, repositoryAlias, perPage, page));
     }
 
     /// <summary>
@@ -49,9 +50,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-tags</cref>
     /// </see>
-    public IHttpResponse GetTags(GitHubRepositoryBase repository) {
+    public async Task<IHttpResponse> GetTags(GitHubRepositoryBase repository) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return GetTags(new GitHubGetTagsOptions(repository));
+        return await GetTags(new GitHubGetTagsOptions(repository));
     }
 
     /// <summary>
@@ -64,9 +65,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-tags</cref>
     /// </see>
-    public IHttpResponse GetTags(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetTags(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return GetTags(new GitHubGetTagsOptions(repository, perPage, page));
+        return await GetTags(new GitHubGetTagsOptions(repository, perPage, page));
     }
 
     /// <summary>
@@ -77,9 +78,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-tags</cref>
     /// </see>
-    public IHttpResponse GetTags(GitHubGetTagsOptions options) {
+    public async Task<IHttpResponse> GetTags(GitHubGetTagsOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
 }

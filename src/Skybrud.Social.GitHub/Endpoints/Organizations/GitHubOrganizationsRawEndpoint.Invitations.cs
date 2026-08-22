@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Options.Organizations.Invitations;
 
@@ -13,9 +14,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// </summary>
     /// <param name="orgAlias">The alias of the organization.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetPendingInvitations(string orgAlias) {
+    public async Task<IHttpResponse> GetPendingInvitations(string orgAlias) {
         if (string.IsNullOrWhiteSpace(orgAlias)) throw new ArgumentNullException(nameof(orgAlias));
-        return GetPendingInvitations(new GitHubGetPendingInvitationsOptions(orgAlias));
+        return await GetPendingInvitations(new GitHubGetPendingInvitationsOptions(orgAlias));
     }
 
     /// <summary>
@@ -25,9 +26,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <param name="perPage">The maximum amount of invites to be returned by each page.</param>
     /// <param name="page">The page to be returned.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetPendingInvitations(string orgAlias, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetPendingInvitations(string orgAlias, int? perPage = null, int? page = null) {
         if (string.IsNullOrWhiteSpace(orgAlias)) throw new ArgumentNullException(nameof(orgAlias));
-        return GetPendingInvitations(new GitHubGetPendingInvitationsOptions(orgAlias, perPage, page));
+        return await GetPendingInvitations(new GitHubGetPendingInvitationsOptions(orgAlias, perPage, page));
     }
 
     /// <summary>
@@ -35,9 +36,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetPendingInvitations(GitHubGetPendingInvitationsOptions options) {
+    public async Task<IHttpResponse> GetPendingInvitations(GitHubGetPendingInvitationsOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     /// <summary>
@@ -45,9 +46,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// </summary>
     /// <param name="orgAlias">The alias of the organization.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetFailedInvitations(string orgAlias) {
+    public async Task<IHttpResponse> GetFailedInvitations(string orgAlias) {
         if (string.IsNullOrWhiteSpace(orgAlias)) throw new ArgumentNullException(nameof(orgAlias));
-        return GetFailedInvitations(new GitHubGetFailedInvitationsOptions(orgAlias));
+        return await GetFailedInvitations(new GitHubGetFailedInvitationsOptions(orgAlias));
     }
 
     /// <summary>
@@ -57,9 +58,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <param name="perPage">The maximum amount of invites to be returned by each page.</param>
     /// <param name="page">The page to be returned.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetFailedInvitations(string orgAlias, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetFailedInvitations(string orgAlias, int? perPage = null, int? page = null) {
         if (string.IsNullOrWhiteSpace(orgAlias)) throw new ArgumentNullException(nameof(orgAlias));
-        return GetFailedInvitations(new GitHubGetFailedInvitationsOptions(orgAlias, perPage, page));
+        return await GetFailedInvitations(new GitHubGetFailedInvitationsOptions(orgAlias, perPage, page));
     }
 
     /// <summary>
@@ -67,9 +68,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetFailedInvitations(GitHubGetFailedInvitationsOptions options) {
+    public async Task<IHttpResponse> GetFailedInvitations(GitHubGetFailedInvitationsOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
 }

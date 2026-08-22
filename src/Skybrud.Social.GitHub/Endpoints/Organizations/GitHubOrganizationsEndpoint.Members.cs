@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Models.Organizations;
 using Skybrud.Social.GitHub.Options.Organizations.Members;
 using Skybrud.Social.GitHub.Responses.Users;
@@ -16,8 +17,8 @@ public partial class GitHubOrganizationsEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organization-members</cref>
     /// </see>
-    public GitHubUserListResponse GetMembers(int organizationId) {
-        return new GitHubUserListResponse(Raw.GetMembers(organizationId));
+    public async Task<GitHubUserListResponse> GetMembers(int organizationId) {
+        return new GitHubUserListResponse(await Raw.GetMembers(organizationId));
     }
 
     /// <summary>
@@ -30,8 +31,8 @@ public partial class GitHubOrganizationsEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organization-members</cref>
     /// </see>
-    public GitHubUserListResponse GetMembers(int organizationId, int? perPage = null, int? page = null) {
-        return new GitHubUserListResponse(Raw.GetMembers(organizationId, perPage, page));
+    public async Task<GitHubUserListResponse> GetMembers(int organizationId, int? perPage = null, int? page = null) {
+        return new GitHubUserListResponse(await Raw.GetMembers(organizationId, perPage, page));
     }
 
     /// <summary>
@@ -42,8 +43,8 @@ public partial class GitHubOrganizationsEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organization-members</cref>
     /// </see>
-    public GitHubUserListResponse GetMembers(string organizationAlias) {
-        return new GitHubUserListResponse(Raw.GetMembers(organizationAlias));
+    public async Task<GitHubUserListResponse> GetMembers(string organizationAlias) {
+        return new GitHubUserListResponse(await Raw.GetMembers(organizationAlias));
     }
 
     /// <summary>
@@ -56,8 +57,8 @@ public partial class GitHubOrganizationsEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organization-members</cref>
     /// </see>
-    public GitHubUserListResponse GetMembers(string organizationAlias, int? perPage = null, int? page = null) {
-        return new GitHubUserListResponse(Raw.GetMembers(organizationAlias, perPage, page));
+    public async Task<GitHubUserListResponse> GetMembers(string organizationAlias, int? perPage = null, int? page = null) {
+        return new GitHubUserListResponse(await Raw.GetMembers(organizationAlias, perPage, page));
     }
 
     /// <summary>
@@ -68,8 +69,8 @@ public partial class GitHubOrganizationsEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organization-members</cref>
     /// </see>
-    public GitHubUserListResponse GetMembers(GitHubOrganizationItem organization) {
-        return new GitHubUserListResponse(Raw.GetMembers(organization));
+    public async Task<GitHubUserListResponse> GetMembers(GitHubOrganizationItem organization) {
+        return new GitHubUserListResponse(await Raw.GetMembers(organization));
     }
 
     /// <summary>
@@ -82,8 +83,8 @@ public partial class GitHubOrganizationsEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organization-members</cref>
     /// </see>
-    public GitHubUserListResponse GetMembers(GitHubOrganizationItem organization, int? perPage = null, int? page = null) {
-        return new GitHubUserListResponse(Raw.GetMembers(organization, perPage, page));
+    public async Task<GitHubUserListResponse> GetMembers(GitHubOrganizationItem organization, int? perPage = null, int? page = null) {
+        return new GitHubUserListResponse(await Raw.GetMembers(organization, perPage, page));
     }
 
     /// <summary>
@@ -94,8 +95,8 @@ public partial class GitHubOrganizationsEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organization-members</cref>
     /// </see>
-    public GitHubUserListResponse GetMembers(GitHubGetOrganizationMembersOptions options) {
-        return new GitHubUserListResponse(Raw.GetMembers(options));
+    public async Task<GitHubUserListResponse> GetMembers(GitHubGetOrganizationMembersOptions options) {
+        return new GitHubUserListResponse(await Raw.GetMembers(options));
     }
 
 }

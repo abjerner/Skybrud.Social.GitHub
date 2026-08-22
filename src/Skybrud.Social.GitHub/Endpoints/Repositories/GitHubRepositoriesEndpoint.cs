@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Options.Repositories;
 using Skybrud.Social.GitHub.Responses.Repositories;
 
@@ -37,8 +38,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <paramref name="repository"/>.
     /// </summary>
     /// <returns>An instance of <see cref="GitHubRepositoryResponse"/> representing the response.</returns>
-    public GitHubRepositoryResponse GetRepository(string owner, string repository) {
-        return new GitHubRepositoryResponse(Raw.GetRepository(owner, repository));
+    public async Task<GitHubRepositoryResponse> GetRepository(string owner, string repository) {
+        return new GitHubRepositoryResponse(await Raw.GetRepository(owner, repository));
     }
 
     /// <summary>
@@ -52,8 +53,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create-repository-using-a-repository-template</cref>
     /// </see>
-    public GitHubRepositoryResponse CreateRepositoryFromTemplate(string templateOwner, string templateRepository, string owner, string name) {
-        return new GitHubRepositoryResponse(Raw.CreateRepositoryFromTemplate(templateOwner, templateRepository, owner, name));
+    public async Task<GitHubRepositoryResponse> CreateRepositoryFromTemplate(string templateOwner, string templateRepository, string owner, string name) {
+        return new GitHubRepositoryResponse(await Raw.CreateRepositoryFromTemplate(templateOwner, templateRepository, owner, name));
     }
 
     /// <summary>
@@ -68,8 +69,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create-repository-using-a-repository-template</cref>
     /// </see>
-    public GitHubRepositoryResponse CreateRepositoryFromTemplate(string templateOwner, string templateRepository, string owner, string name, bool isPrivate) {
-        return new GitHubRepositoryResponse(Raw.CreateRepositoryFromTemplate(templateOwner, templateRepository, owner, name, isPrivate));
+    public async Task<GitHubRepositoryResponse> CreateRepositoryFromTemplate(string templateOwner, string templateRepository, string owner, string name, bool isPrivate) {
+        return new GitHubRepositoryResponse(await Raw.CreateRepositoryFromTemplate(templateOwner, templateRepository, owner, name, isPrivate));
     }
 
     /// <summary>
@@ -80,8 +81,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create-repository-using-a-repository-template</cref>
     /// </see>
-    public GitHubRepositoryResponse CreateRepositoryFromTemplate(GitHubCreateRepositoryFromTemplateOptions options) {
-        return new GitHubRepositoryResponse(Raw.CreateRepositoryFromTemplate(options));
+    public async Task<GitHubRepositoryResponse> CreateRepositoryFromTemplate(GitHubCreateRepositoryFromTemplateOptions options) {
+        return new GitHubRepositoryResponse(await Raw.CreateRepositoryFromTemplate(options));
     }
 
     /// <summary>
@@ -92,8 +93,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
-    public GitHubRepositoryResponse CreateUserRepository(string name) {
-        return new GitHubRepositoryResponse(Raw.CreateUserRepository(name));
+    public async Task<GitHubRepositoryResponse> CreateUserRepository(string name) {
+        return new GitHubRepositoryResponse(await Raw.CreateUserRepository(name));
     }
 
     /// <summary>
@@ -105,8 +106,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
-    public GitHubRepositoryResponse CreateUserRepository(string name, bool isPrivate) {
-        return new GitHubRepositoryResponse(Raw.CreateUserRepository(name, isPrivate));
+    public async Task<GitHubRepositoryResponse> CreateUserRepository(string name, bool isPrivate) {
+        return new GitHubRepositoryResponse(await Raw.CreateUserRepository(name, isPrivate));
     }
 
     /// <summary>
@@ -117,8 +118,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
-    public GitHubRepositoryResponse CreateUserRepository(GitHubCreateUserRepositoryOptions options) {
-        return new GitHubRepositoryResponse(Raw.CreateUserRepository(options));
+    public async Task<GitHubRepositoryResponse> CreateUserRepository(GitHubCreateUserRepositoryOptions options) {
+        return new GitHubRepositoryResponse(await Raw.CreateUserRepository(options));
     }
 
     /// <summary>
@@ -130,8 +131,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
-    public GitHubRepositoryResponse CreateOrganisationRepository(string organisation, string name) {
-        return new GitHubRepositoryResponse(Raw.CreateOrganisationRepository(organisation, name));
+    public async Task<GitHubRepositoryResponse> CreateOrganisationRepository(string organisation, string name) {
+        return new GitHubRepositoryResponse(await Raw.CreateOrganisationRepository(organisation, name));
     }
 
     /// <summary>
@@ -144,8 +145,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
-    public GitHubRepositoryResponse CreateOrganisationRepository(string organisation, string name, bool isPrivate) {
-        return new GitHubRepositoryResponse(Raw.CreateOrganisationRepository(organisation, name, isPrivate));
+    public async Task<GitHubRepositoryResponse> CreateOrganisationRepository(string organisation, string name, bool isPrivate) {
+        return new GitHubRepositoryResponse(await Raw.CreateOrganisationRepository(organisation, name, isPrivate));
     }
 
     /// <summary>
@@ -156,8 +157,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
-    public GitHubRepositoryResponse CreateOrganisationRepository(GitHubCreateOrganisationRepositoryOptions options) {
-        return new GitHubRepositoryResponse(Raw.CreateOrganisationRepository(options));
+    public async Task<GitHubRepositoryResponse> CreateOrganisationRepository(GitHubCreateOrganisationRepositoryOptions options) {
+        return new GitHubRepositoryResponse(await Raw.CreateOrganisationRepository(options));
     }
 
     #endregion

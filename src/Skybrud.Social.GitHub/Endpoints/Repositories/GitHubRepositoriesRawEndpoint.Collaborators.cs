@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Models.Users;
@@ -23,11 +24,11 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#add-a-repository-collaborator</cref>
     /// </see>
-    public IHttpResponse AddCollaborator(string owner, string repositoryAlias, string username) {
+    public async Task<IHttpResponse> AddCollaborator(string owner, string repositoryAlias, string username) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
         if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
-        return AddCollaborator(new GitHubAddCollaboratorOptions(owner, repositoryAlias, username));
+        return await AddCollaborator(new GitHubAddCollaboratorOptions(owner, repositoryAlias, username));
     }
 
     /// <summary>
@@ -39,10 +40,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#add-a-repository-collaborator</cref>
     /// </see>
-    public IHttpResponse AddCollaborator(GitHubRepositoryBase repository, string username) {
+    public async Task<IHttpResponse> AddCollaborator(GitHubRepositoryBase repository, string username) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
         if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
-        return AddCollaborator(new GitHubAddCollaboratorOptions(repository, username));
+        return await AddCollaborator(new GitHubAddCollaboratorOptions(repository, username));
     }
 
     /// <summary>
@@ -54,10 +55,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#add-a-repository-collaborator</cref>
     /// </see>
-    public IHttpResponse AddCollaborator(GitHubRepositoryBase repository, GitHubUserBase user) {
+    public async Task<IHttpResponse> AddCollaborator(GitHubRepositoryBase repository, GitHubUserBase user) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
         if (user == null) throw new ArgumentNullException(nameof(user));
-        return AddCollaborator(new GitHubAddCollaboratorOptions(repository, user));
+        return await AddCollaborator(new GitHubAddCollaboratorOptions(repository, user));
     }
 
     /// <summary>
@@ -68,9 +69,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#add-a-repository-collaborator</cref>
     /// </see>
-    public IHttpResponse AddCollaborator(GitHubAddCollaboratorOptions options) {
+    public async Task<IHttpResponse> AddCollaborator(GitHubAddCollaboratorOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion
@@ -86,10 +87,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators</cref>
     /// </see>
-    public IHttpResponse GetCollaborators(string owner, string repositoryAlias) {
+    public async Task<IHttpResponse> GetCollaborators(string owner, string repositoryAlias) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
-        return Client.GetResponse(new GitHubGetCollaboratorsOptions(owner, repositoryAlias));
+        return await Client.GetResponseAsync(new GitHubGetCollaboratorsOptions(owner, repositoryAlias));
     }
 
     /// <summary>
@@ -103,10 +104,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators</cref>
     /// </see>
-    public IHttpResponse GetCollaborators(string owner, string repositoryAlias, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetCollaborators(string owner, string repositoryAlias, int? perPage = null, int? page = null) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
-        return Client.GetResponse(new GitHubGetCollaboratorsOptions(owner, repositoryAlias, perPage, page));
+        return await Client.GetResponseAsync(new GitHubGetCollaboratorsOptions(owner, repositoryAlias, perPage, page));
     }
 
     /// <summary>
@@ -117,9 +118,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators</cref>
     /// </see>
-    public IHttpResponse GetCollaborators(GitHubRepositoryBase repository) {
+    public async Task<IHttpResponse> GetCollaborators(GitHubRepositoryBase repository) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return Client.GetResponse(new GitHubGetCollaboratorsOptions(repository));
+        return await Client.GetResponseAsync(new GitHubGetCollaboratorsOptions(repository));
     }
 
     /// <summary>
@@ -132,9 +133,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators</cref>
     /// </see>
-    public IHttpResponse GetCollaborators(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetCollaborators(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return Client.GetResponse(new GitHubGetCollaboratorsOptions(repository, perPage, page));
+        return await Client.GetResponseAsync(new GitHubGetCollaboratorsOptions(repository, perPage, page));
     }
 
     /// <summary>
@@ -145,9 +146,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators</cref>
     /// </see>
-    public IHttpResponse GetCollaborators(GitHubGetCollaboratorsOptions options) {
+    public async Task<IHttpResponse> GetCollaborators(GitHubGetCollaboratorsOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion

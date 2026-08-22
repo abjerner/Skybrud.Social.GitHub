@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.Forks;
 using Skybrud.Social.GitHub.Responses.Repositories;
@@ -15,8 +16,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#create-a-fork</cref>
     /// </see>
-    public GitHubRepositoryResponse CreateFork(string owner, string repository) {
-        return new GitHubRepositoryResponse(Raw.CreateFork(owner, repository));
+    public async Task<GitHubRepositoryResponse> CreateFork(string owner, string repository) {
+        return new GitHubRepositoryResponse(await Raw.CreateFork(owner, repository));
     }
 
     /// <summary>
@@ -29,8 +30,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#create-a-fork</cref>
     /// </see>
-    public GitHubRepositoryResponse CreateFork(string owner, string repository, string organization) {
-        return new GitHubRepositoryResponse(Raw.CreateFork(owner, repository, organization));
+    public async Task<GitHubRepositoryResponse> CreateFork(string owner, string repository, string organization) {
+        return new GitHubRepositoryResponse(await Raw.CreateFork(owner, repository, organization));
     }
 
     /// <summary>
@@ -41,8 +42,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#create-a-fork</cref>
     /// </see>
-    public GitHubRepositoryResponse CreateFork(GitHubRepositoryBase repository) {
-        return new GitHubRepositoryResponse(Raw.CreateFork(repository));
+    public async Task<GitHubRepositoryResponse> CreateFork(GitHubRepositoryBase repository) {
+        return new GitHubRepositoryResponse(await Raw.CreateFork(repository));
     }
 
     /// <summary>
@@ -54,8 +55,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#create-a-fork</cref>
     /// </see>
-    public GitHubRepositoryResponse CreateFork(GitHubRepositoryBase repository, string organization) {
-        return new GitHubRepositoryResponse(Raw.CreateFork(repository, organization));
+    public async Task<GitHubRepositoryResponse> CreateFork(GitHubRepositoryBase repository, string organization) {
+        return new GitHubRepositoryResponse(await Raw.CreateFork(repository, organization));
     }
 
     /// <summary>
@@ -66,8 +67,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#create-a-fork</cref>
     /// </see>
-    public GitHubRepositoryResponse CreateFork(GitHubCreateForkOptions options) {
-        return new GitHubRepositoryResponse(Raw.CreateFork(options));
+    public async Task<GitHubRepositoryResponse> CreateFork(GitHubCreateForkOptions options) {
+        return new GitHubRepositoryResponse(await Raw.CreateFork(options));
     }
 
 }

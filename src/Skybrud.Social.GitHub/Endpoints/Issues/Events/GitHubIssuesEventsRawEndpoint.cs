@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Issues;
 using Skybrud.Social.GitHub.OAuth;
@@ -43,11 +44,10 @@ public class GitHubIssuesEventsRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/events/#list-events-for-an-issue</cref>
     /// </see>
-    public IHttpResponse GetEvents(string owner, string repository, int number) {
+    public async Task<IHttpResponse> GetEvents(string owner, string repository, int number) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
-        if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
-        if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
-        return GetEvents(new GitHubGetIssueEventsOptions(owner, repository, number));
+        if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
+        return await GetEvents(new GitHubGetIssueEventsOptions(owner, repository, number));
     }
 
     /// <summary>
@@ -58,9 +58,9 @@ public class GitHubIssuesEventsRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/events/#list-events-for-an-issue</cref>
     /// </see>
-    public IHttpResponse GetEvents(GitHubIssueBase issue) {
+    public async Task<IHttpResponse> GetEvents(GitHubIssueBase issue) {
         if (issue == null) throw new ArgumentNullException(nameof(issue));
-        return GetEvents(new GitHubGetIssueEventsOptions(issue));
+        return await GetEvents(new GitHubGetIssueEventsOptions(issue));
     }
 
     /// <summary>
@@ -71,9 +71,9 @@ public class GitHubIssuesEventsRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/events/#list-events-for-an-issue</cref>
     /// </see>
-    public IHttpResponse GetEvents(GitHubGetIssueEventsOptions options) {
+    public async Task<IHttpResponse> GetEvents(GitHubGetIssueEventsOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion

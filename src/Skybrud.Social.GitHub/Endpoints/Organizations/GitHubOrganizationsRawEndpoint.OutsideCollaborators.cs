@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Organizations;
 using Skybrud.Social.GitHub.Options.Organizations.OutsideCollaborators;
@@ -17,8 +18,8 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-outside-collaborators-for-an-organization</cref>
     /// </see>
-    public IHttpResponse GetOutsideCollaborators(int organizationId) {
-        return GetOutsideCollaborators(new GitHubGetOutsideCollaboratorsOptions(organizationId));
+    public async Task<IHttpResponse> GetOutsideCollaborators(int organizationId) {
+        return await GetOutsideCollaborators(new GitHubGetOutsideCollaboratorsOptions(organizationId));
     }
 
     /// <summary>
@@ -31,8 +32,8 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-outside-collaborators-for-an-organization</cref>
     /// </see>
-    public IHttpResponse GetOutsideCollaborators(int organizationId, int? perPage = null, int? page = null) {
-        return GetOutsideCollaborators(new GitHubGetOutsideCollaboratorsOptions(organizationId, perPage, page));
+    public async Task<IHttpResponse> GetOutsideCollaborators(int organizationId, int? perPage = null, int? page = null) {
+        return await GetOutsideCollaborators(new GitHubGetOutsideCollaboratorsOptions(organizationId, perPage, page));
     }
 
     /// <summary>
@@ -43,9 +44,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-outside-collaborators-for-an-organization</cref>
     /// </see>
-    public IHttpResponse GetOutsideCollaborators(string organizationAlias) {
+    public async Task<IHttpResponse> GetOutsideCollaborators(string organizationAlias) {
         if (string.IsNullOrWhiteSpace(organizationAlias)) throw new ArgumentNullException(nameof(organizationAlias));
-        return GetOutsideCollaborators(new GitHubGetOutsideCollaboratorsOptions(organizationAlias));
+        return await GetOutsideCollaborators(new GitHubGetOutsideCollaboratorsOptions(organizationAlias));
     }
 
     /// <summary>
@@ -58,9 +59,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-outside-collaborators-for-an-organization</cref>
     /// </see>
-    public IHttpResponse GetOutsideCollaborators(string organizationAlias, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetOutsideCollaborators(string organizationAlias, int? perPage = null, int? page = null) {
         if (string.IsNullOrWhiteSpace(organizationAlias)) throw new ArgumentNullException(nameof(organizationAlias));
-        return GetOutsideCollaborators(new GitHubGetOutsideCollaboratorsOptions(organizationAlias, perPage, page));
+        return await GetOutsideCollaborators(new GitHubGetOutsideCollaboratorsOptions(organizationAlias, perPage, page));
     }
 
     /// <summary>
@@ -71,9 +72,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-outside-collaborators-for-an-organization</cref>
     /// </see>
-    public IHttpResponse GetOutsideCollaborators(GitHubOrganizationItem organization) {
+    public async Task<IHttpResponse> GetOutsideCollaborators(GitHubOrganizationItem organization) {
         if (organization == null) throw new ArgumentNullException(nameof(organization));
-        return GetOutsideCollaborators(new GitHubGetOutsideCollaboratorsOptions(organization));
+        return await GetOutsideCollaborators(new GitHubGetOutsideCollaboratorsOptions(organization));
     }
 
     /// <summary>
@@ -86,9 +87,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-outside-collaborators-for-an-organization</cref>
     /// </see>
-    public IHttpResponse GetOutsideCollaborators(GitHubOrganizationItem organization, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetOutsideCollaborators(GitHubOrganizationItem organization, int? perPage = null, int? page = null) {
         if (organization == null) throw new ArgumentNullException(nameof(organization));
-        return GetOutsideCollaborators(new GitHubGetOutsideCollaboratorsOptions(organization, perPage, page));
+        return await GetOutsideCollaborators(new GitHubGetOutsideCollaboratorsOptions(organization, perPage, page));
     }
 
     /// <summary>
@@ -99,9 +100,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-outside-collaborators-for-an-organization</cref>
     /// </see>
-    public IHttpResponse GetOutsideCollaborators(GitHubGetOutsideCollaboratorsOptions options) {
+    public async Task<IHttpResponse> GetOutsideCollaborators(GitHubGetOutsideCollaboratorsOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
 }

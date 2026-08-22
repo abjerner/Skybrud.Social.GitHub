@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Repositories;
@@ -34,10 +35,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <paramref name="repository"/>.
     /// </summary>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetRepository(string owner, string repository) {
+    public async Task<IHttpResponse> GetRepository(string owner, string repository) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-        return Client.Get($"/repos/{owner}/{repository}");
+        return await Client.GetAsync($"/repos/{owner}/{repository}");
     }
 
     /// <summary>
@@ -51,12 +52,12 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create-repository-using-a-repository-template</cref>
     /// </see>
-    public IHttpResponse CreateRepositoryFromTemplate(string templateOwner, string templateRepository, string owner, string name) {
+    public async Task<IHttpResponse> CreateRepositoryFromTemplate(string templateOwner, string templateRepository, string owner, string name) {
         if (string.IsNullOrWhiteSpace(templateOwner)) throw new ArgumentNullException(nameof(templateOwner));
         if (string.IsNullOrWhiteSpace(templateRepository)) throw new ArgumentNullException(nameof(templateRepository));
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-        return CreateRepositoryFromTemplate(new GitHubCreateRepositoryFromTemplateOptions(templateOwner, templateRepository, owner, name));
+        return await CreateRepositoryFromTemplate(new GitHubCreateRepositoryFromTemplateOptions(templateOwner, templateRepository, owner, name));
     }
 
     /// <summary>
@@ -71,12 +72,12 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create-repository-using-a-repository-template</cref>
     /// </see>
-    public IHttpResponse CreateRepositoryFromTemplate(string templateOwner, string templateRepository, string owner, string name, bool isPrivate) {
+    public async Task<IHttpResponse> CreateRepositoryFromTemplate(string templateOwner, string templateRepository, string owner, string name, bool isPrivate) {
         if (string.IsNullOrWhiteSpace(templateOwner)) throw new ArgumentNullException(nameof(templateOwner));
         if (string.IsNullOrWhiteSpace(templateRepository)) throw new ArgumentNullException(nameof(templateRepository));
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-        return CreateRepositoryFromTemplate(new GitHubCreateRepositoryFromTemplateOptions(templateOwner, templateRepository, owner, name, isPrivate));
+        return await CreateRepositoryFromTemplate(new GitHubCreateRepositoryFromTemplateOptions(templateOwner, templateRepository, owner, name, isPrivate));
     }
 
     /// <summary>
@@ -87,9 +88,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create-repository-using-a-repository-template</cref>
     /// </see>
-    public IHttpResponse CreateRepositoryFromTemplate(GitHubCreateRepositoryFromTemplateOptions options) {
+    public async Task<IHttpResponse> CreateRepositoryFromTemplate(GitHubCreateRepositoryFromTemplateOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     /// <summary>
@@ -100,9 +101,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
-    public IHttpResponse CreateUserRepository(string name) {
+    public async Task<IHttpResponse> CreateUserRepository(string name) {
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-        return CreateUserRepository(new GitHubCreateUserRepositoryOptions(name));
+        return await CreateUserRepository(new GitHubCreateUserRepositoryOptions(name));
     }
 
     /// <summary>
@@ -114,9 +115,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
-    public IHttpResponse CreateUserRepository(string name, bool isPrivate) {
+    public async Task<IHttpResponse> CreateUserRepository(string name, bool isPrivate) {
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-        return CreateUserRepository(new GitHubCreateUserRepositoryOptions(name, isPrivate));
+        return await CreateUserRepository(new GitHubCreateUserRepositoryOptions(name, isPrivate));
     }
 
     /// <summary>
@@ -127,9 +128,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
-    public IHttpResponse CreateUserRepository(GitHubCreateUserRepositoryOptions options) {
+    public async Task<IHttpResponse> CreateUserRepository(GitHubCreateUserRepositoryOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     /// <summary>
@@ -141,10 +142,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
-    public IHttpResponse CreateOrganisationRepository(string organisation, string name) {
+    public async Task<IHttpResponse> CreateOrganisationRepository(string organisation, string name) {
         if (string.IsNullOrWhiteSpace(organisation)) throw new ArgumentNullException(nameof(organisation));
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-        return CreateOrganisationRepository(new GitHubCreateOrganisationRepositoryOptions(organisation, name));
+        return await CreateOrganisationRepository(new GitHubCreateOrganisationRepositoryOptions(organisation, name));
     }
 
     /// <summary>
@@ -157,10 +158,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
-    public IHttpResponse CreateOrganisationRepository(string organisation, string name, bool isPrivate) {
+    public async Task<IHttpResponse> CreateOrganisationRepository(string organisation, string name, bool isPrivate) {
         if (string.IsNullOrWhiteSpace(organisation)) throw new ArgumentNullException(nameof(organisation));
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-        return CreateOrganisationRepository(new GitHubCreateOrganisationRepositoryOptions(organisation, name, isPrivate));
+        return await CreateOrganisationRepository(new GitHubCreateOrganisationRepositoryOptions(organisation, name, isPrivate));
     }
 
     /// <summary>
@@ -171,9 +172,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
-    public IHttpResponse CreateOrganisationRepository(GitHubCreateOrganisationRepositoryOptions options) {
+    public async Task<IHttpResponse> CreateOrganisationRepository(GitHubCreateOrganisationRepositoryOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion

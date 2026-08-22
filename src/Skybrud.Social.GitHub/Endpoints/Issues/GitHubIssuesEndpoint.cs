@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Endpoints.Issues.Comments;
 using Skybrud.Social.GitHub.Endpoints.Issues.Events;
 using Skybrud.Social.GitHub.Endpoints.Issues.Milestones;
@@ -63,8 +64,8 @@ public class GitHubIssuesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#create-an-issue</cref>
     /// </see>
-    public GitHubIssueResponse CreateIssue(GitHubCreateIssueOptions options) {
-        return new GitHubIssueResponse(Raw.CreateIssue(options));
+    public async Task<GitHubIssueResponse> CreateIssue(GitHubCreateIssueOptions options) {
+        return new GitHubIssueResponse(await Raw.CreateIssue(options));
     }
 
     /// <summary>
@@ -77,8 +78,8 @@ public class GitHubIssuesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/#get-a-single-issue</cref>
     /// </see>
-    public GitHubIssueResponse GetIssue(string owner, string repositoryAlias, int number) {
-        return new GitHubIssueResponse(Raw.GetIssue(owner, repositoryAlias, number));
+    public async Task<GitHubIssueResponse> GetIssue(string owner, string repositoryAlias, int number) {
+        return new GitHubIssueResponse(await Raw.GetIssue(owner, repositoryAlias, number));
     }
 
     /// <summary>
@@ -90,9 +91,9 @@ public class GitHubIssuesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/#get-a-single-issue</cref>
     /// </see>
-    public GitHubIssueResponse GetIssue(GitHubRepositoryBase repository, int number) {
+    public async Task<GitHubIssueResponse> GetIssue(GitHubRepositoryBase repository, int number) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return GetIssue(new GitHubGetIssueOptions(repository, number));
+        return await GetIssue(new GitHubGetIssueOptions(repository, number));
     }
 
     /// <summary>
@@ -103,16 +104,16 @@ public class GitHubIssuesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/#get-a-single-issue</cref>
     /// </see>
-    public GitHubIssueResponse GetIssue(GitHubGetIssueOptions options) {
-        return new GitHubIssueResponse(Raw.GetIssue(options));
+    public async Task<GitHubIssueResponse> GetIssue(GitHubGetIssueOptions options) {
+        return new GitHubIssueResponse(await Raw.GetIssue(options));
     }
 
     /// <summary>
     /// Gets a list of issues assigned to the authenticated user.
     /// </summary>
     /// <returns>An instance of <see cref="GitHubIssueListResponse"/> representing the response.</returns>
-    public GitHubIssueListResponse GetIssues() {
-        return new GitHubIssueListResponse(Raw.GetIssues());
+    public async Task<GitHubIssueListResponse> GetIssues() {
+        return new GitHubIssueListResponse(await Raw.GetIssues());
     }
 
     /// <summary>
@@ -120,8 +121,8 @@ public class GitHubIssuesEndpoint {
     /// </summary>
     /// <param name="options">The options for the call to the API.</param>
     /// <returns>An instance of <see cref="GitHubIssueListResponse"/> representing the response.</returns>
-    public GitHubIssueListResponse GetIssues(GitHubGetIssuesOptions options) {
-        return new GitHubIssueListResponse(Raw.GetIssues(options));
+    public async Task<GitHubIssueListResponse> GetIssues(GitHubGetIssuesOptions options) {
+        return new GitHubIssueListResponse(await Raw.GetIssues(options));
     }
 
     /// <summary>
@@ -130,8 +131,8 @@ public class GitHubIssuesEndpoint {
     /// <param name="owner">The alias of the parent user or organization.</param>
     /// <param name="repositoryAlias">The alias of the repository.</param>
     /// <returns>An instance of <see cref="GitHubIssueListResponse"/> representing the response.</returns>
-    public GitHubIssueListResponse GetIssues(string owner, string repositoryAlias) {
-        return new GitHubIssueListResponse(Raw.GetIssues(owner, repositoryAlias));
+    public async Task<GitHubIssueListResponse> GetIssues(string owner, string repositoryAlias) {
+        return new GitHubIssueListResponse(await Raw.GetIssues(owner, repositoryAlias));
     }
 
     /// <summary>
@@ -139,8 +140,8 @@ public class GitHubIssuesEndpoint {
     /// </summary>
     /// <param name="repository">The repository.</param>
     /// <returns>An instance of <see cref="GitHubIssueListResponse"/> representing the response.</returns>
-    public GitHubIssueListResponse GetIssues(GitHubRepositoryBase repository) {
-        return new GitHubIssueListResponse(Raw.GetIssues(repository));
+    public async Task<GitHubIssueListResponse> GetIssues(GitHubRepositoryBase repository) {
+        return new GitHubIssueListResponse(await Raw.GetIssues(repository));
     }
 
     /// <summary>
@@ -148,8 +149,8 @@ public class GitHubIssuesEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="GitHubIssueListResponse"/> representing the response.</returns>
-    public GitHubIssueListResponse GetIssues(GitHubGetRepositoryIssuesOptions options) {
-        return new GitHubIssueListResponse(Raw.GetIssues(options));
+    public async Task<GitHubIssueListResponse> GetIssues(GitHubGetRepositoryIssuesOptions options) {
+        return new GitHubIssueListResponse(await Raw.GetIssues(options));
     }
 
     #endregion

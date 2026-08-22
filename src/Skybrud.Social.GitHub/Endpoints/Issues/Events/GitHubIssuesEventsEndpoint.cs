@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Models.Issues;
 using Skybrud.Social.GitHub.Options.Issues.Events;
 using Skybrud.Social.GitHub.Responses.Events;
@@ -43,8 +44,8 @@ public class GitHubIssuesEventsEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/events/#list-events-for-an-issue</cref>
     /// </see>
-    public GitHubEventListResponse GetEvents(string owner, string repository, int number) {
-        return new GitHubEventListResponse(Raw.GetEvents(owner, repository, number));
+    public async Task<GitHubEventListResponse> GetEvents(string owner, string repository, int number) {
+        return new GitHubEventListResponse(await Raw.GetEvents(owner, repository, number));
     }
 
     /// <summary>
@@ -55,8 +56,8 @@ public class GitHubIssuesEventsEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/events/#list-events-for-an-issue</cref>
     /// </see>
-    public GitHubEventListResponse GetEvents(GitHubIssueBase issue) {
-        return new GitHubEventListResponse(Raw.GetEvents(issue));
+    public async Task<GitHubEventListResponse> GetEvents(GitHubIssueBase issue) {
+        return new GitHubEventListResponse(await Raw.GetEvents(issue));
     }
 
     /// <summary>
@@ -67,8 +68,8 @@ public class GitHubIssuesEventsEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/events/#list-events-for-an-issue</cref>
     /// </see>
-    public GitHubEventListResponse GetEvents(GitHubGetIssueEventsOptions options) {
-        return new GitHubEventListResponse(Raw.GetEvents(options));
+    public async Task<GitHubEventListResponse> GetEvents(GitHubGetIssueEventsOptions options) {
+        return new GitHubEventListResponse(await Raw.GetEvents(options));
     }
 
     #endregion

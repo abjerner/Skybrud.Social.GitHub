@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.Content;
 using Skybrud.Social.GitHub.Responses.Repositories.Content;
@@ -20,8 +21,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#create-or-update-file-contents</cref>
     /// </see>
-    public GitHubContentResponse CreateContent(string owner, string repositoryAlias, string path, string message, string content) {
-        return new GitHubContentResponse(Raw.CreateContent(owner, repositoryAlias, path, message, content));
+    public async Task<GitHubContentResponse> CreateContent(string owner, string repositoryAlias, string path, string message, string content) {
+        return new GitHubContentResponse(await Raw.CreateContent(owner, repositoryAlias, path, message, content));
     }
 
     /// <summary>
@@ -37,8 +38,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#create-or-update-file-contents</cref>
     /// </see>
-    public GitHubContentResponse CreateContent(string owner, string repositoryAlias, string path, string message, string content, string? branch) {
-        return new GitHubContentResponse(Raw.CreateContent(owner, repositoryAlias, path, message, content, branch));
+    public async Task<GitHubContentResponse> CreateContent(string owner, string repositoryAlias, string path, string message, string content, string? branch) {
+        return new GitHubContentResponse(await Raw.CreateContent(owner, repositoryAlias, path, message, content, branch));
     }
 
     /// <summary>
@@ -52,8 +53,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#create-or-update-file-contents</cref>
     /// </see>
-    public GitHubContentResponse CreateContent(GitHubRepositoryBase repository, string path, string message, string content) {
-        return new GitHubContentResponse(Raw.CreateContent(repository, path, message, content));
+    public async Task<GitHubContentResponse> CreateContent(GitHubRepositoryBase repository, string path, string message, string content) {
+        return new GitHubContentResponse(await Raw.CreateContent(repository, path, message, content));
     }
 
     /// <summary>
@@ -68,8 +69,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#create-or-update-file-contents</cref>
     /// </see>
-    public GitHubContentResponse CreateContent(GitHubRepositoryBase repository, string path, string message, string content, string? branch) {
-        return new GitHubContentResponse(Raw.CreateContent(repository, path, message, content, branch));
+    public async Task<GitHubContentResponse> CreateContent(GitHubRepositoryBase repository, string path, string message, string content, string? branch) {
+        return new GitHubContentResponse(await Raw.CreateContent(repository, path, message, content, branch));
     }
 
     /// <summary>
@@ -80,8 +81,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#create-or-update-file-contents</cref>
     /// </see>
-    public GitHubContentResponse CreateContent(GitHubCreateRepositoryContentOptions options) {
-        return new GitHubContentResponse(Raw.CreateContent(options));
+    public async Task<GitHubContentResponse> CreateContent(GitHubCreateRepositoryContentOptions options) {
+        return new GitHubContentResponse(await Raw.CreateContent(options));
     }
 
     #endregion
@@ -98,8 +99,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#get-repository-content</cref>
     /// </see>
-    public GitHubContentResponse GetContent(string owner, string repositoryAlias, string path) {
-        return new GitHubContentResponse(Raw.GetContent(owner, repositoryAlias, path));
+    public async Task<GitHubContentResponse> GetContent(string owner, string repositoryAlias, string path) {
+        return new GitHubContentResponse(await Raw.GetContent(owner, repositoryAlias, path));
     }
 
     /// <summary>
@@ -113,8 +114,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#get-repository-content</cref>
     /// </see>
-    public GitHubContentResponse GetContent(string owner, string repositoryAlias, string path, string? @ref) {
-        return new GitHubContentResponse(Raw.GetContent(owner, repositoryAlias, path, @ref));
+    public async Task<GitHubContentResponse> GetContent(string owner, string repositoryAlias, string path, string? @ref) {
+        return new GitHubContentResponse(await Raw.GetContent(owner, repositoryAlias, path, @ref));
     }
 
     /// <summary>
@@ -126,8 +127,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#get-repository-content</cref>
     /// </see>
-    public GitHubContentResponse GetContent(GitHubRepositoryBase repository, string path) {
-        return new GitHubContentResponse(Raw.GetContent(repository, path));
+    public async Task<GitHubContentResponse> GetContent(GitHubRepositoryBase repository, string path) {
+        return new GitHubContentResponse(await Raw.GetContent(repository, path));
     }
 
     /// <summary>
@@ -140,8 +141,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#get-repository-content</cref>
     /// </see>
-    public GitHubContentResponse GetContent(GitHubRepositoryBase repository, string path, string? @ref) {
-        return new GitHubContentResponse(Raw.GetContent(repository, path, @ref));
+    public async Task<GitHubContentResponse> GetContent(GitHubRepositoryBase repository, string path, string? @ref) {
+        return new GitHubContentResponse(await Raw.GetContent(repository, path, @ref));
     }
 
     /// <summary>
@@ -152,8 +153,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#get-repository-content</cref>
     /// </see>
-    public GitHubContentResponse GetContent(GitHubGetRepositoryContentOptions options) {
-        return new GitHubContentResponse(Raw.GetContent(options));
+    public async Task<GitHubContentResponse> GetContent(GitHubGetRepositoryContentOptions options) {
+        return new GitHubContentResponse(await Raw.GetContent(options));
     }
 
     #endregion
@@ -168,8 +169,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#create-or-update-file-contents</cref>
     /// </see>
-    public GitHubContentResponse UpdateContent(GitHubUpdateRepositoryContentOptions options) {
-        return new GitHubContentResponse(Raw.UpdateContent(options));
+    public async Task<GitHubContentResponse> UpdateContent(GitHubUpdateRepositoryContentOptions options) {
+        return new GitHubContentResponse(await Raw.UpdateContent(options));
     }
 
     #endregion

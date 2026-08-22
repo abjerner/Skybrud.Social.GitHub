@@ -1,4 +1,5 @@
-﻿using Skybrud.Social.GitHub.Models.Repositories;
+﻿using System.Threading.Tasks;
+using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.Labels;
 using Skybrud.Social.GitHub.Responses.Labels;
 
@@ -20,8 +21,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#create-a-label</cref>
     /// </see>
-    public GitHubLabelResponse CreateLabel(string owner, string repository, string name) {
-        return new GitHubLabelResponse(Raw.CreateLabel(owner, repository, name));
+    public async Task<GitHubLabelResponse> CreateLabel(string owner, string repository, string name) {
+        return new GitHubLabelResponse(await Raw.CreateLabel(owner, repository, name));
     }
 
     /// <summary>
@@ -36,8 +37,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#create-a-label</cref>
     /// </see>
-    public GitHubLabelResponse CreateLabel(string owner, string repository, string name, string? color, string? description) {
-        return new GitHubLabelResponse(Raw.CreateLabel(owner, repository, name, color, description));
+    public async Task<GitHubLabelResponse> CreateLabel(string owner, string repository, string name, string? color, string? description) {
+        return new GitHubLabelResponse(await Raw.CreateLabel(owner, repository, name, color, description));
     }
 
     /// <summary>
@@ -49,8 +50,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#create-a-label</cref>
     /// </see>
-    public GitHubLabelResponse CreateLabel(GitHubRepositoryBase repository, string name) {
-        return new GitHubLabelResponse(Raw.CreateLabel(repository, name));
+    public async Task<GitHubLabelResponse> CreateLabel(GitHubRepositoryBase repository, string name) {
+        return new GitHubLabelResponse(await Raw.CreateLabel(repository, name));
     }
 
     /// <summary>
@@ -64,8 +65,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#create-a-label</cref>
     /// </see>
-    public GitHubLabelResponse CreateLabel(GitHubRepositoryBase repository, string name, string? color, string? description) {
-        return new GitHubLabelResponse(Raw.CreateLabel(repository, name, color, description));
+    public async Task<GitHubLabelResponse> CreateLabel(GitHubRepositoryBase repository, string name, string? color, string? description) {
+        return new GitHubLabelResponse(await Raw.CreateLabel(repository, name, color, description));
     }
 
     /// <summary>
@@ -76,8 +77,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#create-a-label</cref>
     /// </see>
-    public GitHubLabelResponse CreateLabel(GitHubCreateLabelOptions options) {
-        return new GitHubLabelResponse(Raw.CreateLabel(options));
+    public async Task<GitHubLabelResponse> CreateLabel(GitHubCreateLabelOptions options) {
+        return new GitHubLabelResponse(await Raw.CreateLabel(options));
     }
 
     #endregion
@@ -94,8 +95,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#get-a-label</cref>
     /// </see>
-    public GitHubLabelResponse GetLabel(string owner, string repository, string name) {
-        return new GitHubLabelResponse(Raw.GetLabel(owner, repository, name));
+    public async Task<GitHubLabelResponse> GetLabel(string owner, string repository, string name) {
+        return new GitHubLabelResponse(await Raw.GetLabel(owner, repository, name));
     }
 
     /// <summary>
@@ -107,8 +108,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#get-a-label</cref>
     /// </see>
-    public GitHubLabelResponse GetLabel(GitHubRepositoryBase repository, string name) {
-        return new GitHubLabelResponse(Raw.GetLabel(repository, name));
+    public async Task<GitHubLabelResponse> GetLabel(GitHubRepositoryBase repository, string name) {
+        return new GitHubLabelResponse(await Raw.GetLabel(repository, name));
     }
 
     /// <summary>
@@ -119,8 +120,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#get-a-label</cref>
     /// </see>
-    public GitHubLabelResponse GetLabel(GitHubGetLabelOptions options) {
-        return new GitHubLabelResponse(Raw.GetLabel(options));
+    public async Task<GitHubLabelResponse> GetLabel(GitHubGetLabelOptions options) {
+        return new GitHubLabelResponse(await Raw.GetLabel(options));
     }
 
     #endregion
@@ -135,8 +136,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#update-a-label</cref>
     /// </see>
-    public GitHubLabelResponse UpdateLabel(GitHubUpdateLabelOptions options) {
-        return new GitHubLabelResponse(Raw.UpdateLabel(options));
+    public async Task<GitHubLabelResponse> UpdateLabel(GitHubUpdateLabelOptions options) {
+        return new GitHubLabelResponse(await Raw.UpdateLabel(options));
     }
 
     #endregion
@@ -152,8 +153,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#list-labels-for-a-repository</cref>
     /// </see>
-    public GitHubLabelListResponse GetLabels(string owner, string repository) {
-        return new GitHubLabelListResponse(Raw.GetLabels(owner, repository));
+    public async Task<GitHubLabelListResponse> GetLabels(string owner, string repository) {
+        return new GitHubLabelListResponse(await Raw.GetLabels(owner, repository));
     }
 
     /// <summary>
@@ -167,8 +168,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#list-labels-for-a-repository</cref>
     /// </see>
-    public GitHubLabelListResponse GetLabels(string owner, string repository, int? perPage = null, int? page = null) {
-        return new GitHubLabelListResponse(Raw.GetLabels(owner, repository, perPage, page));
+    public async Task<GitHubLabelListResponse> GetLabels(string owner, string repository, int? perPage = null, int? page = null) {
+        return new GitHubLabelListResponse(await Raw.GetLabels(owner, repository, perPage, page));
     }
 
     /// <summary>
@@ -179,8 +180,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#list-labels-for-a-repository</cref>
     /// </see>
-    public GitHubLabelListResponse GetLabels(GitHubRepositoryBase repository) {
-        return new GitHubLabelListResponse(Raw.GetLabels(repository));
+    public async Task<GitHubLabelListResponse> GetLabels(GitHubRepositoryBase repository) {
+        return new GitHubLabelListResponse(await Raw.GetLabels(repository));
     }
 
     /// <summary>
@@ -193,8 +194,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#list-labels-for-a-repository</cref>
     /// </see>
-    public GitHubLabelListResponse GetLabels(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
-        return new GitHubLabelListResponse(Raw.GetLabels(repository, perPage, page));
+    public async Task<GitHubLabelListResponse> GetLabels(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
+        return new GitHubLabelListResponse(await Raw.GetLabels(repository, perPage, page));
     }
 
     /// <summary>
@@ -205,8 +206,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#list-labels-for-a-repository</cref>
     /// </see>
-    public GitHubLabelListResponse GetLabels(GitHubGetLabelsOptions options) {
-        return new GitHubLabelListResponse(Raw.GetLabels(options));
+    public async Task<GitHubLabelListResponse> GetLabels(GitHubGetLabelsOptions options) {
+        return new GitHubLabelListResponse(await Raw.GetLabels(options));
     }
 
     #endregion

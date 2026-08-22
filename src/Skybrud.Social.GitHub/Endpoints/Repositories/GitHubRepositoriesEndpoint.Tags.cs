@@ -1,4 +1,5 @@
-﻿using Skybrud.Social.GitHub.Models.Repositories;
+﻿using System.Threading.Tasks;
+using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.Tags;
 using Skybrud.Social.GitHub.Responses.Tags;
 
@@ -17,8 +18,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-tags</cref>
     /// </see>
-    public GitHubTagListResponse GetTags(string ownerAlias, string repositoryAlias) {
-        return new GitHubTagListResponse(Raw.GetTags(ownerAlias, repositoryAlias));
+    public async Task<GitHubTagListResponse> GetTags(string ownerAlias, string repositoryAlias) {
+        return new GitHubTagListResponse(await Raw.GetTags(ownerAlias, repositoryAlias));
     }
 
     /// <summary>
@@ -32,8 +33,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-tags</cref>
     /// </see>
-    public GitHubTagListResponse GetTags(string ownerAlias, string repositoryAlias, int? perPage = null, int? page = null) {
-        return new GitHubTagListResponse(Raw.GetTags(ownerAlias, repositoryAlias, perPage, page));
+    public async Task<GitHubTagListResponse> GetTags(string ownerAlias, string repositoryAlias, int? perPage = null, int? page = null) {
+        return new GitHubTagListResponse(await Raw.GetTags(ownerAlias, repositoryAlias, perPage, page));
     }
 
     /// <summary>
@@ -44,8 +45,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-tags</cref>
     /// </see>
-    public GitHubTagListResponse GetTags(GitHubRepositoryBase repository) {
-        return new GitHubTagListResponse(Raw.GetTags(repository));
+    public async Task<GitHubTagListResponse> GetTags(GitHubRepositoryBase repository) {
+        return new GitHubTagListResponse(await Raw.GetTags(repository));
     }
 
     /// <summary>
@@ -58,8 +59,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-tags</cref>
     /// </see>
-    public GitHubTagListResponse GetTags(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
-        return new GitHubTagListResponse(Raw.GetTags(repository, perPage, page));
+    public async Task<GitHubTagListResponse> GetTags(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
+        return new GitHubTagListResponse(await Raw.GetTags(repository, perPage, page));
     }
 
     /// <summary>
@@ -70,8 +71,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-tags</cref>
     /// </see>
-    public GitHubTagListResponse GetTags(GitHubGetTagsOptions options) {
-        return new GitHubTagListResponse(Raw.GetTags(options));
+    public async Task<GitHubTagListResponse> GetTags(GitHubGetTagsOptions options) {
+        return new GitHubTagListResponse(await Raw.GetTags(options));
     }
 
 }

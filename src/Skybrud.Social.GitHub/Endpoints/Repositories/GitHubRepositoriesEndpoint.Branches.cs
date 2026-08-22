@@ -1,4 +1,5 @@
-﻿using Skybrud.Social.GitHub.Models.Repositories;
+﻿using System.Threading.Tasks;
+using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.Branches;
 using Skybrud.Social.GitHub.Responses.Branches;
 
@@ -20,8 +21,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#get-a-branch</cref>
     /// </see>
-    public GitHubBranchResponse GetBranch(string owner, string repo, string name) {
-        return new GitHubBranchResponse(Raw.GetBranch(owner, repo, name));
+    public async Task<GitHubBranchResponse> GetBranch(string owner, string repo, string name) {
+        return new GitHubBranchResponse(await Raw.GetBranch(owner, repo, name));
     }
 
     /// <summary>
@@ -33,8 +34,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#get-a-branch</cref>
     /// </see>
-    public GitHubBranchResponse GetBranch(GitHubRepositoryBase repository, string name) {
-        return new GitHubBranchResponse(Raw.GetBranch(repository, name));
+    public async Task<GitHubBranchResponse> GetBranch(GitHubRepositoryBase repository, string name) {
+        return new GitHubBranchResponse(await Raw.GetBranch(repository, name));
     }
 
     /// <summary>
@@ -45,8 +46,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#get-a-branch</cref>
     /// </see>
-    public GitHubBranchResponse GetBranch(GitHubGetBranchOptions options) {
-        return new GitHubBranchResponse(Raw.GetBranch(options));
+    public async Task<GitHubBranchResponse> GetBranch(GitHubGetBranchOptions options) {
+        return new GitHubBranchResponse(await Raw.GetBranch(options));
     }
 
     #endregion
@@ -62,8 +63,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-branches</cref>
     /// </see>
-    public GitHubBranchListResponse GetBranches(string owner, string repo) {
-        return new GitHubBranchListResponse(Raw.GetBranches(owner, repo));
+    public async Task<GitHubBranchListResponse> GetBranches(string owner, string repo) {
+        return new GitHubBranchListResponse(await Raw.GetBranches(owner, repo));
     }
 
     /// <summary>
@@ -77,8 +78,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-branches</cref>
     /// </see>
-    public GitHubBranchListResponse GetBranches(string owner, string repo, int? perPage = null, int? page = null) {
-        return new GitHubBranchListResponse(Raw.GetBranches(owner, repo, perPage, page));
+    public async Task<GitHubBranchListResponse> GetBranches(string owner, string repo, int? perPage = null, int? page = null) {
+        return new GitHubBranchListResponse(await Raw.GetBranches(owner, repo, perPage, page));
     }
 
     /// <summary>
@@ -89,8 +90,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-branches</cref>
     /// </see>
-    public GitHubBranchListResponse GetBranches(GitHubRepositoryBase repository) {
-        return new GitHubBranchListResponse(Raw.GetBranches(repository));
+    public async Task<GitHubBranchListResponse> GetBranches(GitHubRepositoryBase repository) {
+        return new GitHubBranchListResponse(await Raw.GetBranches(repository));
     }
 
     /// <summary>
@@ -103,8 +104,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-branches</cref>
     /// </see>
-    public GitHubBranchListResponse GetBranches(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
-        return new GitHubBranchListResponse(Raw.GetBranches(repository, perPage, page));
+    public async Task<GitHubBranchListResponse> GetBranches(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
+        return new GitHubBranchListResponse(await Raw.GetBranches(repository, perPage, page));
     }
 
     /// <summary>
@@ -115,8 +116,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-branches</cref>
     /// </see>
-    public GitHubBranchListResponse GetBranches(GitHubGetBranchesOptions options) {
-        return new GitHubBranchListResponse(Raw.GetBranches(options));
+    public async Task<GitHubBranchListResponse> GetBranches(GitHubGetBranchesOptions options) {
+        return new GitHubBranchListResponse(await Raw.GetBranches(options));
     }
 
     #endregion

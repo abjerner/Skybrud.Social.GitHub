@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Options.Organizations.Teams;
 
@@ -14,8 +15,8 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <param name="organizationAlias">The alias/slug og the organization.</param>
     /// <param name="name">The name of the team to be created.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse CreateTeam(string organizationAlias, string name) {
-        return Client.GetResponse(new GitHubCreateTeamOptions(organizationAlias, name));
+    public async Task<IHttpResponse> CreateTeam(string organizationAlias, string name) {
+        return await Client.GetResponseAsync(new GitHubCreateTeamOptions(organizationAlias, name));
     }
 
     /// <summary>
@@ -25,8 +26,8 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <param name="name">The name of the team to be created.</param>
     /// <param name="description">The description of the team to be created.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse CreateTeam(string organizationAlias, string name, string description) {
-        return Client.GetResponse(new GitHubCreateTeamOptions(organizationAlias, name, description));
+    public async Task<IHttpResponse> CreateTeam(string organizationAlias, string name, string description) {
+        return await Client.GetResponseAsync(new GitHubCreateTeamOptions(organizationAlias, name, description));
     }
 
     /// <summary>
@@ -34,9 +35,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse CreateTeam(GitHubCreateTeamOptions options) {
+    public async Task<IHttpResponse> CreateTeam(GitHubCreateTeamOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     /// <summary>
@@ -44,8 +45,8 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// </summary>
     /// <param name="organizationId">The ID of the organization.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetTeams(int organizationId) {
-        return Client.GetResponse(new GitHubGetTeamsOptions(organizationId));
+    public async Task<IHttpResponse> GetTeams(int organizationId) {
+        return await Client.GetResponseAsync(new GitHubGetTeamsOptions(organizationId));
     }
 
     /// <summary>
@@ -55,8 +56,8 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <param name="page">The page to be returned. </param>
     /// <param name="perPage">The maximum amount of teams to be returned by each page.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetTeams(int organizationId, int? perPage = null, int? page = null) {
-        return Client.GetResponse(new GitHubGetTeamsOptions(organizationId, page, perPage));
+    public async Task<IHttpResponse> GetTeams(int organizationId, int? perPage = null, int? page = null) {
+        return await Client.GetResponseAsync(new GitHubGetTeamsOptions(organizationId, page, perPage));
     }
 
     /// <summary>
@@ -64,8 +65,8 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// </summary>
     /// <param name="organizationAlias">The alias of the organization.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetTeams(string organizationAlias) {
-        return Client.GetResponse(new GitHubGetTeamsOptions(organizationAlias));
+    public async Task<IHttpResponse> GetTeams(string organizationAlias) {
+        return await Client.GetResponseAsync(new GitHubGetTeamsOptions(organizationAlias));
     }
 
     /// <summary>
@@ -75,8 +76,8 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <param name="page">The page to be returned. </param>
     /// <param name="perPage">The maximum amount of teams to be returned by each page.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetTeams(string organizationAlias, int? perPage = null, int? page = null) {
-        return Client.GetResponse(new GitHubGetTeamsOptions(organizationAlias, page, perPage));
+    public async Task<IHttpResponse> GetTeams(string organizationAlias, int? perPage = null, int? page = null) {
+        return await Client.GetResponseAsync(new GitHubGetTeamsOptions(organizationAlias, page, perPage));
     }
 
     /// <summary>
@@ -85,9 +86,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public IHttpResponse GetTeams(GitHubGetTeamsOptions options) {
+    public async Task<IHttpResponse> GetTeams(GitHubGetTeamsOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
 }

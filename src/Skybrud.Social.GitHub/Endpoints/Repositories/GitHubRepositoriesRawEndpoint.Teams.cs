@@ -26,52 +26,7 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
     /// </see>
-    public IHttpResponse AddTeam(string repositoryOwner, string repositoryAlias, string teamAlias, GitHubTeamPermission permission) {
-        if (string.IsNullOrWhiteSpace(repositoryOwner)) throw new ArgumentNullException(nameof(repositoryOwner));
-        if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
-        if (string.IsNullOrWhiteSpace(teamAlias)) throw new ArgumentNullException(nameof(teamAlias));
-        return Client.GetResponse(new GitHubAddTeamsOptions(repositoryOwner, repositoryAlias, teamAlias, permission));
-    }
-
-    /// <summary>
-    /// Adds a team to a repository.
-    /// </summary>
-    /// <param name="repository">The repository.</param>
-    /// <param name="team">The team.</param>
-    /// <param name="permission">The permission to set for the team.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    /// <see>
-    ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
-    /// </see>
-    public IHttpResponse AddTeam(GitHubRepositoryBase repository, GitHubTeamBase team, GitHubTeamPermission permission) {
-        return Client.GetResponse(new GitHubAddTeamsOptions(repository, team, permission));
-    }
-
-    /// <summary>
-    /// Adds a team to a repository.
-    /// </summary>
-    /// <param name="options">The options for the request to the API.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    /// <see>
-    ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
-    /// </see>
-    public IHttpResponse AddTeam(GitHubAddTeamsOptions options) {
-        if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
-    }
-
-    /// <summary>
-    /// Adds a team to a repository.
-    /// </summary>
-    /// <param name="repositoryOwner">The alias of the repository owner.</param>
-    /// <param name="repositoryAlias">The alias of the repository.</param>
-    /// <param name="teamAlias">The alias of the team.</param>
-    /// <param name="permission">The permission to set for the team.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    /// <see>
-    ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
-    /// </see>
-    public async Task<IHttpResponse> AddTeamAsync(string repositoryOwner, string repositoryAlias, string teamAlias, GitHubTeamPermission permission) {
+    public async Task<IHttpResponse> AddTeam(string repositoryOwner, string repositoryAlias, string teamAlias, GitHubTeamPermission permission) {
         if (string.IsNullOrWhiteSpace(repositoryOwner)) throw new ArgumentNullException(nameof(repositoryOwner));
         if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
         if (string.IsNullOrWhiteSpace(teamAlias)) throw new ArgumentNullException(nameof(teamAlias));
@@ -88,7 +43,7 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
     /// </see>
-    public async Task<IHttpResponse> AddTeamAsync(GitHubRepositoryBase repository, GitHubTeamBase team, GitHubTeamPermission permission) {
+    public async Task<IHttpResponse> AddTeam(GitHubRepositoryBase repository, GitHubTeamBase team, GitHubTeamPermission permission) {
         return await Client.GetResponseAsync(new GitHubAddTeamsOptions(repository, team, permission));
     }
 
@@ -100,7 +55,7 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
     /// </see>
-    public async Task<IHttpResponse> AddTeamAsync(GitHubAddTeamsOptions options) {
+    public async Task<IHttpResponse> AddTeam(GitHubAddTeamsOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
         return await Client.GetResponseAsync(options);
     }
@@ -118,10 +73,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-teams</cref>
     /// </see>
-    public IHttpResponse GetTeams(string owner, string repositoryAlias) {
+    public async Task<IHttpResponse> GetTeams(string owner, string repositoryAlias) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
-        return Client.GetResponse(new GitHubGetTeamsOptions(owner, repositoryAlias));
+        return await Client.GetResponseAsync(new GitHubGetTeamsOptions(owner, repositoryAlias));
     }
 
     /// <summary>
@@ -135,10 +90,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-teams</cref>
     /// </see>
-    public IHttpResponse GetTeams(string owner, string repositoryAlias, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetTeams(string owner, string repositoryAlias, int? perPage = null, int? page = null) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
-        return Client.GetResponse(new GitHubGetTeamsOptions(owner, repositoryAlias, perPage, page));
+        return await Client.GetResponseAsync(new GitHubGetTeamsOptions(owner, repositoryAlias, perPage, page));
     }
 
     /// <summary>
@@ -149,9 +104,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-teams</cref>
     /// </see>
-    public IHttpResponse GetTeams(GitHubRepositoryBase repository) {
+    public async Task<IHttpResponse> GetTeams(GitHubRepositoryBase repository) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return Client.GetResponse(new GitHubGetTeamsOptions(repository));
+        return await Client.GetResponseAsync(new GitHubGetTeamsOptions(repository));
     }
 
     /// <summary>
@@ -164,9 +119,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-teams</cref>
     /// </see>
-    public IHttpResponse GetTeams(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetTeams(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return Client.GetResponse(new GitHubGetTeamsOptions(repository, perPage, page));
+        return await Client.GetResponseAsync(new GitHubGetTeamsOptions(repository, perPage, page));
     }
 
     /// <summary>
@@ -177,9 +132,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-teams</cref>
     /// </see>
-    public IHttpResponse GetTeams(GitHubGetTeamsOptions options) {
+    public async Task<IHttpResponse> GetTeams(GitHubGetTeamsOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion

@@ -24,8 +24,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
     /// </see>
-    public GitHubResponse AddTeam(string repositoryOwner, string repositoryAlias, string teamAlias, GitHubTeamPermission permission) {
-        return new GitHubResponse(Raw.AddTeam(repositoryOwner, repositoryAlias, teamAlias, permission));
+    public async Task<GitHubResponse> AddTeam(string repositoryOwner, string repositoryAlias, string teamAlias, GitHubTeamPermission permission) {
+        return new GitHubResponse(await Raw.AddTeam(repositoryOwner, repositoryAlias, teamAlias, permission));
     }
 
     /// <summary>
@@ -38,8 +38,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
     /// </see>
-    public GitHubResponse AddTeam(GitHubRepositoryBase repository, GitHubTeamBase team, GitHubTeamPermission permission) {
-        return new GitHubResponse(Raw.AddTeam(repository, team, permission));
+    public async Task<GitHubResponse> AddTeam(GitHubRepositoryBase repository, GitHubTeamBase team, GitHubTeamPermission permission) {
+        return new GitHubResponse(await Raw.AddTeam(repository, team, permission));
     }
 
     /// <summary>
@@ -50,8 +50,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
     /// </see>
-    public GitHubResponse AddTeam(GitHubAddTeamsOptions options) {
-        return new GitHubResponse(Raw.AddTeam(options));
+    public async Task<GitHubResponse> AddTeam(GitHubAddTeamsOptions options) {
+        return new GitHubResponse(await Raw.AddTeam(options));
     }
 
     /// <summary>
@@ -66,7 +66,7 @@ public partial class GitHubRepositoriesEndpoint {
     ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
     /// </see>
     public async Task<GitHubResponse> AddTeamAsync(string repositoryOwner, string repositoryAlias, string teamAlias, GitHubTeamPermission permission) {
-        return new GitHubResponse(await Raw.AddTeamAsync(repositoryOwner, repositoryAlias, teamAlias, permission));
+        return new GitHubResponse(await Raw.AddTeam(repositoryOwner, repositoryAlias, teamAlias, permission));
     }
 
     /// <summary>
@@ -80,7 +80,7 @@ public partial class GitHubRepositoriesEndpoint {
     ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
     /// </see>
     public async Task<GitHubResponse> AddTeamAsync(GitHubRepositoryBase repository, GitHubTeamBase team, GitHubTeamPermission permission) {
-        return new GitHubResponse(await Raw.AddTeamAsync(repository, team, permission));
+        return new GitHubResponse(await Raw.AddTeam(repository, team, permission));
     }
 
     /// <summary>
@@ -92,7 +92,7 @@ public partial class GitHubRepositoriesEndpoint {
     ///     <cref>https://docs.github.com/en/rest/teams/teams?apiVersion=2022-11-28#add-or-update-team-repository-permissions</cref>
     /// </see>
     public async Task<GitHubResponse> AddTeamAsync(GitHubAddTeamsOptions options) {
-        return new GitHubResponse(await Raw.AddTeamAsync(options));
+        return new GitHubResponse(await Raw.AddTeam(options));
     }
 
     #endregion
@@ -108,8 +108,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-teams</cref>
     /// </see>
-    public GitHubTeamListResponse GetTeams(string owner, string repositoryAlias) {
-        return new GitHubTeamListResponse(Raw.GetTeams(owner, repositoryAlias));
+    public async Task<GitHubTeamListResponse> GetTeams(string owner, string repositoryAlias) {
+        return new GitHubTeamListResponse(await Raw.GetTeams(owner, repositoryAlias));
     }
 
     /// <summary>
@@ -123,8 +123,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-teams</cref>
     /// </see>
-    public GitHubTeamListResponse GetTeams(string owner, string repositoryAlias, int? perPage = null, int? page = null) {
-        return new GitHubTeamListResponse(Raw.GetTeams(owner, repositoryAlias, perPage, page));
+    public async Task<GitHubTeamListResponse> GetTeams(string owner, string repositoryAlias, int? perPage = null, int? page = null) {
+        return new GitHubTeamListResponse(await Raw.GetTeams(owner, repositoryAlias, perPage, page));
     }
 
     /// <summary>
@@ -135,8 +135,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-teams</cref>
     /// </see>
-    public GitHubTeamListResponse GetTeams(GitHubRepositoryBase repository) {
-        return new GitHubTeamListResponse(Raw.GetTeams(repository));
+    public async Task<GitHubTeamListResponse> GetTeams(GitHubRepositoryBase repository) {
+        return new GitHubTeamListResponse(await Raw.GetTeams(repository));
     }
 
     /// <summary>
@@ -149,8 +149,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-teams</cref>
     /// </see>
-    public GitHubTeamListResponse GetTeams(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
-        return new GitHubTeamListResponse(Raw.GetTeams(repository, perPage, page));
+    public async Task<GitHubTeamListResponse> GetTeams(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
+        return new GitHubTeamListResponse(await Raw.GetTeams(repository, perPage, page));
     }
 
     /// <summary>
@@ -161,8 +161,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-repository-teams</cref>
     /// </see>
-    public GitHubTeamListResponse GetTeams(GitHubGetTeamsOptions options) {
-        return new GitHubTeamListResponse(Raw.GetTeams(options));
+    public async Task<GitHubTeamListResponse> GetTeams(GitHubGetTeamsOptions options) {
+        return new GitHubTeamListResponse(await Raw.GetTeams(options));
     }
 
     #endregion

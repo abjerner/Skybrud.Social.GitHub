@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Options.Organizations.Repositories;
 
@@ -11,9 +12,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetRepositories(GitHubGetRepositoriesOptions options) {
+    public async Task<IHttpResponse> GetRepositories(GitHubGetRepositoriesOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
 }

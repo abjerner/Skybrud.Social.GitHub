@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Models.Users;
 using Skybrud.Social.GitHub.Options.Users;
 using Skybrud.Social.GitHub.Responses.Repositories;
@@ -13,8 +14,8 @@ public partial class GitHubUsersEndpoint {
     /// </summary>
     /// <param name="userId">The ID of the user.</param>
     /// <returns>An instance of <see cref="GitHubRepositoryListResponse"/> representing the response.</returns>
-    public GitHubRepositoryListResponse GetRepositories(int userId) {
-        return new GitHubRepositoryListResponse(Raw.GetRepositories(userId));
+    public async Task<GitHubRepositoryListResponse> GetRepositories(int userId) {
+        return new GitHubRepositoryListResponse(await Raw.GetRepositories(userId));
     }
 
     /// <summary>
@@ -24,8 +25,8 @@ public partial class GitHubUsersEndpoint {
     /// <param name="perPage">The maximum amount of repositories to returned by each page. Maximum is <c>100</c>.</param>
     /// <param name="page">The page to be returned.</param>
     /// <returns>An instance of <see cref="GitHubRepositoryListResponse"/> representing the response.</returns>
-    public GitHubRepositoryListResponse GetRepositories(int userId, int? perPage = null, int? page = null) {
-        return new GitHubRepositoryListResponse(Raw.GetRepositories(userId, perPage, page));
+    public async Task<GitHubRepositoryListResponse> GetRepositories(int userId, int? perPage = null, int? page = null) {
+        return new GitHubRepositoryListResponse(await Raw.GetRepositories(userId, perPage, page));
     }
 
     /// <summary>
@@ -33,8 +34,8 @@ public partial class GitHubUsersEndpoint {
     /// </summary>
     /// <param name="username">The username (login) of the user.</param>
     /// <returns>An instance of <see cref="GitHubRepositoryListResponse"/> representing the response.</returns>
-    public GitHubRepositoryListResponse GetRepositories(string username) {
-        return new GitHubRepositoryListResponse(Raw.GetRepositories(username));
+    public async Task<GitHubRepositoryListResponse> GetRepositories(string username) {
+        return new GitHubRepositoryListResponse(await Raw.GetRepositories(username));
     }
 
     /// <summary>
@@ -44,8 +45,8 @@ public partial class GitHubUsersEndpoint {
     /// <param name="perPage">The maximum amount of repositories to returned by each page. Maximum is <c>100</c>.</param>
     /// <param name="page">The page to be returned.</param>
     /// <returns>An instance of <see cref="GitHubRepositoryListResponse"/> representing the response.</returns>
-    public GitHubRepositoryListResponse GetRepositories(string username, int? perPage = null, int? page = null) {
-        return new GitHubRepositoryListResponse(Raw.GetRepositories(username, perPage, page));
+    public async Task<GitHubRepositoryListResponse> GetRepositories(string username, int? perPage = null, int? page = null) {
+        return new GitHubRepositoryListResponse(await Raw.GetRepositories(username, perPage, page));
     }
 
     /// <summary>
@@ -53,8 +54,8 @@ public partial class GitHubUsersEndpoint {
     /// </summary>
     /// <param name="user">The user.</param>
     /// <returns>An instance of <see cref="GitHubRepositoryListResponse"/> representing the response.</returns>
-    public GitHubRepositoryListResponse GetRepositories(GitHubUserBase user) {
-        return new GitHubRepositoryListResponse(Raw.GetRepositories(user));
+    public async Task<GitHubRepositoryListResponse> GetRepositories(GitHubUserBase user) {
+        return new GitHubRepositoryListResponse(await Raw.GetRepositories(user));
     }
 
     /// <summary>
@@ -64,8 +65,8 @@ public partial class GitHubUsersEndpoint {
     /// <param name="perPage">The maximum amount of repositories to returned by each page. Maximum is <c>100</c>.</param>
     /// <param name="page">The page to be returned.</param>
     /// <returns>An instance of <see cref="GitHubRepositoryListResponse"/> representing the response.</returns>
-    public GitHubRepositoryListResponse GetRepositories(GitHubUserBase user, int? perPage = null, int? page = null) {
-        return new GitHubRepositoryListResponse(Raw.GetRepositories(user, perPage, page));
+    public async Task<GitHubRepositoryListResponse> GetRepositories(GitHubUserBase user, int? perPage = null, int? page = null) {
+        return new GitHubRepositoryListResponse(await Raw.GetRepositories(user, perPage, page));
     }
 
     /// <summary>
@@ -73,8 +74,8 @@ public partial class GitHubUsersEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="GitHubRepositoryListResponse"/> representing the response.</returns>
-    public GitHubRepositoryListResponse GetRepositories(GitHubGetRepositoriesOptions options) {
-        return new GitHubRepositoryListResponse(Raw.GetRepositories(options));
+    public async Task<GitHubRepositoryListResponse> GetRepositories(GitHubGetRepositoriesOptions options) {
+        return new GitHubRepositoryListResponse(await Raw.GetRepositories(options));
     }
 
 }

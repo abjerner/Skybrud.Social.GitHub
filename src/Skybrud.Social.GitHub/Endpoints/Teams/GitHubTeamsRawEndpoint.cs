@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Organizations.Teams;
@@ -38,8 +39,8 @@ public class GitHubTeamsRawEndpoint {
     /// <param name="organizationId">The ID of the organization.</param>
     /// <param name="teamId">The ID of the team.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetTeam(int organizationId, int teamId) {
-        return GetTeam(new GitHubGetTeamOptions(organizationId, teamId));
+    public async Task<IHttpResponse> GetTeam(int organizationId, int teamId) {
+        return await GetTeam(new GitHubGetTeamOptions(organizationId, teamId));
     }
 
     /// <summary>
@@ -51,10 +52,10 @@ public class GitHubTeamsRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/teams#get-a-team-by-name</cref>
     /// </see>
-    public IHttpResponse GetTeam(string organization, string team) {
+    public async Task<IHttpResponse> GetTeam(string organization, string team) {
         if (string.IsNullOrWhiteSpace(organization)) throw new ArgumentNullException(nameof(organization));
         if (string.IsNullOrWhiteSpace(team)) throw new ArgumentNullException(nameof(team));
-        return GetTeam(new GitHubGetTeamByNameOptions(organization, team));
+        return await GetTeam(new GitHubGetTeamByNameOptions(organization, team));
     }
 
     /// <summary>
@@ -62,9 +63,9 @@ public class GitHubTeamsRawEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetTeam(GitHubGetTeamOptions options) {
+    public async Task<IHttpResponse> GetTeam(GitHubGetTeamOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     /// <summary>
@@ -75,9 +76,9 @@ public class GitHubTeamsRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/teams#get-a-team-by-name</cref>
     /// </see>
-    public IHttpResponse GetTeam(GitHubGetTeamByNameOptions options) {
+    public async Task<IHttpResponse> GetTeam(GitHubGetTeamByNameOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion

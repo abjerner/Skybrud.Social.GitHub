@@ -3,7 +3,7 @@ using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.GraphQl.Responses;
 using Skybrud.Social.GitHub.Responses;
 
-namespace Skybrud.Social.GitHub.GraphQl; 
+namespace Skybrud.Social.GitHub.GraphQl;
 
 /// <summary>
 /// Class representing the <strong>GraphQL</strong> endpoint.
@@ -39,17 +39,8 @@ public class GraphQlEndpoint {
     /// </summary>
     /// <param name="query">The GraphQL query.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the response.</returns>
-    public GitHubResponse GetResponse(string query) {
-        return new(Raw.GetResponse(query));
-    }
-
-    /// <summary>
-    /// Returns a response based on the specified GraphQL <paramref name="query"/>.
-    /// </summary>
-    /// <param name="query">The GraphQL query.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response.</returns>
     public async Task<GitHubResponse> GetResponseAsync(string query) {
-        return new(await Raw.GetResponseAsync(query));
+        return new(await Raw.GetResponse(query));
     }
 
     /// <summary>
@@ -57,17 +48,8 @@ public class GraphQlEndpoint {
     /// </summary>
     /// <param name="query">The GraphQL query.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the response.</returns>
-    public OrganizationResponse GetOrganization(string query) {
-        return new(Raw.GetResponse(query));
-    }
-
-    /// <summary>
-    /// Returns a response based on the specified GraphQL <paramref name="query"/>.
-    /// </summary>
-    /// <param name="query">The GraphQL query.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response.</returns>
-    public async Task<OrganizationResponse> GetOrganizationAsync(string query) {
-        return new(await Raw.GetResponseAsync(query));
+    public async Task<OrganizationResponse> GetOrganization(string query) {
+        return new(await Raw.GetResponse(query));
     }
 
     #endregion

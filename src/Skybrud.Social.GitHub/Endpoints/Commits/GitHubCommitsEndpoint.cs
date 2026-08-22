@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Options.Commits;
 using Skybrud.Social.GitHub.Responses.Commits;
 
@@ -40,8 +41,8 @@ public class GitHubCommitsEndpoint {
     /// <param name="repository">The slug of the repository.</param>
     /// <param name="sha">The SHA hash of the commit.</param>
     /// <returns>An instance of <see cref="GitHubCommitResponse"/> representing the response.</returns>
-    public GitHubCommitResponse GetCommit(string owner, string repository, string sha) {
-        return new GitHubCommitResponse(Raw.GetCommit(owner, repository, sha));
+    public async Task<GitHubCommitResponse> GetCommit(string owner, string repository, string sha) {
+        return new GitHubCommitResponse(await Raw.GetCommit(owner, repository, sha));
     }
 
     /// <summary>
@@ -49,8 +50,8 @@ public class GitHubCommitsEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="GitHubCommitResponse"/> representing the response.</returns>
-    public GitHubCommitResponse GetCommit(GitHubGetCommitOptions options) {
-        return new GitHubCommitResponse(Raw.GetCommit(options));
+    public async Task<GitHubCommitResponse> GetCommit(GitHubGetCommitOptions options) {
+        return new GitHubCommitResponse(await Raw.GetCommit(options));
     }
 
     /// <summary>
@@ -60,8 +61,8 @@ public class GitHubCommitsEndpoint {
     /// <param name="owner">The alias (login) of the owner.</param>
     /// <param name="repository">The slug of the repository.</param>
     /// <returns>An instance of <see cref="GitHubCommitListResponse"/> representing the response.</returns>
-    public GitHubCommitListResponse GetCommits(string owner, string repository) {
-        return new GitHubCommitListResponse(Raw.GetCommits(owner, repository));
+    public async Task<GitHubCommitListResponse> GetCommits(string owner, string repository) {
+        return new GitHubCommitListResponse(await Raw.GetCommits(owner, repository));
     }
 
     /// <summary>
@@ -69,8 +70,8 @@ public class GitHubCommitsEndpoint {
     /// </summary>
     /// <param name="options">The options for the call to the API.</param>
     /// <returns>An instance of <see cref="GitHubCommitListResponse"/> representing the response.</returns>
-    public GitHubCommitListResponse GetCommits(GitHubGetCommitsOptions options) {
-        return new GitHubCommitListResponse(Raw.GetCommits(options));
+    public async Task<GitHubCommitListResponse> GetCommits(GitHubGetCommitsOptions options) {
+        return new GitHubCommitListResponse(await Raw.GetCommits(options));
     }
 
     #endregion

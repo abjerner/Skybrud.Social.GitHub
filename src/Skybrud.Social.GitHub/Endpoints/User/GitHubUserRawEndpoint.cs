@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.User.Organizations;
@@ -6,7 +7,7 @@ using Skybrud.Social.GitHub.Options.User.Repositories;
 
 // ReSharper disable MethodOverloadWithOptionalParameter
 
-namespace Skybrud.Social.GitHub.Endpoints.User; 
+namespace Skybrud.Social.GitHub.Endpoints.User;
 
 /// <summary>
 /// Class representing the raw <strong>User</strong> endpoint.
@@ -36,32 +37,32 @@ public class GitHubUserRawEndpoint {
     /// Gets information about the authenticated user.
     /// </summary>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetUser() {
-        return Client.Get("/user");
+    public async Task<IHttpResponse> GetUser() {
+        return await Client.GetAsync("/user");
     }
 
     /// <summary>
     /// Gets a list of email addresses of the authenticated user.
     /// </summary>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetEmails() {
-        return Client.Get("/user/emails");
+    public async Task<IHttpResponse> GetEmails() {
+        return await Client.GetAsync("/user/emails");
     }
 
     /// <summary>
     /// Gets a list of users following the authenticated user.
     /// </summary>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetFollowers() {
-        return Client.Get("/user/followers");
+    public async Task<IHttpResponse> GetFollowers() {
+        return await Client.GetAsync("/user/followers");
     }
 
     /// <summary>
     /// Gets a list of users the authenticated user is following.
     /// </summary>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetFollowing() {
-        return Client.Get("/user/following");
+    public async Task<IHttpResponse> GetFollowing() {
+        return await Client.GetAsync("/user/following");
     }
 
     /// <summary>
@@ -69,17 +70,17 @@ public class GitHubUserRawEndpoint {
     /// </summary>
     /// <param name="username">The username (login) of the user.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse IsFollowing(string username) {
+    public async Task<IHttpResponse> IsFollowing(string username) {
         if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
-        return Client.Get("/user/following/" + username);
+        return await Client.GetAsync("/user/following/" + username);
     }
 
     /// <summary>
     /// Gets a list of repositories of the authenticated user.
     /// </summary>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetRepositories() {
-        return GetRepositories(new GitHubGetRepositoriesOptions());
+    public async Task<IHttpResponse> GetRepositories() {
+        return await GetRepositories(new GitHubGetRepositoriesOptions());
     }
 
     /// <summary>
@@ -88,8 +89,8 @@ public class GitHubUserRawEndpoint {
     /// <param name="perPage">The maximum amount of organizations to returned by each page. Maximum is <c>100</c>.</param>
     /// <param name="page">The page to be returned.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetRepositories(int? perPage = null, int? page = null) {
-        return GetRepositories(new GitHubGetRepositoriesOptions(perPage, page));
+    public async Task<IHttpResponse> GetRepositories(int? perPage = null, int? page = null) {
+        return await GetRepositories(new GitHubGetRepositoriesOptions(perPage, page));
     }
 
     /// <summary>
@@ -97,9 +98,9 @@ public class GitHubUserRawEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetRepositories(GitHubGetRepositoriesOptions options) {
+    public async Task<IHttpResponse> GetRepositories(GitHubGetRepositoriesOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     /// <summary>
@@ -109,8 +110,8 @@ public class GitHubUserRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-the-authenticated-user</cref>
     /// </see>
-    public IHttpResponse GetOrganizations() {
-        return GetOrganizations(new GitHubGetOrganizationsOptions());
+    public async Task<IHttpResponse> GetOrganizations() {
+        return await GetOrganizations(new GitHubGetOrganizationsOptions());
     }
 
     /// <summary>
@@ -121,9 +122,9 @@ public class GitHubUserRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-the-authenticated-user</cref>
     /// </see>
-    public IHttpResponse GetOrganizations(GitHubGetOrganizationsOptions options) {
+    public async Task<IHttpResponse> GetOrganizations(GitHubGetOrganizationsOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion

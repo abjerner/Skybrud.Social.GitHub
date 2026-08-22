@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Responses.Organizations;
 
 namespace Skybrud.Social.GitHub.Endpoints.Organizations;
@@ -36,8 +37,8 @@ public partial class GitHubOrganizationsEndpoint {
     /// </summary>
     /// <param name="id">The ID of the organization.</param>
     /// <returns>An instance of <see cref="GitHubOrganizationResponse"/> representing the response.</returns>
-    public GitHubOrganizationResponse GetOrganization(int id) {
-        return new GitHubOrganizationResponse(Raw.GetOrganization(id));
+    public async Task<GitHubOrganizationResponse> GetOrganization(int id) {
+        return new GitHubOrganizationResponse(await Raw.GetOrganization(id));
     }
 
     /// <summary>
@@ -45,8 +46,8 @@ public partial class GitHubOrganizationsEndpoint {
     /// </summary>
     /// <param name="alias">The alias (login) of the organization.</param>
     /// <returns>An instance of <see cref="GitHubOrganizationResponse"/> representing the response.</returns>
-    public GitHubOrganizationResponse GetOrganization(string alias) {
-        return new GitHubOrganizationResponse(Raw.GetOrganization(alias));
+    public async Task<GitHubOrganizationResponse> GetOrganization(string alias) {
+        return new GitHubOrganizationResponse(await Raw.GetOrganization(alias));
     }
 
     #endregion

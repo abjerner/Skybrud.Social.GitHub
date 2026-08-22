@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Models.Milestones;
 using Skybrud.Social.GitHub.Options.Issues.Milestones;
 using Skybrud.Social.GitHub.Responses;
@@ -45,8 +46,8 @@ public class GitHubMilestonesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#create-a-milestone</cref>
     /// </see>
-    public GitHubMilestoneResponse CreateMilestone(string owner, string repository, string title) {
-        return new GitHubMilestoneResponse(Raw.CreateMilestone(owner, repository, title));
+    public async Task<GitHubMilestoneResponse> CreateMilestone(string owner, string repository, string title) {
+        return new GitHubMilestoneResponse(await Raw.CreateMilestone(owner, repository, title));
     }
 
     /// <summary>
@@ -57,8 +58,8 @@ public class GitHubMilestonesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#create-a-milestone</cref>
     /// </see>
-    public GitHubMilestoneResponse CreateMilestone(GitHubCreateMilestoneOptions options) {
-        return new GitHubMilestoneResponse(Raw.CreateMilestone(options));
+    public async Task<GitHubMilestoneResponse> CreateMilestone(GitHubCreateMilestoneOptions options) {
+        return new GitHubMilestoneResponse(await Raw.CreateMilestone(options));
     }
 
     /// <summary>
@@ -71,8 +72,8 @@ public class GitHubMilestonesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#get-a-single-milestone</cref>
     /// </see>
-    public GitHubMilestoneResponse GetMilestone(string owner, string repository, int number) {
-        return new GitHubMilestoneResponse(Raw.GetMilestone(owner, repository, number));
+    public async Task<GitHubMilestoneResponse> GetMilestone(string owner, string repository, int number) {
+        return new GitHubMilestoneResponse(await Raw.GetMilestone(owner, repository, number));
     }
 
     /// <summary>
@@ -83,8 +84,8 @@ public class GitHubMilestonesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#get-a-single-milestone</cref>
     /// </see>
-    public GitHubMilestoneResponse GetMilestone(GitHubGetMilestoneOptions options) {
-        return new GitHubMilestoneResponse(Raw.GetMilestone(options));
+    public async Task<GitHubMilestoneResponse> GetMilestone(GitHubGetMilestoneOptions options) {
+        return new GitHubMilestoneResponse(await Raw.GetMilestone(options));
     }
 
     /// <summary>
@@ -95,8 +96,8 @@ public class GitHubMilestonesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#update-a-milestone</cref>
     /// </see>
-    public GitHubMilestoneResponse UpdateMilestone(GitHubUpdateMilestoneOptions options) {
-        return new GitHubMilestoneResponse(Raw.UpdateMilestone(options));
+    public async Task<GitHubMilestoneResponse> UpdateMilestone(GitHubUpdateMilestoneOptions options) {
+        return new GitHubMilestoneResponse(await Raw.UpdateMilestone(options));
     }
 
     /// <summary>
@@ -109,8 +110,8 @@ public class GitHubMilestonesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#delete-a-milestone</cref>
     /// </see>
-    public GitHubResponse DeleteMilestone(string owner, string repository, int number) {
-        return new GitHubResponse(Raw.DeleteMilestone(owner, repository, number));
+    public async Task<GitHubResponse> DeleteMilestone(string owner, string repository, int number) {
+        return new GitHubResponse(await Raw.DeleteMilestone(owner, repository, number));
     }
 
     /// <summary>
@@ -121,8 +122,8 @@ public class GitHubMilestonesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#delete-a-milestone</cref>
     /// </see>
-    public GitHubResponse DeleteMilestone(GitHubMilestone milestone) {
-        return new GitHubResponse(Raw.DeleteMilestone(milestone));
+    public async Task<GitHubResponse> DeleteMilestone(GitHubMilestone milestone) {
+        return new GitHubResponse(await Raw.DeleteMilestone(milestone));
     }
 
     /// <summary>
@@ -133,8 +134,8 @@ public class GitHubMilestonesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#delete-a-milestone</cref>
     /// </see>
-    public GitHubResponse DeleteMilestone(GitHubDeleteMilestoneOptions options) {
-        return new GitHubResponse(Raw.DeleteMilestone(options));
+    public async Task<GitHubResponse> DeleteMilestone(GitHubDeleteMilestoneOptions options) {
+        return new GitHubResponse(await Raw.DeleteMilestone(options));
     }
 
     /// <summary>
@@ -145,8 +146,8 @@ public class GitHubMilestonesEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/milestones/#list-milestones-for-a-repository</cref>
     /// </see>
-    public GitHubMilestoneListResponse GetMilestones(GitHubGetMilestonesOptions options) {
-        return new GitHubMilestoneListResponse(Raw.GetMilestones(options));
+    public async Task<GitHubMilestoneListResponse> GetMilestones(GitHubGetMilestonesOptions options) {
+        return new GitHubMilestoneListResponse(await Raw.GetMilestones(options));
     }
 
     #endregion

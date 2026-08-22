@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Organizations;
 using Skybrud.Social.GitHub.Options.Organizations.Members;
@@ -17,8 +18,8 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organization-members</cref>
     /// </see>
-    public IHttpResponse GetMembers(int organizationId) {
-        return GetMembers(new GitHubGetOrganizationMembersOptions(organizationId));
+    public async Task<IHttpResponse> GetMembers(int organizationId) {
+        return await GetMembers(new GitHubGetOrganizationMembersOptions(organizationId));
     }
 
     /// <summary>
@@ -31,8 +32,8 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organization-members</cref>
     /// </see>
-    public IHttpResponse GetMembers(int organizationId, int? perPage = null, int? page = null) {
-        return GetMembers(new GitHubGetOrganizationMembersOptions(organizationId, perPage, page));
+    public async Task<IHttpResponse> GetMembers(int organizationId, int? perPage = null, int? page = null) {
+        return await GetMembers(new GitHubGetOrganizationMembersOptions(organizationId, perPage, page));
     }
 
     /// <summary>
@@ -43,9 +44,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organization-members</cref>
     /// </see>
-    public IHttpResponse GetMembers(string organizationAlias) {
+    public async Task<IHttpResponse> GetMembers(string organizationAlias) {
         if (string.IsNullOrWhiteSpace(organizationAlias)) throw new ArgumentNullException(nameof(organizationAlias));
-        return GetMembers(new GitHubGetOrganizationMembersOptions(organizationAlias));
+        return await GetMembers(new GitHubGetOrganizationMembersOptions(organizationAlias));
     }
 
     /// <summary>
@@ -58,9 +59,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organization-members</cref>
     /// </see>
-    public IHttpResponse GetMembers(string organizationAlias, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetMembers(string organizationAlias, int? perPage = null, int? page = null) {
         if (string.IsNullOrWhiteSpace(organizationAlias)) throw new ArgumentNullException(nameof(organizationAlias));
-        return GetMembers(new GitHubGetOrganizationMembersOptions(organizationAlias, perPage, page));
+        return await GetMembers(new GitHubGetOrganizationMembersOptions(organizationAlias, perPage, page));
     }
 
     /// <summary>
@@ -71,9 +72,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organization-members</cref>
     /// </see>
-    public IHttpResponse GetMembers(GitHubOrganizationItem organization) {
+    public async Task<IHttpResponse> GetMembers(GitHubOrganizationItem organization) {
         if (organization == null) throw new ArgumentNullException(nameof(organization));
-        return GetMembers(new GitHubGetOrganizationMembersOptions(organization));
+        return await GetMembers(new GitHubGetOrganizationMembersOptions(organization));
     }
 
     /// <summary>
@@ -86,9 +87,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organization-members</cref>
     /// </see>
-    public IHttpResponse GetMembers(GitHubOrganizationItem organization, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetMembers(GitHubOrganizationItem organization, int? perPage = null, int? page = null) {
         if (organization == null) throw new ArgumentNullException(nameof(organization));
-        return GetMembers(new GitHubGetOrganizationMembersOptions(organization, perPage, page));
+        return await GetMembers(new GitHubGetOrganizationMembersOptions(organization, perPage, page));
     }
 
     /// <summary>
@@ -99,9 +100,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organization-members</cref>
     /// </see>
-    public IHttpResponse GetMembers(GitHubGetOrganizationMembersOptions options) {
+    public async Task<IHttpResponse> GetMembers(GitHubGetOrganizationMembersOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
 }

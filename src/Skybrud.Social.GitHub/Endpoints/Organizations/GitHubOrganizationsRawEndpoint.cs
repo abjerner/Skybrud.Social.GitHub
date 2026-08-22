@@ -1,8 +1,9 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.OAuth;
 
-namespace Skybrud.Social.GitHub.Endpoints.Organizations; 
+namespace Skybrud.Social.GitHub.Endpoints.Organizations;
 
 /// <summary>
 /// Class representing the raw <strong>Organizations</strong> endpoint.
@@ -36,8 +37,8 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// </summary>
     /// <param name="organizationId">The ID of the organization.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetOrganization(int organizationId) {
-        return Client.Get($"/organizations/{organizationId}");
+    public async Task<IHttpResponse> GetOrganization(int organizationId) {
+        return await Client.GetAsync($"/organizations/{organizationId}");
     }
 
     /// <summary>
@@ -45,9 +46,9 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// </summary>
     /// <param name="organizationAlias">The alias (login) of the organization.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetOrganization(string organizationAlias) {
+    public async Task<IHttpResponse> GetOrganization(string organizationAlias) {
         if (string.IsNullOrWhiteSpace(organizationAlias)) throw new ArgumentNullException(nameof(organizationAlias));
-        return Client.Get($"/orgs/{organizationAlias}");
+        return await Client.GetAsync($"/orgs/{organizationAlias}");
     }
 
     #endregion

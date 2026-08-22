@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.Branches;
@@ -21,11 +22,11 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#get-a-branch</cref>
     /// </see>
-    public IHttpResponse GetBranch(string owner, string repo, string name) {
+    public async Task<IHttpResponse> GetBranch(string owner, string repo, string name) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repo)) throw new ArgumentNullException(nameof(repo));
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-        return GetBranch(new GitHubGetBranchOptions(owner, repo, name));
+        return await GetBranch(new GitHubGetBranchOptions(owner, repo, name));
     }
 
     /// <summary>
@@ -37,9 +38,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#get-a-branch</cref>
     /// </see>
-    public IHttpResponse GetBranch(GitHubRepositoryBase repository, string name) {
+    public async Task<IHttpResponse> GetBranch(GitHubRepositoryBase repository, string name) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return GetBranch(new GitHubGetBranchOptions(repository, name));
+        return await GetBranch(new GitHubGetBranchOptions(repository, name));
     }
 
     /// <summary>
@@ -50,9 +51,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#get-a-branch</cref>
     /// </see>
-    public IHttpResponse GetBranch(GitHubGetBranchOptions options) {
+    public async Task<IHttpResponse> GetBranch(GitHubGetBranchOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion
@@ -68,10 +69,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-branches</cref>
     /// </see>
-    public IHttpResponse GetBranches(string owner, string repo) {
+    public async Task<IHttpResponse> GetBranches(string owner, string repo) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repo)) throw new ArgumentNullException(nameof(repo));
-        return GetBranches(new GitHubGetBranchesOptions(owner, repo));
+        return await GetBranches(new GitHubGetBranchesOptions(owner, repo));
     }
 
     /// <summary>
@@ -85,10 +86,10 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-branches</cref>
     /// </see>
-    public IHttpResponse GetBranches(string owner, string repo, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetBranches(string owner, string repo, int? perPage = null, int? page = null) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repo)) throw new ArgumentNullException(nameof(repo));
-        return GetBranches(new GitHubGetBranchesOptions(owner, repo, perPage, page));
+        return await GetBranches(new GitHubGetBranchesOptions(owner, repo, perPage, page));
     }
 
     /// <summary>
@@ -99,9 +100,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-branches</cref>
     /// </see>
-    public IHttpResponse GetBranches(GitHubRepositoryBase repository) {
+    public async Task<IHttpResponse> GetBranches(GitHubRepositoryBase repository) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return GetBranches(new GitHubGetBranchesOptions(repository));
+        return await GetBranches(new GitHubGetBranchesOptions(repository));
     }
 
     /// <summary>
@@ -114,9 +115,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-branches</cref>
     /// </see>
-    public IHttpResponse GetBranches(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetBranches(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return GetBranches(new GitHubGetBranchesOptions(repository, perPage, page));
+        return await GetBranches(new GitHubGetBranchesOptions(repository, perPage, page));
     }
 
     /// <summary>
@@ -127,9 +128,9 @@ public partial class GitHubRepositoriesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-branches</cref>
     /// </see>
-    public IHttpResponse GetBranches(GitHubGetBranchesOptions options) {
+    public async Task<IHttpResponse> GetBranches(GitHubGetBranchesOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion

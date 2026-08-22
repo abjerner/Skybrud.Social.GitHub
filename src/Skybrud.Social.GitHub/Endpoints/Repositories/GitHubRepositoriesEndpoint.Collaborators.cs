@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Models.Users;
 using Skybrud.Social.GitHub.Options.Repositories.Collaborators;
@@ -23,8 +24,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#add-a-repository-collaborator</cref>
     /// </see>
-    public GitHubResponse AddCollaborator(string owner, string repositoryAlias, string username) {
-        return new GitHubResponse(Raw.AddCollaborator(owner, repositoryAlias, username));
+    public async Task<GitHubResponse> AddCollaborator(string owner, string repositoryAlias, string username) {
+        return new GitHubResponse(await Raw.AddCollaborator(owner, repositoryAlias, username));
     }
 
     /// <summary>
@@ -36,8 +37,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#add-a-repository-collaborator</cref>
     /// </see>
-    public GitHubResponse AddCollaborator(GitHubRepositoryBase repository, string username) {
-        return new GitHubResponse(Raw.AddCollaborator(repository, username));
+    public async Task<GitHubResponse> AddCollaborator(GitHubRepositoryBase repository, string username) {
+        return new GitHubResponse(await Raw.AddCollaborator(repository, username));
     }
 
     /// <summary>
@@ -49,8 +50,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#add-a-repository-collaborator</cref>
     /// </see>
-    public GitHubResponse AddCollaborator(GitHubRepositoryBase repository, GitHubUserBase user) {
-        return new GitHubResponse(Raw.AddCollaborator(repository, user));
+    public async Task<GitHubResponse> AddCollaborator(GitHubRepositoryBase repository, GitHubUserBase user) {
+        return new GitHubResponse(await Raw.AddCollaborator(repository, user));
     }
 
     /// <summary>
@@ -61,8 +62,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#add-a-repository-collaborator</cref>
     /// </see>
-    public GitHubResponse AddCollaborator(GitHubAddCollaboratorOptions options) {
-        return new GitHubResponse(Raw.AddCollaborator(options));
+    public async Task<GitHubResponse> AddCollaborator(GitHubAddCollaboratorOptions options) {
+        return new GitHubResponse(await Raw.AddCollaborator(options));
     }
 
     #endregion
@@ -78,8 +79,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators</cref>
     /// </see>
-    public GitHubUserListResponse GetCollaborators(string owner, string repositoryAlias) {
-        return new GitHubUserListResponse(Raw.GetCollaborators(owner, repositoryAlias));
+    public async Task<GitHubUserListResponse> GetCollaborators(string owner, string repositoryAlias) {
+        return new GitHubUserListResponse(await Raw.GetCollaborators(owner, repositoryAlias));
     }
 
     /// <summary>
@@ -93,8 +94,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators</cref>
     /// </see>
-    public GitHubUserListResponse GetCollaborators(string owner, string repositoryAlias, int? perPage = null, int? page = null) {
-        return new GitHubUserListResponse(Raw.GetCollaborators(owner, repositoryAlias, perPage, page));
+    public async Task<GitHubUserListResponse> GetCollaborators(string owner, string repositoryAlias, int? perPage = null, int? page = null) {
+        return new GitHubUserListResponse(await Raw.GetCollaborators(owner, repositoryAlias, perPage, page));
     }
 
     /// <summary>
@@ -105,8 +106,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators</cref>
     /// </see>
-    public GitHubUserListResponse GetCollaborators(GitHubRepositoryBase repository) {
-        return new GitHubUserListResponse(Raw.GetCollaborators(repository));
+    public async Task<GitHubUserListResponse> GetCollaborators(GitHubRepositoryBase repository) {
+        return new GitHubUserListResponse(await Raw.GetCollaborators(repository));
     }
 
     /// <summary>
@@ -119,8 +120,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators</cref>
     /// </see>
-    public GitHubUserListResponse GetCollaborators(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
-        return new GitHubUserListResponse(Raw.GetCollaborators(repository, perPage, page));
+    public async Task<GitHubUserListResponse> GetCollaborators(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
+        return new GitHubUserListResponse(await Raw.GetCollaborators(repository, perPage, page));
     }
 
     /// <summary>
@@ -131,8 +132,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/collaborators#list-repository-collaborators</cref>
     /// </see>
-    public GitHubUserListResponse GetCollaborators(GitHubGetCollaboratorsOptions options) {
-        return new GitHubUserListResponse(Raw.GetCollaborators(options));
+    public async Task<GitHubUserListResponse> GetCollaborators(GitHubGetCollaboratorsOptions options) {
+        return new GitHubUserListResponse(await Raw.GetCollaborators(options));
     }
 
     #endregion

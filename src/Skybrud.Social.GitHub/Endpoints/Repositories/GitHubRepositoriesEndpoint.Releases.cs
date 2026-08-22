@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.Releases;
 using Skybrud.Social.GitHub.Responses.Releases;
@@ -20,8 +21,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-releases</cref>
     /// </see>
-    public GitHubReleaseListResponse GetReleases(string ownerAlias, string repositoryAlias) {
-        return new GitHubReleaseListResponse(Raw.GetReleases(ownerAlias, repositoryAlias));
+    public async Task<GitHubReleaseListResponse> GetReleases(string ownerAlias, string repositoryAlias) {
+        return new GitHubReleaseListResponse(await Raw.GetReleases(ownerAlias, repositoryAlias));
     }
 
     /// <summary>
@@ -35,8 +36,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-releases</cref>
     /// </see>
-    public GitHubReleaseListResponse GetReleases(string ownerAlias, string repositoryAlias, int? perPage = null, int? page = null) {
-        return new GitHubReleaseListResponse(Raw.GetReleases(ownerAlias, repositoryAlias, perPage, page));
+    public async Task<GitHubReleaseListResponse> GetReleases(string ownerAlias, string repositoryAlias, int? perPage = null, int? page = null) {
+        return new GitHubReleaseListResponse(await Raw.GetReleases(ownerAlias, repositoryAlias, perPage, page));
     }
 
     /// <summary>
@@ -47,9 +48,9 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-releases</cref>
     /// </see>
-    public GitHubReleaseListResponse GetReleases(GitHubRepositoryBase repository) {
+    public async Task<GitHubReleaseListResponse> GetReleases(GitHubRepositoryBase repository) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return GetReleases(new GitHubGetReleasesOptions(repository));
+        return await GetReleases(new GitHubGetReleasesOptions(repository));
     }
 
     /// <summary>
@@ -62,9 +63,9 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-releases</cref>
     /// </see>
-    public GitHubReleaseListResponse GetReleases(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
+    public async Task<GitHubReleaseListResponse> GetReleases(GitHubRepositoryBase repository, int? perPage = null, int? page = null) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return GetReleases(new GitHubGetReleasesOptions(repository, perPage, page));
+        return await GetReleases(new GitHubGetReleasesOptions(repository, perPage, page));
     }
 
     /// <summary>
@@ -75,8 +76,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/repos#list-releases</cref>
     /// </see>
-    public GitHubReleaseListResponse GetReleases(GitHubGetReleasesOptions options) {
-        return new GitHubReleaseListResponse(Raw.GetReleases(options));
+    public async Task<GitHubReleaseListResponse> GetReleases(GitHubGetReleasesOptions options) {
+        return new GitHubReleaseListResponse(await Raw.GetReleases(options));
     }
 
     #endregion

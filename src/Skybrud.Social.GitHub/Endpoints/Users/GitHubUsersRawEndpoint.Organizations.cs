@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Users;
 using Skybrud.Social.GitHub.Options.Users;
@@ -19,8 +20,8 @@ public partial class GitHubUsersRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-a-user</cref>
     /// </see>
-    public IHttpResponse GetOrganizations(int userId) {
-        return GetOrganizations(new GitHubGetOrganizationsOptions(userId));
+    public async Task<IHttpResponse> GetOrganizations(int userId) {
+        return await GetOrganizations(new GitHubGetOrganizationsOptions(userId));
     }
 
     /// <summary>
@@ -33,8 +34,8 @@ public partial class GitHubUsersRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-a-user</cref>
     /// </see>
-    public IHttpResponse GetOrganizations(int userId, int? perPage = null, int? page = null) {
-        return GetOrganizations(new GitHubGetOrganizationsOptions(userId, perPage, page));
+    public async Task<IHttpResponse> GetOrganizations(int userId, int? perPage = null, int? page = null) {
+        return await GetOrganizations(new GitHubGetOrganizationsOptions(userId, perPage, page));
     }
 
     /// <summary>
@@ -45,9 +46,9 @@ public partial class GitHubUsersRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-a-user</cref>
     /// </see>
-    public IHttpResponse GetOrganizations(string username) {
+    public async Task<IHttpResponse> GetOrganizations(string username) {
         if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
-        return GetOrganizations(new GitHubGetOrganizationsOptions(username));
+        return await GetOrganizations(new GitHubGetOrganizationsOptions(username));
     }
 
     /// <summary>
@@ -60,9 +61,9 @@ public partial class GitHubUsersRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-a-user</cref>
     /// </see>
-    public IHttpResponse GetOrganizations(string username, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetOrganizations(string username, int? perPage = null, int? page = null) {
         if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
-        return GetOrganizations(new GitHubGetOrganizationsOptions(username, perPage, page));
+        return await GetOrganizations(new GitHubGetOrganizationsOptions(username, perPage, page));
     }
 
     /// <summary>
@@ -73,9 +74,9 @@ public partial class GitHubUsersRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-a-user</cref>
     /// </see>
-    public IHttpResponse GetOrganizations(GitHubUserBase user) {
+    public async Task<IHttpResponse> GetOrganizations(GitHubUserBase user) {
         if (user == null) throw new ArgumentNullException(nameof(user));
-        return GetOrganizations(new GitHubGetOrganizationsOptions(user));
+        return await GetOrganizations(new GitHubGetOrganizationsOptions(user));
     }
 
     /// <summary>
@@ -88,9 +89,9 @@ public partial class GitHubUsersRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-a-user</cref>
     /// </see>
-    public IHttpResponse GetOrganizations(GitHubUserBase user, int? perPage = null, int? page = null) {
+    public async Task<IHttpResponse> GetOrganizations(GitHubUserBase user, int? perPage = null, int? page = null) {
         if (user == null) throw new ArgumentNullException(nameof(user));
-        return GetOrganizations(new GitHubGetOrganizationsOptions(user, perPage, page));
+        return await GetOrganizations(new GitHubGetOrganizationsOptions(user, perPage, page));
     }
 
     /// <summary>
@@ -101,9 +102,9 @@ public partial class GitHubUsersRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-a-user</cref>
     /// </see>
-    public IHttpResponse GetOrganizations(GitHubGetOrganizationsOptions options) {
+    public async Task<IHttpResponse> GetOrganizations(GitHubGetOrganizationsOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion

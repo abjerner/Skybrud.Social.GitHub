@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Endpoints.Issues.Comments;
 using Skybrud.Social.GitHub.Endpoints.Issues.Events;
@@ -59,9 +60,9 @@ public class GitHubIssuesRawEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/issues#create-an-issue</cref>
     /// </see>
-    public IHttpResponse CreateIssue(GitHubCreateIssueOptions options) {
+    public async Task<IHttpResponse> CreateIssue(GitHubCreateIssueOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     /// <summary>
@@ -74,10 +75,10 @@ public class GitHubIssuesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/#get-a-single-issue</cref>
     /// </see>
-    public IHttpResponse GetIssue(string owner, string repositoryAlias, int number) {
+    public async Task<IHttpResponse> GetIssue(string owner, string repositoryAlias, int number) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
-        return GetIssue(new GitHubGetIssueOptions(owner, repositoryAlias, number));
+        return await GetIssue(new GitHubGetIssueOptions(owner, repositoryAlias, number));
     }
 
     /// <summary>
@@ -89,9 +90,9 @@ public class GitHubIssuesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/#get-a-single-issue</cref>
     /// </see>
-    public IHttpResponse GetIssue(GitHubRepositoryBase repository, int number) {
+    public async Task<IHttpResponse> GetIssue(GitHubRepositoryBase repository, int number) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return GetIssue(new GitHubGetIssueOptions(repository, number));
+        return await GetIssue(new GitHubGetIssueOptions(repository, number));
     }
 
     /// <summary>
@@ -102,17 +103,17 @@ public class GitHubIssuesRawEndpoint {
     /// <see>
     ///     <cref>https://developer.github.com/v3/issues/#get-a-single-issue</cref>
     /// </see>
-    public IHttpResponse GetIssue(GitHubGetIssueOptions options) {
+    public async Task<IHttpResponse> GetIssue(GitHubGetIssueOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     /// <summary>
     /// Gets a list of issues assigned to the authenticated user.
     /// </summary>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetIssues() {
-        return Client.Get("/issues");
+    public async Task<IHttpResponse> GetIssues() {
+        return await Client.GetAsync("/issues");
     }
 
     /// <summary>
@@ -120,9 +121,9 @@ public class GitHubIssuesRawEndpoint {
     /// </summary>
     /// <param name="options">The options for the call to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetIssues(GitHubGetIssuesOptions options) {
+    public async Task<IHttpResponse> GetIssues(GitHubGetIssuesOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     /// <summary>
@@ -131,10 +132,10 @@ public class GitHubIssuesRawEndpoint {
     /// <param name="owner">The alias of the parent user or organization.</param>
     /// <param name="repositoryAlias">The alias of the repository.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetIssues(string owner, string repositoryAlias) {
+    public async Task<IHttpResponse> GetIssues(string owner, string repositoryAlias) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repositoryAlias)) throw new ArgumentNullException(nameof(repositoryAlias));
-        return GetIssues(new GitHubGetRepositoryIssuesOptions(owner, repositoryAlias));
+        return await GetIssues(new GitHubGetRepositoryIssuesOptions(owner, repositoryAlias));
     }
 
     /// <summary>
@@ -142,9 +143,9 @@ public class GitHubIssuesRawEndpoint {
     /// </summary>
     /// <param name="repository">The repository.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetIssues(GitHubRepositoryBase repository) {
+    public async Task<IHttpResponse> GetIssues(GitHubRepositoryBase repository) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return GetIssues(new GitHubGetRepositoryIssuesOptions(repository));
+        return await GetIssues(new GitHubGetRepositoryIssuesOptions(repository));
     }
 
     /// <summary>
@@ -152,9 +153,9 @@ public class GitHubIssuesRawEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetIssues(GitHubGetRepositoryIssuesOptions options) {
+    public async Task<IHttpResponse> GetIssues(GitHubGetRepositoryIssuesOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion

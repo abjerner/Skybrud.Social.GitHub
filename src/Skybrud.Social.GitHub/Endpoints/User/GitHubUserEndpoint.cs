@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Options.User.Organizations;
 using Skybrud.Social.GitHub.Options.User.Repositories;
 using Skybrud.Social.GitHub.Responses.Emails;
@@ -41,32 +42,32 @@ public class GitHubUserEndpoint {
     /// Gets information about the authenticated user.
     /// </summary>
     /// <returns>An instance of <see cref="GitHubUserResponse"/> representing the response.</returns>
-    public GitHubUserResponse GetUser() {
-        return new GitHubUserResponse(Raw.GetUser());
+    public async Task<GitHubUserResponse> GetUser() {
+        return new GitHubUserResponse(await Raw.GetUser());
     }
 
     /// <summary>
     /// Gets a list of email addresses of the authenticated user.
     /// </summary>
     /// <returns>An instance of <see cref="GitHubEmailListResponse"/> representing the response.</returns>
-    public GitHubEmailListResponse GetEmails() {
-        return new GitHubEmailListResponse(Raw.GetEmails());
+    public async Task<GitHubEmailListResponse> GetEmails() {
+        return new GitHubEmailListResponse(await Raw.GetEmails());
     }
 
     /// <summary>
     /// Gets a list of users following the authenticated user.
     /// </summary>
     /// <returns>An instance of <see cref="GitHubUserListResponse"/> representing the response.</returns>
-    public GitHubUserListResponse GetFollowers() {
-        return new GitHubUserListResponse(Raw.GetFollowers());
+    public async Task<GitHubUserListResponse> GetFollowers() {
+        return new GitHubUserListResponse(await Raw.GetFollowers());
     }
 
     /// <summary>
     /// Gets a list of users the authenticated user is following.
     /// </summary>
     /// <returns>An instance of <see cref="GitHubUserListResponse"/> representing the response.</returns>
-    public GitHubUserListResponse GetFollowing() {
-        return new GitHubUserListResponse(Raw.GetFollowing());
+    public async Task<GitHubUserListResponse> GetFollowing() {
+        return new GitHubUserListResponse(await Raw.GetFollowing());
     }
 
     /// <summary>
@@ -74,8 +75,8 @@ public class GitHubUserEndpoint {
     /// </summary>
     /// <param name="username">The username (login) of the user.</param>
     /// <returns>An instance of <see cref="GitHubGetFollowingResponse"/> representing the response.</returns>
-    public GitHubGetFollowingResponse IsFollowing(string username) {
-        return new GitHubGetFollowingResponse(Raw.IsFollowing(username));
+    public async Task<GitHubGetFollowingResponse> IsFollowing(string username) {
+        return new GitHubGetFollowingResponse(await Raw.IsFollowing(username));
     }
 
     /// <summary>
@@ -84,8 +85,8 @@ public class GitHubUserEndpoint {
     /// <param name="perPage">The maximum amount of organizations to returned by each page. Maximum is <c>100</c>.</param>
     /// <param name="page">The page to be returned.</param>
     /// <returns>An instance of <see cref="GitHubRepositoryListResponse"/> representing the response.</returns>
-    public GitHubRepositoryListResponse GetRepositories(int? perPage = null, int? page = null) {
-        return new GitHubRepositoryListResponse(Raw.GetRepositories(perPage, page));
+    public async Task<GitHubRepositoryListResponse> GetRepositories(int? perPage = null, int? page = null) {
+        return new GitHubRepositoryListResponse(await Raw.GetRepositories(perPage, page));
     }
 
     /// <summary>
@@ -93,8 +94,8 @@ public class GitHubUserEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="GitHubRepositoryListResponse"/> representing the response.</returns>
-    public GitHubRepositoryListResponse GetRepositories(GitHubGetRepositoriesOptions options) {
-        return new GitHubRepositoryListResponse(Raw.GetRepositories(options));
+    public async Task<GitHubRepositoryListResponse> GetRepositories(GitHubGetRepositoriesOptions options) {
+        return new GitHubRepositoryListResponse(await Raw.GetRepositories(options));
     }
 
     /// <summary>
@@ -104,8 +105,8 @@ public class GitHubUserEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-the-authenticated-user</cref>
     /// </see>
-    public GitHubOrganizationListResponse GetOrganizations() {
-        return new GitHubOrganizationListResponse(Raw.GetOrganizations());
+    public async Task<GitHubOrganizationListResponse> GetOrganizations() {
+        return new GitHubOrganizationListResponse(await Raw.GetOrganizations());
     }
 
     /// <summary>
@@ -116,8 +117,8 @@ public class GitHubUserEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-the-authenticated-user</cref>
     /// </see>
-    public GitHubOrganizationListResponse GetOrganizations(GitHubGetOrganizationsOptions options) {
-        return new GitHubOrganizationListResponse(Raw.GetOrganizations(options));
+    public async Task<GitHubOrganizationListResponse> GetOrganizations(GitHubGetOrganizationsOptions options) {
+        return new GitHubOrganizationListResponse(await Raw.GetOrganizations(options));
     }
 
     #endregion

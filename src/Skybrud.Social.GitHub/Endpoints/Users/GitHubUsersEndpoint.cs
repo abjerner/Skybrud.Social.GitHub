@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Options.Users;
 using Skybrud.Social.GitHub.Responses.Users;
 
@@ -37,8 +38,8 @@ public partial class GitHubUsersEndpoint {
     /// </summary>
     /// <param name="userId">The ID of the user.</param>
     /// <returns>An instance of <see cref="GitHubUserResponse"/> representing the response.</returns>
-    public GitHubUserResponse GetUser(int userId) {
-        return new GitHubUserResponse(Raw.GetUser(userId));
+    public async Task<GitHubUserResponse> GetUser(int userId) {
+        return new GitHubUserResponse(await Raw.GetUser(userId));
     }
 
     /// <summary>
@@ -46,8 +47,8 @@ public partial class GitHubUsersEndpoint {
     /// </summary>
     /// <param name="username">The username (login) of the user.</param>
     /// <returns>An instance of <see cref="GitHubUserResponse"/> representing the response.</returns>
-    public GitHubUserResponse GetUser(string username) {
-        return new GitHubUserResponse(Raw.GetUser(username));
+    public async Task<GitHubUserResponse> GetUser(string username) {
+        return new GitHubUserResponse(await Raw.GetUser(username));
     }
 
     /// <summary>
@@ -55,8 +56,8 @@ public partial class GitHubUsersEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="GitHubUserResponse"/> representing the response.</returns>
-    public GitHubUserResponse GetUser(GitHubGetUserOptions options) {
-        return new GitHubUserResponse(Raw.GetUser(options));
+    public async Task<GitHubUserResponse> GetUser(GitHubGetUserOptions options) {
+        return new GitHubUserResponse(await Raw.GetUser(options));
     }
 
     #endregion

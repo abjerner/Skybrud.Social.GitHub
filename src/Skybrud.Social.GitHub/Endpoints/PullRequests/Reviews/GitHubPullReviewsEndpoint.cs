@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Models.PullRequests;
 using Skybrud.Social.GitHub.Options.PullRequests.Reviews;
 using Skybrud.Social.GitHub.Responses.PullRequests.Reviews;
@@ -41,8 +42,8 @@ public class GitHubPullReviewsEndpoint {
     /// <param name="repository">The slug of the repository.</param>
     /// <param name="number">The number of the issue to which the comment should be added.</param>
     /// <returns>An instance of <see cref="GitHubReviewListResponse"/> representing the response.</returns>
-    public GitHubReviewListResponse GetReviews(string owner, string repository, int number) {
-        return GetReviews(new GitHubGetReviewsOptions(owner, repository, number));
+    public async Task<GitHubReviewListResponse> GetReviews(string owner, string repository, int number) {
+        return await GetReviews(new GitHubGetReviewsOptions(owner, repository, number));
     }
 
     /// <summary>
@@ -50,9 +51,9 @@ public class GitHubPullReviewsEndpoint {
     /// </summary>
     /// <param name="pullRequest">The pull request to get reviews for.</param>
     /// <returns>An instance of <see cref="GitHubReviewListResponse"/> representing the response.</returns>
-    public GitHubReviewListResponse GetReviews(GitHubPullRequestBase pullRequest) {
+    public async Task<GitHubReviewListResponse> GetReviews(GitHubPullRequestBase pullRequest) {
         if (pullRequest == null) throw new ArgumentNullException(nameof(pullRequest));
-        return new GitHubReviewListResponse(Raw.GetReviews(new GitHubGetReviewsOptions(pullRequest)));
+        return new GitHubReviewListResponse(await Raw.GetReviews(new GitHubGetReviewsOptions(pullRequest)));
     }
 
     /// <summary>
@@ -60,8 +61,8 @@ public class GitHubPullReviewsEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="GitHubReviewListResponse"/> representing the response.</returns>
-    public GitHubReviewListResponse GetReviews(GitHubGetReviewsOptions options) {
-        return new GitHubReviewListResponse(Raw.GetReviews(options));
+    public async Task<GitHubReviewListResponse> GetReviews(GitHubGetReviewsOptions options) {
+        return new GitHubReviewListResponse(await Raw.GetReviews(options));
     }
 
     #endregion

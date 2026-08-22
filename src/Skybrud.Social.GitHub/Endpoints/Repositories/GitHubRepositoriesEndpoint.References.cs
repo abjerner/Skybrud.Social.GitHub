@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.Options.Repositories.References;
 using Skybrud.Social.GitHub.Responses.Repositories.References;
@@ -19,8 +20,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/git#create-a-reference</cref>
     /// </see>
-    public GitHubReferenceResponse CreateReference(string owner, string repositoryAlias, string @ref, string sha) {
-        return new GitHubReferenceResponse(Raw.CreateReference(owner, repositoryAlias, @ref, sha));
+    public async Task<GitHubReferenceResponse> CreateReference(string owner, string repositoryAlias, string @ref, string sha) {
+        return new GitHubReferenceResponse(await Raw.CreateReference(owner, repositoryAlias, @ref, sha));
     }
 
     /// <summary>
@@ -33,8 +34,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/git#create-a-reference</cref>
     /// </see>
-    public GitHubReferenceResponse CreateReference(GitHubRepositoryBase repository, string @ref, string sha) {
-        return new GitHubReferenceResponse(Raw.CreateReference(repository, @ref, sha));
+    public async Task<GitHubReferenceResponse> CreateReference(GitHubRepositoryBase repository, string @ref, string sha) {
+        return new GitHubReferenceResponse(await Raw.CreateReference(repository, @ref, sha));
     }
 
     /// <summary>
@@ -45,8 +46,8 @@ public partial class GitHubRepositoriesEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/git#create-a-reference</cref>
     /// </see>
-    public GitHubReferenceResponse CreateReference(GitHubCreateReferenceOptions options) {
-        return new GitHubReferenceResponse(Raw.CreateReference(options));
+    public async Task<GitHubReferenceResponse> CreateReference(GitHubCreateReferenceOptions options) {
+        return new GitHubReferenceResponse(await Raw.CreateReference(options));
     }
 
     #endregion

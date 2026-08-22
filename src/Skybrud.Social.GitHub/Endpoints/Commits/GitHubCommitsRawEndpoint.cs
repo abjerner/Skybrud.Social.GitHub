@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Repositories;
 using Skybrud.Social.GitHub.OAuth;
@@ -38,11 +39,11 @@ public class GitHubCommitsRawEndpoint {
     /// <param name="repository">The slug of the repository.</param>
     /// <param name="sha">The SHA hash of the commit.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetCommit(string owner, string repository, string sha) {
+    public async Task<IHttpResponse> GetCommit(string owner, string repository, string sha) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
         if (string.IsNullOrWhiteSpace(sha)) throw new ArgumentNullException(nameof(sha));
-        return GetCommit(new GitHubGetCommitOptions(owner, repository, sha));
+        return await GetCommit(new GitHubGetCommitOptions(owner, repository, sha));
     }
 
     /// <summary>
@@ -51,10 +52,10 @@ public class GitHubCommitsRawEndpoint {
     /// <param name="repository">The repository.</param>
     /// <param name="sha">The SHA hash of the commit.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetCommit(GitHubRepositoryBase repository, string sha) {
+    public async Task<IHttpResponse> GetCommit(GitHubRepositoryBase repository, string sha) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
         if (string.IsNullOrWhiteSpace(sha)) throw new ArgumentNullException(nameof(sha));
-        return GetCommit(new GitHubGetCommitOptions(repository, sha));
+        return await GetCommit(new GitHubGetCommitOptions(repository, sha));
     }
 
     /// <summary>
@@ -62,9 +63,9 @@ public class GitHubCommitsRawEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetCommit(GitHubGetCommitOptions options) {
+    public async Task<IHttpResponse> GetCommit(GitHubGetCommitOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     /// <summary>
@@ -74,10 +75,10 @@ public class GitHubCommitsRawEndpoint {
     /// <param name="owner">The alias (login) of the owner.</param>
     /// <param name="repository">The slug of the repository.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetCommits(string owner, string repository) {
+    public async Task<IHttpResponse> GetCommits(string owner, string repository) {
         if (string.IsNullOrWhiteSpace(owner)) throw new ArgumentNullException(nameof(owner));
         if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
-        return GetCommits(new GitHubGetCommitsOptions(owner, repository));
+        return await GetCommits(new GitHubGetCommitsOptions(owner, repository));
     }
 
     /// <summary>
@@ -85,9 +86,9 @@ public class GitHubCommitsRawEndpoint {
     /// </summary>
     /// <param name="repository">The repository.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetCommits(GitHubRepositoryBase repository) {
+    public async Task<IHttpResponse> GetCommits(GitHubRepositoryBase repository) {
         if (repository == null) throw new ArgumentNullException(nameof(repository));
-        return GetCommits(new GitHubGetCommitsOptions(repository));
+        return await GetCommits(new GitHubGetCommitsOptions(repository));
     }
 
     /// <summary>
@@ -95,9 +96,9 @@ public class GitHubCommitsRawEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public IHttpResponse GetCommits(GitHubGetCommitsOptions options) {
+    public async Task<IHttpResponse> GetCommits(GitHubGetCommitsOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
+        return await Client.GetResponseAsync(options);
     }
 
     #endregion

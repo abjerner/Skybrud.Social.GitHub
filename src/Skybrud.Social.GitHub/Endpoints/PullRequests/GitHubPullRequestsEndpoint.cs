@@ -1,6 +1,6 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Endpoints.PullRequests.Reviews;
 using Skybrud.Social.GitHub.Options.PullRequests;
-using Skybrud.Social.GitHub.Responses;
 using Skybrud.Social.GitHub.Responses.PullRequests;
 
 namespace Skybrud.Social.GitHub.Endpoints.PullRequests;
@@ -51,8 +51,8 @@ public class GitHubPullRequestsEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/pulls#create-a-pull-request</cref>
     /// </see>
-    public GitHubPullRequestResponse CreatePullRequest(GitHubCreatePullRequestOptions options) {
-        return new GitHubPullRequestResponse(Raw.CreatePullRequest(options));
+    public async Task<GitHubPullRequestResponse> CreatePullRequest(GitHubCreatePullRequestOptions options) {
+        return new GitHubPullRequestResponse(await Raw.CreatePullRequest(options));
     }
 
     /// <summary>
@@ -62,8 +62,8 @@ public class GitHubPullRequestsEndpoint {
     /// <param name="repository">The alias of the repository.</param>
     /// <param name="number">The number of the pull request.</param>
     /// <returns>An instance of <see cref="GitHubPullRequestResponse"/> representing the response.</returns>
-    public GitHubPullRequestResponse GetPullRequest(string owner, string repository, int number) {
-        return new GitHubPullRequestResponse(Raw.GetPullRequest(owner, repository, number));
+    public async Task<GitHubPullRequestResponse> GetPullRequest(string owner, string repository, int number) {
+        return new GitHubPullRequestResponse(await Raw.GetPullRequest(owner, repository, number));
     }
 
     /// <summary>
@@ -71,8 +71,8 @@ public class GitHubPullRequestsEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="GitHubPullRequestResponse"/> representing the response.</returns>
-    public GitHubPullRequestResponse GetPullRequest(GitHubGetPullRequestOptions options) {
-        return new GitHubPullRequestResponse(Raw.GetPullRequest(options));
+    public async Task<GitHubPullRequestResponse> GetPullRequest(GitHubGetPullRequestOptions options) {
+        return new GitHubPullRequestResponse(await Raw.GetPullRequest(options));
     }
 
     /// <summary>
@@ -81,8 +81,8 @@ public class GitHubPullRequestsEndpoint {
     /// <param name="owner">The alias of the repository owner.</param>
     /// <param name="repository">The alias of the repository.</param>
     /// <returns>An instance of <see cref="GitHubPullRequestListResponse"/> representing the response.</returns>
-    public GitHubPullRequestListResponse GetPullRequests(string owner, string repository) {
-        return new GitHubPullRequestListResponse(Raw.GetPullRequests(owner, repository));
+    public async Task<GitHubPullRequestListResponse> GetPullRequests(string owner, string repository) {
+        return new GitHubPullRequestListResponse(await Raw.GetPullRequests(owner, repository));
     }
 
     /// <summary>
@@ -90,8 +90,8 @@ public class GitHubPullRequestsEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="GitHubPullRequestListResponse"/> representing the response.</returns>
-    public GitHubPullRequestListResponse GetPullRequests(GitHubGetPullRequestsOptions options) {
-        return new GitHubPullRequestListResponse(Raw.GetPullRequests(options));
+    public async Task<GitHubPullRequestListResponse> GetPullRequests(GitHubGetPullRequestsOptions options) {
+        return new GitHubPullRequestListResponse(await Raw.GetPullRequests(options));
     }
 
     #endregion

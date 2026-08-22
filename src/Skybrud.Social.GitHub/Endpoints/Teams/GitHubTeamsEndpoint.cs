@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Options.Organizations.Teams;
 using Skybrud.Social.GitHub.Responses.Teams;
 
@@ -41,8 +42,8 @@ public class GitHubTeamsEndpoint {
     /// <param name="organizationId">The ID of the organization.</param>
     /// <param name="teamId">The ID of the team.</param>
     /// <returns>An instance of <see cref="GitHubTeamResponse"/> representing the response.</returns>
-    public GitHubTeamResponse GetTeam(int organizationId, int teamId) {
-        return new GitHubTeamResponse(Raw.GetTeam(organizationId, teamId));
+    public async Task<GitHubTeamResponse> GetTeam(int organizationId, int teamId) {
+        return new GitHubTeamResponse(await Raw.GetTeam(organizationId, teamId));
     }
 
     /// <summary>
@@ -54,8 +55,8 @@ public class GitHubTeamsEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/teams#get-a-team-by-name</cref>
     /// </see>
-    public GitHubTeamResponse GetTeam(string organization, string team) {
-        return new GitHubTeamResponse(Raw.GetTeam(organization, team));
+    public async Task<GitHubTeamResponse> GetTeam(string organization, string team) {
+        return new GitHubTeamResponse(await Raw.GetTeam(organization, team));
     }
 
     /// <summary>
@@ -63,8 +64,8 @@ public class GitHubTeamsEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="GitHubTeamResponse"/> representing the raw response.</returns>
-    public GitHubTeamResponse GetTeam(GitHubGetTeamOptions options) {
-        return new GitHubTeamResponse(Raw.GetTeam(options));
+    public async Task<GitHubTeamResponse> GetTeam(GitHubGetTeamOptions options) {
+        return new GitHubTeamResponse(await Raw.GetTeam(options));
     }
 
     /// <summary>
@@ -75,8 +76,8 @@ public class GitHubTeamsEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/teams#get-a-team-by-name</cref>
     /// </see>
-    public GitHubTeamResponse GetTeam(GitHubGetTeamByNameOptions options) {
-        return new GitHubTeamResponse(Raw.GetTeam(options));
+    public async Task<GitHubTeamResponse> GetTeam(GitHubGetTeamByNameOptions options) {
+        return new GitHubTeamResponse(await Raw.GetTeam(options));
     }
 
     #endregion

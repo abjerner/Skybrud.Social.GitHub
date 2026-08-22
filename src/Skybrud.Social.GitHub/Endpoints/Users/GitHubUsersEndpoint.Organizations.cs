@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Models.Users;
 using Skybrud.Social.GitHub.Options.Users;
 using Skybrud.Social.GitHub.Responses.Organizations;
@@ -16,8 +17,8 @@ public partial class GitHubUsersEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-a-user</cref>
     /// </see>
-    public GitHubOrganizationListResponse GetOrganizations(int userId) {
-        return new GitHubOrganizationListResponse(Raw.GetOrganizations(userId));
+    public async Task<GitHubOrganizationListResponse> GetOrganizations(int userId) {
+        return new GitHubOrganizationListResponse(await Raw.GetOrganizations(userId));
     }
 
     /// <summary>
@@ -30,8 +31,8 @@ public partial class GitHubUsersEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-a-user</cref>
     /// </see>
-    public GitHubOrganizationListResponse GetOrganizations(int userId, int? perPage = null, int? page = null) {
-        return new GitHubOrganizationListResponse(Raw.GetOrganizations(userId, perPage, page));
+    public async Task<GitHubOrganizationListResponse> GetOrganizations(int userId, int? perPage = null, int? page = null) {
+        return new GitHubOrganizationListResponse(await Raw.GetOrganizations(userId, perPage, page));
     }
 
     /// <summary>
@@ -42,8 +43,8 @@ public partial class GitHubUsersEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-a-user</cref>
     /// </see>
-    public GitHubOrganizationListResponse GetOrganizations(string username) {
-        return new GitHubOrganizationListResponse(Raw.GetOrganizations(username));
+    public async Task<GitHubOrganizationListResponse> GetOrganizations(string username) {
+        return new GitHubOrganizationListResponse(await Raw.GetOrganizations(username));
     }
 
     /// <summary>
@@ -56,8 +57,8 @@ public partial class GitHubUsersEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-a-user</cref>
     /// </see>
-    public GitHubOrganizationListResponse GetOrganizations(string username, int? perPage = null, int? page = null) {
-        return new GitHubOrganizationListResponse(Raw.GetOrganizations(username, perPage, page));
+    public async Task<GitHubOrganizationListResponse> GetOrganizations(string username, int? perPage = null, int? page = null) {
+        return new GitHubOrganizationListResponse(await Raw.GetOrganizations(username, perPage, page));
     }
 
     /// <summary>
@@ -68,8 +69,8 @@ public partial class GitHubUsersEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-a-user</cref>
     /// </see>
-    public GitHubOrganizationListResponse GetOrganizations(GitHubUserBase user) {
-        return new GitHubOrganizationListResponse(Raw.GetOrganizations(user));
+    public async Task<GitHubOrganizationListResponse> GetOrganizations(GitHubUserBase user) {
+        return new GitHubOrganizationListResponse(await Raw.GetOrganizations(user));
     }
 
     /// <summary>
@@ -82,8 +83,8 @@ public partial class GitHubUsersEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-a-user</cref>
     /// </see>
-    public GitHubOrganizationListResponse GetOrganizations(GitHubUserBase user, int? perPage = null, int? page = null) {
-        return new GitHubOrganizationListResponse(Raw.GetOrganizations(user, perPage, page));
+    public async Task<GitHubOrganizationListResponse> GetOrganizations(GitHubUserBase user, int? perPage = null, int? page = null) {
+        return new GitHubOrganizationListResponse(await Raw.GetOrganizations(user, perPage, page));
     }
 
     /// <summary>
@@ -94,8 +95,8 @@ public partial class GitHubUsersEndpoint {
     /// <see>
     ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-a-user</cref>
     /// </see>
-    public GitHubOrganizationListResponse GetOrganizations(GitHubGetOrganizationsOptions options) {
-        return new GitHubOrganizationListResponse(Raw.GetOrganizations(options));
+    public async Task<GitHubOrganizationListResponse> GetOrganizations(GitHubGetOrganizationsOptions options) {
+        return new GitHubOrganizationListResponse(await Raw.GetOrganizations(options));
     }
 
 }
