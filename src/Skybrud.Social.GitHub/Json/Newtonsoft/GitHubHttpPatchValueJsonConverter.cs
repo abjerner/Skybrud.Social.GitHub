@@ -6,12 +6,12 @@ using Skybrud.Social.GitHub.Http;
 
 namespace Skybrud.Social.GitHub.Json.Newtonsoft;
 
-public class PatchValueJsonConverter : JsonConverter {
+public class GitHubHttpPatchValueJsonConverter : JsonConverter {
 
     public override bool CanRead => false;
 
     public override bool CanConvert(Type objectType) {
-        return objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(GitHubPatchValue<>);
+        return objectType.IsGenericType && objectType.GetGenericTypeDefinition() == typeof(GitHubHttpPatchValue<>);
     }
 
     public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer) {
@@ -21,7 +21,7 @@ public class PatchValueJsonConverter : JsonConverter {
             return;
         }
 
-        var valueProperty = value.GetType().GetProperty(nameof(GitHubPatchValue<object>.Value))!;
+        var valueProperty = value.GetType().GetProperty(nameof(GitHubHttpPatchValue<object>.Value))!;
         var innerValue = valueProperty.GetValue(value);
 
         serializer.Serialize(writer, innerValue);

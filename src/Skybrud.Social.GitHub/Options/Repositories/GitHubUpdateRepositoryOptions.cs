@@ -46,25 +46,25 @@ public class GitHubUpdateRepositoryOptions : GitHubHttpRequestOptions {
     /// Gets or sets the name of the repository.
     /// </summary>
     [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
-    public GitHubPatchValue<string>? Name { get; set; }
+    public GitHubHttpPatchValue<string>? Name { get; set; }
 
     /// <summary>
     /// Gets or sets a short description of the repository.
     /// </summary>
     [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
-    public GitHubPatchValue<string?>? Description { get; set; }
+    public GitHubHttpPatchValue<string?>? Description { get; set; }
 
     /// <summary>
     /// Gets or sets a URL with more information about the repository.
     /// </summary>
     [JsonProperty("homepage", NullValueHandling = NullValueHandling.Ignore)]
-    public GitHubPatchValue<string?>? Homepage { get; set; }
+    public GitHubHttpPatchValue<string?>? Homepage { get; set; }
 
     /// <summary>
     /// Gets or sets the default branch.
     /// </summary>
     [JsonProperty("default_branch", NullValueHandling = NullValueHandling.Ignore)]
-    public GitHubPatchValue<string>? DefaultBranch { get; set; }
+    public GitHubHttpPatchValue<string>? DefaultBranch { get; set; }
 
     #endregion
 
