@@ -75,12 +75,28 @@ public static class GitHubUtils {
         repositoryAlias = null;
 
         if (!Uri.TryCreate(value, UriKind.Absolute, out Uri? uri)) return false;
-
         string[] segments = uri.AbsolutePath.Trim('/').Split('/');
-        if (segments.Length < 2) return false;
 
-        ownerAlias = segments[0];
-        repositoryAlias = segments[1];
+        if (uri.Host.Equals("github.com", StringComparison.OrdinalIgnoreCase)) {
+
+            if (segments.Length < 2) return false;
+
+            ownerAlias = segments[0];
+            repositoryAlias = segments[1];
+
+        } else if (uri.Host.Equals("api.github.com", StringComparison.OrdinalIgnoreCase)) {
+
+            if (segments.Length < 3 || !segments[0].Equals("repos", StringComparison.OrdinalIgnoreCase)) return false;
+
+            ownerAlias = segments[1];
+            repositoryAlias = segments[2];
+
+        } else {
+
+            return false;
+
+        }
+
         return true;
 
     }
