@@ -65,7 +65,7 @@ public class GitHubOrganizationsRawEndpoint {
 
     #endregion
 
-    #region Methods
+    #region GetOrganization(...)
 
     /// <summary>
     /// Gets information about the organisation with the specified <paramref name="organizationId"/>.
