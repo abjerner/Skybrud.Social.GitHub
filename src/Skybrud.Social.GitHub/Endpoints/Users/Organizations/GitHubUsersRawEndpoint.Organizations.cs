@@ -2,13 +2,36 @@ using System;
 using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.GitHub.Models.Users;
+using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Users;
 
-// ReSharper disable MethodOverloadWithOptionalParameter
+namespace Skybrud.Social.GitHub.Endpoints.Users.Organizations;
 
-namespace Skybrud.Social.GitHub.Endpoints.Users;
+/// <summary>
+/// Class representing the raw <strong>Users / Organizations</strong> endpoint.
+/// </summary>
+public class GitHubUsersOrganizationsRawEndpoint {
 
-public partial class GitHubUsersRawEndpoint {
+    #region Properties
+
+    /// <summary>
+    /// Gets a reference to the parent OAuth client.
+    /// </summary>
+    public GitHubOAuthClient Client { get; }
+
+    #endregion
+
+    #region Constructors
+
+    /// <summary>
+    /// Initializes a new instance based on the specified <paramref name="client"/>.
+    /// </summary>
+    /// <param name="client">The OAuth instance.</param>
+    public GitHubUsersOrganizationsRawEndpoint(GitHubOAuthClient client) {
+        Client = client;
+    }
+
+    #endregion
 
     #region GetOrganizations(...)
 

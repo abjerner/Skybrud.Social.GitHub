@@ -3,11 +3,38 @@ using Skybrud.Social.GitHub.Models.Users;
 using Skybrud.Social.GitHub.Options.Users;
 using Skybrud.Social.GitHub.Responses.Repositories;
 
-// ReSharper disable MethodOverloadWithOptionalParameter
+namespace Skybrud.Social.GitHub.Endpoints.Users.Repositories;
 
-namespace Skybrud.Social.GitHub.Endpoints.Users;
+/// <summary>
+/// Class representing the <strong>Users / Repositories</strong> endpoint.
+/// </summary>
+public class GitHubUsersRepositoriesEndpoint {
 
-public partial class GitHubUsersEndpoint {
+    #region Properties
+
+    /// <summary>
+    /// Gets a reference to the GitHub service.
+    /// </summary>
+    public GitHubHttpService Service { get; }
+
+    /// <summary>
+    /// Gets a reference to the raw endpoint.
+    /// </summary>
+    public GitHubUsersRepositoriesRawEndpoint Raw => Service.Client.Users.Repositories;
+
+    #endregion
+
+    #region Constructors
+
+    /// <summary>
+    /// Initializes a new instance based on the specified <paramref name="service"/>.
+    /// </summary>
+    /// <param name="service">The HTTP service instance.</param>
+    public GitHubUsersRepositoriesEndpoint(GitHubHttpService service) {
+        Service = service;
+    }
+
+    #endregion
 
     /// <summary>
     /// Gets a list of repositories of the user with the specified <paramref name="userId"/>.

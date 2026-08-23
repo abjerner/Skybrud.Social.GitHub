@@ -3,11 +3,40 @@ using Skybrud.Social.GitHub.Models.Users;
 using Skybrud.Social.GitHub.Options.Users;
 using Skybrud.Social.GitHub.Responses.Organizations;
 
-// ReSharper disable MethodOverloadWithOptionalParameter
+namespace Skybrud.Social.GitHub.Endpoints.Users.Organizations;
 
-namespace Skybrud.Social.GitHub.Endpoints.Users;
+/// <summary>
+/// Class representing the <strong>Users / Organizations</strong> endpoint.
+/// </summary>
+public class GitHubUsersOrganizationsEndpoint {
 
-public partial class GitHubUsersEndpoint {
+    #region Properties
+
+    /// <summary>
+    /// Gets a reference to the GitHub service.
+    /// </summary>
+    public GitHubHttpService Service { get; }
+
+    /// <summary>
+    /// Gets a reference to the raw endpoint.
+    /// </summary>
+    public GitHubUsersOrganizationsRawEndpoint Raw => Service.Client.Users.Organizations;
+
+    #endregion
+
+    #region Constructors
+
+    /// <summary>
+    /// Initializes a new instance based on the specified <paramref name="service"/>.
+    /// </summary>
+    /// <param name="service">The HTTP service instance.</param>
+    public GitHubUsersOrganizationsEndpoint(GitHubHttpService service) {
+        Service = service;
+    }
+
+    #endregion
+
+    #region GetOrganizations(...)
 
     /// <summary>
     /// Gets a list of organizations the user with the specified <paramref name="userId"/> is a member of.
@@ -98,5 +127,7 @@ public partial class GitHubUsersEndpoint {
     public async Task<GitHubOrganizationListResponse> GetOrganizations(GitHubGetOrganizationsOptions options) {
         return new GitHubOrganizationListResponse(await Raw.GetOrganizations(options));
     }
+
+    #endregion
 
 }

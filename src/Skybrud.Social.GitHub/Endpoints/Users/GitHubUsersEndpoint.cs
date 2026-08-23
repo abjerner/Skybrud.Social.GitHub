@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using Skybrud.Social.GitHub.Endpoints.Users.Organizations;
+using Skybrud.Social.GitHub.Endpoints.Users.Repositories;
 using Skybrud.Social.GitHub.Options.Users;
 using Skybrud.Social.GitHub.Responses.Users;
 
@@ -7,7 +9,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Users;
 /// <summary>
 /// Class representing the <strong>Users</strong> endpoint.
 /// </summary>
-public partial class GitHubUsersEndpoint {
+public class GitHubUsersEndpoint {
 
     #region Properties
 
@@ -21,12 +23,24 @@ public partial class GitHubUsersEndpoint {
     /// </summary>
     public GitHubUsersRawEndpoint Raw => Service.Client.Users;
 
+    /// <summary>
+    /// Gets a reference to the <strong>Organizations</strong> endpoint.
+    /// </summary>
+    public GitHubUsersOrganizationsEndpoint Organizations { get; }
+
+    /// <summary>
+    /// Gets a reference to the <strong>Repositories</strong> endpoint.
+    /// </summary>
+    public GitHubUsersRepositoriesEndpoint Repositories { get; }
+
     #endregion
 
     #region Constructors
 
     internal GitHubUsersEndpoint(GitHubHttpService service) {
         Service = service;
+        Organizations = new GitHubUsersOrganizationsEndpoint(service);
+        Repositories = new GitHubUsersRepositoriesEndpoint(service);
     }
 
     #endregion
