@@ -49,12 +49,12 @@ public abstract class GitHubEventBase : GitHubObject {
     /// <summary>
     /// Gets the string SHA of the commit that referenced this issue.
     /// </summary>
-    public string CommitId { get; }
+    public string? CommitId { get; }
 
     /// <summary>
     /// Gets the GitHub API link to a commit that referenced this issue.
     /// </summary>
-    public string CommitUrl { get; }
+    public string? CommitUrl { get; }
 
     /// <summary>
     /// Gets the timestamp indicating when the event occurred.
@@ -117,8 +117,8 @@ public abstract class GitHubEventBase : GitHubObject {
         Actor = json.GetObject("actor", GitHubUserItem.Parse);
         Event = json.GetEnum("event", GitHubEventType.Other);
         EventRaw = json.GetRequiredString("event");
-        CommitId = json.GetRequiredString("commit_id");
-        CommitUrl = json.GetRequiredString("commit_url");
+        CommitId = json.GetString("commit_id");
+        CommitUrl = json.GetString("commit_url");
         CreatedAt = json.GetRequiredEssentialsTime("created_at");
 
         ReviewRequester = json.GetObject("review_requester", GitHubUserItem.Parse);

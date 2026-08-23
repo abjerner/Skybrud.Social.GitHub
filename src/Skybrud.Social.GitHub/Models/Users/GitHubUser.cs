@@ -15,7 +15,7 @@ public class GitHubUser : GitHubUserBase {
     /// <summary>
     /// Gets the name of the user.
     /// </summary>
-    public string Name { get; }
+    public string? Name { get; }
 
     /// <summary>
     /// Gets the company name of the user.
@@ -35,7 +35,7 @@ public class GitHubUser : GitHubUserBase {
     /// <summary>
     /// Gets whether the user is available for hire.
     /// </summary>
-    public string IsHireable { get; }
+    public bool IsHireable { get; }
 
     /// <summary>
     /// Gets the bio of the user.
@@ -77,11 +77,11 @@ public class GitHubUser : GitHubUserBase {
     #region Constructors
 
     private GitHubUser(JObject json) : base(json) {
-        Name = json.GetRequiredString("name");
+        Name = json.GetString("name");
         Company = json.GetString("company");
         Location = json.GetString("location");
         Email = json.GetString("email");
-        IsHireable = json.GetRequiredString("hireable");
+        IsHireable = json.GetBoolean("hireable");
         Bio = json.GetString("bio");
         PublicRepos = json.GetRequiredInt32("public_repos");
         PublicGists = json.GetRequiredInt32("public_gists");

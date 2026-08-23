@@ -14,14 +14,14 @@ public class GitHubRepository : GitHubRepositoryItem {
     /// <summary>
     /// Gets a reference to the parent organization, if any.
     /// </summary>
-    public GitHubUser? Organization { get; }
+    public GitHubUserItem? Organization { get; }
 
     #endregion
 
     #region Constructors
 
     private GitHubRepository(JObject json) : base(json) {
-        Organization = json.GetObject("organization", GitHubUser.Parse);
+        Organization = json.GetObject("organization", GitHubUserItem.Parse);
     }
 
     #endregion
