@@ -11,6 +11,7 @@ using Skybrud.Social.GitHub.Endpoints.Repositories.References;
 using Skybrud.Social.GitHub.Endpoints.Repositories.Releases;
 using Skybrud.Social.GitHub.Endpoints.Repositories.Tags;
 using Skybrud.Social.GitHub.Endpoints.Repositories.Teams;
+using Skybrud.Social.GitHub.Endpoints.Repositories.Topics;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Repositories;
 
@@ -78,6 +79,11 @@ public class GitHubRepositoriesRawEndpoint {
     /// </summary>
     public GitHubRepositoryTeamsRawEndpoint Teams { get; }
 
+    /// <summary>
+    /// Gets a reference to the <strong>Topics</strong> endpoint.
+    /// </summary>
+    public GitHubRepositoryTopicsRawEndpoint Topics { get; }
+
     #endregion
 
     #region Constructors
@@ -94,6 +100,7 @@ public class GitHubRepositoriesRawEndpoint {
         Releases = new GitHubRepositoryReleasesRawEndpoint(client);
         Tags = new GitHubRepositoryRawEndpoint(client);
         Teams = new GitHubRepositoryTeamsRawEndpoint(client);
+        Topics = new GitHubRepositoryTopicsRawEndpoint(client);
     }
 
     #endregion

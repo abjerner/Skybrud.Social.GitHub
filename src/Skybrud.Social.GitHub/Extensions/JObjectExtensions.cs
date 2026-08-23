@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Enums;
+using Skybrud.Essentials.Json.Newtonsoft.Exceptions;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
+using Skybrud.Essentials.Json.Newtonsoft.Parsing;
 using Skybrud.Essentials.Time;
 using Skybrud.Social.GitHub.Constants;
 
@@ -13,6 +16,15 @@ namespace Skybrud.Social.GitHub.Extensions;
 /// Various extensions methods for <see cref="JObject"/> that makes manual parsing easier.
 /// </summary>
 public static class JObjectExtensions {
+
+    internal static string[] GetRequiredStringArray(this JObject json, string propertyName) {
+        // TODO: move to Skybrud.Essentials?
+        JProperty property = json.Property(propertyName) ?? throw new JsonPropertyNotFoundException(json, propertyName);
+        if (property.Value.Type != JTokenType.Array || property.Value.Any(token => !JsonTokenUtils.TryParseString(token, out _))) {
+            throw new JsonException($"The value of the '{propertyName}' property doesn't match a valid string array.");
+        }
+        return property.Value.Values<string>().ToArray();
+    }
 
     /// <summary>
     /// Gets an enum of type <typeparamref name="T"/> from the token matching the specified <paramref name="path"/>.
