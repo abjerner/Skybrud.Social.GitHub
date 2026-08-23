@@ -15,7 +15,7 @@
 
 ## Target Frameworks
 
-.NET 4.5, .NET 4.6, .NET 4.7 and .NET Standard 1.3 ([read more](https://www.nuget.org/packages/Skybrud.Social.GitHub#supportedframeworks-body-tab)).
+.NET Standard 2.0, .NET 8 and .NET 10 ([read more](https://www.nuget.org/packages/Skybrud.Social.GitHub#supportedframeworks-body-tab)).
 
 
 
@@ -27,13 +27,13 @@
 Install the package via [**NuGet**](https://www.nuget.org/packages/Skybrud.Social.GitHub) - either via the .NET CLI:
 
 ```
-dotnet add package Skybrud.Social.GitHub --version 1.0.0-beta010
+dotnet add package Skybrud.Social.GitHub --version 1.0.0-beta011
 ```
 
 or the NuGet Package Manager:
 
 ```
-Install-Package Skybrud.Social.GitHub -Version 1.0.0-beta010
+Install-Package Skybrud.Social.GitHub -Version 1.0.0-beta011
 ```
 
 
