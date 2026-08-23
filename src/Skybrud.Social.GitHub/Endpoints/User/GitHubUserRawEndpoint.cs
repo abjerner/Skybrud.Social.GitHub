@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
+using Skybrud.Social.GitHub.Endpoints.User.Organizations;
 using Skybrud.Social.GitHub.Endpoints.User.Repositories;
 using Skybrud.Social.GitHub.OAuth;
-using Skybrud.Social.GitHub.Options.User.Organizations;
 
 namespace Skybrud.Social.GitHub.Endpoints.User;
 
@@ -20,6 +20,11 @@ public class GitHubUserRawEndpoint {
     public GitHubOAuthClient Client { get; }
 
     /// <summary>
+    /// Gets a reference to the <strong>Organizations</strong> endpoint.
+    /// </summary>
+    public GitHubUserOrganizationsRawEndpoint Organizations { get; }
+
+    /// <summary>
     /// Gets a reference to the <strong>Repositories</strong> endpoint.
     /// </summary>
     public GitHubUserRepositoriesRawEndpoint Repositories { get; }
@@ -30,6 +35,7 @@ public class GitHubUserRawEndpoint {
 
     internal GitHubUserRawEndpoint(GitHubOAuthClient client) {
         Client = client;
+        Organizations = new GitHubUserOrganizationsRawEndpoint(client);
         Repositories = new GitHubUserRepositoriesRawEndpoint(client);
     }
 
@@ -77,30 +83,6 @@ public class GitHubUserRawEndpoint {
     public async Task<IHttpResponse> IsFollowing(string username) {
         if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
         return await Client.GetAsync("/user/following/" + username);
-    }
-
-    /// <summary>
-    /// Gets a list of organizations the authenticated user is a member of.
-    /// </summary>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    /// <see>
-    ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-the-authenticated-user</cref>
-    /// </see>
-    public async Task<IHttpResponse> GetOrganizations() {
-        return await GetOrganizations(new GitHubGetOrganizationsOptions());
-    }
-
-    /// <summary>
-    /// Returns a list of organizations the authenticated user is a member of.
-    /// </summary>
-    /// <param name="options">The options for the request to the API.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    /// <see>
-    ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-the-authenticated-user</cref>
-    /// </see>
-    public async Task<IHttpResponse> GetOrganizations(GitHubGetOrganizationsOptions options) {
-        if (options == null) throw new ArgumentNullException(nameof(options));
-        return await Client.GetResponseAsync(options);
     }
 
     #endregion

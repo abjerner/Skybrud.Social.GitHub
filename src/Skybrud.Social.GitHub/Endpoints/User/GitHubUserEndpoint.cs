@@ -1,9 +1,8 @@
 using System.Threading.Tasks;
+using Skybrud.Social.GitHub.Endpoints.User.Organizations;
 using Skybrud.Social.GitHub.Endpoints.User.Repositories;
-using Skybrud.Social.GitHub.Options.User.Organizations;
 using Skybrud.Social.GitHub.Responses.Emails;
 using Skybrud.Social.GitHub.Responses.Followers;
-using Skybrud.Social.GitHub.Responses.Organizations;
 using Skybrud.Social.GitHub.Responses.Users;
 
 namespace Skybrud.Social.GitHub.Endpoints.User;
@@ -26,6 +25,11 @@ public class GitHubUserEndpoint {
     public GitHubUserRawEndpoint Raw => Service.Client.User;
 
     /// <summary>
+    /// Gets a reference to the <strong>Organizations</strong> endpoint.
+    /// </summary>
+    public GitHubUserOrganizationsEndpoint Organizations { get; }
+
+    /// <summary>
     /// Gets a reference to the <strong>Repositories</strong> endpoint.
     /// </summary>
     public GitHubUserRepositoriesEndpoint Repositories { get; }
@@ -36,8 +40,8 @@ public class GitHubUserEndpoint {
 
     internal GitHubUserEndpoint(GitHubHttpService service) {
         Service = service;
+        Organizations = new GitHubUserOrganizationsEndpoint(service);
         Repositories = new GitHubUserRepositoriesEndpoint(service);
-
     }
 
     #endregion
@@ -83,29 +87,6 @@ public class GitHubUserEndpoint {
     /// <returns>An instance of <see cref="GitHubGetFollowingResponse"/> representing the response.</returns>
     public async Task<GitHubGetFollowingResponse> IsFollowing(string username) {
         return new GitHubGetFollowingResponse(await Raw.IsFollowing(username));
-    }
-
-    /// <summary>
-    /// Gets a list of organizations the authenticated user is a member of.
-    /// </summary>
-    /// <returns>An instance of <see cref="GitHubOrganizationListResponse"/> representing the response.</returns>
-    /// <see>
-    ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-the-authenticated-user</cref>
-    /// </see>
-    public async Task<GitHubOrganizationListResponse> GetOrganizations() {
-        return new GitHubOrganizationListResponse(await Raw.GetOrganizations());
-    }
-
-    /// <summary>
-    /// Returns a list of organizations the authenticated user is a member of.
-    /// </summary>
-    /// <param name="options">The options for the request to the API.</param>
-    /// <returns>An instance of <see cref="GitHubOrganizationListResponse"/> representing the response.</returns>
-    /// <see>
-    ///     <cref>https://docs.github.com/en/rest/reference/orgs#list-organizations-for-the-authenticated-user</cref>
-    /// </see>
-    public async Task<GitHubOrganizationListResponse> GetOrganizations(GitHubGetOrganizationsOptions options) {
-        return new GitHubOrganizationListResponse(await Raw.GetOrganizations(options));
     }
 
     #endregion
