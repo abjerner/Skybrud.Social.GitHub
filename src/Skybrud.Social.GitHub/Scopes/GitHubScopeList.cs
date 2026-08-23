@@ -127,7 +127,7 @@ public class GitHubScopeList : IEnumerable<GitHubScope> {
     /// <param name="array">The array the list should be based on.</param>
     /// <returns>Returns a new instance of <see cref="GitHubScopeList"/>.</returns>
     public static implicit operator GitHubScopeList(GitHubScope[] array) {
-        return new GitHubScopeList(array ?? new GitHubScope[0]);
+        return new GitHubScopeList(array);
     }
 
     /// <summary>

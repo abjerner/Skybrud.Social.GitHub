@@ -89,7 +89,7 @@ public class GitHubScope {
     /// <param name="alias">The name of the alias.</param>
     /// <returns>A scope matching the specified <paramref name="alias"/>, or <c>null</c> if not found.</returns>
     public static GitHubScope? GetScope(string alias) {
-        return _scopes.TryGetValue(alias, out var scope) ? scope : null;
+        return _scopes.TryGetValue(alias, out GitHubScope? scope) ? scope : null;
     }
 
     /// <summary>

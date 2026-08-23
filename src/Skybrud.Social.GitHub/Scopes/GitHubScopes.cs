@@ -1,6 +1,8 @@
 ﻿// ReSharper disable InconsistentNaming
 
-namespace Skybrud.Social.GitHub.Scopes; 
+using System.Collections.Generic;
+
+namespace Skybrud.Social.GitHub.Scopes;
 
 /// <summary>
 /// Static class with properties representing scopes of the GitHub API.
@@ -21,41 +23,78 @@ public static class GitHubScopes {
     /// Gets an array of all build-in scopes.
     /// </summary>
     /// <returns></returns>
-    public static readonly GitHubScope[] All = [
+    public static readonly IReadOnlyList<GitHubScope> All = [
+
         Default,
+
         Repositories.Write,
         Repositories.Status,
         Repositories.Deployment,
         Repositories.Public,
         Repositories.Invite,
         Repositories.Delete,
+
         SecurityEvents.Write,
+
         RepositoryHooks.Admin,
         RepositoryHooks.Write,
         RepositoryHooks.Read,
+
         Organizations.Admin,
         Organizations.Write,
         Organizations.Read,
+
         PublicKeys.Admin,
         PublicKeys.Write,
         PublicKeys.Read,
+
         OrganizationHooks.Admin,
+
         Gists.Write,
+
         Notifications.Read,
+
         Users.Write,
         Users.Read,
         Users.Email,
         Users.Follow,
-        Discussions.Write,
-        Discussions.Read,
+
+        Projects.Write,
+        Projects.Read,
+
         Packages.Write,
         Packages.Read,
         Packages.Delete,
+
         GpgKeys.Admin,
         GpgKeys.Write,
         GpgKeys.Read,
-        Workflow.Write
+
+        Codespaces.Write,
+
+        Workflow.Write,
+
+        AuditLogs.Read,
+
+        OAuth.OfflineAccess
+
     ];
+
+    /// <summary>
+    /// Scopes related to Codespaces.
+    /// </summary>
+    public static class Codespaces {
+
+        /// <summary>
+        /// Grants the ability to create and manage codespaces.
+        /// </summary>
+        public static readonly GitHubScope Write = GitHubScope.RegisterScope(
+            "codespace",
+            "Codespaces: Write",
+            "Grants the ability to create and manage codespaces."
+        );
+
+    }
 
     /// <summary>
     /// Scopes related to repositories.
@@ -240,6 +279,31 @@ public static class GitHubScopes {
     }
 
     /// <summary>
+    /// Scopes related to projects.
+    /// </summary>
+    public static class Projects {
+
+        /// <summary>
+        /// Grants read/write access to user and organization projects.
+        /// </summary>
+        public static readonly GitHubScope Write = GitHubScope.RegisterScope(
+            "project",
+            "Projects: Write",
+            "Grants read/write access to user and organization projects."
+        );
+
+        /// <summary>
+        /// Grants read-only access to user and organization projects.
+        /// </summary>
+        public static readonly GitHubScope Read = GitHubScope.RegisterScope(
+            "read:project",
+            "Projects: Read",
+            "Grants read-only access to user and organization projects."
+        );
+
+    }
+
+    /// <summary>
     /// Scopes related to organization hooks.
     /// </summary>
     public static class OrganizationHooks {
@@ -330,31 +394,6 @@ public static class GitHubScopes {
     }
 
     /// <summary>
-    /// Scopes related to discussions.
-    /// </summary>
-    public static class Discussions {
-
-        /// <summary>
-        /// Allows read and write access for team discussions.
-        /// </summary>
-        public static readonly GitHubScope Write = GitHubScope.RegisterScope(
-            "write:discussion",
-            "Discussions: Write",
-            "Allows read and write access for team discussions."
-        );
-
-        /// <summary>
-        /// Allows read access for team discussions.
-        /// </summary>
-        public static readonly GitHubScope Read = GitHubScope.RegisterScope(
-            "read:discussion",
-            "Discussions: Read",
-            "Allows read access for team discussions."
-        );
-
-    }
-
-    /// <summary>
     /// Scopes related to packages.
     /// </summary>
     public static class Packages {
@@ -435,6 +474,39 @@ public static class GitHubScopes {
             "workflow",
             "Workflow: Write",
             "Grants the ability to add and update GitHub Actions workflow files. Workflow files can be committed without this scope if the same file (with both the same path and contents) exists on another branch in the same repository."
+        );
+
+    }
+
+    /// <summary>
+    /// Scopes related to audit logs.
+    /// </summary>
+    public static class AuditLogs {
+
+        /// <summary>
+        /// Grants read access to audit log data.
+        /// </summary>
+        public static readonly GitHubScope Read = GitHubScope.RegisterScope(
+            "read:audit_log",
+            "Audit Logs: Read",
+            "Grants read access to audit log data."
+        );
+
+    }
+
+    /// <summary>
+    /// Scopes related to OAuth access.
+    /// </summary>
+    public static class OAuth {
+
+        /// <summary>
+        /// Requests an expiring access token and a refresh token, even if the OAuth app
+        /// isn't configured to use expiring tokens.
+        /// </summary>
+        public static readonly GitHubScope OfflineAccess = GitHubScope.RegisterScope(
+            "offline_access",
+            "OAuth: Offline Access",
+            "Requests an expiring access token and a refresh token, even if the OAuth app isn't configured to use expiring tokens."
         );
 
     }
