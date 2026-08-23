@@ -1,7 +1,16 @@
 using System;
 using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
+using Skybrud.Social.GitHub.Endpoints.Repositories.Branches;
+using Skybrud.Social.GitHub.Endpoints.Repositories.Collaborators;
+using Skybrud.Social.GitHub.Endpoints.Repositories.Content;
+using Skybrud.Social.GitHub.Endpoints.Repositories.Forks;
 using Skybrud.Social.GitHub.Endpoints.Repositories.Issues;
+using Skybrud.Social.GitHub.Endpoints.Repositories.Labels;
+using Skybrud.Social.GitHub.Endpoints.Repositories.References;
+using Skybrud.Social.GitHub.Endpoints.Repositories.Releases;
+using Skybrud.Social.GitHub.Endpoints.Repositories.Tags;
+using Skybrud.Social.GitHub.Endpoints.Repositories.Teams;
 using Skybrud.Social.GitHub.OAuth;
 using Skybrud.Social.GitHub.Options.Repositories;
 
@@ -10,7 +19,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Repositories;
 /// <summary>
 /// Class representing the raw <strong>Repositories</strong> endpoint.
 /// </summary>
-public partial class GitHubRepositoriesRawEndpoint {
+public class GitHubRepositoriesRawEndpoint {
 
     #region Properties
 
@@ -20,9 +29,54 @@ public partial class GitHubRepositoriesRawEndpoint {
     public GitHubOAuthClient Client { get; }
 
     /// <summary>
+    /// Gets a reference to the <strong>Branches</strong> endpoint.
+    /// </summary>
+    public GitHubRepositoryBranchesRawEndpoint Branches { get; }
+
+    /// <summary>
+    /// Gets a reference to the <strong>Collaborators</strong> endpoint.
+    /// </summary>
+    public GitHubRepositoryCollaboratorsRawEndpoint Collaborators { get; }
+
+    /// <summary>
+    /// Gets a reference to the <strong>Content</strong> endpoint.
+    /// </summary>
+    public GitHubRepositoryContentRawEndpoint Content { get; }
+
+    /// <summary>
+    /// Gets a reference to the <strong>Forks</strong> endpoint.
+    /// </summary>
+    public GitHubRepositoryForksRawEndpoint Forks { get; }
+
+    /// <summary>
     /// Gets a reference to the <strong>Issues</strong> endpoint.
     /// </summary>
     public GitHubRepositoryIssuesRawEndpoint Issues { get; }
+
+    /// <summary>
+    /// Gets a reference to the <strong>Labels</strong> endpoint.
+    /// </summary>
+    public GitHubRepositoryLabelsRawEndpoint Labels { get; }
+
+    /// <summary>
+    /// Gets a reference to the <strong>References</strong> endpoint.
+    /// </summary>
+    public GitHubRepositoryReferencesRawEndpoint References { get; }
+
+    /// <summary>
+    /// Gets a reference to the <strong>Releases</strong> endpoint.
+    /// </summary>
+    public GitHubRepositoryReleasesRawEndpoint Releases { get; }
+
+    /// <summary>
+    /// Gets a reference to the <strong>Tags</strong> endpoint.
+    /// </summary>
+    public GitHubRepositoryRawEndpoint Tags { get; }
+
+    /// <summary>
+    /// Gets a reference to the <strong>Teams</strong> endpoint.
+    /// </summary>
+    public GitHubRepositoryTeamsRawEndpoint Teams { get; }
 
     #endregion
 
@@ -30,7 +84,16 @@ public partial class GitHubRepositoriesRawEndpoint {
 
     internal GitHubRepositoriesRawEndpoint(GitHubOAuthClient client) {
         Client = client;
+        Branches = new GitHubRepositoryBranchesRawEndpoint(client);
+        Collaborators = new GitHubRepositoryCollaboratorsRawEndpoint(client);
+        Content = new GitHubRepositoryContentRawEndpoint(client);
+        Forks = new GitHubRepositoryForksRawEndpoint(client);
         Issues = new GitHubRepositoryIssuesRawEndpoint(client);
+        Labels = new GitHubRepositoryLabelsRawEndpoint(client);
+        References = new GitHubRepositoryReferencesRawEndpoint(client);
+        Releases = new GitHubRepositoryReleasesRawEndpoint(client);
+        Tags = new GitHubRepositoryRawEndpoint(client);
+        Teams = new GitHubRepositoryTeamsRawEndpoint(client);
     }
 
     #endregion

@@ -6,7 +6,7 @@ using Skybrud.Social.GitHub.Responses.Issues;
 namespace Skybrud.Social.GitHub.Endpoints.Repositories.Issues;
 
 /// <summary>
-/// Class representing the <strong>Repositories</strong> endpoint.
+/// Class representing the <strong>Repositories / Issues</strong> endpoint.
 /// </summary>
 public class GitHubRepositoryIssuesEndpoint {
 

@@ -1,6 +1,11 @@
 using System;
 using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
+using Skybrud.Social.GitHub.Endpoints.Organizations.Invitations;
+using Skybrud.Social.GitHub.Endpoints.Organizations.Members;
+using Skybrud.Social.GitHub.Endpoints.Organizations.OutsideCollaborators;
+using Skybrud.Social.GitHub.Endpoints.Organizations.Repositories;
+using Skybrud.Social.GitHub.Endpoints.Organizations.Teams;
 using Skybrud.Social.GitHub.OAuth;
 
 namespace Skybrud.Social.GitHub.Endpoints.Organizations;
@@ -11,7 +16,7 @@ namespace Skybrud.Social.GitHub.Endpoints.Organizations;
 /// <see>
 ///     <cref>https://developer.github.com/v3/orgs/</cref>
 /// </see>
-public partial class GitHubOrganizationsRawEndpoint {
+public class GitHubOrganizationsRawEndpoint {
 
     #region Properties
 
@@ -20,12 +25,42 @@ public partial class GitHubOrganizationsRawEndpoint {
     /// </summary>
     public GitHubOAuthClient Client { get; }
 
+    /// <summary>
+    /// Gets a reference to the <strong>Invitations</strong> endpoint.
+    /// </summary>
+    public GitHubOrganizationInvitationsRawEndpoint Invitations { get; }
+
+    /// <summary>
+    /// Gets a reference to the <strong>Members</strong> endpoint.
+    /// </summary>
+    public GitHubOrganizationMembersRawEndpoint Members { get; }
+
+    /// <summary>
+    /// Gets a reference to the <strong>Outside Collaborators</strong> endpoint.
+    /// </summary>
+    public GitHubOrganizationOutsideCollaboratorsRawEndpoint OutsideCollaborators { get; }
+
+    /// <summary>
+    /// Gets a reference to the <strong>Repositories</strong> endpoint.
+    /// </summary>
+    public GitHubOrganizationRepositoriesRawEndpoint Repositories { get; }
+
+    /// <summary>
+    /// Gets a reference to the <strong>Teams</strong> endpoint.
+    /// </summary>
+    public GitHubOrganizationTeamsRawEndpoint Teams { get; }
+
     #endregion
 
     #region Constructors
 
     internal GitHubOrganizationsRawEndpoint(GitHubOAuthClient client) {
         Client = client;
+        Invitations = new GitHubOrganizationInvitationsRawEndpoint(client);
+        Members = new GitHubOrganizationMembersRawEndpoint(client);
+        OutsideCollaborators = new GitHubOrganizationOutsideCollaboratorsRawEndpoint(client);
+        Repositories = new GitHubOrganizationRepositoriesRawEndpoint(client);
+        Teams = new GitHubOrganizationTeamsRawEndpoint(client);
     }
 
     #endregion
