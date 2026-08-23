@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Options;
 
@@ -13,6 +14,7 @@ public abstract class GitHubHttpRequestOptions : IHttpRequestOptions {
     /// <summary>
     /// Gets or sets the media types that should make up the <strong>Accept</strong> header of requests made using this instance.
     /// </summary>
+    [JsonIgnore]
     public List<string> MediaTypes = [];
 
     /// <inheritdoc />

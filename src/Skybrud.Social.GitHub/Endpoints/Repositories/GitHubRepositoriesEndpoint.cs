@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Skybrud.Social.GitHub.Endpoints.Repositories.Branches;
 using Skybrud.Social.GitHub.Endpoints.Repositories.Collaborators;
@@ -108,7 +109,7 @@ public class GitHubRepositoriesEndpoint {
 
     #endregion
 
-    #region Methods
+    #region GetRepository(...)
 
     /// <summary>
     /// Gets information about the repository matching the specified <paramref name="owner"/> and
@@ -118,6 +119,10 @@ public class GitHubRepositoriesEndpoint {
     public async Task<GitHubRepositoryResponse> GetRepository(string owner, string repository) {
         return new GitHubRepositoryResponse(await Raw.GetRepository(owner, repository));
     }
+
+    #endregion
+
+    #region CreateRepositoryFromTemplate(...)
 
     /// <summary>
     /// Creates a new repository using a repository template.
@@ -162,6 +167,10 @@ public class GitHubRepositoriesEndpoint {
         return new GitHubRepositoryResponse(await Raw.CreateRepositoryFromTemplate(options));
     }
 
+    #endregion
+
+    #region CreateUserRepository(...)
+
     /// <summary>
     /// Creates a new repository for the authenticated user.
     /// </summary>
@@ -198,6 +207,10 @@ public class GitHubRepositoriesEndpoint {
     public async Task<GitHubRepositoryResponse> CreateUserRepository(GitHubCreateUserRepositoryOptions options) {
         return new GitHubRepositoryResponse(await Raw.CreateUserRepository(options));
     }
+
+    #endregion
+
+    #region CreateOrganisationRepository(...)
 
     /// <summary>
     /// Creates a new repository in the specified organization. The authenticated user must be a member of the organization.
@@ -236,6 +249,20 @@ public class GitHubRepositoriesEndpoint {
     /// </see>
     public async Task<GitHubRepositoryResponse> CreateOrganisationRepository(GitHubCreateOrganisationRepositoryOptions options) {
         return new GitHubRepositoryResponse(await Raw.CreateOrganisationRepository(options));
+    }
+
+    #endregion
+
+    #region UpdateRepository(...)
+
+    /// <summary>
+    /// Updates the repository matching the specified <paramref name="options"/>.
+    /// </summary>
+    /// <param name="options">The options describing the request to the API.</param>
+    /// <returns>An instance of <see cref="GitHubRepositoryResponse"/> representing the response.</returns>
+    public async Task<GitHubRepositoryResponse> UpdateRepository(GitHubUpdateRepositoryOptions options) {
+        if (options == null) throw new ArgumentNullException(nameof(options));
+        return new GitHubRepositoryResponse(await Raw.UpdateRepository(options));
     }
 
     #endregion

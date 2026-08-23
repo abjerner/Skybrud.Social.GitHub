@@ -105,7 +105,7 @@ public class GitHubRepositoriesRawEndpoint {
 
     #endregion
 
-    #region Member methods
+    #region GetRepository(...)
 
     /// <summary>
     /// Gets information about the repository matching the specified <paramref name="owner"/> and
@@ -117,6 +117,10 @@ public class GitHubRepositoriesRawEndpoint {
         if (string.IsNullOrWhiteSpace(repository)) throw new ArgumentNullException(nameof(repository));
         return await Client.GetAsync($"/repos/{owner}/{repository}");
     }
+
+    #endregion
+
+    #region CreateRepositoryFromTemplate(...)
 
     /// <summary>
     /// Creates a new repository using a repository template.
@@ -170,6 +174,10 @@ public class GitHubRepositoriesRawEndpoint {
         return await Client.GetResponseAsync(options);
     }
 
+    #endregion
+
+    #region CreateUserRepository(...)
+
     /// <summary>
     /// Creates a new repository for the authenticated user.
     /// </summary>
@@ -179,6 +187,7 @@ public class GitHubRepositoriesRawEndpoint {
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
     public async Task<IHttpResponse> CreateUserRepository(string name) {
+        // TODO: consider moving to "User" repository...
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
         return await CreateUserRepository(new GitHubCreateUserRepositoryOptions(name));
     }
@@ -193,6 +202,7 @@ public class GitHubRepositoriesRawEndpoint {
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
     public async Task<IHttpResponse> CreateUserRepository(string name, bool isPrivate) {
+        // TODO: consider moving to "User" repository...
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
         return await CreateUserRepository(new GitHubCreateUserRepositoryOptions(name, isPrivate));
     }
@@ -206,9 +216,14 @@ public class GitHubRepositoriesRawEndpoint {
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
     public async Task<IHttpResponse> CreateUserRepository(GitHubCreateUserRepositoryOptions options) {
+        // TODO: consider moving to "User" repository...
         if (options == null) throw new ArgumentNullException(nameof(options));
         return await Client.GetResponseAsync(options);
     }
+
+    #endregion
+
+    #region CreateOrganisationRepository(...)
 
     /// <summary>
     /// Creates a new repository in the specified organization. The authenticated user must be a member of the organization.
@@ -220,6 +235,7 @@ public class GitHubRepositoriesRawEndpoint {
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
     public async Task<IHttpResponse> CreateOrganisationRepository(string organisation, string name) {
+        // TODO: consider moving to "Organizations" repository...
         if (string.IsNullOrWhiteSpace(organisation)) throw new ArgumentNullException(nameof(organisation));
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
         return await CreateOrganisationRepository(new GitHubCreateOrganisationRepositoryOptions(organisation, name));
@@ -236,6 +252,7 @@ public class GitHubRepositoriesRawEndpoint {
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
     public async Task<IHttpResponse> CreateOrganisationRepository(string organisation, string name, bool isPrivate) {
+        // TODO: consider moving to "Organizations" repository...
         if (string.IsNullOrWhiteSpace(organisation)) throw new ArgumentNullException(nameof(organisation));
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
         return await CreateOrganisationRepository(new GitHubCreateOrganisationRepositoryOptions(organisation, name, isPrivate));
@@ -250,6 +267,21 @@ public class GitHubRepositoriesRawEndpoint {
     ///     <cref>https://developer.github.com/v3/repos/#create</cref>
     /// </see>
     public async Task<IHttpResponse> CreateOrganisationRepository(GitHubCreateOrganisationRepositoryOptions options) {
+        // TODO: consider moving to "Organizations" repository...
+        if (options == null) throw new ArgumentNullException(nameof(options));
+        return await Client.GetResponseAsync(options);
+    }
+
+    #endregion
+
+    #region UpdateRepository(...)
+
+    /// <summary>
+    /// Updates the repository matching the specified <paramref name="options"/>.
+    /// </summary>
+    /// <param name="options">The options describing the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+    public async Task<IHttpResponse> UpdateRepository(GitHubUpdateRepositoryOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
         return await Client.GetResponseAsync(options);
     }
