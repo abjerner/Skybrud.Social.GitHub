@@ -118,7 +118,7 @@ public class GitHubReleaseBase : GitHubObject {
     /// <summary>
     /// Gets the amount of mentions in this release.
     /// </summary>
-    public int MentionsCount { get; }
+    public int? MentionsCount { get; }
 
     // TODO: add support for the "discussion_url" property (string)
 
@@ -155,7 +155,7 @@ public class GitHubReleaseBase : GitHubObject {
         Assets = json.GetRequiredArray("assets", GitHubReleaseAsset.Parse);
         // TODO: add support for the "body_html" property (string)
         // TODO: add support for the "body_text" property (string)
-        MentionsCount = json.GetRequiredInt32("mentions_count");
+        MentionsCount = json.GetInt32OrNull("mentions_count");
         // TODO: add support for the "discussion_url" property (string)
         // TODO: add support for the "reactions" property (ReactionRollup)
     }
